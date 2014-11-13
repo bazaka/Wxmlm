@@ -87,9 +87,7 @@ public class BackendGetAccounts {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String request = "http://" + user.getEmail() + ":" + user.getPassword1() + "@" + scheme + "money/api/accounts/?limit=10&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
-        System.out.println("Открываю запрос: " + request);
         selenium.open(request);
-        System.out.println("Проблема дальше");
         selenium.waitForPageToLoad("5000");
         //Парсим JSON, делаем и возвращаем обьект Account
         try {JSONArray jsonArr = new JSONArray(selenium.getBodyText());
