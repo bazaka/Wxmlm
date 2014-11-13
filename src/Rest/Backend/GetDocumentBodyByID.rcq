@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://xmlm.t4web.com.ua/users/api/documents/get/?id=181</URL><method>GET</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>filonchenko@gmail.com</auth-username><auth-password>rO0ABXQAAzEyMw==</auth-password><headers><header key="Content-Type" value="application/json"/></headers></request></rest-client>

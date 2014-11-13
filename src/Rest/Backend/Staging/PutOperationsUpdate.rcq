@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://staging.xmlm.t4web.com.ua/money/api/operations/update/</URL><method>PUT</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>filonchenko@gmail.com</auth-username><auth-password>rO0ABXQAAzEyMw==</auth-password><headers><header key="Content-Type" value="application/json"/></headers><body content-type="text/plain" charset="UTF-8">[&#x0D;
+  {&#x0D;
+    "id": 377,&#x0D;
+    "target_account_id": 609,&#x0D;
+    "source_account_id": 610,&#x0D;
+    "purchase_id": null,&#x0D;
+    "initiator_user_id": 238,&#x0D;
+    "created_date": "2014-10-24 17:49:53",&#x0D;
+    "amount": 60,&#x0D;
+    "status": 3,&#x0D;
+    "type": 3&#x0D;
+  }&#x0D;
+]</body></request></rest-client>

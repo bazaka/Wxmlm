@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://xmlm.t4web.com.ua/money/api/accounts/update/</URL><method>PUT</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>filonchenko@gmail.com</auth-username><auth-password>rO0ABXQAAzEyMw==</auth-password><headers><header key="Content-Type" value="application/json"/></headers><body content-type="text/plain" charset="UTF-8">[ &#x0D;
+{&#x0D;
+  "account_id" : 782,&#x0D;
+  "account_number" : "101414578353",&#x0D;
+  "account_type" : 10,&#x0D;
+  "status" : true,&#x0D;
+  "account_info" : "Current",&#x0D;
+  "amount" : 1&#x0D;
+}, {&#x0D;
+  "account_id" : 783,&#x0D;
+  "account_number" : "201414578353",&#x0D;
+  "account_type" : 20,&#x0D;
+  "status" : true,&#x0D;
+  "account_info" : "Bonuses",&#x0D;
+  "amount" : 2&#x0D;
+}&#x0D;
+]</body></request></rest-client>

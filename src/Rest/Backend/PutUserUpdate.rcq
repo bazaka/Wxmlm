@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://xmlm.t4web.com.ua/users/api/user/update/</URL><method>PUT</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>filonchenko@gmail.com</auth-username><auth-password>rO0ABXQAAzEyMw==</auth-password><headers><header key="Content-Type" value="application/json"/></headers><body content-type="text/plain" charset="UTF-8">[&#x0D;
+ {&#x0D;
+ "id":343,&#x0D;
+ "career":7&#x0D;
+}&#x0D;
+]</body></request></rest-client>
