@@ -1,7 +1,6 @@
 package ApiTests;
 
 import ApiTests.ObjectClasses.Account;
-import ApiTests.BackendGetAccounts;
 import UsedByAll.TestUser;
 import com.thoughtworks.selenium.DefaultSelenium;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
@@ -13,7 +12,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class BackendPutAccountsUpdate{
     private DefaultSelenium selenium;
-    BackendGetAccounts getAccounts = new BackendGetAccounts();
 
     @Before
     public void setUp(String scheme) throws Exception {
@@ -23,12 +21,15 @@ public class BackendPutAccountsUpdate{
         System.out.println("Запускаю селениум для проверки API-метода PUT Accounts update на " + scheme);
     }
 
+    // ТЕСТ НЕ ДОДЕЛАН
     @Test
-    public boolean BackendPutAccountsUpdate(TestUser user, String scheme){
-        Account account = new BackendGetAccounts().getAccount(user, scheme);
+    public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
+        Account account = new BackendGetAccounts().getAccount(user, scheme, selenium);
         double newAmount = account.getAmount() + 50;
         String jsn = "[{\"account_id\":" + account.getAccountId() + ", \"account_number\":\"" + account.getAccountNumber() + "\", \"account_type\":" + account.getAccountType() + ", \"status\":" + account.getStatus() + ", \"account_info\": \"" + account.getAccountInfo() + "\", \"amount\":" + newAmount + "}]";
         System.out.println(jsn);
         return true;
-        }
     }
+    @After
+    public void tearDown() throws Exception { selenium.stop(); }
+}

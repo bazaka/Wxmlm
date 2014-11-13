@@ -10,7 +10,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        String scheme = "xm-541.xmlm.t4web.com.ua/"; // Урл проверяемого сайта. В будущем надо вынести в конфиг-файл
+        String scheme = "xmlm.t4web.com.ua/"; // Урл проверяемого сайта. В будущем надо вынести в конфиг-файл
         // Проверка - не тестируем на продакшене
         if(RegionMatch.IsStringRegionMatch(scheme, "kairosplanet.com"))
         {
@@ -38,9 +38,6 @@ public class Main
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_API("))
             {
                 APITest newAPITest = new APITest(); // Создаём объект теста
-                // Вызов метода, переходящего на главную страницу проекта
-                try { newAPITest.setUp(scheme); }
-                catch (Exception e) { e.printStackTrace(); return; }
                 //Вызов метода, запускающего тесты API
                 try { if (newAPITest.runAPITests(scheme, testUser[i]))
                     System.out.println("Проверка API пройдена");
@@ -50,9 +47,6 @@ public class Main
                 catch (Exception e) { e.printStackTrace();
                     System.out.println("Проверка API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
-                try { newAPITest.tearDown(); }
-                catch (Exception e) { e.printStackTrace(); return; }
-
             }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_Registration("))
             {

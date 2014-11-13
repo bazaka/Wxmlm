@@ -1,8 +1,5 @@
 package ApiTests.ObjectClasses;
 
-/**
- * Created by Mykhail Filonchenko on 06.11.2014.
- */
 public class Account {
     public int accountId;
     public int userId;
@@ -12,18 +9,6 @@ public class Account {
     public String accountInfo;
     public double amount;
     public String updatedDate;
-
-    public Account(int aId, int uId, String aNumber, int aType, boolean aStatus, String aInfo, double aAmount, String upDate)
-    {
-        accountId = aId;
-        userId = uId;
-        accountNumber = aNumber;
-        accountType = aType;
-        status = aStatus;
-        accountInfo = aInfo;
-        amount = aAmount;
-        updatedDate = upDate;
-    }
 
     public Account(int aId, String aNumber, int aType, boolean aStatus, String aInfo, double aAmount)
     {

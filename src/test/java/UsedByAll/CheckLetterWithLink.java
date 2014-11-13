@@ -1,6 +1,5 @@
 package UsedByAll;
 
-import UsedByAll.TestUser;
 import com.thoughtworks.selenium.*;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.junit.After;
@@ -11,17 +10,14 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class CheckLetterWithLink {
 	private DefaultSelenium selenium;
-    private WebDriver driver;
 
 	@Before
 	public void setUp(String mailerURL) throws Exception {
+        WebDriver driver;
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
         selenium = new WebDriverBackedSelenium(driver, mailerURL);
-/*		selenium = new DefaultSelenium("localhost", 4444, "*firefox", mailerURL);
-		selenium.start();
-        selenium.windowMaximize();
-*/        System.out.println("Запускаю селениум для подтверждения регистрации на почтовике " + mailerURL);
+        System.out.println("Запускаю селениум для подтверждения регистрации на почтовике " + mailerURL);
 	}
 
 	@Test
