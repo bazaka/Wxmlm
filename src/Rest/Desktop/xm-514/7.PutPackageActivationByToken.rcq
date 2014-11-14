@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://xm-514.xmlm.t4web.com.ua/users/api/desktop/activation/</URL><method>PUT</method><auth-methods>BASIC</auth-methods><auth-preemptive>true</auth-preemptive><auth-username>t.4webuser01@gmail.com</auth-username><auth-password>rO0ABXQABjExMTExMQ==</auth-password><headers><header key="Content-Type" value="application/json"/></headers><body content-type="text/plain" charset="UTF-8">{&#x0D;
+"token":"b2fb748fae0e1a9b26bbf131fc34cc17",&#x0D;
+"id":"155"&#x0D;
+}</body></request></rest-client>
