@@ -4,20 +4,12 @@
     <bookmark url="file://$PROJECT_DIR$/src/test/java/FunctionalTests/PasswordRecovery.java" line="80" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2b4755b-8466-4168-ace4-eeab634b4580" name="Default" comment="Work Added Libraries">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/0.GetTokenByAuth.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/1.GetUserByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/2.GetPingByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/3.GetNewTokenByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/4.GetStatisticByTokenAndPeriod.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.1.GetEventsByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.2.GetAppVersionByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.3.GetModuleInfoByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.4.GetModuleInfoByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.GetPurchasesByToken.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/6.GetProducts.rcq" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/7.PutPackageActivationByToken.rcq" />
-      <change type="DELETED" beforePath="D:\w-xmlm\w-xmlm\selenium-server-standalone-2.43.0.jar" afterPath="" />
+    <list default="true" id="a2b4755b-8466-4168-ace4-eeab634b4580" name="Default" comment="Dairy summary">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.4.GetModuleBodyByToken.rcq" />
+      <change type="DELETED" beforePath="D:\w-xmlm\w-xmlm\src\Rest\Desktop\xm-516\5.4.GetModuleInfoByToken.rcq" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/2.GetPingByToken.rcq" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/2.GetPingByToken.rcq" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.2.GetAppVersionByToken.rcq" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.2.GetAppVersionByToken.rcq" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.3.GetModuleInfoByToken.rcq" afterPath="$PROJECT_DIR$/src/Rest/Desktop/xm-516/5.3.GetModuleInfoByToken.rcq" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="W-xmlm.iws" />
@@ -524,7 +516,11 @@
       <created>1415969199432</created>
       <updated>1415969199432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Dairy summary">
+      <created>1415972123004</created>
+      <updated>1415972123004</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -542,7 +538,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885212" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885212" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="RESTClient" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.50361943" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="RESTClient" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.81592554" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -601,7 +597,8 @@
     </option>
     <MESSAGE value="HomeDone" />
     <MESSAGE value="Work Added Libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="Work Added Libraries" />
+    <MESSAGE value="Dairy summary" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dairy summary" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
