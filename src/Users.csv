@@ -1,8 +1,9 @@
 email, mailerURL, ePassword, fullName, password1, password2, newPassword1, newPassword2, phone, inviteCode, useInTest
-t4webuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, Mikhail Pavlovich Filonchenko, 111111, 111111, 111111, 111111, 1112121, kairos,
-t4.webuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, Михаил Павлович Филонченко, 111111, 111111, 111111, 111111, 1112121, kairos,
-t4w.ebuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, Mikhail Pavlovich-F'ilonchenko, 111111, 111111, 111111, 111111, 1112121, kairos,
-t4webuser03@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser03, User 03, 111111, 111111, 222222, 222222, 3333333, User01,
+t4webuser.01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, Mikhail Pavlovich Filonchenko, 111111, 111111, 111111, 111111, 1112121, kairos, _1Registration()_
+t4webuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, Михаил Павлович Филонченко, 111111, 111111, 111111, 111111, 1112121, kairos, _1PasswordRecovery()_
+t4w.ebuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, Mikhail Pavlovich-F'ilonchenko, 111111, 111111, 111111, 111111, 1112121, kairos, _1Registration()_
+t4we.buser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, Mikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich FilonchenkoMikhail Pavlovich Filonchenko, 111111, 111111, 222222, 222222, 2222222, kairos, _1Registration()_
+t4webuser03@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser03, User 03, 111111, 111111, 222222, 222222, 3333333, User01, 
 t4webuser04@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser04, User 04, 111111, 111111, 222222, 222222, 4444444, User01, 
 t4webuser05@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser05, User 05, 111111, 111111, 222222, 222222, 5555555, User01, 
 system@kairosplanet.com, ---, ---, Api Tester, 123, 123, 123, 123, ---, User01, _API()_
