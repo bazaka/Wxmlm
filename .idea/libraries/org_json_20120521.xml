@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="org.json-20120521">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/org.json-20120521.jar!/" />
+      <root url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" recursive="false" type="SOURCES" />
+  </library>
+</component>
