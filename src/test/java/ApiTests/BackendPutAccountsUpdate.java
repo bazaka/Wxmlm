@@ -26,7 +26,7 @@ public class BackendPutAccountsUpdate{
     public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
         Account account = new BackendGetAccounts().getAccount(user, scheme, selenium);
         double newAmount = account.getAmount() + 50;
-        String jsn = "[{\"account_id\":" + account.getAccountId() + ", \"account_number\":\"" + account.getAccountNumber() + "\", \"account_type\":" + account.getAccountType() + ", \"status\":" + account.getStatus() + ", \"account_info\": \"" + account.getAccountInfo() + "\", \"amount\":" + newAmount + "}]";
+        String jsn = "[{\"account_id\":" + account.getAccountId() + ", \"account_number\":\"" + account.getAccountNumber() + "\", \"account_type\":" + account.getAccountType() + ", \"status\":" + account.getStatus() + ", \"account_info\": \"" + account.getAccountInfo() + "\", \"amount\": \"" + newAmount + "\"}]";
         System.out.println(jsn);
         return true;
     }
