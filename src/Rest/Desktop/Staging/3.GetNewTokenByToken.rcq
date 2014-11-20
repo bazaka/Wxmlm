@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://staging.xmlm.t4web.com.ua/users/api/desktop/get-new-token/?_format=json&amp;token=140ece85ebaec2507502af88c06b1cfc</URL><method>GET</method><headers><header key="Content-Type" value="application/json"/></headers></request></rest-client>
+<rest-client version="2.3.3"><request><http-version>1.1</http-version><URL>http://staging.xmlm.t4web.com.ua/users/api/desktop/get-new-token/?_format=json&amp;token=d9146ef2dcf6fb6d62bd4626a4505237</URL><method>GET</method><headers><header key="Content-Type" value="application/json"/></headers></request></rest-client>
