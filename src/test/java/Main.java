@@ -10,7 +10,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        String scheme = "staging.xmlm.t4web.com.ua/"; // Урл проверяемого сайта. В будущем надо вынести в конфиг-файл
+        String scheme = "xmlm.t4web.com.ua/"; // Урл проверяемого сайта. В будущем надо вынести в конфиг-файл
         // Проверка - не тестируем на продакшене
         if(RegionMatch.IsStringRegionMatch(scheme, "kairosplanet.com"))
         {
