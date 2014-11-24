@@ -70,7 +70,7 @@ public class BackendGetAccounts {
             boolean isDateTimeValid = checker.checkDateTimeString(updatedDate);
             if (!isAccountIdValid || !isUserIdValid || !isAccountNumberValid || !isAccountTypeValid || !isStatusValid || !isAccountInfoValid || !isAmountValid || !isDateTimeValid || object.length() != 8)
             {
-                System.out.print("Проверка API GET accounts НЕ пройдена на объекте с ID " + accountId + ". ");
+                System.out.print("Проверка API GET accounts НЕ пройдена на объекте с ID " + accountId + ". ");  // тут єбануть асерт
                 return false;
             }
         }

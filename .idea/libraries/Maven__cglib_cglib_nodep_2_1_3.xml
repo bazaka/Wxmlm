@@ -2,8 +2,6 @@
   <library name="Maven: cglib:cglib-nodep:2.1_3">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/.idea/libraries/org.json-20120521.jar!/" />
-      <root url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3-javadoc.jar!/" />
@@ -12,7 +10,6 @@
       <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib-nodep/2.1_3/cglib-nodep-2.1_3-sources.jar!/" />
       <root url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" />
     </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/.idea/libraries/ostermillerutils-1.08.02" recursive="false" type="SOURCES" />
   </library>
 </component>
