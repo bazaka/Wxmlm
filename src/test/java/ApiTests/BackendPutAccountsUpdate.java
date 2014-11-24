@@ -10,6 +10,14 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import org.apache.commons.codec.binary.Base64;
+import static org.junit.Assert.assertTrue;
+
 public class BackendPutAccountsUpdate{
     private DefaultSelenium selenium;
 
@@ -24,10 +32,62 @@ public class BackendPutAccountsUpdate{
     // ТЕСТ НЕ ДОДЕЛАН
     @Test
     public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
-        Account account = new BackendGetAccounts().getAccount(user, scheme, selenium);
-        double newAmount = account.getAmount() + 50;
-        String jsn = "[{\"account_id\":" + account.getAccountId() + ", \"account_number\":\"" + account.getAccountNumber() + "\", \"account_type\":" + account.getAccountType() + ", \"status\":" + account.getStatus() + ", \"account_info\": \"" + account.getAccountInfo() + "\", \"amount\": \"" + newAmount + "\"}]";
-        System.out.println(jsn);
+        Account originalAccount = new BackendGetAccounts().getAccount(user, scheme, selenium);
+        Account modifiedAccount = new Account(originalAccount.getAccountId(), originalAccount.getAccountNumber(), originalAccount.getAccountType(), originalAccount.getStatus(), originalAccount.getAccountInfo() + "1", originalAccount.getAmount() + 50);
+        String originalJson = "[{\"account_id\":" + originalAccount.getAccountId() + ", \"account_number\":\"" + originalAccount.getAccountNumber() + "\", \"account_type\":" + originalAccount.getAccountType() + ", \"status\":" + originalAccount.getStatus() + ", \"account_info\": \"" + originalAccount.getAccountInfo() + "\", \"amount\": \"" + originalAccount.getAmount() + "\"}]";
+        String modifiedJson = "[{\"account_id\":" + modifiedAccount.getAccountId() + ", \"account_number\":\"" + modifiedAccount.getAccountNumber() + "\", \"account_type\":" + modifiedAccount.getAccountType() + ", \"status\":" + modifiedAccount.getStatus() + ", \"account_info\": \"" + modifiedAccount.getAccountInfo() + "\", \"amount\": \"" + modifiedAccount.getAmount() + "\"}]";
+
+        // Содзаем URL
+        String authString = user.getEmail() + ":" + user.getPassword1();
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        String stringUrl = "http://" + scheme + "money/api/accounts/update/";
+        System.out.println("URL: " + stringUrl);
+        try {URL url = new URL(stringUrl);
+            try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+                httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+                httpCon.setRequestMethod("PUT");
+                httpCon.setRequestProperty("Content-Type", "application/json");
+                httpCon.setRequestProperty("Accept", "application/json");
+                httpCon.setDoOutput(true);
+                OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+                out.write(modifiedJson);
+                out.close();
+                System.out.println(httpCon.getInputStream());
+                System.out.println("Запрос на изменение отправлен. JSON: " + modifiedJson);
+            }
+            catch (IOException e) {e.printStackTrace();}
+        }
+        catch (MalformedURLException e) {e.printStackTrace();}
+        // Проверяем GET-запросом, что данные обновились
+        Account changedAccount = new BackendGetAccounts().getAccount("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
+        System.out.println(modifiedAccount.getAccountNumber());
+        System.out.println(changedAccount.getAccountNumber());
+        System.out.println(modifiedAccount.getAccountInfo());
+        System.out.println(changedAccount.getAccountInfo());
+        System.out.println(modifiedAccount.getAmount());
+        System.out.println(changedAccount.getAmount());
+
+        assertTrue("Check modified data saved correctly", modifiedAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && modifiedAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && modifiedAccount.getAmount() == changedAccount.getAmount());
+        try {URL url = new URL(stringUrl);
+            try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+                httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+                httpCon.setRequestMethod("PUT");
+                httpCon.setRequestProperty("Content-Type", "application/json");
+                httpCon.setRequestProperty("Accept", "application/json");
+                httpCon.setDoOutput(true);
+                OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+                out.write(originalJson);
+                out.close();
+                System.out.println(httpCon.getInputStream());
+                System.out.println("Запрос на возврат исходных данных отправлен. JSON: " + originalJson);
+            }
+            catch (IOException e) {e.printStackTrace();}
+        }
+        catch (MalformedURLException e) {e.printStackTrace();}
+        // Проверяем GET-запросом, что данные восстановились
+        changedAccount = new BackendGetAccounts().getAccount("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
+        assertTrue("Check modified data returned correctly", originalAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && originalAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && originalAccount.getAmount() == changedAccount.getAmount());
         return true;
     }
     @After
