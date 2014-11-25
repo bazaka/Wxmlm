@@ -37,7 +37,6 @@ public class BackendGetAccounts {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String request = "http://" + User.getEmail() + ":" + User.getPassword1() + "@" + scheme + "money/api/accounts/?limit=10&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
-        System.out.println("Открываю запрос: " + request);
         selenium.open(request);
         selenium.waitForPageToLoad("5000");
 
@@ -66,7 +65,7 @@ public class BackendGetAccounts {
         return true;
     }
 
-    public Account getAccount(TestUser user, String scheme, DefaultSelenium selenium) {
+    public Account getAnyAccount(TestUser user, String scheme, DefaultSelenium selenium) {
         //Создаем и отсылаем запрос
         Calendar calBefore = Calendar.getInstance();
         Calendar calAfter = Calendar.getInstance();
@@ -88,7 +87,7 @@ public class BackendGetAccounts {
         }
     }
 
-    public Account getAccount(String parameterName, String parameterValue, TestUser user, String scheme, DefaultSelenium selenium) {
+    public Account getAccountByParameter(String parameterName, String parameterValue, TestUser user, String scheme, DefaultSelenium selenium) {
         //Создаем и отсылаем запрос
         Calendar calBefore = Calendar.getInstance();
         Calendar calAfter = Calendar.getInstance();

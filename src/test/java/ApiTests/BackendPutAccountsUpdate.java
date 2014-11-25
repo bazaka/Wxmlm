@@ -32,7 +32,7 @@ public class BackendPutAccountsUpdate{
     // ТЕСТ НЕ ДОДЕЛАН
     @Test
     public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
-        Account originalAccount = new BackendGetAccounts().getAccount(user, scheme, selenium);
+        Account originalAccount = new BackendGetAccounts().getAnyAccount(user, scheme, selenium);
         Account modifiedAccount = new Account(originalAccount.getAccountId(), originalAccount.getAccountNumber(), originalAccount.getAccountType(), originalAccount.getStatus(), originalAccount.getAccountInfo() + "1", originalAccount.getAmount() + 50);
         String originalJson = "[{\"account_id\":" + originalAccount.getAccountId() + ", \"account_number\":\"" + originalAccount.getAccountNumber() + "\", \"account_type\":" + originalAccount.getAccountType() + ", \"status\":" + originalAccount.getStatus() + ", \"account_info\": \"" + originalAccount.getAccountInfo() + "\", \"amount\": \"" + originalAccount.getAmount() + "\"}]";
         String modifiedJson = "[{\"account_id\":" + modifiedAccount.getAccountId() + ", \"account_number\":\"" + modifiedAccount.getAccountNumber() + "\", \"account_type\":" + modifiedAccount.getAccountType() + ", \"status\":" + modifiedAccount.getStatus() + ", \"account_info\": \"" + modifiedAccount.getAccountInfo() + "\", \"amount\": \"" + modifiedAccount.getAmount() + "\"}]";
@@ -58,7 +58,7 @@ public class BackendPutAccountsUpdate{
         }
         catch (MalformedURLException e) {e.printStackTrace();}
         // Проверяем GET-запросом, что данные обновились
-        Account changedAccount = new BackendGetAccounts().getAccount("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
+        Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
         assertTrue("Check modified data saved correctly", modifiedAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && modifiedAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && modifiedAccount.getAmount() == changedAccount.getAmount());
         try {URL url = new URL(stringUrl);
             try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
@@ -76,7 +76,7 @@ public class BackendPutAccountsUpdate{
         }
         catch (MalformedURLException e) {e.printStackTrace();}
         // Проверяем GET-запросом, что данные восстановились
-        changedAccount = new BackendGetAccounts().getAccount("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
+        changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
         assertTrue("Check modified data returned correctly", originalAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && originalAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && originalAccount.getAmount() == changedAccount.getAmount());
         return true;
     }
