@@ -42,7 +42,6 @@ public class BackendPutAccountsUpdate{
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         String stringUrl = "http://" + scheme + "money/api/accounts/update/";
-        System.out.println("URL: " + stringUrl);
         try {URL url = new URL(stringUrl);
             try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
                 httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
@@ -54,20 +53,12 @@ public class BackendPutAccountsUpdate{
                 out.write(modifiedJson);
                 out.close();
                 System.out.println(httpCon.getInputStream());
-                System.out.println("Запрос на изменение отправлен. JSON: " + modifiedJson);
             }
             catch (IOException e) {e.printStackTrace();}
         }
         catch (MalformedURLException e) {e.printStackTrace();}
         // Проверяем GET-запросом, что данные обновились
         Account changedAccount = new BackendGetAccounts().getAccount("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
-        System.out.println(modifiedAccount.getAccountNumber());
-        System.out.println(changedAccount.getAccountNumber());
-        System.out.println(modifiedAccount.getAccountInfo());
-        System.out.println(changedAccount.getAccountInfo());
-        System.out.println(modifiedAccount.getAmount());
-        System.out.println(changedAccount.getAmount());
-
         assertTrue("Check modified data saved correctly", modifiedAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && modifiedAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && modifiedAccount.getAmount() == changedAccount.getAmount());
         try {URL url = new URL(stringUrl);
             try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
@@ -80,7 +71,6 @@ public class BackendPutAccountsUpdate{
                 out.write(originalJson);
                 out.close();
                 System.out.println(httpCon.getInputStream());
-                System.out.println("Запрос на возврат исходных данных отправлен. JSON: " + originalJson);
             }
             catch (IOException e) {e.printStackTrace();}
         }
