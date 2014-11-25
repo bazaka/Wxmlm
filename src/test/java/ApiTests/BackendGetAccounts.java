@@ -59,7 +59,7 @@ public class BackendGetAccounts {
             assertTrue("Incorrect account_info", checker.checkNotNull(object.getString("account_info")));
             assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
-            assertTrue("Incorrect parameters number", object.length() == 8);
+            assertTrue("Incorrect parameters number", object.length() == 8); // assertEquals
         }
 
         return true;

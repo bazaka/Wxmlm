@@ -59,7 +59,7 @@ public class BackendPutAccountsUpdate{
         catch (MalformedURLException e) {e.printStackTrace();}
         // Проверяем GET-запросом, что данные обновились
         Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
-        assertTrue("Check modified data saved correctly", modifiedAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && modifiedAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && modifiedAccount.getAmount() == changedAccount.getAmount());
+        assertTrue("Check modified data saved correctly", modifiedAccount.equalsExceptUpdatedDate(changedAccount));
         try {URL url = new URL(stringUrl);
             try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
                 httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
@@ -77,7 +77,7 @@ public class BackendPutAccountsUpdate{
         catch (MalformedURLException e) {e.printStackTrace();}
         // Проверяем GET-запросом, что данные восстановились
         changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
-        assertTrue("Check modified data returned correctly", originalAccount.getAccountNumber().equals(changedAccount.getAccountNumber()) && originalAccount.getAccountInfo().equals(changedAccount.getAccountInfo()) && originalAccount.getAmount() == changedAccount.getAmount());
+        assertTrue("Check modified data returned correctly", originalAccount.equalsExceptUpdatedDate(changedAccount));
         return true;
     }
     @After

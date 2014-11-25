@@ -37,4 +37,29 @@ public class Account {
     public void setAccountInfo(String a) {this.accountInfo = a;}
     public void setAmount(double a) {this.amount = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
+
+    public boolean equalsExceptUpdatedDate(Account acc)
+    {
+        if (this == acc)
+            return true;
+        if (acc == null)
+            return false;
+        if (getClass() != acc.getClass())
+            return false;
+        if (getAccountId() != acc.getAccountId())
+            return false;
+        if (getAmount() != acc.getAmount())
+            return false;
+        if (!getAccountInfo().equals(acc.getAccountInfo()))
+            return false;
+        if (!getAccountNumber().equals(acc.getAccountNumber()))
+            return false;
+        if (getAccountType() != acc.getAccountType())
+            return false;
+        if (getStatus() != acc.getStatus())
+            return false;
+        if (getUserId() != acc.getUserId())
+            return false;
+        return true;
+    }
 }
