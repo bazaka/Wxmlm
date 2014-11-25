@@ -51,27 +51,18 @@ public class BackendGetAccounts {
         }
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
-            int accountId = object.getInt("account_id");
-            boolean isAccountIdValid = checker.checkIdValue(accountId);
-            int userId = object.getInt("user_id");
-            assertTrue("Check user_id", checker.checkIdValue(userId));
-            String accountNumber = object.getString("account_number");
-            boolean isAccountNumberValid = checker.checkAccountNumberValue(accountNumber);
-            int accountType = object.getInt("account_type");
-            boolean isAccountTypeValid = checker.checkAccountTypeValue(accountType);
-            boolean status = object.getBoolean("status");
-            boolean isStatusValid = checker.checkBooleanValue(status);
-            String accountInfo = object.getString("account_info");
-            boolean isAccountInfoValid = checker.checkNotNull(accountInfo);
-            double amount = object.getDouble("amount");
-            boolean isAmountValid = checker.checkDoubleValue(amount);
-            String updatedDate = object.getString("updated_date");
-            boolean isDateTimeValid = checker.checkDateTimeString(updatedDate);
-            if (!isAccountIdValid || !isAccountNumberValid || !isAccountTypeValid || !isStatusValid || !isAccountInfoValid || !isAmountValid || !isDateTimeValid || object.length() != 8) {
-                System.out.print("Проверка API GET accounts НЕ пройдена на объекте с ID " + accountId + ". ");
-                return false;
-            }
+
+            assertTrue("Incorrect account_id", checker.checkIdValue(object.getInt("account_id")));
+            assertTrue("Incorrect user_id", checker.checkIdValue(object.getInt("user_id")));
+            assertTrue("Incorrect account_number", checker.checkAccountNumberValue(object.getString("account_number")));
+            assertTrue("Incorrect account_type", checker.checkAccountTypeValue(object.getInt("account_type")));
+            assertTrue("Incorrect status", checker.checkBooleanValue(object.getBoolean("status")));
+            assertTrue("Incorrect account_info", checker.checkNotNull(object.getString("account_info")));
+            assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
+            assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
+            assertTrue("Incorrect parameters number", object.length() != 8);
         }
+
         return true;
     }
 
