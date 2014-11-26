@@ -83,8 +83,8 @@ public class ValidationChecker {
             boolean valid = EmailValidator.getInstance().isValid(anotherEmail);
             return valid;
         }*/
+     public boolean checkAnotherEmail (Object anotherEmail) {
         return anotherEmail == null || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
-
     }
 
 }
