@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -29,7 +30,6 @@ public class BackendPutAccountsUpdate{
         System.out.println("Запускаю селениум для проверки API-метода PUT Accounts update на " + scheme);
     }
 
-    // ТЕСТ НЕ ДОДЕЛАН
     @Test
     public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
         Account originalAccount = new BackendGetAccounts().getAnyAccount(user, scheme, selenium);
@@ -52,7 +52,9 @@ public class BackendPutAccountsUpdate{
                 OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
                 out.write(modifiedJson);
                 out.close();
-                System.out.println(httpCon.getInputStream());
+                InputStream inStrm = httpCon.getInputStream();
+                assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+                //System.out.println(httpCon.getInputStream());
             }
             catch (IOException e) {e.printStackTrace();}
         }
@@ -70,7 +72,9 @@ public class BackendPutAccountsUpdate{
                 OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
                 out.write(originalJson);
                 out.close();
-                System.out.println(httpCon.getInputStream());
+                InputStream inStrm = httpCon.getInputStream();
+                assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+                //System.out.println(httpCon.getInputStream());
             }
             catch (IOException e) {e.printStackTrace();}
         }

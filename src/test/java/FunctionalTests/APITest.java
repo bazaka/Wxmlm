@@ -52,7 +52,7 @@ public class APITest {
             }
         }
         catch (Exception e) { e.printStackTrace();
-            System.out.println("Проверка API GET accounts НЕ пройдена:" + e); }
+            System.out.println("Проверка API GET accounts НЕ пройдена: " + e); }
         //Вызов метода окончания теста
         try { newBackendGetAccounts.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }

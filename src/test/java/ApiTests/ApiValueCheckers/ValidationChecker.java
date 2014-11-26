@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ValidationChecker {
+    // Проверка что поле содержит Id
     public boolean checkIdValue(int id)
     {
         return (id > 0);
@@ -38,6 +39,8 @@ public class ValidationChecker {
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
     public boolean checkUserStatusId(int statusId) {return (statusId>=1 && statusId<=4);}
+    public boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
+    public boolean checkOperationTypeId(int statusId) {return (statusId>=1 && statusId<=9);}
     public boolean checkCareer(int careerId) {return (careerId>=0 && careerId<=11);}
     public boolean checkMoreOrNullId (Object languageId){
         if (languageId.equals(null))
@@ -56,12 +59,17 @@ public class ValidationChecker {
     }
     public boolean checkAnotherEmail (Object anotherEmail) {
         if (anotherEmail.equals(null))
-           return true;
-        else{
-          //  boolean valid;// = EmailValidator.getInstance().isValid(anotherEmail.toString());
+            return true;
+        else {
+            //  boolean valid;// = EmailValidator.getInstance().isValid(anotherEmail.toString());
             return (EmailValidator.getInstance().isValid(anotherEmail.toString()));
         }
+    }
 
+    // Проверка что поле содержит необязательный Id
+    public boolean checkIdOrNull(String id){
+        return (id == null || checkIdValue(Integer.valueOf(id)));
+    }
      /*  // if (anotherEmail.equals("null"))
         if
             return true;
@@ -69,7 +77,4 @@ public class ValidationChecker {
             boolean valid = EmailValidator.getInstance().isValid(anotherEmail);
             return valid;
         }*/
-
-    }
-
 }
