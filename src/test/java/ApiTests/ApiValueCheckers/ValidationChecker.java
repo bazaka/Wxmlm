@@ -35,6 +35,21 @@ public class ValidationChecker {
             return true; }
         catch (ParseException e) {return false;}
     }
+    public boolean checkDateOrNull(Object dTime){
+        if (dTime == null)
+            return true;
+        else{
+            String dateTime = dTime.toString();
+            String[] parts = dateTime.split("T");
+            try {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                Date date = dateFormat.parse(parts[0]);
+                Date time = timeFormat.parse(parts[1]);
+                return true; }
+            catch (ParseException e) {return false;}
+        }
+    }
     public boolean checkStringOrNull(String str) { return (str == null || str.length() > 0 );}//дописати
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
@@ -42,13 +57,13 @@ public class ValidationChecker {
     public boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
     public boolean checkOperationTypeId(int statusId) {return (statusId>=1 && statusId<=9);}
     public boolean checkCareer(int careerId) {return (careerId>=0 && careerId<=11);}
-    public boolean checkMoreOrNullId (Object languageId){
-        if (languageId.equals(null))
+    public boolean checkMoreOrNullId (Object someId){
+        if (someId == null)
             return true;
         else{
-            String langId = languageId.toString();
-            int langInt = (Integer.valueOf(langId));
-            return (langInt >= 0);
+            String strId = someId.toString();
+            int IntId = (Integer.valueOf(strId));
+            return (IntId >= 0);
 
 
         }
@@ -57,15 +72,6 @@ public class ValidationChecker {
 
         return (EmailValidator.getInstance().isValid(email));
     }
-    public boolean checkAnotherEmail (Object anotherEmail) {
-        if (anotherEmail.equals(null))
-            return true;
-        else {
-            //  boolean valid;// = EmailValidator.getInstance().isValid(anotherEmail.toString());
-            return (EmailValidator.getInstance().isValid(anotherEmail.toString()));
-        }
-    }
-
     // Проверка что поле содержит необязательный Id
     public boolean checkIdOrNull(String id){
         return (id == null || checkIdValue(Integer.valueOf(id)));
@@ -77,4 +83,8 @@ public class ValidationChecker {
             boolean valid = EmailValidator.getInstance().isValid(anotherEmail);
             return valid;
         }*/
+        return anotherEmail == null || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
+
+    }
+
 }

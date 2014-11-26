@@ -1,8 +1,6 @@
 package FunctionalTests;
 
-import ApiTests.BackendGetAccounts;
 import ApiTests.BackendGetUsers;
-import ApiTests.BackendPutAccountsUpdate;
 import UsedByAll.TestUser;
 
 public class APITest {
@@ -32,7 +30,7 @@ public class APITest {
         //Вызов метода окончания теста
         try { newBackendGetUsers.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }
-
+        /*
         BackendGetAccounts newBackendGetAccounts = new BackendGetAccounts(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         try { newBackendGetAccounts.setUp(scheme); }
@@ -81,6 +79,8 @@ public class APITest {
         //Вызов метода окончания теста
         try { newBackendPutAccountsUpdate.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }
+        */
         return isComplete;
+
     }
 }
