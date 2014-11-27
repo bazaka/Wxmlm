@@ -3,16 +3,8 @@ package ApiTests;
 import ApiTests.ApiValueCheckers.ValidationChecker;
 import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
-import com.thoughtworks.selenium.DefaultSelenium;
-import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -22,33 +14,9 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.*;
 
 public class BackendGetUsers {
-    public static WebDriver driver;
-    public static WebElement element;
-    private DefaultSelenium selenium;
-    //public static WebDriverWait wait;
 
-
-    @Before
-    public void setUp(String scheme) throws Exception{
-        WebDriver driver = new FirefoxDriver();
-        driver.manage().window().maximize();
-        selenium = new WebDriverBackedSelenium(driver, "http://" + scheme);
-        //driver.get("http://" +scheme);
-        System.out.println("Запуск селениум для проверки API метода GET Users на " + scheme);
-    }
-
-    @Test
-   /* public boolean doTest(JSONArray jsonArr, String fieldName){
-
-        ValidationChecker checker = new ValidationChecker();
-        for (int i=0; i<jsonArr.length(); i++){
-            JSONObject object = jsonArr.getJSONObject(i);
-            int someField = object.getInt(fieldName);
-            return assertTrue("Incorrect "+fieldName, checker.checkIdValue(someField));
-
-        }
-    }*/
     public boolean testBackendGetUsers(String scheme, TestUser User) throws Exception{
+        System.out.println("Запуск селениум для проверки API метода GET Users на " + scheme);
         String url = "users/api/users/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
@@ -82,7 +50,12 @@ public class BackendGetUsers {
             assertTrue("Incorrect countryId ",checker.checkIdValue(object.getInt("country_id")));
             assertTrue("Incorrect languageId",checker.checkMoreOrNullId(object.get("language_id")));
             assertTrue("Incorrect birthDate",checker.checkDateTimeString(object.getString("birth_date")));
-            assertTrue("Incorrect emailMain",checker.checkEmail(object.get("email_main").toString()));
+            System.out.println("Object.get = " + object.get("email_main"));
+            System.out.println("Object.get(email).toStr = "+ object.get("email_main").toString());
+            System.out.println("Object.getString(emailmain)"+ object.getString("email_main"));
+           // assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
+            //assertTrue("Incorrect emailMain",checker.checkEmail(object.get("email_main").toString()));
+            assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
             assertTrue("Incorrect email2 ",checker.checkAnotherEmail(object.get("email2")));
             assertTrue("Incorrect email3",checker.checkAnotherEmail(object.get("email3")));
             assertTrue("Incorrect phoneNumberMain ",checker.checkNotNull(object.getString("phone_number_main")));
@@ -112,10 +85,7 @@ public class BackendGetUsers {
         }
         return true;
     }
-    @After
-    public void tearDown() throws Exception{
-        selenium.stop();
-    }
+
 
 
 }

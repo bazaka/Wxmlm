@@ -22,7 +22,7 @@ public class ValidationChecker {
     public boolean checkBooleanValue(boolean boo){
         return true;
     }
-    public boolean checkNotNull(String str){return (str != null);
+    public boolean checkNotNull(String str){return (!str.equals(null));
     }
     public boolean checkDoubleValue(double dbl) {return  true; }
     public boolean checkDateTimeString(String dateTime) {
@@ -50,12 +50,12 @@ public class ValidationChecker {
             catch (ParseException e) {return false;}
         }
     }
-    public boolean checkStringOrNull(String str) { return (str == null || str.length() > 0 );}//дописати
+    public boolean checkStringOrNull(String str) { return (str.equals(null) || str.length() > 0 );}//дописати
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
-    public boolean checkUserStatusId(int statusId) {return (statusId>=1 && statusId<=4);}
+    public boolean checkUserStatusId(int userStatusId) {return (userStatusId>=1 && userStatusId<=4);}
     public boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
-    public boolean checkOperationTypeId(int statusId) {return (statusId>=1 && statusId<=9);}
+    public boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=9);}
     public boolean checkCareer(int careerId) {return (careerId>=0 && careerId<=11);}
     public boolean checkMoreOrNullId (Object someId){
         if (someId.equals(null))
@@ -70,21 +70,31 @@ public class ValidationChecker {
     }
     public boolean checkEmail (String email) {
 
+
         return (EmailValidator.getInstance().isValid(email));
     }
     // Проверка что поле содержит необязательный Id
     public boolean checkIdOrNull(String id){
         return (id == null || checkIdValue(Integer.valueOf(id)));
     }
-     /*  // if (anotherEmail.equals("null"))
-        if
-            return true;
-        else{
-            boolean valid = EmailValidator.getInstance().isValid(anotherEmail);
-            return valid;
-        }*/
-     public boolean checkAnotherEmail (Object anotherEmail) {
+    public boolean checkAnotherEmail (Object anotherEmail) {
         return anotherEmail.equals(null) || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
     }
+    public boolean checkProductId (int productId){
+        return(productId == 1 || productId == 2 || productId == 3 || productId == 4);
+    }
+    public boolean checkMoneyFormat(String value){
+        int i = Integer.valueOf(value);
+        if(i == Integer.parseInt(value)) {
+            return true;
+        }
+        else {
+            String[] parts = value.split(".");
+            return (Integer.valueOf(parts[0]) > 0 && Integer.valueOf(parts[1]) > 0 && parts[1].length() <= 2);
+        }
+    }
+
+
+
 
 }
