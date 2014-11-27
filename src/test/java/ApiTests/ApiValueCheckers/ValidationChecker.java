@@ -36,7 +36,7 @@ public class ValidationChecker {
         catch (ParseException e) {return false;}
     }
     public boolean checkDateOrNull(Object dTime){
-        if (dTime == null)
+        if (dTime.equals(null))
             return true;
         else{
             String dateTime = dTime.toString();
@@ -58,7 +58,7 @@ public class ValidationChecker {
     public boolean checkOperationTypeId(int statusId) {return (statusId>=1 && statusId<=9);}
     public boolean checkCareer(int careerId) {return (careerId>=0 && careerId<=11);}
     public boolean checkMoreOrNullId (Object someId){
-        if (someId == null)
+        if (someId.equals(null))
             return true;
         else{
             String strId = someId.toString();
@@ -84,7 +84,7 @@ public class ValidationChecker {
             return valid;
         }*/
      public boolean checkAnotherEmail (Object anotherEmail) {
-        return anotherEmail == null || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
+        return anotherEmail.equals(null) || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
     }
 
 }

@@ -14,6 +14,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+
 import static org.junit.Assert.*;
 
 public class BackendGetUsers {
@@ -45,11 +50,20 @@ public class BackendGetUsers {
     }*/
     public boolean testBackendGetUsers(String scheme, TestUser User) throws Exception{
         String url = "users/api/users/";
-        selenium.open(MakeRequest.request(scheme, User, url, 5));
-        selenium.waitForPageToLoad("5000");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
 
         //JSON
-        JSONArray jsonArr = new JSONArray(selenium.getBodyText());
+        JSONArray jsonArr = new JSONArray(result);
         //Structure
         ValidationChecker checker = new ValidationChecker();
         assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());

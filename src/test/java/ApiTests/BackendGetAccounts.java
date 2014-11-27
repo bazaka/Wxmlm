@@ -1,6 +1,7 @@
 package ApiTests;
 
 import ApiTests.ObjectClasses.Account;
+import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import com.thoughtworks.selenium.*;
 import com.thoughtworks.selenium.webdriven.WebDriverBackedSelenium;
@@ -36,7 +37,9 @@ public class BackendGetAccounts {
 
     @Test
     public boolean testBackendGetAccounts(String scheme, TestUser user) throws Exception {
-        //Создаем и отсылаем запрос
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+
+        /*//Создаем запрос
         Calendar calBefore = Calendar.getInstance();
         Calendar calAfter = Calendar.getInstance();
         calBefore.add(Calendar.DATE, -5);
@@ -52,15 +55,14 @@ public class BackendGetAccounts {
         URL url = new URL(request);
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
         httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-        httpCon.setRequestMethod("GET");
+        httpCon.setRequestMethod("GET");*/
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
-        String result = null;
+        String result = "";
         String line;
         while ((line = br.readLine()) != null) {
-            System.out.println(line);
             result += line;
         }
         br.close();
@@ -68,7 +70,6 @@ public class BackendGetAccounts {
         selenium.waitForPageToLoad("5000");*/
 
         //Парсим JSON
-        System.out.println(result);
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
         ValidationChecker checker = new ValidationChecker();

@@ -83,7 +83,8 @@ public class BackendGetOperations {
             assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
             assertTrue("Incorrect type", checker.checkOperationTypeId(object.getInt("type")));
-            assertTrue("Incorrect parameters number", object.length() == 10); // assertEquals
+            assertTrue("Incorrect quarantine", checker.checkBooleanValue(object.getBoolean("quarantine")));
+            assertTrue("Incorrect parameters number", object.length() == 11); // assertEquals
         }
         return true;
     }
