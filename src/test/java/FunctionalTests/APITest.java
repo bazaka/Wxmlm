@@ -1,17 +1,15 @@
 package FunctionalTests;
 
-import ApiTests.BackendGetAccounts;
-import ApiTests.BackendGetUsers;
-import ApiTests.BackendPutAccountsUpdate;
+import ApiTests.BackendGetPurchases;
 import UsedByAll.TestUser;
 
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
         boolean isComplete = false;
-        /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
+       /* BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
-        try { newBackendGetUsers.setUp(scheme); }
-        catch (Exception e) { e.printStackTrace(); }
+        //try { newBackendGetUsers.setUp(scheme); }
+        //catch (Exception e) { e.printStackTrace(); }
         //Вызов метода, запускающего GET API Accounts
         try
         {
@@ -29,11 +27,12 @@ public class APITest {
         }
         catch (Exception e) { e.printStackTrace();
             System.out.println("Проверка API GET Users НЕ пройдена:" + e); }
+            */
         //Вызов метода окончания теста
-        try { newBackendGetUsers.tearDown(); }
-        catch (Exception e) { e.printStackTrace(); }*/
+       // try { newBackendGetUsers.tearDown(); }
+        //catch (Exception e) { e.printStackTrace(); }
 
-        BackendGetAccounts newBackendGetAccounts = new BackendGetAccounts(); // Создаём объект теста
+      /*  BackendGetAccounts newBackendGetAccounts = new BackendGetAccounts(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         try { newBackendGetAccounts.setUp(scheme); }
         catch (Exception e) { e.printStackTrace(); }
@@ -81,6 +80,31 @@ public class APITest {
         //Вызов метода окончания теста
         try { newBackendPutAccountsUpdate.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }
+        */
+
+        BackendGetPurchases newBackendGetPurchases = new BackendGetPurchases(); // Создаём объект теста
+        // Вызов метода, переходящего на главную страницу проекта
+        //try { newBackendGetUsers.setUp(scheme); }
+        //catch (Exception e) { e.printStackTrace(); }
+        //Вызов метода, запускающего GET API Accounts
+        try
+        {
+            if (newBackendGetPurchases.testBackendGetPurchases(scheme, user))
+            {
+                System.out.println("Проверка API GET Purchases пройдена");
+
+                isComplete = true;
+            }
+            else
+            {
+                System.out.println("Проверка API GET Purchases НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API GET Purchases НЕ пройдена:" + e); }
+
+
         return isComplete;
 
     }
