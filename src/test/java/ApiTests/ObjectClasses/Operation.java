@@ -62,8 +62,10 @@ public class Operation {
             return false;
         if (getSourceAccountId() != a.getSourceAccountId())
             return false;
-        if (getPurchaseId().equals(a.getPurchaseId()))
-            return false;
+        if (getPurchaseId() != null && a.getPurchaseId() != null){
+            if (!getPurchaseId().equals(a.getPurchaseId()))
+                return false;
+        }
         if (getInitiatorUserId() != a.getInitiatorUserId())
             return false;
         if (!getCreatedDate().equals(a.getCreatedDate()))

@@ -7,7 +7,7 @@ import UsedByAll.TestUser;
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
         boolean isComplete = true;
-        BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
+        /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         //try { newBackendGetUsers.setUp(scheme); }
         //catch (Exception e) { e.printStackTrace(); }
@@ -28,7 +28,7 @@ public class APITest {
             System.out.println("Проверка API GET Users НЕ пройдена:" + e); }
         //Вызов метода окончания теста
         //try { newBackendGetUsers.tearDown(); }
-        //catch (Exception e) { e.printStackTrace(); }
+        //catch (Exception e) { e.printStackTrace(); }*/
 
         BackendGetAccounts newBackendGetAccounts = new BackendGetAccounts(); // Создаём объект теста
         //Вызов метода, запускающего GET API Accounts
@@ -53,16 +53,16 @@ public class APITest {
         {
             if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))
             {
-                System.out.println("Проверка API PUT Accounts Update пройдена");
+                System.out.println("Проверка API PUT accounts update пройдена");
             }
             else
             {
-                System.out.println("Проверка API PUT Accounts Update НЕ пройдена");
+                System.out.println("Проверка API PUT accounts update НЕ пройдена");
                 isComplete = false;
             }
         }
         catch (Exception e) { e.printStackTrace();
-            System.out.println("Проверка API PUT Accounts Update НЕ пройдена:" + e);  isComplete = false;}
+            System.out.println("Проверка API PUT accounts update НЕ пройдена:" + e);  isComplete = false;}
 
         BackendGetOperations newBackendGetOperations = new BackendGetOperations(); // Создаём объект теста
         //Вызов метода, запускающего GET API Operations

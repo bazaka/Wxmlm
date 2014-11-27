@@ -1,6 +1,7 @@
 package ApiTests;
 
 import ApiTests.ObjectClasses.Account;
+import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.junit.After;
 import org.junit.Before;
@@ -8,8 +9,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.URL;
-import org.apache.commons.codec.binary.Base64;
 import static org.junit.Assert.assertTrue;
 
 public class BackendPutAccountsUpdate{
@@ -26,39 +25,22 @@ public class BackendPutAccountsUpdate{
         String modifiedJson = "[{\"account_id\":" + modifiedAccount.getAccountId() + ", \"account_number\":\"" + modifiedAccount.getAccountNumber() + "\", \"account_type\":" + modifiedAccount.getAccountType() + ", \"status\":" + modifiedAccount.getStatus() + ", \"account_info\": \"" + modifiedAccount.getAccountInfo() + "\", \"amount\": \"" + modifiedAccount.getAmount() + "\"}]";
 
         // Содзаем URL
-        String authString = user.getEmail() + ":" + user.getPassword1();
-        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
-        String authStringEnc = new String(authEncBytes);
-        String stringUrl = "http://" + scheme + "money/api/accounts/update/";
-        URL url = new URL(stringUrl);
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-        httpCon.setRequestMethod("PUT");
-        httpCon.setRequestProperty("Content-Type", "application/json");
-        httpCon.setRequestProperty("Accept", "application/json");
-        httpCon.setDoOutput(true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/update/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
-        httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-
         // Проверяем GET-запросом, что данные обновились
         Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedAccount.equalsExceptUpdatedDate(changedAccount));
-        url = new URL(stringUrl);
-        httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-        httpCon.setRequestMethod("PUT");
-        httpCon.setRequestProperty("Content-Type", "application/json");
-        httpCon.setRequestProperty("Accept", "application/json");
-        httpCon.setDoOutput(true);
+
+        // Содзаем URL
+        httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/update/", "PUT", "application/json", "application/json", true);
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-
         // Проверяем GET-запросом, что данные восстановились
         changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme);
         assertTrue("Check modified data returned correctly", originalAccount.equalsExceptUpdatedDate(changedAccount));

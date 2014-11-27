@@ -78,17 +78,17 @@ public class BackendGetOperations {
         try {
             JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
-            String pur_id = null;
-            if (!object.get("purchase_id").equals(null))
-                pur_id = object.get("purchase_id").toString();
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), pur_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+            String purchase_id = null;
+            if (object.get("purchase_id") != null)
+                purchase_id = object.get("purchase_id").toString();
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Operation getOperationByParameter(String parameterName, String parameterValue, TestUser user, String scheme) throws IOException {
+    public Operation getOperationByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -104,11 +104,11 @@ public class BackendGetOperations {
             JSONArray jsonArr = new JSONArray(result);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                if (object.getString(parameterName).equals(parameterValue)) {
-                    String pur_id = null;
-                    if (!object.get("purchase_id").equals(null))
-                        pur_id = object.get("purchase_id").toString();
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), pur_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+                if (object.getInt(parameterName) == parameterValue) {
+                    String purchase_id = null;
+                    if (object.get("purchase_id") != null)
+                        purchase_id = object.get("purchase_id").toString();
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
                 }
             }
         } catch (Exception e) {
@@ -117,6 +117,7 @@ public class BackendGetOperations {
         }
         return null;
     }
+
 
     @After
     public void tearDown() throws Exception {}
