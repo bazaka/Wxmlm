@@ -5,7 +5,7 @@ public class Operation {
     public int id;
     public int targetAccountId;
     public int sourceAccountId;
-    public int purchaseId;
+    public String purchaseId;
     public int initiatorUserId;
     public String createdDate;
     public String updatedDate;
@@ -13,7 +13,7 @@ public class Operation {
     public int status;
     public int type;
 
-    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, int oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType)
+    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType)
     {
         this.setId(oId);
         this.setTargetAccountId(oTargetAccountId);
@@ -29,7 +29,7 @@ public class Operation {
     public int getId() {return id;}
     public int getTargetAccountId() {return targetAccountId;}
     public int getSourceAccountId() {return sourceAccountId;}
-    public int getPurchaseId() {return purchaseId;}
+    public String getPurchaseId() {return purchaseId;}
     public int getInitiatorUserId() {return initiatorUserId;}
     public String getCreatedDate() {return createdDate;}
     public String getUpdatedDate() {return updatedDate;}
@@ -40,7 +40,7 @@ public class Operation {
     public void setId(int a) {this.id = a;}
     public void setTargetAccountId(int a) {this.targetAccountId = a;}
     public void setSourceAccountId(int a) {this.sourceAccountId = a;}
-    public void setPurchaseId(int a) {this.purchaseId = a;}
+    public void setPurchaseId(String a) {this.purchaseId = a;}
     public void setInitiatorUserId(int a) {this.initiatorUserId = a;}
     public void setCreatedDate(String a) {this.createdDate = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
@@ -62,7 +62,7 @@ public class Operation {
             return false;
         if (getSourceAccountId() != a.getSourceAccountId())
             return false;
-        if (getPurchaseId() != a.getPurchaseId())
+        if (getPurchaseId().equals(a.getPurchaseId()))
             return false;
         if (getInitiatorUserId() != a.getInitiatorUserId())
             return false;

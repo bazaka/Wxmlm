@@ -78,7 +78,7 @@ public class BackendGetOperations {
         try {
             JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getInt("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getString("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -102,7 +102,7 @@ public class BackendGetOperations {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getString(parameterName).equals(parameterValue)) {
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getInt("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getString("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
                 }
             }
         } catch (Exception e) {

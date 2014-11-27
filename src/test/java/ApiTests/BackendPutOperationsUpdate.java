@@ -31,7 +31,7 @@ public class BackendPutOperationsUpdate {
         String authString = user.getEmail() + ":" + user.getPassword1();
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
-        String stringUrl = "http://" + scheme + "money/api/accounts/update/";
+        String stringUrl = "http://" + scheme + "money/api/operations/update/";
         URL url = new URL(stringUrl);
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
         httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
