@@ -12,12 +12,12 @@ public class Account {
 
     public Account(int aId, String aNumber, int aType, boolean aStatus, String aInfo, double aAmount)
     {
-        accountId = aId;
-        accountNumber = aNumber;
-        accountType = aType;
-        status = aStatus;
-        accountInfo = aInfo;
-        amount = aAmount;
+        this.setAccountId(aId);
+        this.setAccountNumber(aNumber);
+        this.setAccountType(aType);
+        this.setStatus(aStatus);
+        this.setAccountInfo(aInfo);
+        this.setAmount(aAmount);
     }
 
     public int getAccountId() {return accountId;}
@@ -38,27 +38,27 @@ public class Account {
     public void setAmount(double a) {this.amount = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
 
-    public boolean equalsExceptUpdatedDate(Account acc)
+    public boolean equalsExceptUpdatedDate(Account a)
     {
-        if (this == acc)
+        if (this == a)
             return true;
-        if (acc == null)
+        if (a == null)
             return false;
-        if (getClass() != acc.getClass())
+        if (getClass() != a.getClass())
             return false;
-        if (getAccountId() != acc.getAccountId())
+        if (getAccountId() != a.getAccountId())
             return false;
-        if (getAmount() != acc.getAmount())
+        if (getAmount() != a.getAmount())
             return false;
-        if (!getAccountInfo().equals(acc.getAccountInfo()))
+        if (!getAccountInfo().equals(a.getAccountInfo()))
             return false;
-        if (!getAccountNumber().equals(acc.getAccountNumber()))
+        if (!getAccountNumber().equals(a.getAccountNumber()))
             return false;
-        if (getAccountType() != acc.getAccountType())
+        if (getAccountType() != a.getAccountType())
             return false;
-        if (getStatus() != acc.getStatus())
+        if (getStatus() != a.getStatus())
             return false;
-        if (getUserId() != acc.getUserId())
+        if (getUserId() != a.getUserId())
             return false;
         return true;
     }

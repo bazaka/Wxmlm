@@ -2,6 +2,7 @@ package ApiTests;
 
 import ApiTests.ApiValueCheckers.ValidationChecker;
 import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -61,6 +62,56 @@ public class BackendGetOperations {
         }
         return true;
     }
+
+    public Operation getAnyOperation(TestUser user, String scheme) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            JSONObject object = jsonArr.getJSONObject(0);
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getInt("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Operation getOperationByParameter(String parameterName, String parameterValue, TestUser user, String scheme) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject object = jsonArr.getJSONObject(i);
+                if (object.getString(parameterName).equals(parameterValue)) {
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getInt("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
+
     @After
     public void tearDown() throws Exception {}
 }
