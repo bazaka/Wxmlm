@@ -74,8 +74,8 @@ public class ValidationChecker {
         return (EmailValidator.getInstance().isValid(email));
     }
     // Проверка что поле содержит необязательный Id
-    public boolean checkIdOrNull(String id){
-        return (id == null || checkIdValue(Integer.valueOf(id)));
+    public boolean checkIdOrNull(Object id){
+        return (id.equals(null) || checkIdValue(Integer.valueOf(id.toString())));
     }
     public boolean checkAnotherEmail (Object anotherEmail) {
         return anotherEmail.equals(null) || (EmailValidator.getInstance().isValid(anotherEmail.toString()));

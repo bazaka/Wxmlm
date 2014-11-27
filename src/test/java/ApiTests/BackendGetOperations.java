@@ -49,7 +49,7 @@ public class BackendGetOperations {
             assertTrue("Incorrect id", checker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect target_account_id", checker.checkIdValue(object.getInt("target_account_id")));
             assertTrue("Incorrect source_account_id", checker.checkIdValue(object.getInt("source_account_id")));
-            assertTrue("Incorrect purchase_id", checker.checkMoreOrNullId(object.get("purchase_id")));
+            assertTrue("Incorrect purchase_id", checker.checkIdOrNull(object.get("purchase_id")));
             assertTrue("Incorrect initiator_user_id", checker.checkIdValue(object.getInt("initiator_user_id")));
             assertTrue("Incorrect created_date", checker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
@@ -78,7 +78,10 @@ public class BackendGetOperations {
         try {
             JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getString("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+            String pur_id = null;
+            if (!object.get("purchase_id").equals(null))
+                pur_id = object.get("purchase_id").toString();
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), pur_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -102,7 +105,10 @@ public class BackendGetOperations {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getString(parameterName).equals(parameterValue)) {
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), object.getString("purchase_id"), object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
+                    String pur_id = null;
+                    if (!object.get("purchase_id").equals(null))
+                        pur_id = object.get("purchase_id").toString();
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), pur_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"));
                 }
             }
         } catch (Exception e) {
