@@ -8,7 +8,7 @@ import UsedByAll.TestUser;
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
         boolean isComplete = false;
-        BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
+        /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         try { newBackendGetUsers.setUp(scheme); }
         catch (Exception e) { e.printStackTrace(); }
@@ -31,7 +31,7 @@ public class APITest {
             System.out.println("Проверка API GET Users НЕ пройдена:" + e); }
         //Вызов метода окончания теста
         try { newBackendGetUsers.tearDown(); }
-        catch (Exception e) { e.printStackTrace(); }
+        catch (Exception e) { e.printStackTrace(); }*/
 
         BackendGetAccounts newBackendGetAccounts = new BackendGetAccounts(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
@@ -58,7 +58,7 @@ public class APITest {
         catch (Exception e) { e.printStackTrace(); }
 
 
-        /*BackendPutAccountsUpdate newBackendPutAccountsUpdate = new BackendPutAccountsUpdate(); // Создаём объект теста
+        BackendPutAccountsUpdate newBackendPutAccountsUpdate = new BackendPutAccountsUpdate(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         try { newBackendPutAccountsUpdate.setUp(scheme); }
         catch (Exception e) { e.printStackTrace(); }
@@ -80,7 +80,7 @@ public class APITest {
             System.out.println("Проверка API PUT Accounts Update НЕ пройдена:" + e); }
         //Вызов метода окончания теста
         try { newBackendPutAccountsUpdate.tearDown(); }
-        catch (Exception e) { e.printStackTrace(); }*/
+        catch (Exception e) { e.printStackTrace(); }
         return isComplete;
 
     }

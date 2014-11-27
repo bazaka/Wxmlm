@@ -31,7 +31,7 @@ public class BackendPutAccountsUpdate{
     }
 
     @Test
-    public boolean testBackendPutAccountsUpdate(String scheme, TestUser user){
+    public boolean testBackendPutAccountsUpdate(String scheme, TestUser user) throws IOException {
         Account originalAccount = new BackendGetAccounts().getAnyAccount(user, scheme, selenium);
         Account modifiedAccount = new Account(originalAccount.getAccountId(), originalAccount.getAccountNumber(), originalAccount.getAccountType(), originalAccount.getStatus(), originalAccount.getAccountInfo() + "1", originalAccount.getAmount() + 50);
         String originalJson = "[{\"account_id\":" + originalAccount.getAccountId() + ", \"account_number\":\"" + originalAccount.getAccountNumber() + "\", \"account_type\":" + originalAccount.getAccountType() + ", \"status\":" + originalAccount.getStatus() + ", \"account_info\": \"" + originalAccount.getAccountInfo() + "\", \"amount\": \"" + originalAccount.getAmount() + "\"}]";
@@ -42,43 +42,35 @@ public class BackendPutAccountsUpdate{
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
         String stringUrl = "http://" + scheme + "money/api/accounts/update/";
-        try {URL url = new URL(stringUrl);
-            try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-                httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-                httpCon.setRequestMethod("PUT");
-                httpCon.setRequestProperty("Content-Type", "application/json");
-                httpCon.setRequestProperty("Accept", "application/json");
-                httpCon.setDoOutput(true);
-                OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-                out.write(modifiedJson);
-                out.close();
-                InputStream inStrm = httpCon.getInputStream();
-                assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-                //System.out.println(httpCon.getInputStream());
-            }
-            catch (IOException e) {e.printStackTrace();}
-        }
-        catch (MalformedURLException e) {e.printStackTrace();}
+        URL url = new URL(stringUrl);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpCon.setRequestMethod("PUT");
+        httpCon.setRequestProperty("Content-Type", "application/json");
+        httpCon.setRequestProperty("Accept", "application/json");
+        httpCon.setDoOutput(true);
+        OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+        out.write(modifiedJson);
+        out.close();
+        httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+
         // Проверяем GET-запросом, что данные обновились
         Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
         assertTrue("Check modified data saved correctly", modifiedAccount.equalsExceptUpdatedDate(changedAccount));
-        try {URL url = new URL(stringUrl);
-            try {HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-                httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-                httpCon.setRequestMethod("PUT");
-                httpCon.setRequestProperty("Content-Type", "application/json");
-                httpCon.setRequestProperty("Accept", "application/json");
-                httpCon.setDoOutput(true);
-                OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-                out.write(originalJson);
-                out.close();
-                InputStream inStrm = httpCon.getInputStream();
-                assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-                //System.out.println(httpCon.getInputStream());
-            }
-            catch (IOException e) {e.printStackTrace();}
-        }
-        catch (MalformedURLException e) {e.printStackTrace();}
+        url = new URL(stringUrl);
+        httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpCon.setRequestMethod("PUT");
+        httpCon.setRequestProperty("Content-Type", "application/json");
+        httpCon.setRequestProperty("Accept", "application/json");
+        httpCon.setDoOutput(true);
+        out = new OutputStreamWriter(httpCon.getOutputStream());
+        out.write(originalJson);
+        out.close();
+        httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+
         // Проверяем GET-запросом, что данные восстановились
         changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme, selenium);
         assertTrue("Check modified data returned correctly", originalAccount.equalsExceptUpdatedDate(changedAccount));

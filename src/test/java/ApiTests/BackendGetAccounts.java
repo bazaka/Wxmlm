@@ -13,9 +13,12 @@ import org.json.*;
 import ApiTests.ApiValueCheckers.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -38,24 +41,6 @@ public class BackendGetAccounts {
     @Test
     public boolean testBackendGetAccounts(String scheme, TestUser user) throws Exception {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
-
-        /*//Создаем запрос
-        Calendar calBefore = Calendar.getInstance();
-        Calendar calAfter = Calendar.getInstance();
-        calBefore.add(Calendar.DATE, -5);
-        calAfter.add(Calendar.DATE, 5);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        String request = "http://" + scheme + "money/api/accounts/?limit=10&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
-
-        // Содзаем URL
-        String authString = user.getEmail() + ":" + user.getPassword1();
-        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
-        String authStringEnc = new String(authEncBytes);
-        URL url = new URL(request);
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
-        httpCon.setRequestMethod("GET");*/
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -66,8 +51,6 @@ public class BackendGetAccounts {
             result += line;
         }
         br.close();
-        /*selenium.open(request);
-        selenium.waitForPageToLoad("5000");*/
 
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
@@ -88,15 +71,26 @@ public class BackendGetAccounts {
             assertTrue("Incorrect account_info", checker.checkNotNull(object.getString("account_info")));
             assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
-            assertTrue("Incorrect parameters number", object.length() == 8); // assertEquals
+            assertEquals("Incorrect count of Json parameters", object.length(), 8);
         }
 
         return true;
     }
 
-    public Account getAnyAccount(TestUser user, String scheme, DefaultSelenium selenium) {
+    public Account getAnyAccount(TestUser user, String scheme, DefaultSelenium selenium) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
         //Создаем и отсылаем запрос
-        Calendar calBefore = Calendar.getInstance();
+        /*Calendar calBefore = Calendar.getInstance();
         Calendar calAfter = Calendar.getInstance();
         calBefore.add(Calendar.DATE, -5);
         calAfter.add(Calendar.DATE, 5);
@@ -104,10 +98,10 @@ public class BackendGetAccounts {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String request = "http://" + user.getEmail() + ":" + user.getPassword1() + "@" + scheme + "money/api/accounts/?limit=1000&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
         selenium.open(request);
-        selenium.waitForPageToLoad("5000");
+        selenium.waitForPageToLoad("5000");*/
         //Парсим JSON, делаем и возвращаем обьект Account
         try {
-            JSONArray jsonArr = new JSONArray(selenium.getBodyText());
+            JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
             return new Account(object.getInt("account_id"), object.getString("account_number"), object.getInt("account_type"), object.getBoolean("status"), object.getString("account_info"), object.getDouble("amount"));
         } catch (Exception e) {
@@ -116,8 +110,19 @@ public class BackendGetAccounts {
         }
     }
 
-    public Account getAccountByParameter(String parameterName, String parameterValue, TestUser user, String scheme, DefaultSelenium selenium) {
-        //Создаем и отсылаем запрос
+    public Account getAccountByParameter(String parameterName, String parameterValue, TestUser user, String scheme, DefaultSelenium selenium) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        /*//Создаем и отсылаем запрос
         Calendar calBefore = Calendar.getInstance();
         Calendar calAfter = Calendar.getInstance();
         calBefore.add(Calendar.DATE, -1);
@@ -126,10 +131,10 @@ public class BackendGetAccounts {
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String request = "http://" + user.getEmail() + ":" + user.getPassword1() + "@" + scheme + "money/api/accounts/?limit=1000&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
         selenium.open(request);
-        selenium.waitForPageToLoad("5000");
+        selenium.waitForPageToLoad("5000");*/
         //Парсим JSON, делаем и возвращаем обьект Account
         try {
-            JSONArray jsonArr = new JSONArray(selenium.getBodyText());
+            JSONArray jsonArr = new JSONArray(result);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getString(parameterName).equals(parameterValue)) {
