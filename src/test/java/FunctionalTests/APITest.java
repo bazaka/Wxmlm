@@ -1,13 +1,14 @@
 package FunctionalTests;
 
 import ApiTests.BackendGetAccounts;
+import ApiTests.BackendGetOperations;
 import ApiTests.BackendGetUsers;
 import ApiTests.BackendPutAccountsUpdate;
 import UsedByAll.TestUser;
 
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
-        boolean isComplete = false;
+        boolean isComplete = true;
         /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         try { newBackendGetUsers.setUp(scheme); }
@@ -18,8 +19,6 @@ public class APITest {
             if (newBackendGetUsers.testBackendGetUsers(scheme, user))
             {
                 System.out.println("Проверка API GET Users пройдена");
-
-                isComplete = true;
             }
             else
             {
@@ -43,7 +42,6 @@ public class APITest {
             if (newBackendGetAccounts.testBackendGetAccounts(scheme, user))
             {
                 System.out.println("Проверка API GET accounts пройдена");
-                isComplete = true;
             }
             else
             {
@@ -52,11 +50,10 @@ public class APITest {
             }
         }
         catch (Exception e) { e.printStackTrace();
-            System.out.println("Проверка API GET accounts НЕ пройдена: " + e); }
+            System.out.println("Проверка API GET accounts НЕ пройдена: " + e); isComplete = false;}
         //Вызов метода окончания теста
         try { newBackendGetAccounts.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }
-
 
         BackendPutAccountsUpdate newBackendPutAccountsUpdate = new BackendPutAccountsUpdate(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
@@ -68,7 +65,6 @@ public class APITest {
             if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))
             {
                 System.out.println("Проверка API PUT Accounts Update пройдена");
-                isComplete = true;
             }
             else
             {
@@ -77,11 +73,34 @@ public class APITest {
             }
         }
         catch (Exception e) { e.printStackTrace();
-            System.out.println("Проверка API PUT Accounts Update НЕ пройдена:" + e); }
+            System.out.println("Проверка API PUT Accounts Update НЕ пройдена:" + e);  isComplete = false;}
         //Вызов метода окончания теста
         try { newBackendPutAccountsUpdate.tearDown(); }
         catch (Exception e) { e.printStackTrace(); }
-        return isComplete;
 
+        BackendGetOperations newBackendGetOperations = new BackendGetOperations(); // Создаём объект теста
+        // Вызов метода, переходящего на главную страницу проекта
+        try { newBackendGetOperations.setUp(scheme); }
+        catch (Exception e) { e.printStackTrace(); }
+        //Вызов метода, запускающего GET API Operations
+        try
+        {
+            if (newBackendGetOperations.testBackendGetOperations(scheme, user))
+            {
+                System.out.println("Проверка API GET operations пройдена");
+            }
+            else
+            {
+                System.out.println("Проверка API GET operations НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API GET operations НЕ пройдена: " + e);  isComplete = false;}
+        //Вызов метода окончания теста
+        try { newBackendGetOperations.tearDown(); }
+        catch (Exception e) { e.printStackTrace(); }
+
+        return isComplete;
     }
 }
