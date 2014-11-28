@@ -56,9 +56,9 @@ public class BackendGetOperations {
             assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
             assertTrue("Incorrect type", checker.checkOperationTypeId(object.getInt("type")));
-            //assertEquals("Incorrect count of Json parameters", object.length(), 10); // Заменить строку на строки ниже, если есть поле Quarantine
-            assertTrue("Incorrect quarantine", checker.checkBooleanValue(object.getBoolean("quarantine")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 11);
+            assertEquals("Incorrect count of Json parameters", object.length(), 10); // Заменить строку на строки ниже, если есть поле Quarantine
+            //assertTrue("Incorrect quarantine", checker.checkBooleanValue(object.getBoolean("quarantine")));
+            //assertEquals("Incorrect count of Json parameters", object.length(), 11);
         }
         return true;
     }
@@ -81,7 +81,7 @@ public class BackendGetOperations {
             String purchase_id = null;
             if (object.get("purchase_id") != null)
                 purchase_id = object.get("purchase_id").toString();
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"));
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type")/*, object.getBoolean("quarantine")*/);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -108,7 +108,7 @@ public class BackendGetOperations {
                     String purchase_id = null;
                     if (object.get("purchase_id") != null)
                         purchase_id = object.get("purchase_id").toString();
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"));
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type")/*, object.getBoolean("quarantine")*/);
                 }
             }
         } catch (Exception e) {
