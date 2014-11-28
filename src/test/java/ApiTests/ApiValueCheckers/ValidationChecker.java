@@ -78,7 +78,13 @@ public class ValidationChecker {
         return (id.equals(null) || checkIdValue(Integer.valueOf(id.toString())));
     }
     public boolean checkAnotherEmail (Object anotherEmail) {
-        return anotherEmail.equals(null) || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
+        if (anotherEmail.equals(null))
+            return true;
+        else{
+            String mailStr = anotherEmail.toString();
+            return (mailStr.length()>0);
+        }
+        //return anotherEmail.equals(null) || (EmailValidator.getInstance().isValid(anotherEmail.toString()));
     }
     public boolean checkProductId (int productId){
         return(productId == 1 || productId == 2 || productId == 3 || productId == 4);
