@@ -51,7 +51,7 @@ public class APITest {
         //Вызов метода, запускающего Put API Accounts Update
         try
         {
-            if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))
+            if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))hghj
             {
                 System.out.println("Проверка API PUT accounts update пройдена");
             }
