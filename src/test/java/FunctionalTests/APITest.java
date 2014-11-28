@@ -7,7 +7,7 @@ import UsedByAll.TestUser;
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
         boolean isComplete = true;
-        /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
+        BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         //try { newBackendGetUsers.setUp(scheme); }
         //catch (Exception e) { e.printStackTrace(); }
@@ -51,7 +51,7 @@ public class APITest {
         //Вызов метода, запускающего Put API Accounts Update
         try
         {
-            if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))hghj
+            if (newBackendPutAccountsUpdate.testBackendPutAccountsUpdate(scheme, user))
             {
                 System.out.println("Проверка API PUT accounts update пройдена");
             }

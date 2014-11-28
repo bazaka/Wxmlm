@@ -20,7 +20,7 @@ public class MakeRequest{
         calAfter.add(Calendar.DATE, valueInDays);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        String urlString = "http://" + scheme + urlPart + "?limit=10&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
+        String urlString = "http://" + scheme + urlPart + "?limit=1000000&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
 
         // Содзаем HttpUrlConnection
         String authString = user.getEmail() + ":" + user.getPassword1();
