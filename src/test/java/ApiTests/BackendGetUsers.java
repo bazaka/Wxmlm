@@ -50,13 +50,16 @@ public class BackendGetUsers {
             assertTrue("Incorrect countryId ",checker.checkIdValue(object.getInt("country_id")));
             assertTrue("Incorrect languageId",checker.checkMoreOrNullId(object.get("language_id")));
             assertTrue("Incorrect birthDate",checker.checkDateTimeString(object.getString("birth_date")));
-            System.out.println("Object.get = " + object.get("email_main"));
-            System.out.println("Object.get(email).toStr = "+ object.get("email_main").toString());
+
             System.out.println("Object.getString(emailmain)"+ object.getString("email_main"));
            // assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
             //assertTrue("Incorrect emailMain",checker.checkEmail(object.get("email_main").toString()));
             assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
+
+
             assertTrue("Incorrect email2 ",checker.checkAnotherEmail(object.get("email2")));
+
+
             assertTrue("Incorrect email3",checker.checkAnotherEmail(object.get("email3")));
             assertTrue("Incorrect phoneNumberMain ",checker.checkNotNull(object.getString("phone_number_main")));
             assertTrue("Incorrect phoneNumber2 ",checker.checkStringOrNull(object.get("phone_number2").toString()));
