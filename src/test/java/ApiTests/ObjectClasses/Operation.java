@@ -12,9 +12,9 @@ public class Operation {
     public double amount;
     public int status;
     public int type;
-    //public boolean quarantine;
+    public boolean quarantine;
 
-    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType/*, boolean oQuarantine*/)
+    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine)
     {
         this.setId(oId);
         this.setTargetAccountId(oTargetAccountId);
@@ -25,7 +25,7 @@ public class Operation {
         this.setAmount(oAmount);
         this.setStatus(oStatus);
         this.setType(oType);
-        //this.setQuarantine(oQuarantine);
+        this.setQuarantine(oQuarantine);
     }
 
     public int getId() {return id;}
@@ -38,7 +38,7 @@ public class Operation {
     public double getAmount() {return amount;}
     public int getStatus() {return status;}
     public int getType() {return type;}
-    //public boolean getQuarantine() {return quarantine;}
+    public boolean getQuarantine() {return quarantine;}
 
     public void setId(int a) {this.id = a;}
     public void setTargetAccountId(int a) {this.targetAccountId = a;}
@@ -50,38 +50,58 @@ public class Operation {
     public void setAmount(double a) {this.amount = a;}
     public void setStatus(int a) {this.status = a;}
     public void setType(int a) {this.type = a;}
-    //public void setQuarantine(boolean a) {this.quarantine = a;}
+    public void setQuarantine(boolean a) {this.quarantine = a;}
 
     public boolean equalsExceptUpdatedDate(Operation a)
     {
         if (this == a)
             return true;
-        if (a == null)
+        if (a == null) {
+            System.out.println("1");
             return false;
-        if (getClass() != a.getClass())
-            return false;
-        if (getId() != a.getId())
-            return false;
-        if (getTargetAccountId() != a.getTargetAccountId())
-            return false;
-        if (getSourceAccountId() != a.getSourceAccountId())
-            return false;
-        if (getPurchaseId() != null && a.getPurchaseId() != null){
-            if (!getPurchaseId().equals(a.getPurchaseId()))
-                return false;
         }
-        if (getInitiatorUserId() != a.getInitiatorUserId())
+        if (getClass() != a.getClass()) {
+            System.out.println("2");
             return false;
-        if (!getCreatedDate().equals(a.getCreatedDate()))
+        }
+        if (getTargetAccountId() != a.getTargetAccountId()) {
+            System.out.println("4");
             return false;
-        if (getAmount() != a.getAmount())
+        }
+        if (getSourceAccountId() != a.getSourceAccountId()) {
+            System.out.println("5");
             return false;
-        if (getStatus() != a.getStatus())
+        }
+        if (getPurchaseId() != null && a.getPurchaseId() != null){
+            if (!getPurchaseId().equals(a.getPurchaseId())) {
+                System.out.println("6");
+                return false;
+            }
+        }
+        if (getInitiatorUserId() != a.getInitiatorUserId()) {
+            System.out.println("7");
             return false;
-        if (getType() != a.getType())
+        }
+        if (!getCreatedDate().equals(a.getCreatedDate())) {
+            System.out.println("8");
             return false;
-        /*if (getQuarantine() != a.getQuarantine())
-            return false;*/
+        }
+        if (getAmount() != a.getAmount()) {
+            System.out.println("9");
+            return false;
+        }
+        if (getStatus() != a.getStatus()) {
+            System.out.println("10");
+            return false;
+        }
+        if (getType() != a.getType()) {
+            System.out.println("11");
+            return false;
+        }
+        if (getQuarantine() != a.getQuarantine()) {
+            System.out.println("12");
+            return false;
+        }
         return true;
     }
 }

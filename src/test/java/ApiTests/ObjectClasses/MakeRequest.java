@@ -2,25 +2,19 @@ package ApiTests.ObjectClasses;
 
 import UsedByAll.TestUser;
 import org.apache.commons.codec.binary.Base64;
-
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import static ApiTests.ObjectClasses.DateForAPI.makeDateTimeString;
 
 public class MakeRequest{
     // Для GET-ов
     public static HttpURLConnection getConnection(String scheme, TestUser user, String urlPart, int valueInDays, String requestMethod) throws IOException {
         // Создаем диапазон и ссылку
-        Calendar calBefore = Calendar.getInstance();
-        Calendar calAfter = Calendar.getInstance();
-        calBefore.add(Calendar.DATE, -valueInDays);
-        calAfter.add(Calendar.DATE, valueInDays);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        String urlString = "http://" + scheme + urlPart + "?limit=1000000&offset=0&dt_from=" + dateFormat.format(calBefore.getTime()) + "T" + timeFormat.format(calBefore.getTime()) + "&dt_to=" + dateFormat.format(calAfter.getTime()) + "T" + timeFormat.format(calAfter.getTime());
+        String calBeforeString = makeDateTimeString(Calendar.getInstance(), -valueInDays);
+        String calAfterString = makeDateTimeString(Calendar.getInstance(), valueInDays);
+        String urlString = "http://" + scheme + urlPart + "?limit=1000000&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
 
         // Содзаем HttpUrlConnection
         String authString = user.getEmail() + ":" + user.getPassword1();

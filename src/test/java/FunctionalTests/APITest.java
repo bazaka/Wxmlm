@@ -98,6 +98,23 @@ public class APITest {
         catch (Exception e) { e.printStackTrace();
             System.out.println("Проверка API PUT operations update НЕ пройдена: " + e);  isComplete = false;}
 
+        BackendPostOperationInsert newBackendPostOperationInsert = new BackendPostOperationInsert(); // Создаём объект теста
+        //Вызов метода, запускающего PUT API Operation Insert
+        try
+        {
+            if (newBackendPostOperationInsert.testBackendPostOperationInsert(scheme, user))
+            {
+                System.out.println("Проверка API POST operation insert пройдена");
+            }
+            else
+            {
+                System.out.println("Проверка API POST operation insert НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API API POST operation insert НЕ пройдена: " + e);  isComplete = false;}
+
         BackendGetPurchases newBackendGetPurchases = new BackendGetPurchases(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         //try { newBackendGetUsers.setUp(scheme); }
