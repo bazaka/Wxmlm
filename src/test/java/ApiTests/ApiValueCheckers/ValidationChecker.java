@@ -50,11 +50,19 @@ public class ValidationChecker {
             catch (ParseException e) {return false;}
         }
     }
-    public boolean checkStringOrNull(String str) { return (str.equals(null) || str.length() > 0 );}//дописати
+    public boolean checkStringOrNull(Object str) {
+        if (str == null || str.equals(null))
+            return true;
+        else {
+            String strStr = str.toString();
+            return strStr.length() >= 0;
+        }
+    }
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
     public boolean checkUserStatusId(int userStatusId) {return (userStatusId>=1 && userStatusId<=4);}
     public boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
+    public boolean checkWithdrawStatusId(int statusId) {return (statusId>=1 && statusId<=3);}
     public boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=9);}
     public boolean checkCareer(int careerId) {return (careerId>=0 && careerId<=11);}
     public boolean checkMoreOrNullId (Object someId){

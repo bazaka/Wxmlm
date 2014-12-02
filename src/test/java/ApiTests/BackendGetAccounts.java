@@ -58,7 +58,6 @@ public class BackendGetAccounts {
             assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
             assertEquals("Incorrect count of Json parameters", object.length(), 8);
         }
-
         return true;
     }
 
@@ -84,7 +83,7 @@ public class BackendGetAccounts {
         }
     }
 
-    public Account getAccountByParameter(String parameterName, String parameterValue, TestUser user, String scheme) throws IOException {
+    public Account getAccountByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -100,7 +99,7 @@ public class BackendGetAccounts {
             JSONArray jsonArr = new JSONArray(result);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                if (object.getString(parameterName).equals(parameterValue)) {
+                if (object.getInt(parameterName) == parameterValue) {
                     return new Account(object.getInt("account_id"), object.getString("account_number"), object.getInt("account_type"), object.getBoolean("status"), object.getString("account_info"), object.getDouble("amount"));
                 }
             }

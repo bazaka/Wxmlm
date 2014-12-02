@@ -7,7 +7,7 @@ import UsedByAll.TestUser;
 public class APITest {
     public boolean runAPITests(String scheme, TestUser user){
         boolean isComplete = true;
-        /*BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
+        BackendGetUsers newBackendGetUsers = new BackendGetUsers(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         //try { newBackendGetUsers.setUp(scheme); }
         //catch (Exception e) { e.printStackTrace(); }
@@ -98,6 +98,23 @@ public class APITest {
         catch (Exception e) { e.printStackTrace();
             System.out.println("Проверка API PUT operations update НЕ пройдена: " + e);  isComplete = false;}
 
+        BackendPostOperationInsert newBackendPostOperationInsert = new BackendPostOperationInsert(); // Создаём объект теста
+        //Вызов метода, запускающего PUT API Operation Insert
+        try
+        {
+            if (newBackendPostOperationInsert.testBackendPostOperationInsert(scheme, user))
+            {
+                System.out.println("Проверка API POST operation insert пройдена");
+            }
+            else
+            {
+                System.out.println("Проверка API POST operation insert НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API API POST operation insert НЕ пройдена: " + e);  isComplete = false;}
+
         BackendGetPurchases newBackendGetPurchases = new BackendGetPurchases(); // Создаём объект теста
         // Вызов метода, переходящего на главную страницу проекта
         //try { newBackendGetUsers.setUp(scheme); }
@@ -117,6 +134,23 @@ public class APITest {
         }
         catch (Exception e) { e.printStackTrace();
             System.out.println("Проверка API GET Purchases НЕ пройдена:" + e); }
+
+        BackendGetWithdraws newBackendGetWithdraws = new BackendGetWithdraws(); // Создаём объект теста
+        //Вызов метода, запускающего GET API Accounts
+        try
+        {
+            if (newBackendGetWithdraws.testBackendGetWithdraws(scheme, user))
+            {
+                System.out.println("Проверка API GET withdraws пройдена");
+            }
+            else
+            {
+                System.out.println("Проверка API GET withdraws НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API GET withdraws НЕ пройдена:" + e); }
 
         return isComplete;
     }
