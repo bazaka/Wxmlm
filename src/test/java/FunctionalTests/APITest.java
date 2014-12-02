@@ -135,6 +135,23 @@ public class APITest {
         catch (Exception e) { e.printStackTrace();
             System.out.println("Проверка API GET Purchases НЕ пройдена:" + e); }
 
+        BackendGetWithdraws newBackendGetWithdraws = new BackendGetWithdraws(); // Создаём объект теста
+        //Вызов метода, запускающего GET API Accounts
+        try
+        {
+            if (newBackendGetWithdraws.testBackendGetWithdraws(scheme, user))
+            {
+                System.out.println("Проверка API GET withdraws пройдена");
+            }
+            else
+            {
+                System.out.println("Проверка API GET withdraws НЕ пройдена");
+                isComplete = false;
+            }
+        }
+        catch (Exception e) { e.printStackTrace();
+            System.out.println("Проверка API GET withdraws НЕ пройдена:" + e); }
+
         return isComplete;
     }
 }

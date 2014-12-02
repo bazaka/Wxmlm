@@ -49,8 +49,7 @@ public class BackendGetPurchases {
             assertTrue("Incorrect price", checker.checkMoneyFormat(object.get("price").toString()));
             assertTrue("Incorrect payment_amount", checker.checkMoneyFormat(object.get("payment_amount").toString()));
             assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
-            assertTrue("Incorrect terms", checker.checkStringOrNull(object.getString("terms")));
-
+            assertTrue("Incorrect terms", checker.checkStringOrNull(object.get("terms")));
             assertEquals("Incorrect count of JSON Objects", object.length(),9);
         }
 

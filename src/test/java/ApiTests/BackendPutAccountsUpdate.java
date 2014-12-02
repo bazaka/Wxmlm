@@ -31,7 +31,7 @@ public class BackendPutAccountsUpdate{
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные обновились
-        Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme);
+        Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedAccount.equalsExceptUpdatedDate(changedAccount));
 
         // Содзаем URL
@@ -42,7 +42,7 @@ public class BackendPutAccountsUpdate{
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedAccount = new BackendGetAccounts().getAccountByParameter("account_number", originalAccount.getAccountNumber(), user, scheme);
+        changedAccount = new BackendGetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalAccount.equalsExceptUpdatedDate(changedAccount));
         return true;
     }

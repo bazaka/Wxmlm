@@ -42,24 +42,42 @@ public class Account {
     {
         if (this == a)
             return true;
-        if (a == null)
+        if (a == null){
+            System.out.println("1");
             return false;
-        if (getClass() != a.getClass())
+        }
+        if (getClass() != a.getClass()) {
+            System.out.println("2");
             return false;
-        if (getAccountId() != a.getAccountId())
+        }
+        if (getAccountId() != a.getAccountId()) {
+            System.out.println("3");
             return false;
-        if (getAmount() != a.getAmount())
+        }
+        if (getAmount() != a.getAmount()) {
+            System.out.println("4");
             return false;
-        if (!getAccountInfo().equals(a.getAccountInfo()))
+        }
+        if (!getAccountInfo().equals(a.getAccountInfo())) {
+            System.out.println("5");
             return false;
-        if (!getAccountNumber().equals(a.getAccountNumber()))
+        }
+        if (!getAccountNumber().equals(a.getAccountNumber())) {
+            System.out.println("6");
             return false;
-        if (getAccountType() != a.getAccountType())
+        }
+        if (getAccountType() != a.getAccountType()) {
+            System.out.println("7");
             return false;
-        if (getStatus() != a.getStatus())
+        }
+        if (getStatus() != a.getStatus()) {
+            System.out.println("8");
             return false;
-        if (getUserId() != a.getUserId())
+        }
+        if (getUserId() != a.getUserId()) {
+            System.out.println("9");
             return false;
+        }
         return true;
     }
 }

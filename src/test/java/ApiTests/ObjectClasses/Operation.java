@@ -57,49 +57,38 @@ public class Operation {
         if (this == a)
             return true;
         if (a == null) {
-            System.out.println("1");
             return false;
         }
         if (getClass() != a.getClass()) {
-            System.out.println("2");
             return false;
         }
         if (getTargetAccountId() != a.getTargetAccountId()) {
-            System.out.println("4");
             return false;
         }
         if (getSourceAccountId() != a.getSourceAccountId()) {
-            System.out.println("5");
             return false;
         }
         if (getPurchaseId() != null && a.getPurchaseId() != null){
             if (!getPurchaseId().equals(a.getPurchaseId())) {
-                System.out.println("6");
                 return false;
             }
         }
         if (getInitiatorUserId() != a.getInitiatorUserId()) {
-            System.out.println("7");
             return false;
         }
         if (!getCreatedDate().equals(a.getCreatedDate())) {
-            System.out.println("8");
             return false;
         }
         if (getAmount() != a.getAmount()) {
-            System.out.println("9");
             return false;
         }
         if (getStatus() != a.getStatus()) {
-            System.out.println("10");
             return false;
         }
         if (getType() != a.getType()) {
-            System.out.println("11");
             return false;
         }
         if (getQuarantine() != a.getQuarantine()) {
-            System.out.println("12");
             return false;
         }
         return true;
