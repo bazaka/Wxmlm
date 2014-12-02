@@ -16,8 +16,9 @@ public class Withdraw {
     public String bankAddress;
     public String accountIban;
     public String swiftCode;
+    public String merchant;
 
-    public Withdraw(int wId, int wUserId, int wMerchantId, int wOperationId, double wAmount, String wCreatedDate, int wStatus, String wEpid)
+    public Withdraw(int wId, int wUserId, int wMerchantId, int wOperationId, double wAmount, String wCreatedDate, int wStatus, String wEpid, String wMerchant)
     {
         this.setId(wId);
         this.setUserId(wUserId);
@@ -27,9 +28,10 @@ public class Withdraw {
         this.setCreatedDate(wCreatedDate);
         this.setStatus(wStatus);
         this.setEpid(wEpid);
+        this.setMerchant(wMerchant);
     }
 
-    public Withdraw(int wId, int wUserId, int wMerchantId, int wOperationId, double wAmount, String wCreatedDate, int wStatus, String wSwiftName, String wSwiftAddress, String wBankName, String wBankAddress, String wAccountIban, String wSwiftCode)
+    public Withdraw(int wId, int wUserId, int wMerchantId, int wOperationId, double wAmount, String wCreatedDate, int wStatus, String wSwiftName, String wSwiftAddress, String wBankName, String wBankAddress, String wAccountIban, String wSwiftCode, String wMerchant)
     {
         this.setId(wId);
         this.setUserId(wUserId);
@@ -44,6 +46,7 @@ public class Withdraw {
         this.setBankAddress(wBankAddress);
         this.setAccountIban(wAccountIban);
         this.setSwiftCode(wSwiftCode);
+        this.setMerchant(wMerchant);
     }
 
     public int getId() {return id;}
@@ -60,6 +63,7 @@ public class Withdraw {
     public String getBankAddress() {return bankAddress;}
     public String getAccountIban() {return accountIban;}
     public String getSwiftCode() {return swiftCode;}
+    public String getMerchant() {return merchant;}
 
     public void setId(int a) {this.id = a;}
     public void setUserId(int a) {this.userId = a;}
@@ -75,6 +79,7 @@ public class Withdraw {
     public void setBankAddress(String a) {this.bankAddress = a;}
     public void setAccountIban(String a) {this.accountIban = a;}
     public void setSwiftCode(String a) {this.swiftCode = a;}
+    public void setMerchant(String a) {this.merchant = a;}
 
     public boolean equalsExceptUpdatedDate(Withdraw a)
     {
@@ -116,33 +121,42 @@ public class Withdraw {
             System.out.println("9");
             return false;
         }
-        if (!getEpid().equals(a.getEpid())) {
+        if (!getMerchant().equals(a.getMerchant())){
             System.out.println("10");
             return false;
         }
-        if (!getSwiftName().equals(a.getSwiftName())) {
-            System.out.println("11");
-            return false;
+        if (getMerchant().equals("ePayment"))
+        {
+            if (!getEpid().equals(a.getEpid())) {
+                System.out.println("10");
+                return false;
+            }
         }
-        if (!getSwiftAddress().equals(a.getSwiftAddress())) {
-            System.out.println("12");
-            return false;
-        }
-        if (!getBankName().equals(a.getBankName())) {
-            System.out.println("13");
-            return false;
-        }
-        if (!getBankAddress().equals(a.getBankAddress())) {
-            System.out.println("14");
-            return false;
-        }
-        if (!getAccountIban().equals(a.getAccountIban())) {
-            System.out.println("15");
-            return false;
-        }
-        if (!getSwiftCode().equals(a.getSwiftCode())) {
-            System.out.println("16");
-            return false;
+        else {
+            if (!getSwiftName().equals(a.getSwiftName())) {
+                System.out.println("11");
+                return false;
+            }
+            if (!getSwiftAddress().equals(a.getSwiftAddress())) {
+                System.out.println("12");
+                return false;
+            }
+            if (!getBankName().equals(a.getBankName())) {
+                System.out.println("13");
+                return false;
+            }
+            if (!getBankAddress().equals(a.getBankAddress())) {
+                System.out.println("14");
+                return false;
+            }
+            if (!getAccountIban().equals(a.getAccountIban())) {
+                System.out.println("15");
+                return false;
+            }
+            if (!getSwiftCode().equals(a.getSwiftCode())) {
+                System.out.println("16");
+                return false;
+            }
         }
         return true;
     }

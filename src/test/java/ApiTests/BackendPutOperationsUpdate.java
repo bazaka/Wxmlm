@@ -3,8 +3,6 @@ package ApiTests;
 import ApiTests.ObjectClasses.MakeRequest;
 import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -12,10 +10,6 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 public class BackendPutOperationsUpdate {
-    @Before
-    public void setUp(String scheme) throws Exception {
-        System.out.println("Запускаю селениум для проверки API-метода PUT Operations update на " + scheme);
-    }
 
     @Test
     public boolean testBackendPutOperationsUpdate(String scheme, TestUser user) throws IOException {
@@ -47,6 +41,4 @@ public class BackendPutOperationsUpdate {
         assertTrue("Check modified data returned correctly", originalOperation.equalsExceptUpdatedDate(changedOperation));
         return true;
     }
-    @After
-    public void tearDown() throws Exception {}
 }

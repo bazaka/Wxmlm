@@ -72,13 +72,9 @@ public class ValidationChecker {
             String strId = someId.toString();
             int IntId = (Integer.valueOf(strId));
             return (IntId >= 0);
-
-
         }
     }
     public boolean checkEmail (String email) {
-
-
         return (EmailValidator.getInstance().isValid(email));
     }
     // Проверка что поле содержит необязательный Id

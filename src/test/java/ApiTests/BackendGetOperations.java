@@ -6,8 +6,6 @@ import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -16,10 +14,6 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 25.11.2014. Тест проверяет метод АПИ GET Operations
 public class BackendGetOperations {
-    @Before
-    public void setUp(String scheme) throws Exception {
-        System.out.println("Запускаю селениум для проверки API-метода GET Operations на " + scheme);
-    }
 
     @Test
     public boolean testBackendGetOperations(String scheme, TestUser user) throws Exception {
@@ -56,7 +50,6 @@ public class BackendGetOperations {
             assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
             assertTrue("Incorrect type", checker.checkOperationTypeId(object.getInt("type")));
-            //assertEquals("Incorrect count of Json parameters", object.length(), 10); // Заменить строку на строки ниже, если есть поле Quarantine
             assertTrue("Incorrect quarantine", checker.checkBooleanValue(object.getBoolean("quarantine")));
             assertEquals("Incorrect count of Json parameters", object.length(), 11);
         }
@@ -89,7 +82,7 @@ public class BackendGetOperations {
     }
 
     public Operation getOperationByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -117,8 +110,4 @@ public class BackendGetOperations {
         }
         return null;
     }
-
-
-    @After
-    public void tearDown() throws Exception {}
 }
