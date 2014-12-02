@@ -3,8 +3,6 @@ package ApiTests;
 import ApiTests.ObjectClasses.Account;
 import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.json.*;
 import ApiTests.ApiValueCheckers.*;
@@ -17,11 +15,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 public class BackendGetAccounts {
-
-    @Before
-    public void setUp(String scheme) throws Exception {
-        System.out.println("Запускаю селениум для проверки API-метода GET Accounts на " + scheme);
-    }
 
     @Test
     public boolean testBackendGetAccounts(String scheme, TestUser user) throws Exception {
@@ -84,7 +77,7 @@ public class BackendGetAccounts {
     }
 
     public Account getAccountByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -109,8 +102,4 @@ public class BackendGetAccounts {
         }
         return null;
     }
-
-
-    @After
-    public void tearDown() throws Exception {}
 }

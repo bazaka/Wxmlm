@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 public class BackendGetUsers {
 
     public boolean testBackendGetUsers(String scheme, TestUser User) throws Exception{
-        System.out.println("Запуск селениум для проверки API метода GET Users на " + scheme);
         String url = "users/api/users/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
@@ -50,16 +49,8 @@ public class BackendGetUsers {
             assertTrue("Incorrect countryId ",checker.checkIdValue(object.getInt("country_id")));
             assertTrue("Incorrect languageId",checker.checkMoreOrNullId(object.get("language_id")));
             assertTrue("Incorrect birthDate",checker.checkDateTimeString(object.getString("birth_date")));
-
-            System.out.println("Object.getString(emailmain)"+ object.getString("email_main"));
-           // assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
-            //assertTrue("Incorrect emailMain",checker.checkEmail(object.get("email_main").toString()));
             assertTrue("Incorrect emailMain",checker.checkEmail(object.getString("email_main")));
-
-
             assertTrue("Incorrect email2 ",checker.checkAnotherEmail(object.get("email2")));
-
-
             assertTrue("Incorrect email3",checker.checkAnotherEmail(object.get("email3")));
             assertTrue("Incorrect phoneNumberMain ",checker.checkNotNull(object.getString("phone_number_main")));
             assertTrue("Incorrect phoneNumber2 ",checker.checkStringOrNull(object.get("phone_number2").toString()));
@@ -84,11 +75,7 @@ public class BackendGetUsers {
             assertTrue("Incorrect career",checker.checkCareer(object.getInt("career")));
             assertTrue("Incorrect isApproved",checker.checkBooleanValue(object.getBoolean("is_approved")));
             assertEquals("Incorrect count of Json Objects", object.length(), 35);
-
         }
         return true;
     }
-
-
-
 }

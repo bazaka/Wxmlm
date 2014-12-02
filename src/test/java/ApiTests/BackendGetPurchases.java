@@ -17,11 +17,8 @@ import static org.junit.Assert.*;
 
 public class BackendGetPurchases {
 
-
-
     @Test
     public boolean testBackendGetPurchases(String scheme, TestUser User) throws Exception{
-        System.out.println("Запуск селениум для проверки API метода GET Purchases на " + scheme);
         String url = "products/api/purchase/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
