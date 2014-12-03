@@ -66,6 +66,7 @@ public class RegistrationTest extends BaseTest {
                 System.out.println("Тест для "+testUser[i].getEmail()+ " успешно пройден");
 
 
+
             }
         }
         System.out.println("RegistraionTest успешно пройден");

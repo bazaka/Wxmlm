@@ -45,6 +45,7 @@ public class GmailPage extends BasePage {
 
         if (!driver.findElement(email).isDisplayed()) // якщо не знайдене поле вводу пошти, нажимаем "Войти"
             driver.findElement(signIn).click();
+
         driver.findElement(email).sendKeys(user.getEmail());
         driver.findElement(password).sendKeys(user.getEPassword());
         if (driver.findElement(remember).isSelected()) // прибираємо чекбокс "Оставаться в системе"
