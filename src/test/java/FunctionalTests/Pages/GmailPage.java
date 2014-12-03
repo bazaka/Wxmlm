@@ -14,16 +14,20 @@ import java.util.concurrent.TimeUnit;
  */
 public class GmailPage extends BasePage {
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+
 
     private static final By signIn = By.id("gmail-sign-in");
     private static final By email = By.id("Email");
     private static final By password = By.id("Passwd");
     private static final By enter = By.id("signIn");
     private static final By remember = By.id("PersistentCookie");
+    private static final By inbox = By.xpath("//a[contains(@href, 'https://mail.google.com/mail/u/0/?pli=1#inbox')]");
+    private static final By letterTime = By.xpath("//table/tbody/tr[1]/td[8]/span");
     private static final String letter = "//table/tbody/tr/td[6]//span[contains(text(), '%s')]";
     private static final By letterLink = By.xpath("//a[contains(@href, 'xmlm.t4web.com.ua/register/confirm/')]");
     private static final By successConfirm = By.xpath("//div[@id='main-modal-window-confirmed-email']//p[contains(text(), 'Congrats')]");
+    public String letterDateBefore;
+
 
 
 
@@ -36,7 +40,7 @@ public class GmailPage extends BasePage {
 
     public void checkGmail(TestUser user) {
         //driver.get(url);
-
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.titleContains("Gmail"));
 
         if (!driver.findElement(email).isDisplayed()) // якщо не знайдене поле вводу пошти, нажимаем "Войти"
@@ -47,9 +51,25 @@ public class GmailPage extends BasePage {
             driver.findElement(remember).click();
         driver.findElement(enter).click();
 
-        wait.until(ExpectedConditions.titleContains(user.getEmail()));
+        wait.until(ExpectedConditions.presenceOfElementLocated(inbox));
+        letterDateBefore = driver.findElement(letterTime).getText();
     }
+
+
     public void checkConfirmLetter(TestUser user, String letterText){
+
+
+
+        //driver.navigate().refresh();
+        //wait.until(ExpectedConditions.presenceOfElementLocated(inbox));
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        String letterDateNow;// = driver.findElement(letterTime).getText();
+
+        do{
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.presenceOfElementLocated(inbox));
+            letterDateNow = driver.findElement(letterTime).getText();
+        }while(letterDateBefore.equals(letterDateNow));
         try{
             driver.findElement(By.xpath(String.format(letter, letterText))).click();
             System.out.println("Письмо найдено");
@@ -57,7 +77,7 @@ public class GmailPage extends BasePage {
             System.out.println("Письмо не найдено");
         }
 
-        wait.until(ExpectedConditions.titleContains("Welcome "+user.getEmail()));
+        wait.until(ExpectedConditions.titleContains("Welcome "));
         driver.findElement(letterLink).click();
 
 
