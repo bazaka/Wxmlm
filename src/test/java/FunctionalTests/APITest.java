@@ -99,6 +99,16 @@ public class APITest {
             isComplete = false;
         }
 
+        BackendPostWithdrawInsert newBackendPostWithdrawInsert = new BackendPostWithdrawInsert(); // Создаём объект теста
+        //Вызов метода, запускающего POST API Withdraw insert
+        if (newBackendPostWithdrawInsert.testBackendPostWithdrawInsert(scheme, user)) {
+            System.out.println("Проверка API POST withdraw insert пройдена");
+        }
+        else {
+            System.out.println("Проверка API POST withdraw insert НЕ пройдена");
+            isComplete = false;
+        }
+
         return isComplete;
     }
 }

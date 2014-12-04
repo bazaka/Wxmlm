@@ -58,11 +58,11 @@ public class Registration {
         // Заполняем данными второй шаг регистрации
         selenium.type("//*[@id=\"fos_user_registration_form_fullName\"]", User.getFullName());
 		selenium.type("id=fos_user_registration_form_phone", User.getPhone());
-        selenium.click("id=fos_user_registration_form_birthday");
-		selenium.click("//div[@class='datetimepicker datetimepicker-dropdown-bottom-right dropdown-menu']/div[@class='datetimepicker-years']/table/tbody/tr/td/span[3]");
+        selenium.type("id=fos_user_registration_form_birthday", "1985-06-23");
+		/*selenium.click("//div[@class='datetimepicker datetimepicker-dropdown-bottom-right dropdown-menu']/div[@class='datetimepicker-years']/table/tbody/tr/td/span[3]");
 		selenium.click("//div[@class='datetimepicker datetimepicker-dropdown-bottom-right dropdown-menu']/div[@class='datetimepicker-months']/table/tbody/tr/td/span[3]");
-		selenium.click("//div[@class='datetimepicker datetimepicker-dropdown-bottom-right dropdown-menu']/div[@class='datetimepicker-days']/table/tbody/tr[2]/td[4]");
-		selenium.click("id=fos_user_registration_form_agreement");
+		selenium.click("//div[@class='datetimepicker datetimepicker-dropdown-bottom-right dropdown-menu']/div[@class='datetimepicker-days']/table/tbody/tr[2]/td[4]");*/
+        selenium.click("id=fos_user_registration_form_agreement");
         Thread.sleep(500);
 		selenium.click("css=div.form-group.text-right > div.col-sm-12 > button.btn.btn-primary");
         System.out.println("Пытаюсь отправить форму после второго шага регистрации");
