@@ -1,7 +1,6 @@
 package ApiTests;
 
 import ApiTests.ObjectClasses.MakeRequest;
-import ApiTests.ObjectClasses.Operation;
 import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
