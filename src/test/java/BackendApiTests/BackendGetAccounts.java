@@ -1,11 +1,11 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ObjectClasses.Account;
-import ApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ObjectClasses.Account;
+import BackendApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.json.*;
-import ApiTests.ApiValueCheckers.*;
+import BackendApiTests.ApiValueCheckers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;

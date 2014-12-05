@@ -1,8 +1,8 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ApiValueCheckers.ValidationChecker;
-import ApiTests.ObjectClasses.MakeRequest;
-import ApiTests.ObjectClasses.Operation;
+import BackendApiTests.ApiValueCheckers.ValidationChecker;
+import BackendApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;

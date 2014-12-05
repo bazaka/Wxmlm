@@ -1,8 +1,8 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ObjectClasses.DateForAPI;
-import ApiTests.ObjectClasses.MakeRequest;
-import ApiTests.ObjectClasses.Operation;
+import BackendApiTests.ObjectClasses.DateForAPI;
+import BackendApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -25,9 +25,9 @@ public class BackendPostOperationInsert {
 
     @Test
     public boolean testBackendPostOperationInsert(String scheme, TestUser user) throws IOException, JSONException {
-        Operation originalOperation = new BackendGetOperations().getAnyOperation(user, scheme);
-        Operation newOperation = new Operation(originalOperation.getId(), originalOperation.getTargetAccountId(), originalOperation.getSourceAccountId(), originalOperation.getPurchaseId(), originalOperation.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOperation.getAmount() + 50, originalOperation.status, originalOperation.getType(), !originalOperation.getQuarantine());
-        String newJson = "{\"target_account_id\":\"" + newOperation.getTargetAccountId() + "\", \"source_account_id\":" + newOperation.getSourceAccountId() + ", \"purchase_id\":" + newOperation.getPurchaseId() + ", \"initiator_user_id\": " + newOperation.getInitiatorUserId() + ", \"created_date\": \"" + newOperation.getCreatedDate() + "\", \"amount\": \"" + newOperation.getAmount() + "\", \"status\": \"" + newOperation.getStatus() + "\", \"type\": " + newOperation.getType() + ", \"quarantine\": " + newOperation.getQuarantine() + "}";
+        Operation originalOne = new BackendGetOperations().getAnyOperation(user, scheme);
+        Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.status, originalOne.getType(), !originalOne.getQuarantine());
+        String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + "}";
 
         // Содзаем URL
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/insert/", "POST", "application/json", "application/json", true);
@@ -49,11 +49,11 @@ public class BackendPostOperationInsert {
         JSONObject response = new JSONObject(result);
         JSONArray reports = response.getJSONArray("reports");
         JSONObject report = reports.getJSONObject(0);
-        int newOperationId = report.getInt("id");
+        int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Operation changedOperation = new BackendGetOperations().getOperationByParameter("id", newOperationId, user, scheme);
-        assertTrue("Check modified data saved correctly", newOperation.equalsExceptUpdatedDate(changedOperation));
+        Operation changedOperation = new BackendGetOperations().getOperationByParameter("id", newOneId, user, scheme);
+        assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOperation));
         return true;
     }
     @After

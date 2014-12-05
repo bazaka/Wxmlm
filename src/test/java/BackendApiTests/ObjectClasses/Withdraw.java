@@ -1,4 +1,4 @@
-package ApiTests.ObjectClasses;
+package BackendApiTests.ObjectClasses;
 
 // * Created for W-xmlm by Fill on 01.12.2014.
 public class Withdraw {
@@ -160,4 +160,85 @@ public class Withdraw {
         }
         return true;
     }
+
+    public boolean equalsWithNew(Withdraw a)
+    {
+        if (this == a)
+            return true;
+        if (a == null) {
+            System.out.println("1");
+            return false;
+        }
+        if (getClass() != a.getClass()) {
+            System.out.println("2");
+            return false;
+        }
+        if (getUserId() != a.getUserId()) {
+            System.out.println("3");
+            return false;
+        }
+        if (getMerchantId() != a.getMerchantId()) {
+            System.out.println("4");
+            return false;
+        }
+        if (getOperationId() == a.getOperationId()){
+            System.out.println("5");
+            return false;
+        }
+        if (getAmount() != a.getAmount()) {
+            System.out.println("6");
+            return false;
+        }
+        if (!getCreatedDate().equals(a.getCreatedDate())) {
+            System.out.println("7");
+            return false;
+        }
+        if (getAmount() != a.getAmount()) {
+            System.out.println("8");
+            return false;
+        }
+        if (getStatus() != a.getStatus()) {
+            System.out.println("9");
+            return false;
+        }
+        if (!getMerchant().equals(a.getMerchant())){
+            System.out.println("10");
+            return false;
+        }
+        if (getMerchant().equals("ePayment"))
+        {
+            if (!getEpid().equals(a.getEpid())) {
+                System.out.println("10");
+                return false;
+            }
+        }
+        else {
+            if (!getSwiftName().equals(a.getSwiftName())) {
+                System.out.println("11");
+                return false;
+            }
+            if (!getSwiftAddress().equals(a.getSwiftAddress())) {
+                System.out.println("12");
+                return false;
+            }
+            if (!getBankName().equals(a.getBankName())) {
+                System.out.println("13");
+                return false;
+            }
+            if (!getBankAddress().equals(a.getBankAddress())) {
+                System.out.println("14");
+                return false;
+            }
+            if (!getAccountIban().equals(a.getAccountIban())) {
+                System.out.println("15");
+                return false;
+            }
+            if (!getSwiftCode().equals(a.getSwiftCode())) {
+                System.out.println("16");
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

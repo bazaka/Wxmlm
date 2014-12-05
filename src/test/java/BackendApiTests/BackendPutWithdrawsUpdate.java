@@ -1,7 +1,7 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ObjectClasses.MakeRequest;
-import ApiTests.ObjectClasses.Withdraw;
+import BackendApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.junit.Test;
 
@@ -20,12 +20,12 @@ public class BackendPutWithdrawsUpdate {
         String modifiedJson;
         Withdraw modifiedWithdraw;
         if (originalWithdraw.getMerchant().equals("ePayment")) {
-            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 10.10, originalWithdraw.getCreatedDate(), 3, originalWithdraw.getEpid() + "123", originalWithdraw.getMerchant());
+            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 10, originalWithdraw.getCreatedDate(), 3, originalWithdraw.getEpid() + "123", originalWithdraw.getMerchant());
             originalJson = "[{\"id\":" + originalWithdraw.getId() + ", \"user_id\":" + originalWithdraw.getUserId() + ", \"merchant_id\":" + originalWithdraw.getMerchantId() + ", \"amount\":" + originalWithdraw.getAmount() + ", \"details\": { \"epid\": \"" + originalWithdraw.getEpid() + "\" }, \"created_date\": \"" + originalWithdraw.getCreatedDate() + "\", \"status\": " + originalWithdraw.getStatus() + " }]";
             modifiedJson = "[{\"id\":" + modifiedWithdraw.getId() + ", \"user_id\":" + modifiedWithdraw.getUserId() + ", \"merchant_id\":" + modifiedWithdraw.getMerchantId() + ", \"amount\":" + modifiedWithdraw.getAmount() + ", \"details\": { \"epid\": \"" + modifiedWithdraw.getEpid() + "\" }, \"created_date\": \"" + modifiedWithdraw.getCreatedDate() + "\", \"status\": " + modifiedWithdraw.getStatus() + " }]";
         }
         else if (originalWithdraw.getMerchant().equals("SWIFT")) {
-            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 12.12, originalWithdraw.getCreatedDate(), 2, originalWithdraw.getSwiftName() + "123", originalWithdraw.getSwiftAddress() + "234", originalWithdraw.getBankName() + "345", originalWithdraw.getBankAddress() + "456", originalWithdraw.getAccountIban(), originalWithdraw.getSwiftCode() + "567", originalWithdraw.getMerchant());
+            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 12, originalWithdraw.getCreatedDate(), 2, originalWithdraw.getSwiftName() + "123", originalWithdraw.getSwiftAddress() + "234", originalWithdraw.getBankName() + "345", originalWithdraw.getBankAddress() + "456", originalWithdraw.getAccountIban(), originalWithdraw.getSwiftCode() + "567", originalWithdraw.getMerchant());
             originalJson = "[{\"id\":" + originalWithdraw.getId() + ", \"user_id\":" + originalWithdraw.getUserId() + ", \"merchant_id\":" + originalWithdraw.getMerchantId() + ", \"amount\":" + originalWithdraw.getAmount() + ", \"details\": { \"name\": \"" + originalWithdraw.getSwiftName() + "\", \"address\": \"" + originalWithdraw.getSwiftAddress() + "\", \"bankName\": \"" + originalWithdraw.getBankName() + "\", \"bankAddress\": \"" + originalWithdraw.getBankAddress() + "\", \"accountIban\": \"" + originalWithdraw.getAccountIban() + "\", \"swiftCode\": \"" + originalWithdraw.getSwiftCode() + "\" }, \"created_date\": \"" + originalWithdraw.getCreatedDate() + "\", \"status\": " + originalWithdraw.getStatus() + " }]";
             modifiedJson = "[{\"id\":" + modifiedWithdraw.getId() + ", \"user_id\":" + modifiedWithdraw.getUserId() + ", \"merchant_id\":" + modifiedWithdraw.getMerchantId() + ", \"amount\":" + modifiedWithdraw.getAmount() + ", \"details\": { \"name\": \"" + modifiedWithdraw.getSwiftName() + "\", \"address\": \"" + modifiedWithdraw.getSwiftAddress() + "\", \"bankName\": \"" + modifiedWithdraw.getBankName() + "\", \"bankAddress\": \"" + modifiedWithdraw.getBankAddress() + "\", \"accountIban\": \"" + modifiedWithdraw.getAccountIban() + "\", \"swiftCode\": \"" + modifiedWithdraw.getSwiftCode() + "\" }, \"created_date\": \"" + modifiedWithdraw.getCreatedDate() + "\", \"status\": " + modifiedWithdraw.getStatus() + " }]";
         }

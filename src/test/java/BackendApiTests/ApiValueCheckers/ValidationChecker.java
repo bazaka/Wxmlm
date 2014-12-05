@@ -1,4 +1,4 @@
-package ApiTests.ApiValueCheckers;
+package BackendApiTests.ApiValueCheckers;
 
 import org.apache.commons.validator.routines.EmailValidator;
 
@@ -57,6 +57,9 @@ public class ValidationChecker {
             String strStr = str.toString();
             return strStr.length() >= 0;
         }
+    }
+    public boolean checkString(Object str) {
+        return (str != null && !str.equals(null) && str.toString().length() >= 0);
     }
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
