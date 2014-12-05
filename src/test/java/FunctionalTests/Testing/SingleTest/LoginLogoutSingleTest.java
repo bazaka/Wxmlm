@@ -1,8 +1,8 @@
 package FunctionalTests.Testing.SingleTest;
 
-import FunctionalTests.Pages.LogoutPage;
-import FunctionalTests.Pages.LoginPage;
-import FunctionalTests.Testing.LoginLogoutTest;
+import FunctionalTests.Pages.LogOutPage;
+import FunctionalTests.Pages.LogInPage;
+import FunctionalTests.Testing.LogInLogOutTest;
 import UsedByAll.TestUser;
 import org.junit.Test;
 
@@ -12,11 +12,11 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by User on 12/5/2014.
  */
-public class LoginLogoutSingleTest extends LoginLogoutTest {
+public class LoginLogoutSingleTest extends LogInLogOutTest {
     @Test
     public void loginLogoutSingleTest(TestUser testUser){
-        LoginPage loginPage = new LoginPage(driver);
-        LogoutPage logoutPage = new LogoutPage(driver);
+        LogInPage loginPage = new LogInPage(driver);
+        LogOutPage logoutPage = new LogOutPage(driver);
         loginPage.open();
         assertTrue("Page not opened", loginPage.isOpened());
 
