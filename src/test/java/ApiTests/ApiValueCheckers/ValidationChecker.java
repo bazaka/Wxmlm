@@ -58,6 +58,9 @@ public class ValidationChecker {
             return strStr.length() >= 0;
         }
     }
+    public boolean checkString(Object str) {
+        return (str != null && !str.equals(null) && str.toString().length() >= 0);
+    }
     //public boolean checkMoreOrNull(int moreNull) { return (moreNull >=0); }
     public boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
     public boolean checkUserStatusId(int userStatusId) {return (userStatusId>=1 && userStatusId<=4);}

@@ -27,7 +27,7 @@ public class MakeRequest{
         return httpCon;
     }
 
-    // Для PUT-ов
+    // Для PUT-ов и POST-ов
     public static HttpURLConnection getConnection(String scheme, TestUser user, String urlPart, String requestMethod, String contentType, String accept, boolean setDoOutput) throws IOException {
         String urlString = "http://" + scheme + urlPart;
 
@@ -42,6 +42,18 @@ public class MakeRequest{
         httpCon.setRequestProperty("Content-Type", contentType);
         httpCon.setRequestProperty("Accept", accept);
         httpCon.setDoOutput(setDoOutput);
+        return httpCon;
+    }
+
+    // Для GET-ов без авторизации
+    public static HttpURLConnection getConnection(String scheme, String urlPart, String requestMethod) throws IOException {
+        // Создаем диапазон и ссылку
+        String urlString = "http://" + scheme + urlPart;
+
+        // Содзаем HttpUrlConnection
+        URL url = new URL(urlString);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestMethod(requestMethod);
         return httpCon;
     }
 

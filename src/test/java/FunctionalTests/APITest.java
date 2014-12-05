@@ -109,6 +109,16 @@ public class APITest {
             isComplete = false;
         }
 
+        GetApplicationVersion newGetApplicationVersion = new GetApplicationVersion(); // Создаём объект теста
+        //Вызов метода, запускающего GET App version
+        if (newGetApplicationVersion.testGetApplicationVersion(scheme)) {
+            System.out.println("Проверка API GET app version пройдена");
+        }
+        else {
+            System.out.println("Проверка API GET app version НЕ пройдена");
+            isComplete = false;
+        }
+
         return isComplete;
     }
 }
