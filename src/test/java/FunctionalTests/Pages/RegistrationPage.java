@@ -24,12 +24,13 @@ public class RegistrationPage extends BasePage {
     private static final By register = By.xpath("//div[@id='step2']/div[8]/div/button[2]");
    // private static final By emailSent = By.xpath("//div[contains(., 'An email has been sent to')]\\");
     private static final By emailSent = By.className("step-content");
+    private static final By successConfirm = By.xpath("//div[@id='main-modal-window-confirmed-email']//p[contains(text(), 'Congrats')]");
 
 
 
     public RegistrationPage(WebDriver driver){
         super(driver);
-        url = "http://xmlm.t4web.com.ua/login/";
+        url = "http://xm-654.xmlm.t4web.com.ua/login/";
     }
 
     public void openRegistration(){
@@ -70,7 +71,9 @@ public class RegistrationPage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(emailSent));
     }
 
-
+    public String confirmActivation(){
+        return (driver.findElement(successConfirm).getText());
+    }
     public boolean isError(){
         return driver.findElement(emailSent).isDisplayed();
     }
