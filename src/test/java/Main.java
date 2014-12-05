@@ -1,4 +1,4 @@
-import FunctionalTests.APITest;
+import FunctionalTests.BackendAPITest;
 import FunctionalTests.PasswordRecovery;
 import FunctionalTests.Registration;
 import FunctionalTests.UserLogin;
@@ -34,12 +34,12 @@ public class Main
         for (int i = 0; i < testUser.length; i++)
         {
             System.out.println("\n" + "Начинаю тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName() + ". Тест-кейсы, в которых он используется: " + testUser[i].getUseInTest());
-            // API
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_API("))
+            // Backend API (needed authorization by admin)
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BackendAPI("))
             {
-                APITest newAPITest = new APITest(); // Создаём объект теста
+                BackendAPITest newBackendAPITest = new BackendAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты API
-                try { if (newAPITest.runAPITests(scheme, testUser[i]))
+                try { if (newBackendAPITest.runAPITests(scheme, testUser[i]))
                     System.out.println("Проверка API пройдена");
                     else
                     System.out.println("Проверка API НЕ пройдена");

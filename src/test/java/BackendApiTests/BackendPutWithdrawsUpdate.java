@@ -1,7 +1,7 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ObjectClasses.MakeRequest;
-import ApiTests.ObjectClasses.Withdraw;
+import BackendApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.junit.Test;
 

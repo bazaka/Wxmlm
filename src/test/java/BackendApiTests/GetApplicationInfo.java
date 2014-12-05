@@ -1,7 +1,7 @@
-package ApiTests;
+package BackendApiTests;
 
-import ApiTests.ApiValueCheckers.ValidationChecker;
-import ApiTests.ObjectClasses.MakeRequest;
+import BackendApiTests.ApiValueCheckers.ValidationChecker;
+import BackendApiTests.ObjectClasses.MakeRequest;
 import org.json.JSONObject;
 import org.junit.Test;
 
@@ -14,9 +14,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 04.12.2014. Gets application's current version
-public class GetApplicationVersion {
+public class GetApplicationInfo {
     @Test
-    public boolean testGetApplicationVersion(String scheme) throws Exception {
+    public boolean testGetApplicationInfo(String scheme) throws Exception {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -41,5 +41,4 @@ public class GetApplicationVersion {
         assertEquals("Incorrect count of Json parameters", object.length(), 5);
     return true;
     }
-
 }

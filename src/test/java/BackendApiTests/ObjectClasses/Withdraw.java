@@ -1,4 +1,4 @@
-package ApiTests.ObjectClasses;
+package BackendApiTests.ObjectClasses;
 
 // * Created for W-xmlm by Fill on 01.12.2014.
 public class Withdraw {
