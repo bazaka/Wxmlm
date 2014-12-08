@@ -1,4 +1,4 @@
-package BackendApiTests.ObjectClasses;
+package ApiTests.ObjectClasses;
 
 public class Account {
     public int accountId;

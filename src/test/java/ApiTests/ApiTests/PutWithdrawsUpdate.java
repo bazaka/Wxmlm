@@ -1,7 +1,7 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ObjectClasses.MakeRequest;
-import BackendApiTests.ObjectClasses.Withdraw;
+import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.junit.Test;
 
@@ -12,10 +12,10 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 02.12.2014. Update withdraws
-public class BackendPutWithdrawsUpdate {
+public class PutWithdrawsUpdate {
     @Test
-    public boolean testBackendPutWithdrawsUpdate(String scheme, TestUser user) throws IOException {
-        Withdraw originalWithdraw = new BackendGetWithdraws().getAnyWithdraw(user, scheme);
+    public boolean testPutWithdrawsUpdate(String scheme, TestUser user) throws IOException {
+        Withdraw originalWithdraw = new GetWithdraws().getAnyWithdraw(user, scheme);
         String originalJson;
         String modifiedJson;
         Withdraw modifiedWithdraw;
@@ -41,7 +41,7 @@ public class BackendPutWithdrawsUpdate {
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные обновились
-        Withdraw changedWithdraw = new BackendGetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
+        Withdraw changedWithdraw = new GetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedWithdraw.equalsExceptUpdatedDate(changedWithdraw));
 
         // Содзаем URL
@@ -52,7 +52,7 @@ public class BackendPutWithdrawsUpdate {
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedWithdraw = new BackendGetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
+        changedWithdraw = new GetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalWithdraw.equalsExceptUpdatedDate(changedWithdraw));
         return true;
     }

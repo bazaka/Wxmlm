@@ -1,8 +1,8 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ObjectClasses.DateForAPI;
-import BackendApiTests.ObjectClasses.MakeRequest;
-import BackendApiTests.ObjectClasses.Operation;
+import ApiTests.ObjectClasses.DateForAPI;
+import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +16,7 @@ import java.util.Calendar;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Insert single operation
-public class BackendPostOperationInsert {
+public class PostOperationInsert {
 
     @Before
     public void setUp(String scheme) throws Exception {
@@ -24,8 +24,8 @@ public class BackendPostOperationInsert {
     }
 
     @Test
-    public boolean testBackendPostOperationInsert(String scheme, TestUser user) throws IOException, JSONException {
-        Operation originalOne = new BackendGetOperations().getAnyOperation(user, scheme);
+    public boolean testPostOperationInsert(String scheme, TestUser user) throws IOException, JSONException {
+        Operation originalOne = new GetOperations().getAnyOperation(user, scheme);
         Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.status, originalOne.getType(), !originalOne.getQuarantine());
         String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + "}";
 
@@ -52,7 +52,7 @@ public class BackendPostOperationInsert {
         int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Operation changedOperation = new BackendGetOperations().getOperationByParameter("id", newOneId, user, scheme);
+        Operation changedOperation = new GetOperations().getOperationByParameter("id", newOneId, user, scheme);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOperation));
         return true;
     }

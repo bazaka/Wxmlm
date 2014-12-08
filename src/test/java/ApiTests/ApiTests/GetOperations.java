@@ -1,8 +1,8 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ApiValueCheckers.ValidationChecker;
-import BackendApiTests.ObjectClasses.MakeRequest;
-import BackendApiTests.ObjectClasses.Operation;
+import ApiTests.ApiValueCheckers.ValidationChecker;
+import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,10 +13,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 25.11.2014. Тест проверяет метод АПИ GET Operations
-public class BackendGetOperations {
+public class GetOperations {
 
     @Test
-    public boolean testBackendGetOperations(String scheme, TestUser user) throws Exception {
+    public boolean testGetOperations(String scheme, TestUser user) throws Exception {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);

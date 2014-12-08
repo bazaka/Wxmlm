@@ -1,8 +1,8 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
 
-import BackendApiTests.ApiValueCheckers.ValidationChecker;
-import BackendApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ApiValueCheckers.ValidationChecker;
+import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -15,10 +15,10 @@ import java.net.HttpURLConnection;
 
 import static org.junit.Assert.*;
 
-public class BackendGetPurchases {
+public class GetPurchases {
 
     @Test
-    public boolean testBackendGetPurchases(String scheme, TestUser User) throws Exception{
+    public boolean testGetPurchases(String scheme, TestUser User) throws Exception{
         String url = "products/api/purchase/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();

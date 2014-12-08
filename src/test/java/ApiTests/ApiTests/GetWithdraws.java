@@ -1,8 +1,8 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ApiValueCheckers.ValidationChecker;
-import BackendApiTests.ObjectClasses.MakeRequest;
-import BackendApiTests.ObjectClasses.Withdraw;
+import ApiTests.ApiValueCheckers.ValidationChecker;
+import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -17,10 +17,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Get Withdraws test
-public class BackendGetWithdraws {
+public class GetWithdraws {
 
     @Test
-    public boolean testBackendGetWithdraws(String scheme, TestUser user) throws Exception {
+    public boolean testGetWithdraws(String scheme, TestUser user) throws Exception {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);

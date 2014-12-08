@@ -1,14 +1,15 @@
 package FunctionalTests;
 
-import BackendApiTests.*;
-import BackendApiTests.BackendGetPurchases;
+import ApiTests.ApiTests.*;
+import ApiTests.ApiTests.GetPurchases;
+import ApiTests.FreeApiTests.GetApplicationInfo;
 import UsedByAll.TestUser;
 
 public class BackendAPITest {
     public boolean runAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
         // GET API users test run
-        if (new BackendGetUsers().testBackendGetUsers(scheme, user)) {
+        if (new GetUsers().testGetUsers(scheme, user)) {
             System.out.println("Проверка API GET users пройдена");
         }
         else {
@@ -17,7 +18,7 @@ public class BackendAPITest {
         }
 
         // GET API accounts test run
-        if (new BackendGetAccounts().testBackendGetAccounts(scheme, user)) {
+        if (new GetAccounts().testGetAccounts(scheme, user)) {
             System.out.println("Проверка API GET accounts пройдена");
         }
         else {
@@ -26,7 +27,7 @@ public class BackendAPITest {
         }
 
         // PUT API accounts update test run
-        if (new BackendPutAccountsUpdate().testBackendPutAccountsUpdate(scheme, user)) {
+        if (new PutAccountsUpdate().testPutAccountsUpdate(scheme, user)) {
             System.out.println("Проверка API PUT accounts update пройдена");
         }
         else {
@@ -35,7 +36,7 @@ public class BackendAPITest {
         }
 
         //GET API operations test run
-        if (new BackendGetOperations().testBackendGetOperations(scheme, user)) {
+        if (new GetOperations().testGetOperations(scheme, user)) {
             System.out.println("Проверка API GET operations пройдена");
         }
         else {
@@ -44,7 +45,7 @@ public class BackendAPITest {
         }
 
         // PUT API operations update test run
-        if (new BackendPutOperationsUpdate().testBackendPutOperationsUpdate(scheme, user)) {
+        if (new PutOperationsUpdate().testPutOperationsUpdate(scheme, user)) {
             System.out.println("Проверка API PUT operations update пройдена");
         }
         else {
@@ -53,7 +54,7 @@ public class BackendAPITest {
         }
 
         // PUT API operation insert test run
-        if (new BackendPostOperationInsert().testBackendPostOperationInsert(scheme, user)) {
+        if (new PostOperationInsert().testPostOperationInsert(scheme, user)) {
             System.out.println("Проверка API POST operation insert пройдена");
         }
         else {
@@ -62,7 +63,7 @@ public class BackendAPITest {
         }
 
         // GET API purchases test run
-        if (new BackendGetPurchases().testBackendGetPurchases(scheme, user)) {
+        if (new GetPurchases().testGetPurchases(scheme, user)) {
             System.out.println("Проверка API GET Purchases пройдена");
         }
         else {
@@ -71,7 +72,7 @@ public class BackendAPITest {
         }
 
         // GET API withdraws test run
-        if (new BackendGetWithdraws().testBackendGetWithdraws(scheme, user)) {
+        if (new GetWithdraws().testGetWithdraws(scheme, user)) {
             System.out.println("Проверка API GET withdraws пройдена");
         }
         else {
@@ -80,7 +81,7 @@ public class BackendAPITest {
         }
 
         // PUT API withdraws update test run
-        if (new BackendPutWithdrawsUpdate().testBackendPutWithdrawsUpdate(scheme, user)) {
+        if (new PutWithdrawsUpdate().testPutWithdrawsUpdate(scheme, user)) {
             System.out.println("Проверка API PUT withdraws update пройдена");
         }
         else {
@@ -89,7 +90,7 @@ public class BackendAPITest {
         }
 
         // POST API withdraw insert test run
-        if (new BackendPostWithdrawInsert().testBackendPostWithdrawInsert(scheme, user)) {
+        if (new PostWithdrawInsert().testPostWithdrawInsert(scheme, user)) {
             System.out.println("Проверка API POST withdraw insert пройдена");
         }
         else {

@@ -1,4 +1,4 @@
-package BackendApiTests.ObjectClasses;
+package ApiTests.ObjectClasses;
 
 import UsedByAll.TestUser;
 import org.apache.commons.codec.binary.Base64;
@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
-import static BackendApiTests.ObjectClasses.DateForAPI.makeDateTimeString;
+import static ApiTests.ObjectClasses.DateForAPI.makeDateTimeString;
 
 public class MakeRequest{
     // Для GET-ов

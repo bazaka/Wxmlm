@@ -1,4 +1,4 @@
-package BackendApiTests.ObjectClasses;
+package ApiTests.ObjectClasses;
 
 // * Created for W-xmlm by Fill on 27.11.2014.
 public class Operation {

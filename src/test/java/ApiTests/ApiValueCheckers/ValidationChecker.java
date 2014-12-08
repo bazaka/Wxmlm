@@ -1,4 +1,4 @@
-package BackendApiTests.ApiValueCheckers;
+package ApiTests.ApiValueCheckers;
 
 import org.apache.commons.validator.routines.EmailValidator;
 

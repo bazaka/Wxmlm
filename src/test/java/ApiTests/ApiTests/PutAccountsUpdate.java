@@ -1,7 +1,7 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ObjectClasses.Account;
-import BackendApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Account;
+import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.junit.After;
 import org.junit.Before;
@@ -11,15 +11,15 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
-public class BackendPutAccountsUpdate{
+public class PutAccountsUpdate {
     @Before
     public void setUp(String scheme) throws Exception {
         System.out.println("Запускаю селениум для проверки API-метода PUT Accounts update на " + scheme);
     }
 
     @Test
-    public boolean testBackendPutAccountsUpdate(String scheme, TestUser user) throws IOException {
-        Account originalAccount = new BackendGetAccounts().getAnyAccount(user, scheme);
+    public boolean testPutAccountsUpdate(String scheme, TestUser user) throws IOException {
+        Account originalAccount = new GetAccounts().getAnyAccount(user, scheme);
         Account modifiedAccount = new Account(originalAccount.getAccountId(), originalAccount.getAccountNumber(), originalAccount.getAccountType(), originalAccount.getStatus(), originalAccount.getAccountInfo() + "1", originalAccount.getAmount() + 50);
         String originalJson = "[{\"account_id\":" + originalAccount.getAccountId() + ", \"account_number\":\"" + originalAccount.getAccountNumber() + "\", \"account_type\":" + originalAccount.getAccountType() + ", \"status\":" + originalAccount.getStatus() + ", \"account_info\": \"" + originalAccount.getAccountInfo() + "\", \"amount\": \"" + originalAccount.getAmount() + "\"}]";
         String modifiedJson = "[{\"account_id\":" + modifiedAccount.getAccountId() + ", \"account_number\":\"" + modifiedAccount.getAccountNumber() + "\", \"account_type\":" + modifiedAccount.getAccountType() + ", \"status\":" + modifiedAccount.getStatus() + ", \"account_info\": \"" + modifiedAccount.getAccountInfo() + "\", \"amount\": \"" + modifiedAccount.getAmount() + "\"}]";
@@ -31,7 +31,7 @@ public class BackendPutAccountsUpdate{
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные обновились
-        Account changedAccount = new BackendGetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
+        Account changedAccount = new GetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedAccount.equalsExceptUpdatedDate(changedAccount));
 
         // Содзаем URL
@@ -42,7 +42,7 @@ public class BackendPutAccountsUpdate{
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedAccount = new BackendGetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
+        changedAccount = new GetAccounts().getAccountByParameter("account_id", originalAccount.getAccountId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalAccount.equalsExceptUpdatedDate(changedAccount));
         return true;
     }

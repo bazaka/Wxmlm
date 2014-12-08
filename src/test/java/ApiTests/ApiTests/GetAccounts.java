@@ -1,11 +1,11 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ObjectClasses.Account;
-import BackendApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Account;
+import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.json.*;
-import BackendApiTests.ApiValueCheckers.*;
+import ApiTests.ApiValueCheckers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
@@ -14,10 +14,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-public class BackendGetAccounts {
+public class GetAccounts {
 
     @Test
-    public boolean testBackendGetAccounts(String scheme, TestUser user) throws Exception {
+    public boolean testGetAccounts(String scheme, TestUser user) throws Exception {
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);

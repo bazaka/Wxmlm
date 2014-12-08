@@ -1,4 +1,4 @@
-package BackendApiTests.ObjectClasses;
+package ApiTests.ObjectClasses;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

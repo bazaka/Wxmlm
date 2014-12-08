@@ -1,7 +1,7 @@
-package BackendApiTests;
+package ApiTests.ApiTests;
 
-import BackendApiTests.ObjectClasses.MakeRequest;
-import BackendApiTests.ObjectClasses.Withdraw;
+import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -14,10 +14,10 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 03.12.2014. Insert single withdraw by API
-public class BackendPostWithdrawInsert {
+public class PostWithdrawInsert {
     @Test
-    public boolean testBackendPostWithdrawInsert(String scheme, TestUser user) throws IOException, JSONException {
-        Withdraw originalOne = new BackendGetWithdraws().getAnyWithdraw(user, scheme);
+    public boolean testPostWithdrawInsert(String scheme, TestUser user) throws IOException, JSONException {
+        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
         Withdraw newOne;
         String newJson;
         if (originalOne.getMerchant().equals("ePayment")) {
@@ -56,7 +56,7 @@ public class BackendPostWithdrawInsert {
         int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Withdraw changedOne = new BackendGetWithdraws().getWithdrawByParameter("id", newOneId, user, scheme);
+        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", newOneId, user, scheme);
         assertTrue("Check modified data saved correctly", newOne.equalsWithNew(changedOne));
         return true;
     }
