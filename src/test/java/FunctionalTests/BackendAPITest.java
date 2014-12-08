@@ -1,8 +1,8 @@
 package FunctionalTests;
 
-import ApiTests.ApiTests.*;
-import ApiTests.ApiTests.GetPurchases;
-import ApiTests.FreeApiTests.GetApplicationInfo;
+import ApiTests.Backend.*;
+import ApiTests.Backend.GetPurchases;
+import ApiTests.LoginFree.GetApplicationInfo;
 import UsedByAll.TestUser;
 
 public class BackendAPITest {
