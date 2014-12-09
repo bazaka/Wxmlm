@@ -1,73 +1,140 @@
-//package FunctionalTests.Pages;
-//
-//import org.junit.Test;
-//
-//import javax.mail.*;
-//import java.util.Properties;
-//
-///**
-// * Created by User on 12/8/2014.
-// */
-//public class GmailMessager {
-//    @Test
-//    public void getMessages (/*TestUser testUser*/){
-//        String POP_AUTH_USER = "yb@t4web.com.ua";/*testUser.getEmail();*/
-//        String POP_AUTH_PWD = "ghbdtnbr";/* testUser.getEPassword();*/
-//
-//        String FOLDER_INBOX = "INBOX"; //name of INBOX folder
-//        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-//
-//        try{
-//            System.out.println("Начинаю соединение с Gmail через POP3");
-//            Properties pop3Props = new Properties();
-//
-//            pop3Props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
-//            pop3Props.setProperty("mail.pop3.socketFactory.fallback", "false");
-//            pop3Props.setProperty("mail.pop3.port", "995");
-//            pop3Props.setProperty("mail.pop3.socketFactory.port", "995");
-//
-//
-//            URLName url = new URLName("pop3", "pop.gmail.com", 955, "", POP_AUTH_USER, POP_AUTH_PWD);
-//            //Session session = Session.getDefaultInstance(pop3Props);
-//            Session session = Session.getInstance(pop3Props, null);
-//            Store store = session.getStore(url);
-//            store.connect();
-//
-//            Folder folder = store.getFolder(FOLDER_INBOX);
-//            try{
-//                folder.open(Folder.READ_WRITE);
-//            } catch(MessagingException ex){
-//                folder.open(Folder.READ_ONLY);
-//            }
-//            //Message[] messages = folder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false)); // тут список новий листів убде
-//            // обробка повідомлень:
-//            Message[] messages = folder.getMessages();
-//            System.out.println("Messages.length: "+messages.length);
-//            //for (int i=messages.length; i>(messages.length - 3; i--){ // останні 3 листи
-//            for(int i=(messages.length-1); i>10; i--){
-//            //for (int i=0; i<messages.length; i++){
-//
-//
-//                Message message = messages[i];
-//                System.out.println("Email Number "+ (i));
-//                System.out.println("Subjet: "+ message.getSubject());
-//                System.out.println("From: "+message.getFrom());
-//                System.out.println("Received Date "+message.getSentDate());
-//                System.out.println("Text: "+ message.getContent().toString());
-//            }
-//
-//            folder.close(false);
-//            store.close();
-//        } catch (NoSuchProviderException e) {
-//            e.printStackTrace();
-//        } catch (MessagingException e) {
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//
-//    }
-//
-//}
+package FunctionalTests.Pages;
+
+import UsedByAll.TestUser;
+
+import javax.activation.DataHandler;
+import javax.mail.*;
+import java.io.IOException;
+import java.util.Properties;
+
+/**
+ * Created by User on 12/8/2014.
+ */
+public class GmailMessager {
+
+
+    public Store initializePOP3 (TestUser testUser) throws MessagingException {
+        String POP_AUTH_USER = testUser.getEmail();
+        String POP_AUTH_PWD = testUser.getEPassword();
+
+
+        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+
+
+
+        System.out.println("Начинаю соединение с Gmail через POP3");
+        Properties pop3Props = new Properties();
+
+        pop3Props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
+        pop3Props.setProperty("mail.pop3.socketFactory.fallback", "false");
+        pop3Props.setProperty("mail.pop3.port", "995");
+        pop3Props.setProperty("mail.pop3.socketFactory.port", "995");
+
+
+        URLName url = new URLName("pop3", "pop.gmail.com", 955, "", POP_AUTH_USER, POP_AUTH_PWD);
+        //Session session = Session.getDefaultInstance(pop3Props);
+        Session session = Session.getInstance(pop3Props, null);
+        Store store = session.getStore(url);
+
+
+        return store;
+
+    }
+    public String getLastMessageTime(TestUser testUser) throws MessagingException {
+
+        String FOLDER_INBOX = "INBOX"; //name of INBOX folder
+        Store store = initializePOP3(testUser);
+
+        store.connect();
+
+        Folder folder = store.getFolder(FOLDER_INBOX);
+        try{
+            folder.open(Folder.READ_WRITE);
+        } catch(MessagingException ex) {
+            folder.open(Folder.READ_ONLY);
+        }
+        Message[] messages = folder.getMessages();
+        System.out.println("Messages.length: " + (messages.length-1));
+
+            Message message = messages[messages.length-1];
+            System.out.println("Email Number " + (messages.length-1));
+            System.out.println("Subjet: " + message.getSubject());
+            System.out.println("Received Date " + message.getSentDate());
+            // System.out.println("Text: "+ message.getContent().toString());
+            String detectMessageTime = message.getSentDate().toString();
+        folder.close(false);
+        store.close();
+        return detectMessageTime;
+    }
+    public String openAndGoToLink(TestUser testUser, String requiredSubject, String requiredLink) throws MessagingException, IOException {
+        String FOLDER_INBOX = "INBOX"; //name of INBOX folder
+        String activationLink = null;
+
+        Store store = initializePOP3(testUser);
+        store.connect();
+
+        Folder folder = store.getFolder(FOLDER_INBOX);
+        try{
+            folder.open(Folder.READ_WRITE);
+        } catch(MessagingException ex) {
+            folder.open(Folder.READ_ONLY);
+        }
+        Message[] messages = folder.getMessages();
+        System.out.println("Messages.length: " + (messages.length-1));
+
+        Message message = messages[messages.length-1];
+
+        String messageSubject = message.getSubject();
+        System.out.println("Subjet: " + messageSubject);// Subject повідомлення
+
+        if(!messageSubject.contains(requiredSubject))
+            System.err.println("Неверная тема сообщения");
+
+        String contentType = message.getContentType(); // тип контенту повідомлення
+        String textMessage = "";
+
+        if (contentType.contains("text/plain") || contentType.contains("text/html")) {
+            textMessage = message.getContent() != null ? textMessage = message.getContent().toString() : ""; //if then else
+        }else if (contentType.contains("multipart")) {
+            Multipart multipart = (Multipart) message.getContent();
+
+            for(int j=0; j<multipart.getCount(); j++){
+                BodyPart bodyPart = multipart.getBodyPart(j);
+
+                String disposition = bodyPart.getDisposition(); // disposition -- расположение
+                if (disposition != null && (disposition.equals(BodyPart.ATTACHMENT))) {
+                    System.out.println("Mail have some attachment");
+                    DataHandler handler = bodyPart.getDataHandler();
+                    System.out.println("file name: " + handler.getName()); //зберегти attachment в файл
+                }else {
+                    textMessage = bodyPart.getContent() != null ? textMessage = bodyPart.getContent().toString() : ""; // мультіпарт в текст
+                }
+
+            }
+        }
+        //CharSequence searchLink = requiredLink; // CharSequence -- послідовність символів, requiredLink -- подаємо з тесту
+        if (textMessage.contains(requiredLink)) {
+            System.out.println("Письмо содержит активационную ссылку");
+        }else {
+            System.err.println("Активационная ссылка не найдена");
+
+        }
+        int indexof = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
+        int lastIndexOf = textMessage.lastIndexOf(" ");
+
+        activationLink = textMessage.substring(indexof, lastIndexOf).trim();
+
+
+        System.out.println("Received Date: " + message.getSentDate());
+        System.out.println("Activation link: " + activationLink);
+
+
+
+        folder.close(false);
+        store.close();
+        return activationLink;
+
+
+    }
+
+}
