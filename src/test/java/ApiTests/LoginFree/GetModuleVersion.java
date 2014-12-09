@@ -1,14 +1,19 @@
 package ApiTests.LoginFree;
 
-//import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
-// * Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
-/*public class GetModuleVersion {
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+//* Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
+public class GetModuleVersion {
     @Test
     public boolean testGetModuleVersion(String scheme) throws Exception {
         List<String> productIDs = new ArrayList<String>();
-        for (int i = 0; i < ; i++) {
+/*        for (int i = 0; i < ; i++) {
 
         } //Дописать после GET Products
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
@@ -33,6 +38,6 @@ package ApiTests.LoginFree;
         assertTrue("Incorrect path", checker.checkString(object.get("path")));
         assertTrue("Incorrect status", object.getBoolean("status"));
         assertEquals("Incorrect count of Json parameters", object.length(), 5);
-        return true;
+*/        return true;
     }
-}*/
+}

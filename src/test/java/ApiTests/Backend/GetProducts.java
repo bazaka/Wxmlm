@@ -66,4 +66,27 @@ public class GetProducts {
         }
         return true;
     }
+    public int[] getProductsIDs(String scheme, TestUser user) throws Exception {
+        String url = "products/api/products/";
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, url, 500, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+
+        JSONArray jsonArr = new JSONArray(result);
+        int[] ids = new int[jsonArr.length()];
+        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        for (int i = 0; i < jsonArr.length(); i++) {
+            JSONObject object = jsonArr.getJSONObject(i);
+            ids[i] = object.getInt("id");
+        }
+        return ids;
+    }
 }
