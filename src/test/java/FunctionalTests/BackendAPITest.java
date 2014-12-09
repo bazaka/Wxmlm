@@ -107,15 +107,6 @@ public class BackendAPITest {
             isComplete = false;
         }
 
-        // GET app info test run
-        if (new GetApplicationInfo().testGetApplicationInfo(scheme)) {
-            System.out.println("Проверка API GET app info пройдена");
-        }
-        else {
-            System.out.println("Проверка API GET app info НЕ пройдена");
-            isComplete = false;
-        }
-
         return isComplete;
     }
 }
