@@ -36,7 +36,6 @@ public class GetWithdraws {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        ValidationChecker checker = new ValidationChecker();
         if (jsonArr.length() == 0) {
             System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
             return false;
@@ -44,26 +43,26 @@ public class GetWithdraws {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
-            assertTrue("Incorrect id", checker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect user_id", checker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect merchant_id", checker.checkIdValue(object.getInt("merchant_id")));
-            assertTrue("Incorrect operation_id", checker.checkIdValue(object.getInt("operation_id")));
-            assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
-            assertTrue("Incorrect created_date", checker.checkDateTimeString(object.getString("created_date")));
-            assertTrue("Incorrect status", checker.checkWithdrawStatusId(object.getInt("status")));
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+            assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
+            assertTrue("Incorrect merchant_id", ValidationChecker.checkIdValue(object.getInt("merchant_id")));
+            assertTrue("Incorrect operation_id", ValidationChecker.checkIdValue(object.getInt("operation_id")));
+            assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
+            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
+            assertTrue("Incorrect status", ValidationChecker.checkWithdrawStatusId(object.getInt("status")));
             assertEquals("Incorrect count of Json parameters", object.length(), 8);
             JSONObject details = object.getJSONObject("details");
             if (details.has("epid")) {
-                assertTrue(checker.checkNotNull(details.getString("epid")));
+                assertTrue(ValidationChecker.checkNotNull(details.getString("epid")));
                 assertEquals("Incorrect count of Bank details parameters", details.length(), 1);
             }
             else if (details.has("swiftCode")) {
-                assertTrue(checker.checkNotNull(details.getString("name")));
-                assertTrue(checker.checkStringOrNull(details.getString("address")));
-                assertTrue(checker.checkNotNull(details.getString("bankName")));
-                assertTrue(checker.checkStringOrNull(details.getString("bankAddress")));
-                assertTrue(checker.checkNotNull(details.getString("accountIban")));
-                assertTrue(checker.checkNotNull(details.getString("swiftCode")));
+                assertTrue(ValidationChecker.checkNotNull(details.getString("name")));
+                assertTrue(ValidationChecker.checkStringOrNull(details.getString("address")));
+                assertTrue(ValidationChecker.checkNotNull(details.getString("bankName")));
+                assertTrue(ValidationChecker.checkStringOrNull(details.getString("bankAddress")));
+                assertTrue(ValidationChecker.checkNotNull(details.getString("accountIban")));
+                assertTrue(ValidationChecker.checkNotNull(details.getString("swiftCode")));
                 assertEquals("Incorrect count of Bank details parameters", details.length(), 6);
                 }
         }

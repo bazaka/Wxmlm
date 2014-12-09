@@ -1,5 +1,7 @@
 package ApiTests.ObjectClasses;
 
+import java.lang.Double;
+
 // * Created for W-xmlm by Fill on 01.12.2014.
 public class Withdraw {
     public int id;
@@ -69,7 +71,7 @@ public class Withdraw {
     public void setUserId(int a) {this.userId = a;}
     public void setMerchantId(int a) {this.merchantId = a;}
     public void setOperationId(int a) {this.operationId = a;}
-    public void setAmount(double a) {this.amount = a;}
+    public void setAmount(double a) {this.amount = (double)((Math.round(a * 100))/100);}
     public void setCreatedDate(String a) {this.createdDate = a;}
     public void setStatus(int a) {this.status = a;}
     public void setEpid(String a) {this.epid = a;}
@@ -107,6 +109,7 @@ public class Withdraw {
         }
         if (getAmount() != a.getAmount()) {
             System.out.println("6");
+            System.out.println(getAmount() + "=" + a.getAmount());
             return false;
         }
         if (!getCreatedDate().equals(a.getCreatedDate())) {
@@ -193,16 +196,12 @@ public class Withdraw {
             System.out.println("7");
             return false;
         }
-        if (getAmount() != a.getAmount()) {
+        if (getStatus() != a.getStatus()) {
             System.out.println("8");
             return false;
         }
-        if (getStatus() != a.getStatus()) {
-            System.out.println("9");
-            return false;
-        }
         if (!getMerchant().equals(a.getMerchant())){
-            System.out.println("10");
+            System.out.println("9");
             return false;
         }
         if (getMerchant().equals("ePayment"))

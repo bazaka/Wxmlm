@@ -1,11 +1,11 @@
 package ApiTests.LoginFree;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+//import static org.junit.Assert.assertEquals;
+//import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
-public class GetModuleVersion {
-/*    @Test
+/*public class GetModuleVersion {
+    @Test
     public boolean testGetModuleVersion(String scheme) throws Exception {
         List<String> productIDs = new ArrayList<String>();
         for (int i = 0; i < ; i++) {
@@ -34,5 +34,5 @@ public class GetModuleVersion {
         assertTrue("Incorrect status", object.getBoolean("status"));
         assertEquals("Incorrect count of Json parameters", object.length(), 5);
         return true;
-    }*/
-}
+    }
+}*/

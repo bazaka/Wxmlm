@@ -33,7 +33,6 @@ public class GetAccounts {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        ValidationChecker checker = new ValidationChecker();
         if (jsonArr.length() == 0) {
             System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
             return false;
@@ -41,14 +40,14 @@ public class GetAccounts {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
-            assertTrue("Incorrect account_id", checker.checkIdValue(object.getInt("account_id")));
-            assertTrue("Incorrect user_id", checker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect account_number", checker.checkAccountNumberValue(object.getString("account_number")));
-            assertTrue("Incorrect account_type", checker.checkAccountTypeValue(object.getInt("account_type")));
-            assertTrue("Incorrect status", checker.checkBooleanValue(object.getBoolean("status")));
-            assertTrue("Incorrect account_info", checker.checkNotNull(object.getString("account_info")));
-            assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
-            assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
+            assertTrue("Incorrect account_id", ValidationChecker.checkIdValue(object.getInt("account_id")));
+            assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
+            assertTrue("Incorrect account_number", ValidationChecker.checkAccountNumberValue(object.getString("account_number")));
+            assertTrue("Incorrect account_type", ValidationChecker.checkAccountTypeValue(object.getInt("account_type")));
+            assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
+            assertTrue("Incorrect account_info", ValidationChecker.checkNotNull(object.getString("account_info")));
+            assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
+            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
             assertEquals("Incorrect count of Json parameters", object.length(), 8);
         }
         return true;

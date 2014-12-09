@@ -32,7 +32,6 @@ public class GetOperations {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        ValidationChecker checker = new ValidationChecker();
         if (jsonArr.length() == 0) {
             System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
             return false;
@@ -40,17 +39,17 @@ public class GetOperations {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
-            assertTrue("Incorrect id", checker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect target_account_id", checker.checkIdValue(object.getInt("target_account_id")));
-            assertTrue("Incorrect source_account_id", checker.checkIdValue(object.getInt("source_account_id")));
-            assertTrue("Incorrect purchase_id", checker.checkIdOrNull(object.get("purchase_id")));
-            assertTrue("Incorrect initiator_user_id", checker.checkIdValue(object.getInt("initiator_user_id")));
-            assertTrue("Incorrect created_date", checker.checkDateTimeString(object.getString("created_date")));
-            assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
-            assertTrue("Incorrect amount", checker.checkDoubleValue(object.getDouble("amount")));
-            assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
-            assertTrue("Incorrect type", checker.checkOperationTypeId(object.getInt("type")));
-            assertTrue("Incorrect quarantine", checker.checkBooleanValue(object.getBoolean("quarantine")));
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+            assertTrue("Incorrect target_account_id", ValidationChecker.checkIdValue(object.getInt("target_account_id")));
+            assertTrue("Incorrect source_account_id", ValidationChecker.checkIdValue(object.getInt("source_account_id")));
+            assertTrue("Incorrect purchase_id", ValidationChecker.checkIdOrNull(object.get("purchase_id")));
+            assertTrue("Incorrect initiator_user_id", ValidationChecker.checkIdValue(object.getInt("initiator_user_id")));
+            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
+            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
+            assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
+            assertTrue("Incorrect status", ValidationChecker.checkOperationStatusId(object.getInt("status")));
+            assertTrue("Incorrect type", ValidationChecker.checkOperationTypeId(object.getInt("type")));
+            assertTrue("Incorrect quarantine", ValidationChecker.checkBooleanValue(object.getBoolean("quarantine")));
             assertEquals("Incorrect count of Json parameters", object.length(), 11);
         }
         return true;

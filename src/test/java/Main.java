@@ -1,7 +1,4 @@
-import FunctionalTests.BackendAPITest;
-import FunctionalTests.PasswordRecovery;
-import FunctionalTests.Registration;
-import FunctionalTests.UserLogin;
+import FunctionalTests.*;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
@@ -34,18 +31,32 @@ public class Main
         for (int i = 0; i < testUser.length; i++)
         {
             System.out.println("\n" + "Начинаю тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName() + ". Тест-кейсы, в которых он используется: " + testUser[i].getUseInTest());
+            // FreeLogin API (authorization don't needed)
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
+            {
+                LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
+                //Вызов метода, запускающего тесты LoginFree API
+                try { if (newLoginFreeAPITest.runLoginFreeAPITests(scheme))
+                    System.out.println("Проверка LoginFree API пройдена");
+                    else
+                    System.out.println("Проверка LoginFree API НЕ пройдена");
+                }
+                catch (Exception e) { e.printStackTrace();
+                    System.out.println("Проверка LoginFree API НЕ пройдена: " + e); }
+                //Вызов метода окончания теста
+            }
             // Backend API (needed authorization by admin)
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BackendAPI("))
             {
                 BackendAPITest newBackendAPITest = new BackendAPITest(); // Создаём объект теста
-                //Вызов метода, запускающего тесты API
-                try { if (newBackendAPITest.runAPITests(scheme, testUser[i]))
-                    System.out.println("Проверка API пройдена");
+                //Вызов метода, запускающего тесты Backend API
+                try { if (newBackendAPITest.runBackendAPITests(scheme, testUser[i]))
+                    System.out.println("Проверка Backend API пройдена");
                     else
-                    System.out.println("Проверка API НЕ пройдена");
+                    System.out.println("Проверка Backend API НЕ пройдена");
                 }
                 catch (Exception e) { e.printStackTrace();
-                    System.out.println("Проверка API НЕ пройдена: " + e); }
+                    System.out.println("Проверка Backend API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
             }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_Registration("))

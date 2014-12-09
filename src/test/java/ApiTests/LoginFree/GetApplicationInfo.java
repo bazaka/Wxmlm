@@ -33,10 +33,10 @@ public class GetApplicationInfo {
         JSONObject object = new JSONObject(result);
         //Проверяем структуру
         ValidationChecker checker = new ValidationChecker();
-        assertTrue("Incorrect id", checker.checkIdValue(object.getInt("id")));
-        assertTrue("Incorrect version", checker.checkString(object.get("version")));
-        assertTrue("Incorrect filename", checker.checkString(object.get("filename")));
-        assertTrue("Incorrect path", checker.checkString(object.get("path")));
+        assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+        assertTrue("Incorrect version", ValidationChecker.checkNotNull(object.getString("version")));
+        assertTrue("Incorrect filename", ValidationChecker.checkNotNull(object.getString("filename")));
+        assertTrue("Incorrect path", ValidationChecker.checkNotNull(object.getString("path")));
         assertTrue("Incorrect status", object.getBoolean("status"));
         assertEquals("Incorrect count of Json parameters", object.length(), 5);
     return true;

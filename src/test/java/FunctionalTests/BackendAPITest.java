@@ -6,7 +6,7 @@ import ApiTests.LoginFree.GetApplicationInfo;
 import UsedByAll.TestUser;
 
 public class BackendAPITest {
-    public boolean runAPITests(String scheme, TestUser user) throws Exception {
+    public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
         // GET API users test run
         if (new GetUsers().testGetUsers(scheme, user)) {
@@ -98,12 +98,12 @@ public class BackendAPITest {
             isComplete = false;
         }
 
-        // GET app info test run
-        if (new GetApplicationInfo().testGetApplicationInfo(scheme)) {
-            System.out.println("Проверка API GET app info пройдена");
+        // GET API products test run
+        if (new GetProducts().testGetProducts(scheme, user)) {
+            System.out.println("Проверка API GET products пройдена");
         }
         else {
-            System.out.println("Проверка API GET app info НЕ пройдена");
+            System.out.println("Проверка API GET products НЕ пройдена");
             isComplete = false;
         }
 
