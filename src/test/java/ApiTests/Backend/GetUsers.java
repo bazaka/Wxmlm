@@ -5,6 +5,7 @@ import ApiTests.ObjectClasses.MakeRequest;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -14,7 +15,7 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.*;
 
 public class GetUsers {
-
+    @Test
     public boolean testGetUsers(String scheme, TestUser User) throws Exception{
         String url = "users/api/users/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
