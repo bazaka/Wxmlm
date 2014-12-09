@@ -5,8 +5,8 @@ import ApiTests.Backend.GetPurchases;
 import ApiTests.LoginFree.GetApplicationInfo;
 import UsedByAll.TestUser;
 
-public class BackendAPITest {
-    public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
+public class LoginFreeAPITest {
+    public boolean runLoginFreeAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
         // GET API users test run
         if (new GetUsers().testGetUsers(scheme, user)) {

@@ -32,21 +32,20 @@ public class GetPurchases {
         }
         br.close();
         JSONArray jsonArr = new JSONArray(result);
-        ValidationChecker checker = new ValidationChecker();
         assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
 
         for (int i=0; i<jsonArr.length(); i++){
 
             JSONObject object = jsonArr.getJSONObject(i);
-            assertTrue("Incorrect id", checker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect buyer_user_id", checker.checkIdValue(object.getInt("buyer_user_id")));
-            assertTrue("Incorrect product_id", checker.checkProductId(object.getInt("product_id")));
-            assertTrue("Incorrect date", checker.checkDateTimeString(object.getString("date")));
-            assertTrue("Incorrect updated_date", checker.checkDateTimeString(object.getString("updated_date")));
-            assertTrue("Incorrect price", checker.checkMoneyFormat(object.get("price").toString()));
-            assertTrue("Incorrect payment_amount", checker.checkMoneyFormat(object.get("payment_amount").toString()));
-            assertTrue("Incorrect status", checker.checkOperationStatusId(object.getInt("status")));
-            assertTrue("Incorrect terms", checker.checkStringOrNull(object.get("terms")));
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+            assertTrue("Incorrect buyer_user_id", ValidationChecker.checkIdValue(object.getInt("buyer_user_id")));
+            assertTrue("Incorrect product_id", ValidationChecker.checkProductId(object.getInt("product_id")));
+            assertTrue("Incorrect date", ValidationChecker.checkDateTimeString(object.getString("date")));
+            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
+            assertTrue("Incorrect price", ValidationChecker.checkMoneyFormat(object.get("price").toString()));
+            assertTrue("Incorrect payment_amount", ValidationChecker.checkMoneyFormat(object.get("payment_amount").toString()));
+            assertTrue("Incorrect status", ValidationChecker.checkOperationStatusId(object.getInt("status")));
+            assertTrue("Incorrect terms", ValidationChecker.checkStringOrNull(object.get("terms")));
             assertEquals("Incorrect count of JSON Objects", object.length(),9);
         }
 

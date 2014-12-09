@@ -1,5 +1,7 @@
 package ApiTests.ObjectClasses;
 
+import java.lang.Double;
+
 // * Created for W-xmlm by Fill on 27.11.2014.
 public class Operation {
     public int id;
@@ -47,7 +49,7 @@ public class Operation {
     public void setInitiatorUserId(int a) {this.initiatorUserId = a;}
     public void setCreatedDate(String a) {this.createdDate = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
-    public void setAmount(double a) {this.amount = a;}
+    public void setAmount(double a) {this.amount = (double)((Math.round(a * 100))/100);}
     public void setStatus(int a) {this.status = a;}
     public void setType(int a) {this.type = a;}
     public void setQuarantine(boolean a) {this.quarantine = a;}
@@ -57,38 +59,50 @@ public class Operation {
         if (this == a)
             return true;
         if (a == null) {
+            System.out.println("1");
             return false;
         }
         if (getClass() != a.getClass()) {
+            System.out.println("2");
             return false;
         }
         if (getTargetAccountId() != a.getTargetAccountId()) {
+            System.out.println("3");
             return false;
         }
         if (getSourceAccountId() != a.getSourceAccountId()) {
+            System.out.println("4");
             return false;
         }
         if (getPurchaseId() != null && a.getPurchaseId() != null){
             if (!getPurchaseId().equals(a.getPurchaseId())) {
+                System.out.println("5");
                 return false;
             }
         }
         if (getInitiatorUserId() != a.getInitiatorUserId()) {
+            System.out.println("6");
             return false;
         }
         if (!getCreatedDate().equals(a.getCreatedDate())) {
+            System.out.println("6.5");
             return false;
         }
         if (getAmount() != a.getAmount()) {
+            System.out.println(a.getAmount() + " = " + a.getAmount());
+            System.out.println("7");
             return false;
         }
         if (getStatus() != a.getStatus()) {
+            System.out.println("8");
             return false;
         }
         if (getType() != a.getType()) {
+            System.out.println("9");
             return false;
         }
         if (getQuarantine() != a.getQuarantine()) {
+            System.out.println("10");
             return false;
         }
         return true;

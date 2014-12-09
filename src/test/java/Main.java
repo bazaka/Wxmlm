@@ -39,7 +39,7 @@ public class Main
             {
                 BackendAPITest newBackendAPITest = new BackendAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты API
-                try { if (newBackendAPITest.runAPITests(scheme, testUser[i]))
+                try { if (newBackendAPITest.runBackendAPITests(scheme, testUser[i]))
                     System.out.println("Проверка API пройдена");
                     else
                     System.out.println("Проверка API НЕ пройдена");
