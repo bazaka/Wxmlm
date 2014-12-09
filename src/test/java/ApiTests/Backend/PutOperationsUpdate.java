@@ -1,4 +1,4 @@
-package ApiTests.ApiTests;
+package ApiTests.Backend;
 
 import ApiTests.ObjectClasses.MakeRequest;
 import ApiTests.ObjectClasses.Operation;

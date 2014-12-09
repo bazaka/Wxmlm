@@ -1,4 +1,4 @@
-package ApiTests.ApiTests;
+package ApiTests.Backend;
 
 import ApiTests.ApiValueCheckers.ValidationChecker;
 import ApiTests.ObjectClasses.MakeRequest;

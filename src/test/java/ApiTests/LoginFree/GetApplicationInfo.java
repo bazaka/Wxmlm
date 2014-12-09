@@ -1,4 +1,4 @@
-package ApiTests.FreeApiTests;
+package ApiTests.LoginFree;
 
 import ApiTests.ApiValueCheckers.ValidationChecker;
 import ApiTests.ObjectClasses.MakeRequest;

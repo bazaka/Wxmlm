@@ -1,4 +1,4 @@
-package ApiTests.FreeApiTests;
+package ApiTests.LoginFree;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
