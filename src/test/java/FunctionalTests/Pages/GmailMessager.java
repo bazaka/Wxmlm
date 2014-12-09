@@ -66,7 +66,7 @@ public class GmailMessager {
         store.close();
         return detectMessageTime;
     }
-    public String openAndGoToLink(TestUser testUser, String requiredSubject, String requiredLink) throws MessagingException, IOException {
+    public String openAndReturnLink(TestUser testUser, String requiredSubject, String requiredLink) throws MessagingException, IOException {
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
         String activationLink = null;
 
@@ -85,7 +85,7 @@ public class GmailMessager {
         Message message = messages[messages.length-1];
 
         String messageSubject = message.getSubject();
-        System.out.println("Subjet: " + messageSubject);// Subject повідомлення
+        System.out.println("Subject: " + messageSubject);// Subject повідомлення
 
         if(!messageSubject.contains(requiredSubject))
             System.err.println("Неверная тема сообщения");
@@ -113,22 +113,23 @@ public class GmailMessager {
             }
         }
         //CharSequence searchLink = requiredLink; // CharSequence -- послідовність символів, requiredLink -- подаємо з тесту
+
+        System.out.println("Message text: "+ textMessage);
+        System.out.println("Required Link: "+ requiredLink);
         if (textMessage.contains(requiredLink)) {
             System.out.println("Письмо содержит активационную ссылку");
         }else {
             System.err.println("Активационная ссылка не найдена");
 
         }
-        int indexof = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
-        int lastIndexOf = textMessage.lastIndexOf(" ");
+        int indexOf = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
+       // int lastIndexOf = textMessage.lastIndexOf(" ");
+        int lastIndexOf = textMessage.lastIndexOf("Regards");
 
-        activationLink = textMessage.substring(indexof, lastIndexOf).trim();
-
+        activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
 
         System.out.println("Received Date: " + message.getSentDate());
         System.out.println("Activation link: " + activationLink);
-
-
 
         folder.close(false);
         store.close();
