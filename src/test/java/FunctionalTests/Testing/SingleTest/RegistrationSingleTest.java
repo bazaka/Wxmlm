@@ -1,15 +1,13 @@
 package FunctionalTests.Testing.SingleTest;
 
-import FunctionalTests.Pages.GmailPage;
+import FunctionalTests.Pages.GmailMessager;
 import FunctionalTests.Pages.RegistrationPage;
+import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.TestUser;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.ArrayList;
+import javax.mail.MessagingException;
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,24 +15,25 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by User on 12/5/2014.
  */
-public class RegistrationSingleTest{
-    private static WebDriver driver;
+public class RegistrationSingleTest extends RegistrationTest{
+
     @Test
-    public void registrationSingleTest(TestUser testUser){
+    public void registrationSingleTest(TestUser testUser) throws IOException, MessagingException {
 
-        driver = new FirefoxDriver();
-        driver.manage().window().maximize();
+
         RegistrationPage registrationPage = new RegistrationPage(driver);
-        GmailPage gmailPage = new GmailPage(driver);
+        GmailMessager gmailMessager = new GmailMessager();
+        String confirmLink = "http://xm-650.xmlm.t4web.com.ua/register/confirm/";
 
-        gmailPage.open();
-        //gmailPage.checkAuthorization();
-        gmailPage.checkGmail(testUser);
-
-        String gmailTab = driver.getWindowHandle();  // save gmail tab
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t"); // open new tab
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(0));
+        String currentMessageTime="";
+        String newMessageTime="";
+        try {
+            gmailMessager.initializePOP3(testUser);
+            currentMessageTime = gmailMessager.getLastMessageTime(testUser);
+            System.out.println("Current last message time: " + currentMessageTime);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         registrationPage.open();
         assertTrue("Page not opened", registrationPage.isOpened());
@@ -43,23 +42,33 @@ public class RegistrationSingleTest{
         registrationPage.secondStep(testUser);
         assertTrue("Confirmation message not displayed", registrationPage.isError());
 
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.TAB);
-        driver.switchTo().window(gmailTab);
+        int count = 1; // лічильник, якщо дорівнює 100, виходимо з циклу
+        do {
+            try {
+                gmailMessager.initializePOP3(testUser);
+                newMessageTime = gmailMessager.getLastMessageTime(testUser);
+                System.out.println("New last message time: " +newMessageTime);
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+            count++;
+            if (count == 100) break;
+        }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
+        String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, "Regards");
+
+        //registrationPage.confirmActivation(activationLink);
 
 
-
-        gmailPage.checkConfirmLetter(testUser, "To finish activating your account");
+      /*  gmailPage.checkConfirmLetter(testUser, "To finish activating your account");
 
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.TAB);//change tab
         ArrayList<String> newtabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(newtabs.get(0)); //switch tab
+        driver.switchTo().window(newtabs.get(0)); //switch tab*/
 
 
-        assertEquals(registrationPage.confirmActivation(), "Congrats " + testUser.getEmail() + ", your account is now activated.");
+        assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
         System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
 
-            if(driver!=null)
-                driver.quit();
 
     }
 }

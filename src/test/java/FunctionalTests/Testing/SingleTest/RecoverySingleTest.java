@@ -65,7 +65,7 @@ public class RecoverySingleTest extends RecoveryTest {
             count++;
             if (count == 100) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
-        String activationLink = gmailMessager.openAndReturnLink(testUser, "Reset Password", confirmLink);
+        String activationLink = gmailMessager.openAndReturnLink(testUser, "Reset Password", confirmLink, "Regards");
         assertEquals("Not same titles", recoveryPage.enterNewPassword(testUser, activationLink), "KairosNet");
 
     }

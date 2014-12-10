@@ -66,7 +66,7 @@ public class GmailMessager {
         store.close();
         return detectMessageTime;
     }
-    public String openAndReturnLink(TestUser testUser, String requiredSubject, String requiredLink) throws MessagingException, IOException {
+    public String openAndReturnLink(TestUser testUser, String requiredSubject, String requiredLink, String Separator) throws MessagingException, IOException {
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
         String activationLink = null;
 
@@ -124,7 +124,7 @@ public class GmailMessager {
         }
         int indexOf = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
        // int lastIndexOf = textMessage.lastIndexOf(" ");
-        int lastIndexOf = textMessage.lastIndexOf("Regards");
+        int lastIndexOf = textMessage.lastIndexOf(Separator); // Separator - разделитель, для рековери - "Regards", для регистрейшн - " "
 
         activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
 
