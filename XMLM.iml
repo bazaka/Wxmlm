@@ -56,7 +56,26 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
     <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.8" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.1.1" level="project" />
-    <orderEntry type="library" name="javax.mail" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/javamail" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/javamail/docs/javadocs" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/javamail/demo/client" />
+          <root url="file://$MODULE_DIR$/javamail/demo/webapp/src/taglib" />
+          <root url="file://$MODULE_DIR$/javamail/demo/webapp/src/classes" />
+          <root url="file://$MODULE_DIR$/javamail/demo/logging" />
+          <root url="file://$MODULE_DIR$/javamail/demo/outlook" />
+          <root url="file://$MODULE_DIR$/javamail/demo/servlet" />
+          <root url="file://$MODULE_DIR$/javamail/demo" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/javamail" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
 

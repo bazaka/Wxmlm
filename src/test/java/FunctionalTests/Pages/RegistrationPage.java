@@ -60,8 +60,9 @@ public class RegistrationPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.findElement(fullName).sendKeys(user.getFullName());
         driver.findElement(phone).sendKeys(user.getPhone());
-        driver.findElement(birth).sendKeys("1970-01-27");
         driver.findElement(agreement).click();
+        driver.findElement(birth).sendKeys("1970-01-27");
+
 
         //driver.findElement(register).click();
         //try {
