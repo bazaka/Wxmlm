@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.junit.Test;
@@ -15,19 +15,22 @@ import static org.junit.Assert.assertTrue;
 public class PutWithdrawsUpdate {
     @Test
     public boolean testPutWithdrawsUpdate(String scheme, TestUser user) throws IOException {
-        Withdraw originalWithdraw = new GetWithdraws().getAnyWithdraw(user, scheme);
+        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
+        if (originalOne == null) {
+            return false;
+        }
         String originalJson;
         String modifiedJson;
-        Withdraw modifiedWithdraw;
-        if (originalWithdraw.getMerchant().equals("ePayment")) {
-            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 10, originalWithdraw.getCreatedDate(), 3, originalWithdraw.getEpid() + "123", originalWithdraw.getMerchant());
-            originalJson = "[{\"id\":" + originalWithdraw.getId() + ", \"user_id\":" + originalWithdraw.getUserId() + ", \"merchant_id\":" + originalWithdraw.getMerchantId() + ", \"amount\":" + originalWithdraw.getAmount() + ", \"details\": { \"epid\": \"" + originalWithdraw.getEpid() + "\" }, \"created_date\": \"" + originalWithdraw.getCreatedDate() + "\", \"status\": " + originalWithdraw.getStatus() + " }]";
-            modifiedJson = "[{\"id\":" + modifiedWithdraw.getId() + ", \"user_id\":" + modifiedWithdraw.getUserId() + ", \"merchant_id\":" + modifiedWithdraw.getMerchantId() + ", \"amount\":" + modifiedWithdraw.getAmount() + ", \"details\": { \"epid\": \"" + modifiedWithdraw.getEpid() + "\" }, \"created_date\": \"" + modifiedWithdraw.getCreatedDate() + "\", \"status\": " + modifiedWithdraw.getStatus() + " }]";
+        Withdraw modifiedOne;
+        if (originalOne.getMerchant().equals("ePayment")) {
+            modifiedOne = new Withdraw(originalOne.getId(), originalOne.getUserId(), originalOne.getMerchantId(), originalOne.getOperationId(), originalOne.getAmount() + 10, originalOne.getCreatedDate(), 3, originalOne.getEpid() + "123", originalOne.getMerchant());
+            originalJson = "[{\"id\":" + originalOne.getId() + ", \"user_id\":" + originalOne.getUserId() + ", \"merchant_id\":" + originalOne.getMerchantId() + ", \"amount\":" + originalOne.getAmount() + ", \"details\": { \"epid\": \"" + originalOne.getEpid() + "\" }, \"created_date\": \"" + originalOne.getCreatedDate() + "\", \"status\": " + originalOne.getStatus() + " }]";
+            modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"user_id\":" + modifiedOne.getUserId() + ", \"merchant_id\":" + modifiedOne.getMerchantId() + ", \"amount\":" + modifiedOne.getAmount() + ", \"details\": { \"epid\": \"" + modifiedOne.getEpid() + "\" }, \"created_date\": \"" + modifiedOne.getCreatedDate() + "\", \"status\": " + modifiedOne.getStatus() + " }]";
         }
-        else if (originalWithdraw.getMerchant().equals("SWIFT")) {
-            modifiedWithdraw = new Withdraw(originalWithdraw.getId(), originalWithdraw.getUserId(), originalWithdraw.getMerchantId(), originalWithdraw.getOperationId(), originalWithdraw.getAmount() + 12, originalWithdraw.getCreatedDate(), 2, originalWithdraw.getSwiftName() + "123", originalWithdraw.getSwiftAddress() + "234", originalWithdraw.getBankName() + "345", originalWithdraw.getBankAddress() + "456", originalWithdraw.getAccountIban(), originalWithdraw.getSwiftCode() + "567", originalWithdraw.getMerchant());
-            originalJson = "[{\"id\":" + originalWithdraw.getId() + ", \"user_id\":" + originalWithdraw.getUserId() + ", \"merchant_id\":" + originalWithdraw.getMerchantId() + ", \"amount\":" + originalWithdraw.getAmount() + ", \"details\": { \"name\": \"" + originalWithdraw.getSwiftName() + "\", \"address\": \"" + originalWithdraw.getSwiftAddress() + "\", \"bankName\": \"" + originalWithdraw.getBankName() + "\", \"bankAddress\": \"" + originalWithdraw.getBankAddress() + "\", \"accountIban\": \"" + originalWithdraw.getAccountIban() + "\", \"swiftCode\": \"" + originalWithdraw.getSwiftCode() + "\" }, \"created_date\": \"" + originalWithdraw.getCreatedDate() + "\", \"status\": " + originalWithdraw.getStatus() + " }]";
-            modifiedJson = "[{\"id\":" + modifiedWithdraw.getId() + ", \"user_id\":" + modifiedWithdraw.getUserId() + ", \"merchant_id\":" + modifiedWithdraw.getMerchantId() + ", \"amount\":" + modifiedWithdraw.getAmount() + ", \"details\": { \"name\": \"" + modifiedWithdraw.getSwiftName() + "\", \"address\": \"" + modifiedWithdraw.getSwiftAddress() + "\", \"bankName\": \"" + modifiedWithdraw.getBankName() + "\", \"bankAddress\": \"" + modifiedWithdraw.getBankAddress() + "\", \"accountIban\": \"" + modifiedWithdraw.getAccountIban() + "\", \"swiftCode\": \"" + modifiedWithdraw.getSwiftCode() + "\" }, \"created_date\": \"" + modifiedWithdraw.getCreatedDate() + "\", \"status\": " + modifiedWithdraw.getStatus() + " }]";
+        else if (originalOne.getMerchant().equals("SWIFT")) {
+            modifiedOne = new Withdraw(originalOne.getId(), originalOne.getUserId(), originalOne.getMerchantId(), originalOne.getOperationId(), originalOne.getAmount() + 12, originalOne.getCreatedDate(), 2, originalOne.getSwiftName() + "123", originalOne.getSwiftAddress() + "234", originalOne.getBankName() + "345", originalOne.getBankAddress() + "456", originalOne.getAccountIban(), originalOne.getSwiftCode() + "567", originalOne.getMerchant());
+            originalJson = "[{\"id\":" + originalOne.getId() + ", \"user_id\":" + originalOne.getUserId() + ", \"merchant_id\":" + originalOne.getMerchantId() + ", \"amount\":" + originalOne.getAmount() + ", \"details\": { \"name\": \"" + originalOne.getSwiftName() + "\", \"address\": \"" + originalOne.getSwiftAddress() + "\", \"bankName\": \"" + originalOne.getBankName() + "\", \"bankAddress\": \"" + originalOne.getBankAddress() + "\", \"accountIban\": \"" + originalOne.getAccountIban() + "\", \"swiftCode\": \"" + originalOne.getSwiftCode() + "\" }, \"created_date\": \"" + originalOne.getCreatedDate() + "\", \"status\": " + originalOne.getStatus() + " }]";
+            modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"user_id\":" + modifiedOne.getUserId() + ", \"merchant_id\":" + modifiedOne.getMerchantId() + ", \"amount\":" + modifiedOne.getAmount() + ", \"details\": { \"name\": \"" + modifiedOne.getSwiftName() + "\", \"address\": \"" + modifiedOne.getSwiftAddress() + "\", \"bankName\": \"" + modifiedOne.getBankName() + "\", \"bankAddress\": \"" + modifiedOne.getBankAddress() + "\", \"accountIban\": \"" + modifiedOne.getAccountIban() + "\", \"swiftCode\": \"" + modifiedOne.getSwiftCode() + "\" }, \"created_date\": \"" + modifiedOne.getCreatedDate() + "\", \"status\": " + modifiedOne.getStatus() + " }]";
         }
         else {
             System.out.println("Bank details is missing in object");
@@ -41,8 +44,8 @@ public class PutWithdrawsUpdate {
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные обновились
-        Withdraw changedWithdraw = new GetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
-        assertTrue("Check modified data saved correctly", modifiedWithdraw.equalsExceptUpdatedDate(changedWithdraw));
+        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
+        assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne));
 
         // Содзаем URL
         httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
@@ -52,8 +55,8 @@ public class PutWithdrawsUpdate {
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedWithdraw = new GetWithdraws().getWithdrawByParameter("id", originalWithdraw.getId(), user, scheme);
-        assertTrue("Check modified data returned correctly", originalWithdraw.equalsExceptUpdatedDate(changedWithdraw));
+        changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
+        assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne));
         return true;
     }
 }

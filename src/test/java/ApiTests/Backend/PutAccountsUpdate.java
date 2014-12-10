@@ -1,7 +1,7 @@
 package ApiTests.Backend;
 
 import ApiTests.ObjectClasses.Account;
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
 import org.junit.After;
 import org.junit.Before;

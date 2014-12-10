@@ -1,5 +1,6 @@
 package FunctionalTests.Pages;
 
+import UsedByAll.Config;
 import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class RecoveryPage extends BasePage {
 
     public RecoveryPage(WebDriver driver){
         super(driver);
-        url = "http://staging.xmlm.t4web.com.ua/login/";
+        url = url + "login/";
     }
     public void sendRecoveryLink(TestUser testUser){
         WebDriverWait wait = new WebDriverWait(driver, 10);
