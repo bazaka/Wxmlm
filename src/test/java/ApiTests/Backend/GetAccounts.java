@@ -45,7 +45,7 @@ public class GetAccounts {
             assertTrue("Incorrect account_number", ValidationChecker.checkAccountNumberValue(object.getString("account_number")));
             assertTrue("Incorrect account_type", ValidationChecker.checkAccountTypeValue(object.getInt("account_type")));
             assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
-            assertTrue("Incorrect account_info", ValidationChecker.checkNotNull(object.getString("account_info")));
+            assertTrue("Incorrect account_info", ValidationChecker.checkStringNotNull(object.getString("account_info")));
             assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
             assertEquals("Incorrect count of Json parameters", object.length(), 8);

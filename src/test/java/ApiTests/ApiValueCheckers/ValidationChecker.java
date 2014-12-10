@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class ValidationChecker {
     // Null - NotNull
-    public static boolean checkNotNull(String str){return (str != null && !str.equals(""));}
+    public static boolean checkStringNotNull(String str){return (str != null && !str.equals(""));}
     public static boolean checkStringOrNull(Object str) {return str == null || str.toString().length() >= 0;}
 
     // ID

@@ -43,8 +43,8 @@ public class GetProducts {
             assertTrue("Incorrect category_id", ValidationChecker.checkIdValue(object.getInt("category_id")));
             assertTrue("Incorrect owner_id", ValidationChecker.checkIdValue(object.getInt("owner_id")));
             assertTrue("Incorrect creator_id", ValidationChecker.checkIdValue(object.getInt("creator_id")));
-            assertTrue("Incorrect title", ValidationChecker.checkNotNull(object.getString("title")));
-            assertTrue("Incorrect description", ValidationChecker.checkNotNull(object.getString("description")));
+            assertTrue("Incorrect title", ValidationChecker.checkStringNotNull(object.getString("title")));
+            assertTrue("Incorrect description", ValidationChecker.checkStringNotNull(object.getString("description")));
             assertTrue("Incorrect price", ValidationChecker.checkDoubleValue(object.getDouble("price")));
             assertTrue("Incorrect status", ValidationChecker.checkProductStatusId(object.getInt("status")));
             assertTrue("Incorrect type", ValidationChecker.checkProductTypeId(object.getInt("type")));
@@ -66,7 +66,7 @@ public class GetProducts {
         }
         return true;
     }
-    public int[] getProductsIDs(String scheme, TestUser user) throws Exception {
+    public static int[] getProductsIDs(String scheme, TestUser user) throws Exception {
         String url = "products/api/products/";
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();

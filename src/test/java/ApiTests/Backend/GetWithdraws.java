@@ -53,16 +53,16 @@ public class GetWithdraws {
             assertEquals("Incorrect count of Json parameters", object.length(), 8);
             JSONObject details = object.getJSONObject("details");
             if (details.has("epid")) {
-                assertTrue(ValidationChecker.checkNotNull(details.getString("epid")));
+                assertTrue(ValidationChecker.checkStringNotNull(details.getString("epid")));
                 assertEquals("Incorrect count of Bank details parameters", details.length(), 1);
             }
             else if (details.has("swiftCode")) {
-                assertTrue(ValidationChecker.checkNotNull(details.getString("name")));
+                assertTrue(ValidationChecker.checkStringNotNull(details.getString("name")));
                 assertTrue(ValidationChecker.checkStringOrNull(details.getString("address")));
-                assertTrue(ValidationChecker.checkNotNull(details.getString("bankName")));
+                assertTrue(ValidationChecker.checkStringNotNull(details.getString("bankName")));
                 assertTrue(ValidationChecker.checkStringOrNull(details.getString("bankAddress")));
-                assertTrue(ValidationChecker.checkNotNull(details.getString("accountIban")));
-                assertTrue(ValidationChecker.checkNotNull(details.getString("swiftCode")));
+                assertTrue(ValidationChecker.checkStringNotNull(details.getString("accountIban")));
+                assertTrue(ValidationChecker.checkStringNotNull(details.getString("swiftCode")));
                 assertEquals("Incorrect count of Bank details parameters", details.length(), 6);
                 }
         }

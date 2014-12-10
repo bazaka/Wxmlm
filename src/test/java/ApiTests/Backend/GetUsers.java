@@ -41,18 +41,18 @@ public class GetUsers {
 
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
             assertTrue("Incorrect surname", ValidationChecker.checkStringOrNull(object.get("surname").toString()));
-            assertTrue("Incorrect name", ValidationChecker.checkNotNull(object.getString("name")));
+            assertTrue("Incorrect name", ValidationChecker.checkStringNotNull(object.getString("name")));
             assertTrue("Incorrect patronymic",ValidationChecker.checkStringOrNull(object.get("patronymic").toString()));
-            assertTrue("Incorrect username",ValidationChecker.checkNotNull(object.getString("username")));
-            assertTrue("Incorrect password",ValidationChecker.checkNotNull(object.getString("password")));
-            assertTrue("Incorrect salt",ValidationChecker.checkNotNull(object.getString("salt")));
+            assertTrue("Incorrect username",ValidationChecker.checkStringNotNull(object.getString("username")));
+            assertTrue("Incorrect password",ValidationChecker.checkStringNotNull(object.getString("password")));
+            assertTrue("Incorrect salt",ValidationChecker.checkStringNotNull(object.getString("salt")));
             assertTrue("Incorrect countryId ",ValidationChecker.checkIdValue(object.getInt("country_id")));
             assertTrue("Incorrect languageId",ValidationChecker.checkIdOrNull(object.get("language_id")));
             assertTrue("Incorrect birthDate",ValidationChecker.checkDateTimeString(object.getString("birth_date")));
             assertTrue("Incorrect emailMain",ValidationChecker.checkEmail(object.getString("email_main")));
             assertTrue("Incorrect email2", ValidationChecker.checkStringOrNull(object.get("email2")) || ValidationChecker.checkEmail(object.getString("email2")));
             assertTrue("Incorrect email3", ValidationChecker.checkStringOrNull(object.get("email3")) || ValidationChecker.checkEmail(object.getString("email3")));
-            assertTrue("Incorrect phoneNumberMain ",ValidationChecker.checkNotNull(object.getString("phone_number_main")));
+            assertTrue("Incorrect phoneNumberMain ",ValidationChecker.checkStringNotNull(object.getString("phone_number_main")));
             assertTrue("Incorrect phoneNumber2 ",ValidationChecker.checkStringOrNull(object.get("phone_number2").toString()));
             assertTrue("Incorrect phoneNumber3",ValidationChecker.checkStringOrNull(object.get("phone_number3").toString()));
             assertTrue("Incorrect passportNumber",ValidationChecker.checkStringOrNull(object.get("passport_number").toString())); // зробити норм валідацію
@@ -63,7 +63,7 @@ public class GetUsers {
             assertTrue("Incorrect adress2",ValidationChecker.checkStringOrNull(object.get("adress2").toString()));
             assertTrue("Incorrect adress3",ValidationChecker.checkStringOrNull(object.get("adress3").toString()));
             assertTrue("Incorrect genderId",ValidationChecker.checkGenderId(object.getInt("gender_id")));
-            assertTrue("Incorrect invitationCode",ValidationChecker.checkNotNull(object.get("invitation_code").toString()));
+            assertTrue("Incorrect invitationCode",ValidationChecker.checkStringNotNull(object.get("invitation_code").toString()));
             assertTrue("Incorrect userStatusId",ValidationChecker.checkUserStatusId(object.getInt("user_status_id")));
             assertTrue("Incorrect createdDate", ValidationChecker.checkStringOrNull(object.get("created_date")) || ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect createdBy",ValidationChecker.checkIdOrNull(object.get("created_by")));
