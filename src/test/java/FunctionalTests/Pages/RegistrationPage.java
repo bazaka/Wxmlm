@@ -30,7 +30,7 @@ public class RegistrationPage extends BasePage {
 
     public RegistrationPage(WebDriver driver){
         super(driver);
-        url = "http://xm-654.xmlm.t4web.com.ua/login/";
+        url = "http://xm-650.xmlm.t4web.com.ua/login/";
     }
 
     public void openRegistration(){
@@ -71,7 +71,12 @@ public class RegistrationPage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(emailSent));
     }
 
-    public String confirmActivation(){
+
+    public String confirmActivation(String activationLink){
+        WebDriverWait wait = new WebDriverWait(driver, 25);
+        driver.get(activationLink);
+        wait.until(ExpectedConditions.presenceOfElementLocated(successConfirm));
+
         return (driver.findElement(successConfirm).getText());
     }
     public boolean isError(){

@@ -13,6 +13,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/5/2014.
  */
 public class LoginLogoutSingleTest extends LogInLogOutTest {
+
     @Test
     public void loginLogoutSingleTest(TestUser testUser){
         LogInPage loginPage = new LogInPage(driver);

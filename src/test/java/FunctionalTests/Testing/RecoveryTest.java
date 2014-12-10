@@ -38,8 +38,6 @@ public class RecoveryTest /*extends BaseTest */{
             }
         }
 
-
-
         System.out.println("RecoveryTest успешно пройден");
     }
 }
