@@ -1,9 +1,9 @@
 package ApiTests.Backend;
 
 
-import ApiTests.ApiValueCheckers.ValidationChecker;
-import ApiTests.ObjectClasses.MakeRequest;
 import ApiTests.ObjectClasses.Purchases;
+import ApiTests.UsedByAll.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
