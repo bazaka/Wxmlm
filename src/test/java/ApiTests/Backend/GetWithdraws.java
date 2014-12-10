@@ -1,7 +1,7 @@
 package ApiTests.Backend;
 
-import ApiTests.ApiValueCheckers.ValidationChecker;
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
+import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
@@ -37,7 +37,7 @@ public class GetWithdraws {
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
         if (jsonArr.length() == 0) {
-            System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
+            System.out.println("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
             return false;
         }
         for (int i = 0; i < jsonArr.length(); i++) {
@@ -83,6 +83,10 @@ public class GetWithdraws {
         br.close();
         try {
             JSONArray jsonArr = new JSONArray(result);
+            if (jsonArr.length() == 0) {
+                System.out.println("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
+                return null;
+            }
             JSONObject object = jsonArr.getJSONObject(0);
             JSONObject details = object.getJSONObject("details");
             if (details.has("epid"))
@@ -113,6 +117,10 @@ public class GetWithdraws {
         br.close();
         try {
             JSONArray jsonArr = new JSONArray(result);
+            if (jsonArr.length() == 0) {
+                System.out.println("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
+                return null;
+            }
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 JSONObject details = object.getJSONObject("details");

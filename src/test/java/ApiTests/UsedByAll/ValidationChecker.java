@@ -1,4 +1,4 @@
-package ApiTests.ApiValueCheckers;
+package ApiTests.UsedByAll;
 
 import UsedByAll.RegionMatch;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -6,7 +6,6 @@ import org.apache.commons.validator.routines.EmailValidator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ValidationChecker {
     // Null - NotNull

@@ -1,8 +1,9 @@
 package FunctionalTests.Testing.SingleTest;
 
-import FunctionalTests.Pages.GmailMessager;
+import UsedByAll.GmailMessager;
 import FunctionalTests.Pages.RegistrationPage;
 import FunctionalTests.Testing.RegistrationTest;
+import UsedByAll.Config;
 import UsedByAll.TestUser;
 import org.junit.Test;
 
@@ -23,7 +24,7 @@ public class RegistrationSingleTest extends RegistrationTest{
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
         GmailMessager gmailMessager = new GmailMessager();
-        String confirmLink = "http://xm-650.xmlm.t4web.com.ua/register/confirm/";
+        String confirmLink = Config.getConfig().getScheme() + "register/confirm/";
 
         String currentMessageTime="";
         String newMessageTime="";
@@ -47,7 +48,7 @@ public class RegistrationSingleTest extends RegistrationTest{
             try {
                 gmailMessager.initializePOP3(testUser);
                 newMessageTime = gmailMessager.getLastMessageTime(testUser);
-                System.out.println("New last message time: " +newMessageTime);
+                System.out.println("New last message time: " + newMessageTime);
             } catch (MessagingException e) {
                 e.printStackTrace();
             }

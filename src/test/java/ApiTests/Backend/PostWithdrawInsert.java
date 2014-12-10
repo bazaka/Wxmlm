@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
@@ -18,6 +18,9 @@ public class PostWithdrawInsert {
     @Test
     public boolean testPostWithdrawInsert(String scheme, TestUser user) throws IOException, JSONException {
         Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
+        if (originalOne == null) {
+            return false;
+        }
         Withdraw newOne;
         String newJson;
         if (originalOne.getMerchant().equals("ePayment")) {

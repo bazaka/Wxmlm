@@ -1,4 +1,4 @@
-package FunctionalTests.Pages;
+package UsedByAll;
 
 import UsedByAll.TestUser;
 

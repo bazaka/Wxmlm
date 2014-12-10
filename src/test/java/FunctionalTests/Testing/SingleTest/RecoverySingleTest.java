@@ -1,6 +1,7 @@
 package FunctionalTests.Testing.SingleTest;
 
-import FunctionalTests.Pages.GmailMessager;
+import UsedByAll.Config;
+import UsedByAll.GmailMessager;
 import FunctionalTests.Pages.RecoveryPage;
 import FunctionalTests.Testing.RecoveryTest;
 import UsedByAll.TestUser;
@@ -29,7 +30,7 @@ public class RecoverySingleTest extends RecoveryTest {
 
         RecoveryPage recoveryPage = new RecoveryPage(driver);
         GmailMessager gmailMessager = new GmailMessager();
-        String confirmLink = "http://staging.xmlm.t4web.com.ua/resetting/reset/";
+        String confirmLink = Config.getConfig().getScheme() + "resetting/reset/";
 
 
 

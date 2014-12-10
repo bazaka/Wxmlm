@@ -1,7 +1,7 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.DateForAPI;
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.DateForAPI;
+import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;

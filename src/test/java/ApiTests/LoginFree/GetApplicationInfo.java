@@ -1,7 +1,7 @@
 package ApiTests.LoginFree;
 
-import ApiTests.ApiValueCheckers.ValidationChecker;
-import ApiTests.ObjectClasses.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
+import ApiTests.UsedByAll.MakeRequest;
 import org.json.JSONObject;
 import org.junit.Test;
 

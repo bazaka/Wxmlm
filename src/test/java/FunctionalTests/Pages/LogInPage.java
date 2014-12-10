@@ -18,7 +18,7 @@ public class LogInPage extends BasePage {
 
     public LogInPage(WebDriver driver){
         super(driver);
-        url="http://xmlm.t4web.com.ua/login/";
+        url = url + "login/";
     }
 
     public void goLogin(TestUser user){

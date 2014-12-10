@@ -1,5 +1,6 @@
 package FunctionalTests.Pages;
 
+import UsedByAll.Config;
 import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +31,7 @@ public class RegistrationPage extends BasePage {
 
     public RegistrationPage(WebDriver driver){
         super(driver);
-        url = "http://xm-650.xmlm.t4web.com.ua/login/";
+        url = url + "login/";
     }
 
     public void openRegistration(){
@@ -60,8 +61,8 @@ public class RegistrationPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.findElement(fullName).sendKeys(user.getFullName());
         driver.findElement(phone).sendKeys(user.getPhone());
-        driver.findElement(birth).sendKeys("1970-01-27");
         driver.findElement(agreement).click();
+        driver.findElement(birth).sendKeys("1970-01-27");
 
         //driver.findElement(register).click();
         //try {
