@@ -6,7 +6,7 @@ import UsedByAll.TestUser;
 public class BackendAPITest {
     public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
-        // GET API users test run
+      /*  // GET API users test run
         if (new GetUsers().testGetUsers(scheme, user)) {
             System.out.println("Проверка API GET users пройдена");
         }
@@ -51,14 +51,14 @@ public class BackendAPITest {
             isComplete = false;
         }
 
-        // PUT API operation insert test run
+        // POST API operation insert test run
         if (new PostOperationInsert().testPostOperationInsert(scheme, user)) {
             System.out.println("Проверка API POST operation insert пройдена");
         }
         else {
             System.out.println("Проверка API POST operation insert НЕ пройдена");
             isComplete = false;
-        }
+        }*/
 
         // GET API purchases test run
         if (new GetPurchases().testGetPurchases(scheme, user)) {
@@ -68,8 +68,24 @@ public class BackendAPITest {
             System.out.println("Проверка API GET Purchases НЕ пройдена");
             isComplete = false;
         }
+        //PUT API Purchases test run
+        if (new PutPurchasesUpdate().testPutPurchasesUpdate(scheme, user)) {
+            System.out.println("Проверка API PUT purchases update пройдена");
+        }
+        else {
+            System.out.println("Проверка API PUT purchases update НЕ пройдена");
+            isComplete = false;
+        }
+        //POST API Purchases test run
+        if (new PostPurchasesInsert().testPostPurchasesInsert(scheme, user)) {
+            System.out.println("Проверка API POST purchases insert пройдена");
+        }
+        else {
+            System.out.println("Проверка API POST purchases insert НЕ пройдена");
+            isComplete = false;
+        }
 
-        // GET API withdraws test run
+     /*   // GET API withdraws test run
         if (new GetWithdraws().testGetWithdraws(scheme, user)) {
             System.out.println("Проверка API GET withdraws пройдена");
         }
@@ -104,7 +120,7 @@ public class BackendAPITest {
             System.out.println("Проверка API GET products НЕ пройдена");
             isComplete = false;
         }
-
+*/
         return isComplete;
     }
 }

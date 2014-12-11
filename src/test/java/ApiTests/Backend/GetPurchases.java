@@ -68,7 +68,7 @@ public class GetPurchases {
             result += line;
         }
         br.close();
-        System.out.println("rez " +result);
+
         JSONArray jsonArr = new JSONArray(result);
         assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
         JSONObject object = jsonArr.getJSONObject(0);
@@ -98,6 +98,7 @@ public class GetPurchases {
                     String terms = null;
                     if(object.get("terms") != null)
                         terms = object.get("terms").toString();
+                   // System.out.println(new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms));
                     return new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
                 }
 
