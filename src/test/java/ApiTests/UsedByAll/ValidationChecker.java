@@ -56,4 +56,5 @@ public class ValidationChecker {
     public static boolean checkEmail (String email) {return (EmailValidator.getInstance().isValid(email));}
     public static boolean checkURLOnDomain(String url, String domain){return RegionMatch.IsStringRegionMatch(url, domain);}
     public static boolean checkPositiveInt(int count){return count >= 0;}
+    public static boolean checkFileName(String fileName){return fileName.split("\\.")[0].length()>=1 && fileName.split("\\.")[1].length()>=3 && fileName.split("\\.")[1].length()<=4;}
 }

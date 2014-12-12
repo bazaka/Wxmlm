@@ -2,10 +2,12 @@ package ApiTests.UsedByAll;
 
 import UsedByAll.TestUser;
 import org.apache.commons.codec.binary.Base64;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Calendar;
+
 import static ApiTests.UsedByAll.DateForAPI.makeDateTimeString;
 
 public class MakeRequest{
@@ -57,4 +59,18 @@ public class MakeRequest{
         return httpCon;
     }
 
+    //Для GET-ов без авторизации и без параметро даты и лимита
+    public static HttpURLConnection getConnection(String scheme, TestUser user, String urlPart, String requestMethod) throws IOException {
+        String urlString = "http://" +scheme + urlPart;
+        //Создаем URL connection
+
+        String authString = user.getEmail() + ":" + user.getPassword1();
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        URL url = new URL(urlString);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpCon.setRequestMethod(requestMethod);
+        return httpCon;
+    }
 }

@@ -44,7 +44,7 @@ public class GetProducts {
             assertTrue("Incorrect owner_id", ValidationChecker.checkIdValue(object.getInt("owner_id")));
             assertTrue("Incorrect creator_id", ValidationChecker.checkIdValue(object.getInt("creator_id")));
             assertTrue("Incorrect title", ValidationChecker.checkStringNotNull(object.getString("title")));
-            assertTrue("Incorrect description", ValidationChecker.checkStringNotNull(object.getString("description")));
+            assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.get("description")));
             assertTrue("Incorrect price", ValidationChecker.checkDoubleValue(object.getDouble("price")));
             assertTrue("Incorrect status", ValidationChecker.checkProductStatusId(object.getInt("status")));
             assertTrue("Incorrect type", ValidationChecker.checkProductTypeId(object.getInt("type")));
@@ -54,10 +54,10 @@ public class GetProducts {
             if (object.getInt("category_id") == 1) {
                 assertTrue("Incorrect available", ValidationChecker.checkStringOrNull(attributes.get("available")) || ValidationChecker.checkPositiveInt(attributes.getInt("available")));
                 assertTrue("Incorrect discSpace", ValidationChecker.checkStringOrNull(attributes.getInt("discSpace")));
-                assertTrue("Incorrect timeOnline", ValidationChecker.checkPositiveInt(attributes.getInt("timeOnline")));
+                assertTrue("Incorrect timeOnline", ValidationChecker.checkStringOrNull(attributes.get("timeOnline")));
                 assertTrue("Incorrect basicIncome", ValidationChecker.checkPositiveInt(attributes.getInt("basicIncome")));
                 assertTrue("Incorrect basicIncomePeriod", ValidationChecker.checkPositiveInt(attributes.getInt("basicIncomePeriod")));
-                assertTrue("Incorrect profit", ValidationChecker.checkDoubleValue(attributes.getDouble("profit")));
+                assertTrue("Incorrect profit", (ValidationChecker.checkStringNotNull(attributes.getString("profit"))) || (ValidationChecker.checkDoubleValue(attributes.getDouble("profit"))));
                 assertTrue("Incorrect investmentPeriod", ValidationChecker.checkPositiveInt(attributes.getInt("investmentPeriod")));
                 assertTrue("Incorrect start", ValidationChecker.checkDateString(attributes.getString("start")));
                 assertEquals("Incorrect count of object additional attributes", attributes.length(), 8);

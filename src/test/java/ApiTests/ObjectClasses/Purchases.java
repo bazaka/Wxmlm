@@ -64,11 +64,11 @@ public class Purchases {
             System.out.println("4");
             return false;
         }
-
-       /* if(!getDate().equals(a.getDate())){
+/* if(!getDate().equals(a.getDate())){
                 System.out.println("5");
                 return false;
         }*/
+
         if(!getPrice().equals(a.getPrice())){
             System.out.println("6");
             return false;
