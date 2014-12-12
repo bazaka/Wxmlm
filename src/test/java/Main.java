@@ -1,4 +1,5 @@
-import FunctionalTests.*;
+import ApiTests.BackendAPITest;
+import ApiTests.LoginFreeAPITest;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RegionMatch;

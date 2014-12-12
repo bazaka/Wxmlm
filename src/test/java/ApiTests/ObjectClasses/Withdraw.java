@@ -4,21 +4,21 @@ import java.lang.Double;
 
 // * Created for W-xmlm by Fill on 01.12.2014.
 public class Withdraw {
-    public int id;
-    public int userId;
-    public int merchantId;
-    public int operationId;
-    public double amount;
-    public String createdDate;
-    public int status;
-    public String epid;
-    public String swiftName;
-    public String swiftAddress;
-    public String bankName;
-    public String bankAddress;
-    public String accountIban;
-    public String swiftCode;
-    public String merchant;
+    private int id;
+    private int userId;
+    private int merchantId;
+    private int operationId;
+    private double amount;
+    private String createdDate;
+    private int status;
+    private String epid;
+    private String swiftName;
+    private String swiftAddress;
+    private String bankName;
+    private String bankAddress;
+    private String accountIban;
+    private String swiftCode;
+    private String merchant;
 
     public Withdraw(int wId, int wUserId, int wMerchantId, int wOperationId, double wAmount, String wCreatedDate, int wStatus, String wEpid, String wMerchant)
     {

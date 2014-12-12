@@ -1,4 +1,4 @@
-package FunctionalTests;
+package ApiTests;
 
 import ApiTests.Backend.*;
 import UsedByAll.TestUser;
@@ -102,6 +102,14 @@ public class BackendAPITest {
         }
         else {
             System.out.println("Проверка API GET products НЕ пройдена");
+            isComplete = false;
+        }
+        // PUT API products update test run
+        if (new PutProductsSave().testPutProductsUpdate(scheme, user)) {
+            System.out.println("Проверка API PUT products update пройдена");
+        }
+        else {
+            System.out.println("Проверка API PUT products update НЕ пройдена");
             isComplete = false;
         }
 

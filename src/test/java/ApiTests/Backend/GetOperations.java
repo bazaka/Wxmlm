@@ -17,7 +17,7 @@ public class GetOperations {
 
     @Test
     public boolean testGetOperations(String scheme, TestUser user) throws Exception {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

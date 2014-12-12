@@ -1,5 +1,5 @@
 email, mailerURL, ePassword, fullName, password1, password2, newPassword1, newPassword2, phone, inviteCode, useInTest
-system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _LoginFreeAPI()_
+system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _1LoginFreeAPI()_
 system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _BackendAPI()_
 t4.webuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, User 02, 111111, 111111, 222222, 222222, 5555555, User01, _1RecoveryTest()_
 t4.webuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, User 02, 222222, 222222, 111111, 111111, 5555555, User01, _1RecoveryTest()_
