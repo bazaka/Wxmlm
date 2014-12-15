@@ -6,7 +6,7 @@ import UsedByAll.TestUser;
 public class BackendAPITest {
     public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
-        /*// GET API users test run
+        // GET API users test run
         if (new GetUsers().testGetUsers(scheme, user)) {
             System.out.println("Проверка API GET users пройдена");
         }
@@ -113,14 +113,14 @@ public class BackendAPITest {
         }
 
         // GET API products test run
-        if (new GetProducts().testGetProducts(scheme, user)) {
+/*        if (new GetProducts().testGetProducts(scheme, user)) {
             System.out.println("Проверка API GET products пройдена");
         }
         else {
             System.out.println("Проверка API GET products НЕ пройдена");
             isComplete = false;
-        }*/
-
+        }
+*/
         //GET API documents
         if (new GetDocuments().testGetDocuments(scheme, user)) {
             System.out.println("Проверка API GET documents пройдена");
@@ -130,6 +130,7 @@ public class BackendAPITest {
             isComplete = false;
         }
         //GET API documents/get
+
         if (new GetDocumentsById().testGetDocumentsById(scheme, user)) {
             System.out.println("Проверка API GET documents GET by ID пройдена");
         }
@@ -138,15 +139,16 @@ public class BackendAPITest {
             isComplete = false;
         }
         // PUT API products update test run
-        if (new PutProductsSave().testPutProductsUpdate(scheme, user)) {
+/*        if (new PutProductsSave().testPutProductsUpdate(scheme, user)) {
             System.out.println("Проверка API PUT products update пройдена");
         }
         else {
             System.out.println("Проверка API PUT products update НЕ пройдена");
             isComplete = false;
         }
-
+*/
         return isComplete;
+
 
 
 

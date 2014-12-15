@@ -55,7 +55,7 @@ public class RegistrationSingleTest extends RegistrationTest{
             count++;
             if (count == 100) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
-        String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, "Regards");
+        String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, " </p>");
 
         //registrationPage.confirmActivation(activationLink);
 
