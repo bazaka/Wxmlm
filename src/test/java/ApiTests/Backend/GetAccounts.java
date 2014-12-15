@@ -54,7 +54,7 @@ public class GetAccounts {
     }
 
     public Account getAnyAccount(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 50, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
