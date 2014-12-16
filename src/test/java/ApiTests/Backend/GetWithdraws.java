@@ -21,7 +21,7 @@ public class GetWithdraws {
 
     @Test
     public boolean testGetWithdraws(String scheme, TestUser user) throws Exception {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -70,7 +70,7 @@ public class GetWithdraws {
     }
 
     public Withdraw getAnyWithdraw(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -104,7 +104,7 @@ public class GetWithdraws {
     }
 
     public Withdraw getWithdrawByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 1, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

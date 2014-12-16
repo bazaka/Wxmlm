@@ -12,10 +12,10 @@ public class Product {
     private int status;
     private int type;
     private String createdDate;
-    private String imageUrl;
-    private String available;
-    private String discSpace;
-    private String timeOnline;
+    private Object imageUrl;
+    private Object available;
+    private Object discSpace;
+    private Object timeOnline;
     private int basicIncome;
     private int basicIncomePeriod;
     private double profit;
@@ -28,7 +28,7 @@ public class Product {
     private String quotaMeasurement;
     private int serviceId;
     // Constructors
-    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, String imageUrl, String available, String discSpace, String timeOnline, int basicIncome, int basicIncomePeriod, double profit, int investmentPeriod, String start)
+    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, Object imageUrl, Object available, Object discSpace, Object timeOnline, int basicIncome, int basicIncomePeriod, double profit, int investmentPeriod, String start)
     {
         this.setId(id);
         this.setCategoryId(categoryId);
@@ -50,7 +50,7 @@ public class Product {
         this.setInvestmentPeriod(investmentPeriod);
         this.setStart(start);
     }
-    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, String imageUrl, int[] requiredForTrial, String trialPeriod, String quotaPrefix, int quota, String quotaMeasurement, int serviceId)
+    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, Object imageUrl, int[] requiredForTrial, String trialPeriod, String quotaPrefix, int quota, String quotaMeasurement, int serviceId)
     {
         this.setId(id);
         this.setCategoryId(categoryId);
@@ -81,10 +81,10 @@ public class Product {
     public int getStatus() {return status;}
     public int getType() {return type;}
     public String getCreatedDate() {return createdDate;}
-    public String getImageUrl() {return imageUrl;}
-    public String getAvailable() {return available;}
-    public String getDiscSpace() {return discSpace;}
-    public String getTimeOnline() {return timeOnline;}
+    public Object getImageUrl() {return imageUrl;}
+    public Object getAvailable() {return available;}
+    public Object getDiscSpace() {return discSpace;}
+    public Object getTimeOnline() {return timeOnline;}
     public int getBasicIncome() {return basicIncome;}
     public int getBasicIncomePeriod() {return basicIncomePeriod;}
     public double getProfit() {return profit;}
@@ -109,10 +109,10 @@ public class Product {
     public void setStatus(int a) {this.status = a;}
     public void setType(int a) {this.type = a;}
     public void setCreatedDate(String a) {this.createdDate = a;}
-    public void setImageUrl(String a) {this.imageUrl = a;}
-    public void setAvailable(String a) {this.available = a;}
-    public void setDiscSpace(String a) {this.discSpace = a;}
-    public void setTimeOnline(String a) {this.timeOnline = a;}
+    public void setImageUrl(Object a) {this.imageUrl = a;}
+    public void setAvailable(Object a) {this.available = a;}
+    public void setDiscSpace(Object a) {this.discSpace = a;}
+    public void setTimeOnline(Object a) {this.timeOnline = a;}
     public void setBasicIncome(int a) {this.basicIncome = a;}
     public void setBasicIncomePeriod(int a) {this.basicIncomePeriod = a;}
     public void setProfit(double a) {this.profit = (double)((Math.round(a * 100))/100);}
@@ -178,21 +178,32 @@ public class Product {
             System.out.println("12");
             return false;
         }
-        if (!getImageUrl().equals(a.getImageUrl())) {
+        if (!(getImageUrl() == a.getImageUrl() || getImageUrl().equals(a.getImageUrl()))) {
+            System.out.println(getImageUrl() == a.getImageUrl());
+            System.out.println(getImageUrl().equals(a.getImageUrl()));
+            System.out.println(getImageUrl() == null && a.getImageUrl() == null);
+            System.out.println(getImageUrl() == null);
+            System.out.println(a.getImageUrl() == null);
+            System.out.println(getImageUrl().equals(null));
+            System.out.println(a.getImageUrl().equals(null));
+            System.out.println(getImageUrl());
+            System.out.println(a.getImageUrl());
             System.out.println("13");
             return false;
         }
         if (getCategoryId() == 1)
         {
-            if (!getAvailable().equals(a.getAvailable())) {
+            if (!(getAvailable() == a.getAvailable() || getAvailable().equals(a.getAvailable()))) {
+                System.out.println(getAvailable());
+                System.out.println(a.getAvailable());
                 System.out.println("14");
                 return false;
             }
-            if (!getDiscSpace().equals(a.getDiscSpace())) {
+            if (getDiscSpace() != a.getDiscSpace() && !getDiscSpace().equals(a.getDiscSpace())) {
                 System.out.println("15");
                 return false;
             }
-            if (!getTimeOnline().equals(a.getTimeOnline())) {
+            if (getTimeOnline() != a.getTimeOnline() && !getTimeOnline().equals(a.getTimeOnline())) {
                 System.out.println("16");
                 return false;
             }
@@ -229,6 +240,8 @@ public class Product {
                 return false;
             }
             if (!getQuotaPrefix().equals(a.getQuotaPrefix())) {
+                System.out.println(getQuotaPrefix());
+                System.out.println(a.getQuotaPrefix());
                 System.out.println("23");
                 return false;
             }
@@ -237,6 +250,8 @@ public class Product {
                 return false;
             }
             if (!getQuotaMeasurement().equals(a.getQuotaMeasurement())) {
+                System.out.println(getQuotaMeasurement());
+                System.out.println(a.getQuotaMeasurement());
                 System.out.println("25");
                 return false;
             }

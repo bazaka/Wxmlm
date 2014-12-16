@@ -24,7 +24,7 @@ public class GetPurchases {
     @Test
     public boolean testGetPurchases(String scheme, TestUser testUser) throws Exception{
 
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -57,7 +57,7 @@ public class GetPurchases {
     }
 
     public Purchases getAnyPurchase(TestUser testUser, String scheme) throws IOException, JSONException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -79,7 +79,7 @@ public class GetPurchases {
     }
 
     public Purchases getPurchaseByParameter(String parameterName, int parameterValue, TestUser testUser, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET" );
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET" );
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
