@@ -1,4 +1,4 @@
-package FunctionalTests;
+package ApiTests;
 
 import ApiTests.LoginFree.GetApplicationInfo;
 import ApiTests.LoginFree.GetModuleContent;
@@ -25,6 +25,7 @@ public class LoginFreeAPITest {
             System.out.println("Проверка API GET module info НЕ пройдена");
             isComplete = false;
         }
+        // GET module content test run
         if (new GetModuleContent().testGetModuleContent(scheme, user)) {
             System.out.println("Проверка API GET module content пройдена");
         }

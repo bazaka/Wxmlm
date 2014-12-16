@@ -24,8 +24,6 @@ public class PostPurchasesInsert {
         Purchases originalOne = new GetPurchases().getAnyPurchase(testUser, scheme);
         Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getPrice(), originalOne.getPaymentAmount()+777, originalOne.getStatus(), originalOne.getTerms() );
         String newJson = "{\"buyer_user_id\":" + newOne.getBuyerUserId() + ", \"product_id\":" + newOne.getProductId() + ", \"date\":" + "\"" + newOne.getDate() + "\"" + ", \"price\":" + newOne.getPrice() + ", \"payment_amount\":" + newOne.getPaymentAmount() + ", \"status\":" + newOne.getStatus() + ", \"terms\":" +newOne.getTerms()+"}";
-        System.out.println(newJson);
-        System.out.println("date: "+newOne.getDate());
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/purchase/insert/", "POST", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);

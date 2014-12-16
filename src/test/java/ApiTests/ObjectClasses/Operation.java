@@ -4,17 +4,17 @@ import java.lang.Double;
 
 // * Created for W-xmlm by Fill on 27.11.2014.
 public class Operation {
-    public int id;
-    public int targetAccountId;
-    public int sourceAccountId;
-    public String purchaseId;
-    public int initiatorUserId;
-    public String createdDate;
-    public String updatedDate;
-    public double amount;
-    public int status;
-    public int type;
-    public boolean quarantine;
+    private int id;
+    private int targetAccountId;
+    private int sourceAccountId;
+    private String purchaseId;
+    private int initiatorUserId;
+    private String createdDate;
+    private String updatedDate;
+    private double amount;
+    private int status;
+    private int type;
+    private boolean quarantine;
 
     public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine)
     {

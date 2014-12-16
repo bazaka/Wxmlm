@@ -1,4 +1,4 @@
-package FunctionalTests;
+package ApiTests;
 
 import ApiTests.Backend.*;
 import UsedByAll.TestUser;
@@ -6,7 +6,7 @@ import UsedByAll.TestUser;
 public class BackendAPITest {
     public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
-        /*// GET API users test run
+        // GET API users test run
         if (new GetUsers().testGetUsers(scheme, user)) {
             System.out.println("Проверка API GET users пройдена");
         }
@@ -76,6 +76,7 @@ public class BackendAPITest {
             System.out.println("Проверка API PUT purchases update НЕ пройдена");
             isComplete = false;
         }
+
         //POST API Purchases test run
         if (new PostPurchasesInsert().testPostPurchasesInsert(scheme, user)) {
             System.out.println("Проверка API POST purchases insert пройдена");
@@ -111,7 +112,6 @@ public class BackendAPITest {
             System.out.println("Проверка API POST withdraw insert НЕ пройдена");
             isComplete = false;
         }
-
         // GET API products test run
         if (new GetProducts().testGetProducts(scheme, user)) {
             System.out.println("Проверка API GET products пройдена");
@@ -119,9 +119,18 @@ public class BackendAPITest {
         else {
             System.out.println("Проверка API GET products НЕ пройдена");
             isComplete = false;
-        }*/
+        }
 
-        //GET API documents
+        // PUT API products update test run
+        if (new PutProductsSave().testPutProductsUpdate(scheme, user)) {
+            System.out.println("Проверка API PUT products update пройдена");
+        }
+        else {
+            System.out.println("Проверка API PUT products update НЕ пройдена");
+            isComplete = false;
+        }
+
+        //GET API documents test run
         if (new GetDocuments().testGetDocuments(scheme, user)) {
             System.out.println("Проверка API GET documents пройдена");
         }
@@ -129,7 +138,8 @@ public class BackendAPITest {
             System.out.println("Проверка API GET documents НЕ пройдена");
             isComplete = false;
         }
-        //GET API documents/get
+
+        //GET API documents by id test run
         if (new GetDocumentsById().testGetDocumentsById(scheme, user)) {
             System.out.println("Проверка API GET documents GET by ID пройдена");
         }
@@ -138,9 +148,24 @@ public class BackendAPITest {
             isComplete = false;
         }
 
+        // GET API config test run
+        if (new GetConfig().testGetConfig(scheme, user)) {
+            System.out.println("Проверка API GET config пройдена");
+        }
+        else {
+            System.out.println("Проверка API GET config НЕ пройдена");
+            isComplete = false;
+        }
+
+        // PUT API config update test run
+        if (new PutConfigUpdate().testPutConfigUpdate(scheme, user)) {
+            System.out.println("Проверка API PUT config update пройдена");
+        }
+        else {
+            System.out.println("Проверка API PUT config update НЕ пройдена");
+            isComplete = false;
+        }
+
         return isComplete;
-
-
-
     }
 }

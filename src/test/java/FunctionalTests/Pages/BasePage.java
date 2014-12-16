@@ -14,7 +14,6 @@ class BasePage {  //abstract class
     public BasePage(WebDriver driver){
         this.driver=driver;
     }
-
     public void open(){
         driver.get(url);
     }

@@ -41,7 +41,7 @@ public class GetDocumentsById {
             br.close();
 
             if(RegionMatch.IsStringRegionMatch(result, "<br />")){
-                System.out.println("Response contains html in its bode. Look: " +result);
+                System.out.println("Response contains html in its body. Look: " +result);
                 return false;
             }
             JSONObject object = new JSONObject(result);

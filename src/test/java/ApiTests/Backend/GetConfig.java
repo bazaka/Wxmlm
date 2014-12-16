@@ -1,24 +1,27 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Account;
+import ApiTests.ObjectClasses.Config;
 import ApiTests.UsedByAll.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
-import org.json.*;
-import ApiTests.UsedByAll.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-public class GetAccounts {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+public class GetConfig {
 
     @Test
-    public boolean testGetAccounts(String scheme, TestUser user) throws Exception {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 500, "GET");
+    public boolean testGetConfig(String scheme, TestUser user) throws Exception {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -40,21 +43,16 @@ public class GetAccounts {
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
-            assertTrue("Incorrect account_id", ValidationChecker.checkIdValue(object.getInt("account_id")));
-            assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect account_number", ValidationChecker.checkAccountNumberValue(object.getString("account_number")));
-            assertTrue("Incorrect account_type", ValidationChecker.checkAccountTypeValue(object.getInt("account_type")));
-            assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
-            assertTrue("Incorrect account_info", ValidationChecker.checkStringNotNull(object.getString("account_info")));
-            assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
-            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 8);
+            assertTrue("Incorrect account_id", ValidationChecker.checkIdValue(object.getInt("id")));
+            assertTrue("Incorrect user_id", ValidationChecker.checkStringNotNull(object.getString("name")));
+            assertTrue("Incorrect account_number", ValidationChecker.checkStringNotNull(object.getString("value")));
+            assertEquals("Incorrect count of Json parameters", object.length(), 3);
         }
         return true;
     }
 
-    public Account getAnyAccount(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 50, "GET");
+    public Config getAnyConfig(TestUser user, String scheme) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 50, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -68,15 +66,15 @@ public class GetAccounts {
         try {
             JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
-            return new Account(object.getInt("account_id"), object.getString("account_number"), object.getInt("account_type"), object.getBoolean("status"), object.getString("account_info"), object.getDouble("amount"));
+            return new Config(object.getInt("id"), object.getString("name"), object.getString("value"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Account getAccountByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 1, "GET");
+    public Config getConfigByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -92,7 +90,7 @@ public class GetAccounts {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Account(object.getInt("account_id"), object.getString("account_number"), object.getInt("account_type"), object.getBoolean("status"), object.getString("account_info"), object.getDouble("amount"));
+                    return new Config(object.getInt("id"), object.getString("name"), object.getString("value"));
                 }
             }
         } catch (Exception e) {
