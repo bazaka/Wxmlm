@@ -15,8 +15,9 @@ public class Operation {
     private int status;
     private int type;
     private boolean quarantine;
+    private Object parentOperationId;
 
-    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine)
+    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine, Object oParentOperationId)
     {
         this.setId(oId);
         this.setTargetAccountId(oTargetAccountId);
@@ -28,6 +29,7 @@ public class Operation {
         this.setStatus(oStatus);
         this.setType(oType);
         this.setQuarantine(oQuarantine);
+
     }
 
     public int getId() {return id;}
@@ -41,6 +43,7 @@ public class Operation {
     public int getStatus() {return status;}
     public int getType() {return type;}
     public boolean getQuarantine() {return quarantine;}
+    public Object getParentOperationId() {return parentOperationId;}
 
     public void setId(int a) {this.id = a;}
     public void setTargetAccountId(int a) {this.targetAccountId = a;}
@@ -53,6 +56,7 @@ public class Operation {
     public void setStatus(int a) {this.status = a;}
     public void setType(int a) {this.type = a;}
     public void setQuarantine(boolean a) {this.quarantine = a;}
+    public void setParentOperationId(Object a) {this.parentOperationId = a;}
 
     public boolean equalsExceptUpdatedDate(Operation a)
     {
@@ -103,6 +107,10 @@ public class Operation {
         }
         if (getQuarantine() != a.getQuarantine()) {
             System.out.println("10");
+            return false;
+        }
+        if (getParentOperationId() != a.getParentOperationId()) {
+            System.out.println("11");
             return false;
         }
         return true;
