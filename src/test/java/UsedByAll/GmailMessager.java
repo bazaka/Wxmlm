@@ -1,10 +1,5 @@
 package UsedByAll;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
 import javax.activation.DataHandler;
 import javax.mail.*;
 import java.io.IOException;
@@ -128,30 +123,28 @@ public class GmailMessager {
             System.err.println("Активационная ссылка не найдена");
 
         }
-        Document letter = Jsoup.parse(textMessage);
-        Elements links = letter.getElementsByTag("p");
-        for(Element link : links ){
-            System.out.println("link: "+link.text());
-        }
-        Elements test1 = letter.getElementsByAttributeValueEnding("p", requiredLink);
-        for(Element test : test1 ){
-            System.out.println("test: "+test.text());
-        }
+      /*  Document letter = Jsoup.parse(textMessage);
+        Elements link = letter.getElementsContainingText(requiredLink);
+        String letterText = link.text();
+        System.out.println("link: "+link.text());*/
+
         //System.out.println("activation jsoup: "+ letterByTag.toString());
 
+        System.out.println("dfg"+textMessage);
+   /*   int indexOf = letterText.lastIndexOf(requiredLink); // перший індекс -- початок лінку
 
-    //   int indexOf = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
+       int lastIndexOf = letterText.lastIndexOf(Separator, indexOf); // Separator - разделитель, для рековери - "Regards", для регистрейшн - " "
 
-      //  int lastIndexOf = textMessage.lastIndexOf(Separator, indexOf); // Separator - разделитель, для рековери - "Regards", для регистрейшн - " "
-
-      //  activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
-
+      System.out.println("indof "+letterText.indexOf(requiredLink));
+        System.out.println("lastind "+letterText.lastIndexOf(Separator, indexOf));
+       activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
+*/
         System.out.println("Received Date: " + message.getSentDate());
        // System.out.println("Activation link: " + activationLink);
 
         folder.close(false);
         store.close();
-        return links.toString();
+        return activationLink;
 
 
     }
