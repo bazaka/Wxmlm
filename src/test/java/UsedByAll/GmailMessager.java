@@ -1,5 +1,7 @@
 package UsedByAll;
 
+import org.jsoup.Jsoup;
+
 import javax.activation.DataHandler;
 import javax.mail.*;
 import java.io.IOException;
@@ -123,28 +125,17 @@ public class GmailMessager {
             System.err.println("Активационная ссылка не найдена");
 
         }
-      /*  Document letter = Jsoup.parse(textMessage);
-        Elements link = letter.getElementsContainingText(requiredLink);
-        String letterText = link.text();
-        System.out.println("link: "+link.text());*/
+        String plainText = Jsoup.parse(textMessage).text();
+        int i = plainText.indexOf(requiredLink);
+        String[] activationlink = plainText.substring(i).split(" ");
+        System.out.println("Activation link: "+ activationlink[0]);
 
-        //System.out.println("activation jsoup: "+ letterByTag.toString());
-
-        System.out.println("dfg"+textMessage);
-   /*   int indexOf = letterText.lastIndexOf(requiredLink); // перший індекс -- початок лінку
-
-       int lastIndexOf = letterText.lastIndexOf(Separator, indexOf); // Separator - разделитель, для рековери - "Regards", для регистрейшн - " "
-
-      System.out.println("indof "+letterText.indexOf(requiredLink));
-        System.out.println("lastind "+letterText.lastIndexOf(Separator, indexOf));
-       activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
-*/
         System.out.println("Received Date: " + message.getSentDate());
-       // System.out.println("Activation link: " + activationLink);
+
 
         folder.close(false);
         store.close();
-        return activationLink;
+        return activationlink[0];
 
 
     }
