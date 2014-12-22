@@ -50,7 +50,8 @@ public class GetOperations {
             assertTrue("Incorrect status", ValidationChecker.checkOperationStatusId(object.getInt("status")));
             assertTrue("Incorrect type", ValidationChecker.checkOperationTypeId(object.getInt("type")));
             assertTrue("Incorrect quarantine", ValidationChecker.checkBooleanValue(object.getBoolean("quarantine")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 11);
+            assertTrue("Incorrect parent_operation_id", ValidationChecker.checkIdOrNull(object.get("parent_operation_id")));
+            assertEquals("Incorrect count of Json parameters", object.length(), 12);
         }
         return true;
     }
@@ -73,7 +74,7 @@ public class GetOperations {
             String purchase_id = null;
             if (object.get("purchase_id") != null)
                 purchase_id = object.get("purchase_id").toString();
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"));
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -100,7 +101,7 @@ public class GetOperations {
                     String purchase_id = null;
                     if (object.get("purchase_id") != null)
                         purchase_id = object.get("purchase_id").toString();
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"));
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"));
                 }
             }
         } catch (Exception e) {

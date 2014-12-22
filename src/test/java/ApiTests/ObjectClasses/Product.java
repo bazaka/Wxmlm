@@ -193,9 +193,11 @@ public class Product {
         }
         if (getCategoryId() == 1)
         {
-            if (!(getAvailable() == a.getAvailable() || getAvailable().equals(a.getAvailable()))) {
+            if (!String.valueOf(getAvailable()).equals(String.valueOf(a.getAvailable()))) {
                 System.out.println(getAvailable());
                 System.out.println(a.getAvailable());
+                System.out.println(getAvailable().getClass());
+                System.out.println(a.getAvailable().getClass());
                 System.out.println("14");
                 return false;
             }
