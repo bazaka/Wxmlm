@@ -1,6 +1,6 @@
 package UsedByAll;
 
-import UsedByAll.TestUser;
+import org.jsoup.Jsoup;
 
 import javax.activation.DataHandler;
 import javax.mail.*;
@@ -114,6 +114,9 @@ public class GmailMessager {
         }
         //CharSequence searchLink = requiredLink; // CharSequence -- послідовність символів, requiredLink -- подаємо з тесту
 
+
+
+
         System.out.println("Message text: "+ textMessage);
         System.out.println("Required Link: "+ requiredLink);
         if (textMessage.contains(requiredLink)) {
@@ -122,18 +125,17 @@ public class GmailMessager {
             System.err.println("Активационная ссылка не найдена");
 
         }
-        int indexOf = textMessage.lastIndexOf(requiredLink); // перший індекс -- початок лінку
-       // int lastIndexOf = textMessage.lastIndexOf(" ");
-        int lastIndexOf = textMessage.lastIndexOf(Separator); // Separator - разделитель, для рековери - "Regards", для регистрейшн - " "
-
-        activationLink = textMessage.substring(indexOf, lastIndexOf).trim(); // trim - обрізає пробєли
+        String plainText = Jsoup.parse(textMessage).text();
+        int i = plainText.indexOf(requiredLink);
+        String[] activationlink = plainText.substring(i).split(" ");
+        System.out.println("Activation link: "+ activationlink[0]);
 
         System.out.println("Received Date: " + message.getSentDate());
-        System.out.println("Activation link: " + activationLink);
+
 
         folder.close(false);
         store.close();
-        return activationLink;
+        return activationlink[0];
 
 
     }
