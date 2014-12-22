@@ -112,6 +112,7 @@ public class BackendAPITest {
             System.out.println("Проверка API POST withdraw insert НЕ пройдена");
             isComplete = false;
         }
+
         // GET API products test run
         if (new GetProducts().testGetProducts(scheme, user)) {
             System.out.println("Проверка API GET products пройдена");
@@ -129,6 +130,7 @@ public class BackendAPITest {
             System.out.println("Проверка API PUT products update НЕ пройдена");
             isComplete = false;
         }
+
 
         //GET API documents test run
         if (new GetDocuments().testGetDocuments(scheme, user)) {
@@ -165,7 +167,6 @@ public class BackendAPITest {
             System.out.println("Проверка API PUT config update НЕ пройдена");
             isComplete = false;
         }
-
         return isComplete;
     }
 }

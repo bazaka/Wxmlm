@@ -201,11 +201,11 @@ public class Product {
                 System.out.println("14");
                 return false;
             }
-            if (getDiscSpace() != a.getDiscSpace() && !getDiscSpace().equals(a.getDiscSpace())) {
+            if (!String.valueOf(getDiscSpace()).equals(String.valueOf(a.getDiscSpace()))) {
                 System.out.println("15");
                 return false;
             }
-            if (getTimeOnline() != a.getTimeOnline() && !getTimeOnline().equals(a.getTimeOnline())) {
+            if (!String.valueOf(getTimeOnline()).equals(String.valueOf(a.getTimeOnline()))) {
                 System.out.println("16");
                 return false;
             }

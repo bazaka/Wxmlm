@@ -21,7 +21,7 @@ public class PutConfigUpdate {
         String modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"name\":\"" + modifiedOne.getName() + "\", \"value\": \"" + modifiedOne.getValue() + "\"}]";
 
         // Содзаем URL
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/config/update/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/update/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
@@ -31,7 +31,7 @@ public class PutConfigUpdate {
         assertTrue("Check modified data saved correctly", modifiedOne.equals(changedConfig));
 
         // Содзаем URL
-        httpCon = MakeRequest.getConnection(scheme, user, "config/api/config/update/", "PUT", "application/json", "application/json", true);
+        httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/update/", "PUT", "application/json", "application/json", true);
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();

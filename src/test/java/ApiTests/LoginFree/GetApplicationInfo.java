@@ -5,6 +5,7 @@ import ApiTests.UsedByAll.MakeRequest;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
