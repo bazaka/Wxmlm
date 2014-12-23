@@ -1,5 +1,8 @@
 import ApiTests.BackendAPITest;
 import ApiTests.LoginFreeAPITest;
+import FunctionalTests.Testing.LogInLogOutTest;
+import FunctionalTests.Testing.RecoveryTest;
+import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RegionMatch;
@@ -60,6 +63,45 @@ public class Main
                 catch (Exception e) { e.printStackTrace();
                     System.out.println("Проверка Backend API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
+            }
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
+                RecoveryTest newRecoveryTest = new RecoveryTest();
+
+                try {
+                    newRecoveryTest.recoveryTest();
+                    System.out.println("RecoveryTest успешно пройден");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("RecoveryTest НЕ пройден");
+                }
+
+            }
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RegistrationTest(")) {
+               RegistrationTest newRegistrationTest = new RegistrationTest();
+
+                try {
+                    newRegistrationTest.registrationTest();
+                    System.out.println("Registration Test успешно пройден");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Registration Test НЕ пройден");
+                }
+
+            }
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LogInLogOutTest(")) {
+                LogInLogOutTest newLoginLogoutTest = new LogInLogOutTest();
+
+                try {
+                    newLoginLogoutTest.logInLogOutTest();
+                    System.out.println("LoginLogout Test успешно пройден");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("LoginLogout Test НЕ пройден");
+                }
+
             }
             System.out.println("Закончил тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName());
         }

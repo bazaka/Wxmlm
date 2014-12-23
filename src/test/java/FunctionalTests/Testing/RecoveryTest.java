@@ -21,23 +21,22 @@ public class RecoveryTest /*extends BaseTest */{
 
     @Test
     public void recoveryTest() throws IOException, MessagingException {
-        System.out.println("Начинаю инициализацию RecoveryTest");
-        RecoverySingleTest recoverySingleTest = new RecoverySingleTest();
-        TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
-        assertNotEquals("Нет пользователей для тестирования. Закрываюсь", testUser.length, 0);
-        System.out.println("Начинаю тестирование");
-        for (int i = 0; i < testUser.length; i++) {
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest("))
-            {
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                recoverySingleTest.recoverySingleTest(testUser[i]);
-                if(driver!=null)
-                    driver.quit();
 
+            System.out.println("Начинаю инициализацию RecoveryTest");
+            RecoverySingleTest recoverySingleTest = new RecoverySingleTest();
+            TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
+            assertNotEquals("Нет пользователей для тестирования. Закрываюсь", testUser.length, 0);
+            System.out.println("Начинаю тестирование");
+            for (int i = 0; i < testUser.length; i++) {
+                if (RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
+                    driver = new FirefoxDriver();
+                    driver.manage().window().maximize();
+                    recoverySingleTest.recoverySingleTest(testUser[i]);
+                    if (driver != null)
+                        driver.quit();
+
+                }
             }
-        }
-
-        System.out.println("RecoveryTest успешно пройден");
+            System.out.println("RecoveryTest успешно пройден");
     }
 }
