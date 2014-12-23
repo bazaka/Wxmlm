@@ -22,7 +22,7 @@ public class GmailMessager {
 
 
 
-        System.out.println("Начинаю соединение с Gmail через POP3");
+        //System.out.println("Начинаю соединение с Gmail через POP3");
         Properties pop3Props = new Properties();
 
         pop3Props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
@@ -54,12 +54,12 @@ public class GmailMessager {
             folder.open(Folder.READ_ONLY);
         }
         Message[] messages = folder.getMessages();
-        System.out.println("Messages.length: " + (messages.length-1));
+        //System.out.println("Messages.length: " + (messages.length-1));
 
             Message message = messages[messages.length-1];
-            System.out.println("Email Number " + (messages.length-1));
-            System.out.println("Subjet: " + message.getSubject());
-            System.out.println("Received Date " + message.getSentDate());
+            //System.out.println("Email Number " + (messages.length-1));
+            //System.out.println("Subjet: " + message.getSubject());
+            //System.out.println("Received Date " + message.getSentDate());
             // System.out.println("Text: "+ message.getContent().toString());
             String detectMessageTime = message.getSentDate().toString();
         folder.close(false);
@@ -80,12 +80,12 @@ public class GmailMessager {
             folder.open(Folder.READ_ONLY);
         }
         Message[] messages = folder.getMessages();
-        System.out.println("Messages.length: " + (messages.length-1));
+        //System.out.println("Messages.length: " + (messages.length-1));
 
         Message message = messages[messages.length-1];
 
         String messageSubject = message.getSubject();
-        System.out.println("Subject: " + messageSubject);// Subject повідомлення
+        //System.out.println("Subject: " + messageSubject);// Subject повідомлення
 
         if(!messageSubject.contains(requiredSubject))
             System.err.println("Неверная тема сообщения");
@@ -103,9 +103,9 @@ public class GmailMessager {
 
                 String disposition = bodyPart.getDisposition(); // disposition -- расположение
                 if (disposition != null && (disposition.equals(BodyPart.ATTACHMENT))) {
-                    System.out.println("Mail have some attachment");
+                    //System.out.println("Mail have some attachment");
                     DataHandler handler = bodyPart.getDataHandler();
-                    System.out.println("file name: " + handler.getName()); //зберегти attachment в файл
+                   // System.out.println("file name: " + handler.getName()); //зберегти attachment в файл
                 }else {
                     textMessage = bodyPart.getContent() != null ? textMessage = bodyPart.getContent().toString() : ""; // мультіпарт в текст
                 }
@@ -117,20 +117,17 @@ public class GmailMessager {
 
 
 
-        System.out.println("Message text: "+ textMessage);
-        System.out.println("Required Link: "+ requiredLink);
-        if (textMessage.contains(requiredLink)) {
-            System.out.println("Письмо содержит активационную ссылку");
-        }else {
-            System.err.println("Активационная ссылка не найдена");
+       // System.out.println("Message text: "+ textMessage);
+        //System.out.println("Required Link: "+ requiredLink);
+        if (!textMessage.contains(requiredLink))
+            System.out.println("Активационная ссылка не найдена");
 
-        }
         String plainText = Jsoup.parse(textMessage).text();
         int i = plainText.indexOf(requiredLink);
         String[] activationlink = plainText.substring(i).split(" ");
         System.out.println("Activation link: "+ activationlink[0]);
 
-        System.out.println("Received Date: " + message.getSentDate());
+        //System.out.println("Received Date: " + message.getSentDate());
 
 
         folder.close(false);

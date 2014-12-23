@@ -36,7 +36,7 @@ public class RegistrationSingleTest extends RegistrationTest{
         try {
             gmailMessager.initializePOP3(testUser);
             currentMessageTime = gmailMessager.getLastMessageTime(testUser);
-            System.out.println("Current last message time: " + currentMessageTime);
+           // System.out.println("Current last message time: " + currentMessageTime);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -51,12 +51,12 @@ public class RegistrationSingleTest extends RegistrationTest{
             try {
                 gmailMessager.initializePOP3(testUser);
                 newMessageTime = gmailMessager.getLastMessageTime(testUser);
-                System.out.println("New last message time: " + newMessageTime);
+                //System.out.println("New last message time: " + newMessageTime);
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
             count++;
-            if (count == 100) break;
+            if (count == 30) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
         String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, " ");
 
@@ -65,9 +65,9 @@ public class RegistrationSingleTest extends RegistrationTest{
 
         assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
 
-        assertEquals("Current value not null", profilePage.getCurrentValue(), 0);
-        assertEquals("Bonus value not null", profilePage.getBonusesValue(), 0);
-        assertEquals("Salary value not null", profilePage.getSalaryValue(), 0);
+        assertEquals("Current value not 0", profilePage.getCurrentValue(), 0);
+        assertEquals("Bonus value not 0", profilePage.getBonusesValue(), 0);
+        assertEquals("Salary value not 0", profilePage.getSalaryValue(), 0);
 
 
 
@@ -81,6 +81,7 @@ public class RegistrationSingleTest extends RegistrationTest{
         assertEquals("Not same career", profilePage.getCareer(), "None");
         assertEquals("Not same status", profilePage.getStatus(), "Potential");
         assertEquals("Not same identification", profilePage.getIdentification(), "Not Approved");
+        assertEquals("Not same invite code", profilePage.getInviteCode(), "You have not permissions to view the invite code.");
 
 
         System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");

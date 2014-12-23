@@ -20,6 +20,7 @@ public class ProfilePage extends BasePage {
     private static final By current = By.xpath("//div[@class='user-wallets']/div[1]/div/div/h1");
     private static final By bonuses = By.xpath("//div[@class='user-wallets']/div[2]/div/div/h1");
     private static final By salary = By.xpath("//div[@class='user-wallets']/div[3]/div/div/h1");
+    private static final By inviteCode = By.xpath("//div[@class='row']//div[@class='invite-in-profile']/table/tbody/tr/td[2]");
     private static final By career = By.xpath("//body//div[@class='row']/div[3]/table/tbody/tr[3]/td[2]/abbr");
     private static final By status = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[1]/td[2]/abbr");
     private static final By identification = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[2]/td[2]/abbr");
@@ -58,4 +59,5 @@ public class ProfilePage extends BasePage {
     public String getCareer() { return driver.findElement(career).getText(); }
     public String getStatus() { return driver.findElement(status).getText(); }
     public String getIdentification() {return driver.findElement(identification).getText(); }
+    public String getInviteCode(){return driver.findElement(inviteCode).getText();}
 }
