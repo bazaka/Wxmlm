@@ -1,20 +1,27 @@
 package UsedByAll;
 
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Config {
     private String scheme;
+    private boolean isHttpsConnection;
 
     public void setScheme(String a)
     { this.scheme = a; }
+    public void setIsHttpsConnection(boolean a)
+    { this.isHttpsConnection = a; }
     public String getScheme()
     { return scheme; }
+    public boolean getIsHttpsConnection()
+    { return isHttpsConnection; }
 
-    public Config(String scheme){
+    public Config(String scheme, boolean isHttpsConnection){
         this.setScheme(scheme);
+        this.setIsHttpsConnection(isHttpsConnection);
     }
 
     public static Config getConfig()
@@ -23,10 +30,16 @@ public class Config {
         try {
             // Читаем конфиг
             FileReader reader = new FileReader("src/Config.json");
-            JSONParser jsonParser = new JSONParser();
-            JSONObject object = (JSONObject) jsonParser.parse(reader);
+            BufferedReader br = new BufferedReader(reader);
+            String result = "";
+            String line;
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            br.close();
+            JSONObject object = new JSONObject(result);
             // Отдаем конфиг
-            return new Config(object.get("scheme").toString());
+            return new Config(object.getString("scheme"), object.getBoolean("isHttpsConnection"));
             }
         catch (Exception e){
             System.out.println("File not found. Exception: " + e);
