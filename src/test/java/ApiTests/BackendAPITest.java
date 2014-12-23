@@ -7,7 +7,6 @@ public class BackendAPITest {
     public boolean runBackendAPITests(String scheme, TestUser user) throws Exception {
         boolean isComplete = true;
         // GET API users test run
-/*
         if (new GetUsers().testGetUsers(scheme, user)) {
             System.out.println("Проверка API GET users пройдена");
         }
@@ -113,7 +112,6 @@ public class BackendAPITest {
             System.out.println("Проверка API POST withdraw insert НЕ пройдена");
             isComplete = false;
         }
-*/
         // GET API products test run
         if (new GetProducts().testGetProducts(scheme, user)) {
             System.out.println("Проверка API GET products пройдена");
@@ -134,7 +132,7 @@ public class BackendAPITest {
 
 
 // Раскомментировать, когда АПИ продуктов будет возвражать все продукты
-
+/*
         // PUT API products insert test run
         if (new PutProductsSave().testPutProductsInsert(scheme, user)) {
             System.out.println("Проверка API PUT products insert пройдена");
@@ -143,8 +141,9 @@ public class BackendAPITest {
             System.out.println("Проверка API PUT products insert НЕ пройдена");
             isComplete = false;
         }
+*/
 
-/*        //GET API documents test run
+        //GET API documents test run
         if (new GetDocuments().testGetDocuments(scheme, user)) {
             System.out.println("Проверка API GET documents пройдена");
         }
@@ -178,7 +177,7 @@ public class BackendAPITest {
         else {
             System.out.println("Проверка API PUT config update НЕ пройдена");
             isComplete = false;
-        }*/
+        }
         return isComplete;
     }
 }
