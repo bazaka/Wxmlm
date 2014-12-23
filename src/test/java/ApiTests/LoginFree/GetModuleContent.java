@@ -23,7 +23,6 @@ public class GetModuleContent {
     public boolean testGetModuleContent(String scheme, TestUser user) throws Exception {
         int[] ids = GetProducts.getProductsIDs(scheme, user);
         for (int i = 0; i < (ids.length - 1); i++) {
-            System.out.println("id: " + ids[i]);
             // Создаем соединение
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-content/?product_id=" + ids[i], "GET");
 
