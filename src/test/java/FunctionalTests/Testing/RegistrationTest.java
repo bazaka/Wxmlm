@@ -39,7 +39,7 @@ public class RegistrationTest{
                     driver.quit();
             }
         }
-        System.out.println("RegistraionTest успешно пройден");
+        System.out.println("RegistrationTest успешно пройден");
 
 
 

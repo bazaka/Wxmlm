@@ -6,6 +6,7 @@ import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
 import UsedByAll.GmailMessager;
 import UsedByAll.TestUser;
+import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Test;
 
@@ -82,6 +83,8 @@ public class RegistrationSingleTest extends RegistrationTest{
         assertEquals("Not same status", profilePage.getStatus(), "Potential");
         assertEquals("Not same identification", profilePage.getIdentification(), "Not Approved");
         assertEquals("Not same invite code", profilePage.getInviteCode(), "You have not permissions to view the invite code.");
+
+        Assert.assertEquals("Not same country", profilePage.getCountry(), "Afghanistan");
 
 
         System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");

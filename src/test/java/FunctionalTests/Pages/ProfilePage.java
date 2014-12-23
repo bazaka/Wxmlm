@@ -24,6 +24,8 @@ public class ProfilePage extends BasePage {
     private static final By career = By.xpath("//body//div[@class='row']/div[3]/table/tbody/tr[3]/td[2]/abbr");
     private static final By status = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[1]/td[2]/abbr");
     private static final By identification = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[2]/td[2]/abbr");
+    private static final By documents = By.xpath("//div[@class='tabbable']/ul/li/a[text()='Documents']");
+    private static final By country = By.xpath("//select[@id='xmlm_bundle_userbundle_document_citizen']/option[@selected='selected']");
 
     public ProfilePage(WebDriver driver){
         super(driver);
@@ -60,4 +62,12 @@ public class ProfilePage extends BasePage {
     public String getStatus() { return driver.findElement(status).getText(); }
     public String getIdentification() {return driver.findElement(identification).getText(); }
     public String getInviteCode(){return driver.findElement(inviteCode).getText();}
+
+    public String getCountry(){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        driver.findElement(documents).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(country));
+        return driver.findElement(country).getText();
+
+    }
 }
