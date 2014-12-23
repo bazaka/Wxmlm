@@ -6,7 +6,6 @@ import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
 import UsedByAll.GmailMessager;
 import UsedByAll.TestUser;
-import org.junit.After;
 import org.junit.Test;
 
 import javax.mail.MessagingException;
@@ -87,9 +86,5 @@ public class RegistrationSingleTest extends RegistrationTest{
 
 
     }
-    @After
-    public void tearDown(){
-        if(driver!=null)
-            driver.quit();
-    }
+
 }
