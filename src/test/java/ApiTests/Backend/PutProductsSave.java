@@ -107,7 +107,7 @@ public class PutProductsSave {
             imageUrlModString = "\"" + originalOne.getImageUrl() + "\"";
         }
         if (originalOne.getCategoryId() == 1) {
-            newOne = new Product(originalOne.getId(), 4, originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), 41, originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getAvailable(), originalOne.getDiscSpace(), originalOne.getTimeOnline(), originalOne.getBasicIncome(), originalOne.getBasicIncomePeriod(), originalOne.getProfit(), originalOne.getInvestmentPeriod(), originalOne.getStart());
+            newOne = new Product(originalOne.getId() + 30, 4, originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), 41, originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getAvailable(), originalOne.getDiscSpace(), originalOne.getTimeOnline(), originalOne.getBasicIncome(), originalOne.getBasicIncomePeriod(), originalOne.getProfit(), originalOne.getInvestmentPeriod(), originalOne.getStart());
             newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + newOne.getAvailable() + ", \"discSpace\": " + newOne.getDiscSpace() + ", \"timeOnline\": " + newOne.getTimeOnline() + ", \"basicIncome\": " + newOne.getBasicIncome() + ", \"basicIncomePeriod\": " + newOne.getBasicIncomePeriod() + ", \"profit\": " + newOne.getProfit() + ", \"investmentPeriod\": " + newOne.getInvestmentPeriod() + ", \"start\": \"" + newOne.getStart() + "\"}}]";
         }
         else if (originalOne.getCategoryId() == 2) {
@@ -132,7 +132,7 @@ public class PutProductsSave {
             System.out.println("Unrecognised category_id");
             return false;
         }
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/purchase/insert/", "POST", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
@@ -150,9 +150,10 @@ public class PutProductsSave {
         //берем из респонса id новой операции
         JSONObject response = new JSONObject(result);
         JSONArray reports = response.getJSONArray("reports");
-        JSONObject report = reports.getJSONObject(0);
-        int newOneId = report.getInt("id");
-
+        String report = reports.getString(0);
+        System.out.println(report);
+        int newOneId = Integer.parseInt(report.replaceAll("[\\D]", ""));
+        System.out.println("newOneId: " + newOneId);
 
         //Проверяем Get-запросом, что данный обновились
         Product changedOne = new GetProducts().getProductByParameter("id", newOneId, testUser, scheme);
