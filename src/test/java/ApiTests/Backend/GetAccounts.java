@@ -19,7 +19,7 @@ public class GetAccounts {
 
     @Test
     public boolean testGetAccounts(String scheme, TestUser user) throws Exception {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
