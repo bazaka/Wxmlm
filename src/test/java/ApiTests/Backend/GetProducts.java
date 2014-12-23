@@ -135,7 +135,6 @@ public class GetProducts {
                 int[] requiredForTrial = new int[requiredForTrialArray.length()];
                 for (int i = 0; i < requiredForTrialArray.length(); i++){
                     requiredForTrial[i] = requiredForTrialArray.optInt(i);
-                    System.out.println("ids[" + (i + 1) + "] = " + requiredForTrial[i]);
                 }
                 return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), requiredForTrial, attributes.getString("trialPeriod"), attributes.getString("quotaPrefix"), attributes.getInt("quota"), attributes.getString("quotaMeasurement"), attributes.getInt("serviceId"));
             }
@@ -178,7 +177,6 @@ public class GetProducts {
                         int[] requiredForTrial = new int[requiredForTrialArray.length()];
                         for (int a = 0; a < requiredForTrialArray.length(); a++){
                             requiredForTrial[a] = requiredForTrialArray.optInt(a);
-                            System.out.println("ids[" + (a + 1) + "] = " + requiredForTrial[a]);
                         }
                         return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), requiredForTrial, attributes.getString("trialPeriod"), attributes.getString("quotaPrefix"), attributes.getInt("quota"), attributes.getString("quotaMeasurement"), attributes.getInt("serviceId"));
                     }

@@ -126,7 +126,7 @@ public class Product {
     public void setQuotaMeasurement(String a) {this.quotaMeasurement = a;}
     public void setServiceId(int a) {this.serviceId = a;}
 
-    public boolean equalsExceptUpdatedDate(Product a)
+    public boolean equalsExceptUpdatedDate(Product a, boolean toCheckCreatedDate)
     {
         if (this == a)
             return true;
@@ -174,7 +174,7 @@ public class Product {
             System.out.println("11");
             return false;
         }
-        if (!getCreatedDate().equals(a.getCreatedDate())) {
+        if (toCheckCreatedDate && !getCreatedDate().equals(a.getCreatedDate())) {
             System.out.println("12");
             return false;
         }

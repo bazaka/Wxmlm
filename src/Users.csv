@@ -1,20 +1,9 @@
 email, mailerURL, ePassword, fullName, password1, password2, newPassword1, newPassword2, phone, inviteCode, useInTest
-system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _LoginFreeAPI()_
 system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _BackendAPI()_
+system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _1LoginFreeAPI()_
 t4.webuser02@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser02, User 02, 111111, 111111, 222222, 222222, 5555555, kairos, _1RecoveryTest()_
 t4w.ebuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_
-t4w.ebuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RecoveryTest()_
+t4w.ebuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_
+t4we.buser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_
 t4w.ebuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 222222, 222222, 111111, 111111, 5555555, kairos, _1RecoveryTest()_
 t4w.ebuser01@gmail.com, https://mail.google.com/mail/u/0/?pli=1#inbox, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1LogInTest()_
-
-
-t.4webuser01@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4.webuser03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4w.ebuser03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4we.buser03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4web.user03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4webu.ser03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4webus.er03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4webuse.r03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _1RegistrationTest()_
-t4webuser.03@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _RegistrationTest()_
-t4webuser0.3@gmail.com, , t4t4webuser03, kairos, 111111, 111111, 222222, 222222, 5555555, 5ffa2e, _RegistrationTest()_
