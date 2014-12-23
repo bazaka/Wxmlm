@@ -6,6 +6,7 @@ import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
 import UsedByAll.GmailMessager;
 import UsedByAll.TestUser;
+import org.junit.After;
 import org.junit.Test;
 
 import javax.mail.MessagingException;
@@ -23,9 +24,10 @@ public class RegistrationSingleTest extends RegistrationTest{
     public void registrationSingleTest(TestUser testUser) throws IOException, MessagingException {
 
 
+        ProfilePage profilePage = new ProfilePage(driver);
         RegistrationPage registrationPage = new RegistrationPage(driver);
         GmailMessager gmailMessager = new GmailMessager();
-        ProfilePage profilePage = new ProfilePage(driver);
+
 
         String confirmLink = Config.getConfig().getScheme() + "register/confirm/";
 
@@ -58,21 +60,16 @@ public class RegistrationSingleTest extends RegistrationTest{
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
         String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, " ");
 
-       // registrationPage.confirmActivation(activationLink);
 
 
-      /*  gmailPage.checkConfirmLetter(testUser, "To finish activating your account");
-
-        driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.TAB);//change tab
-        ArrayList<String> newtabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(newtabs.get(0)); //switch tab*//*
- */
 
         assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
 
         assertEquals("Current value not null", profilePage.getCurrentValue(), 0);
         assertEquals("Bonus value not null", profilePage.getBonusesValue(), 0);
         assertEquals("Salary value not null", profilePage.getSalaryValue(), 0);
+
+
 
         profilePage.goProfilePage();
 
@@ -89,5 +86,10 @@ public class RegistrationSingleTest extends RegistrationTest{
         System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
 
 
+    }
+    @After
+    public void tearDown(){
+        if(driver!=null)
+            driver.quit();
     }
 }
