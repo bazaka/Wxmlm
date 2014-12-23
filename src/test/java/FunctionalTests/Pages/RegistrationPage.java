@@ -1,6 +1,5 @@
 package FunctionalTests.Pages;
 
-import UsedByAll.Config;
 import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -26,7 +25,7 @@ public class RegistrationPage extends BasePage {
    // private static final By emailSent = By.xpath("//div[contains(., 'An email has been sent to')]\\");
     private static final By emailSent = By.className("step-content");
     private static final By successConfirm = By.xpath("//div[@id='main-modal-window-confirmed-email']//p[contains(text(), 'Congrats')]");
-
+    private static final By closeActivationAlert = By.xpath("//div[@id='main-modal-window-confirmed-email']//button[text() = 'Close']");
 
 
     public RegistrationPage(WebDriver driver){
@@ -77,8 +76,11 @@ public class RegistrationPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, 25);
         driver.get(activationLink);
         wait.until(ExpectedConditions.presenceOfElementLocated(successConfirm));
+        String successText = driver.findElement(successConfirm).getText();
+        driver.findElement(closeActivationAlert).click();
 
-        return (driver.findElement(successConfirm).getText());
+
+        return successText;
     }
     public boolean isError(){
         return driver.findElement(emailSent).isDisplayed();

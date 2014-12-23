@@ -1,5 +1,6 @@
 package FunctionalTests.Testing.SingleTest;
 
+import FunctionalTests.Pages.ProfilePage;
 import FunctionalTests.Pages.RegistrationPage;
 import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
@@ -10,6 +11,7 @@ import org.junit.Test;
 import javax.mail.MessagingException;
 import java.io.IOException;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -23,6 +25,8 @@ public class RegistrationSingleTest extends RegistrationTest{
 
         RegistrationPage registrationPage = new RegistrationPage(driver);
         GmailMessager gmailMessager = new GmailMessager();
+        ProfilePage profilePage = new ProfilePage(driver);
+
         String confirmLink = Config.getConfig().getScheme() + "register/confirm/";
 
         String currentMessageTime="";
@@ -54,7 +58,7 @@ public class RegistrationSingleTest extends RegistrationTest{
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
         String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, " ");
 
-        //registrationPage.confirmActivation(activationLink);
+       // registrationPage.confirmActivation(activationLink);
 
 
       /*  gmailPage.checkConfirmLetter(testUser, "To finish activating your account");
@@ -62,10 +66,27 @@ public class RegistrationSingleTest extends RegistrationTest{
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL, Keys.TAB);//change tab
         ArrayList<String> newtabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(newtabs.get(0)); //switch tab*//*
-
+ */
 
         assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
-        */System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
+
+        assertEquals("Current value not null", profilePage.getCurrentValue(), 0);
+        assertEquals("Bonus value not null", profilePage.getBonusesValue(), 0);
+        assertEquals("Salary value not null", profilePage.getSalaryValue(), 0);
+
+        profilePage.goProfilePage();
+
+        assertEquals("Not same Full Name", profilePage.getFullName(), testUser.getFullName());
+        assertEquals("Not same Gender", profilePage.getGender(), "Male");
+        assertEquals("Not same Email", profilePage.getEmail(), testUser.getEmail());
+        assertEquals("Not same Phone", profilePage.getPhone(), testUser.getPhone());
+
+        assertEquals("Not same career", profilePage.getCareer(), "None");
+        assertEquals("Not same status", profilePage.getStatus(), "Potential");
+        assertEquals("Not same identification", profilePage.getIdentification(), "Not Approved");
+
+
+        System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
 
 
     }
