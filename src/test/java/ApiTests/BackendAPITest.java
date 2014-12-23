@@ -131,6 +131,14 @@ public class BackendAPITest {
             isComplete = false;
         }
 
+        // PUT API products insert test run
+        if (new PutProductsSave().testPutProductsInsert(scheme, user)) {
+            System.out.println("Проверка API PUT products insert пройдена");
+        }
+        else {
+            System.out.println("Проверка API PUT products insert НЕ пройдена");
+            isComplete = false;
+        }
 
         //GET API documents test run
         if (new GetDocuments().testGetDocuments(scheme, user)) {

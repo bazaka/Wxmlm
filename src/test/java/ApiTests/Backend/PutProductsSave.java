@@ -3,10 +3,12 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Product;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 
 import static org.junit.Assert.assertTrue;
@@ -87,6 +89,74 @@ public class PutProductsSave {
         // Проверяем GET-запросом, что данные восстановились
         changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne));
+        return true;
+    }
+
+    public boolean testPutProductsInsert(String scheme, TestUser testUser) throws IOException, JSONException {
+        Product originalOne = new GetProducts().getAnyProduct(testUser, scheme);
+        if (originalOne == null) {
+            return false;
+        }
+        String imageUrlModString;
+        String newJson;
+        Product newOne;
+        if (originalOne.getImageUrl().equals(null)){
+            imageUrlModString = "null";
+        }
+        else {
+            imageUrlModString = "\"" + originalOne.getImageUrl() + "\"";
+        }
+        if (originalOne.getCategoryId() == 1) {
+            newOne = new Product(originalOne.getId(), 4, originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), 41, originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getAvailable(), originalOne.getDiscSpace(), originalOne.getTimeOnline(), originalOne.getBasicIncome(), originalOne.getBasicIncomePeriod(), originalOne.getProfit(), originalOne.getInvestmentPeriod(), originalOne.getStart());
+            newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + newOne.getAvailable() + ", \"discSpace\": " + newOne.getDiscSpace() + ", \"timeOnline\": " + newOne.getTimeOnline() + ", \"basicIncome\": " + newOne.getBasicIncome() + ", \"basicIncomePeriod\": " + newOne.getBasicIncomePeriod() + ", \"profit\": " + newOne.getProfit() + ", \"investmentPeriod\": " + newOne.getInvestmentPeriod() + ", \"start\": \"" + newOne.getStart() + "\"}}]";
+        }
+        else if (originalOne.getCategoryId() == 2) {
+            newOne = new Product(originalOne.getId(), originalOne.getCategoryId(), originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), originalOne.getType(), originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getRequiredForTrial(), originalOne.getTrialPeriod(), originalOne.getQuotaPrefix() + " quotaPrefix", originalOne.getQuota() + 1, originalOne.getQuotaMeasurement() + "QuotaMeasurement", originalOne.getServiceId());
+            String requiredForTrialStringMod = "[";
+            for (int i = 0; i < newOne.getRequiredForTrial().length - 1; i++){
+                requiredForTrialStringMod = requiredForTrialStringMod + newOne.getRequiredForTrial()[i] + ",";
+            }
+            requiredForTrialStringMod = requiredForTrialStringMod + newOne.getRequiredForTrial()[newOne.getRequiredForTrial().length - 1];
+            requiredForTrialStringMod = requiredForTrialStringMod + "]";
+            System.out.println("requiredForTrialStringMod: " + requiredForTrialStringMod);
+            String requiredForTrialStringOri = "[";
+            for (int i = 0; i < newOne.getRequiredForTrial().length - 1; i++){
+                requiredForTrialStringOri = requiredForTrialStringOri + originalOne.getRequiredForTrial()[i] + ",";
+            }
+            requiredForTrialStringOri = requiredForTrialStringOri + originalOne.getRequiredForTrial()[newOne.getRequiredForTrial().length - 1];
+            requiredForTrialStringOri = requiredForTrialStringOri + "]";
+            System.out.println("requiredForTrialStringOri: " + requiredForTrialStringOri);
+            newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + newOne.getImageUrl() + ", \"attributes\": { \"requiredForTrial\": " + requiredForTrialStringMod + ", \"trialPeriod\": \"" + newOne.getTrialPeriod() + "\", \"quotaPrefix\": \"" + newOne.getQuotaPrefix() + "\", \"quota\": " + newOne.getQuota() + ", \"quotaMeasurement\": \"" + newOne.getQuotaMeasurement() + "\", \"serviceId\": " + newOne.getServiceId() + "}}]";
+        }
+        else {
+            System.out.println("Unrecognised category_id");
+            return false;
+        }
+        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/purchase/insert/", "POST", "application/json", "application/json", true);
+        OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+        out.write(newJson);
+        out.close();
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+
+        //берем из респонса id новой операции
+        JSONObject response = new JSONObject(result);
+        JSONArray reports = response.getJSONArray("reports");
+        JSONObject report = reports.getJSONObject(0);
+        int newOneId = report.getInt("id");
+
+
+        //Проверяем Get-запросом, что данный обновились
+        Product changedOne = new GetProducts().getProductByParameter("id", newOneId, testUser, scheme);
+        assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne));
         return true;
     }
 }
