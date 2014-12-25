@@ -13,8 +13,8 @@ import java.util.Properties;
 public class GmailMessager {
 
 
-    public Store initializePOP3 (TestUser testUser) throws MessagingException {
-        String POP_AUTH_USER = testUser.getEmail();
+    public Store initializePOP3 (TestUser testUser, String emailAddress) throws MessagingException {
+        String POP_AUTH_USER = emailAddress;
         String POP_AUTH_PWD = testUser.getEPassword();
 
 
@@ -40,10 +40,10 @@ public class GmailMessager {
         return store;
 
     }
-    public String getLastMessageTime(TestUser testUser) throws MessagingException {
+    public String getLastMessageTime(TestUser testUser, String emailAddress) throws MessagingException {
 
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
-        Store store = initializePOP3(testUser);
+        Store store = initializePOP3(testUser, emailAddress);
 
         store.connect();
 
@@ -66,11 +66,11 @@ public class GmailMessager {
         store.close();
         return detectMessageTime;
     }
-    public String openAndReturnLink(TestUser testUser, String requiredSubject, String requiredLink, String Separator) throws MessagingException, IOException {
+    public String openAndReturnLink(TestUser testUser, String emailAddress, String requiredSubject, String requiredLink, String Separator) throws MessagingException, IOException {
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
-        String activationLink = null;
+       // String activationLink = null;
 
-        Store store = initializePOP3(testUser);
+        Store store = initializePOP3(testUser, emailAddress);
         store.connect();
 
         Folder folder = store.getFolder(FOLDER_INBOX);

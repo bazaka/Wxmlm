@@ -1,6 +1,4 @@
-import ApiTests.BackendAPITest;
-import ApiTests.LoginFreeAPITest;
-import FunctionalTests.Testing.LogInLogOutTest;
+import FunctionalTests.Testing.ChangeMailTest;
 import FunctionalTests.Testing.RecoveryTest;
 import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
@@ -37,7 +35,7 @@ public class Main
         {
             System.out.println("\n" + "Начинаю тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName() + ". Тест-кейсы, в которых он используется: " + testUser[i].getUseInTest());
             // FreeLogin API (authorization don't needed)
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
+         /*   if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
             {
                 LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты LoginFree API
@@ -63,7 +61,7 @@ public class Main
                 catch (Exception e) { e.printStackTrace();
                     System.out.println("Проверка Backend API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
-            }
+            }*/
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
                 RecoveryTest newRecoveryTest = new RecoveryTest();
 
@@ -90,19 +88,20 @@ public class Main
                 }
 
             }
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LogInLogOutTest(")) {
-                LogInLogOutTest newLoginLogoutTest = new LogInLogOutTest();
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeMailTest(")) {
+                ChangeMailTest changeMailTest = new ChangeMailTest();
 
                 try {
-                    newLoginLogoutTest.logInLogOutTest();
-                    System.out.println("LoginLogout Test успешно пройден");
+                    changeMailTest.changeMailTest();
+                    System.out.println("ChangeMail Test успешно пройден");
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println("LoginLogout Test НЕ пройден");
+                    System.out.println("ChangeMail Test НЕ пройден");
                 }
 
             }
+
             System.out.println("Закончил тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName());
         }
         System.out.println("Тестирование успешно закончено");

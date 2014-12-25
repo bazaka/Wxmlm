@@ -6,7 +6,6 @@ import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
 import UsedByAll.GmailMessager;
 import UsedByAll.TestUser;
-import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Test;
 
@@ -35,8 +34,8 @@ public class RegistrationSingleTest extends RegistrationTest{
         String currentMessageTime="";
         String newMessageTime="";
         try {
-            gmailMessager.initializePOP3(testUser);
-            currentMessageTime = gmailMessager.getLastMessageTime(testUser);
+            //gmailMessager.initializePOP3(testUser);
+            currentMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail());
            // System.out.println("Current last message time: " + currentMessageTime);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -50,8 +49,8 @@ public class RegistrationSingleTest extends RegistrationTest{
         int count = 1; // лічильник, якщо дорівнює 100, виходимо з циклу
         do {
             try {
-                gmailMessager.initializePOP3(testUser);
-                newMessageTime = gmailMessager.getLastMessageTime(testUser);
+                //gmailMessager.initializePOP3(testUser);
+                newMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail());
                 //System.out.println("New last message time: " + newMessageTime);
             } catch (MessagingException e) {
                 e.printStackTrace();
@@ -59,13 +58,23 @@ public class RegistrationSingleTest extends RegistrationTest{
             count++;
             if (count == 30) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
-        String activationLink = gmailMessager.openAndReturnLink(testUser, "Welcome", confirmLink, " ");
+        String activationLink = gmailMessager.openAndReturnLink(testUser, testUser.getEmail(), "Welcome", confirmLink, " ");
 
 
 
 
         assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
 
+        checkCorrectData(testUser);
+
+
+        System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
+
+
+    }
+    public void checkCorrectData(TestUser testUser){
+
+        ProfilePage profilePage = new ProfilePage(driver);
         assertEquals("Current value not 0", profilePage.getCurrentValue(), 0);
         assertEquals("Bonus value not 0", profilePage.getBonusesValue(), 0);
         assertEquals("Salary value not 0", profilePage.getSalaryValue(), 0);
@@ -84,11 +93,7 @@ public class RegistrationSingleTest extends RegistrationTest{
         assertEquals("Not same identification", profilePage.getIdentification(), "Not Approved");
         assertEquals("Not same invite code", profilePage.getInviteCode(), "You have not permissions to view the invite code.");
 
-        Assert.assertEquals("Not same country", profilePage.getCountry(), "Afghanistan");
-
-
-        System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
-
+        assertEquals("Not same country", profilePage.getCountry(), "Afghanistan");
 
     }
     @After

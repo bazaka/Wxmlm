@@ -21,6 +21,6 @@ public class LoginSingleTest extends LogInTest {
 
         loginPage.goLogin(testUser);
         assertEquals(loginPage.getTitle(), "KairosNet");
-        System.out.println("Тест для " + testUser.getEmail() + " успешно пройден");
+
     }
 }

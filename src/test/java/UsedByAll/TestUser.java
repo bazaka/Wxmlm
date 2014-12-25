@@ -17,7 +17,7 @@ public class TestUser
     // Сеттеры
     public void setEmail(String a)
     { this.email = a; }
-    public void setMailerURL(String a)
+    public void setNewEmail(String a)
     { this.mailerURL = a; }
     public void setEPassword(String a)
     { this.ePassword = a; }
@@ -41,7 +41,7 @@ public class TestUser
     // Геттеры
     public String getEmail()
     { return email; }
-    public String getMailerURL()
+    public String getNewEmail()
     { return mailerURL; }
     public String getEPassword()
     { return ePassword; }

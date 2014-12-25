@@ -12,7 +12,7 @@ public class CsvUsersReader {
         //Подготавливаемся к чтению файла - объявляем списки данных, из которых будут составлены объекты тестовых пользователей
         File file1 = new File(myFile);
         List<String> emails = new ArrayList<String>();
-        List<String> mailerURLs = new ArrayList<String>();
+        List<String> newEmails = new ArrayList<String>();
         List<String> ePasswords = new ArrayList<String>();
         List<String> fullNames = new ArrayList<String>();
         List<String> password1s = new ArrayList<String>();
@@ -29,7 +29,7 @@ public class CsvUsersReader {
             while(parser.getLine() != null) {
                 if(!parser.getValueByLabel("useInTest").isEmpty()){
                     emails.add(parser.getValueByLabel("email"));
-                    mailerURLs.add(parser.getValueByLabel("mailerURL"));
+                    newEmails.add(parser.getValueByLabel("newEmail"));
                     ePasswords.add(parser.getValueByLabel("ePassword"));
                     fullNames.add(parser.getValueByLabel("fullName"));
                     password1s.add(parser.getValueByLabel("password1"));
@@ -44,7 +44,7 @@ public class CsvUsersReader {
 
             // Создаем по спискам данных массив тестовых пользователей
             String[] emailsArray = emails.toArray(new String[emails.size()]);
-            String[] mailerURLsArray = mailerURLs.toArray(new String[emails.size()]);
+            String[] newEmailsArray = newEmails.toArray(new String[emails.size()]);
             String[] ePasswordsArray = ePasswords.toArray(new String[emails.size()]);
             String[] fullNamesArray = fullNames.toArray(new String[emails.size()]);
             String[] password1sArray = password1s.toArray(new String[emails.size()]);
@@ -58,7 +58,7 @@ public class CsvUsersReader {
             for (int i = 0; i < testUsers.length; i++) {
                 testUsers[i] = new TestUser();
                 testUsers[i].setEmail(emailsArray[i]);
-                testUsers[i].setMailerURL(mailerURLsArray[i]);
+                testUsers[i].setNewEmail(newEmailsArray[i]);
                 testUsers[i].setEPassword(ePasswordsArray[i]);
                 testUsers[i].setFullName(fullNamesArray[i]);
                 testUsers[i].setPassword1(password1sArray[i]);

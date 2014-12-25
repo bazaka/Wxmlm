@@ -37,8 +37,8 @@ public class RecoverySingleTest extends RecoveryTest {
         String currentMessageTime="";
         String newMessageTime="";
         try {
-            gmailMessager.initializePOP3(testUser);
-            currentMessageTime = gmailMessager.getLastMessageTime(testUser);
+           // gmailMessager.initializePOP3(testUser, testUser.getEmail());
+            currentMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail());
             System.out.println("Current last message time: " + currentMessageTime);
         } catch (MessagingException e) {
             e.printStackTrace();
@@ -57,8 +57,8 @@ public class RecoverySingleTest extends RecoveryTest {
         int count = 1; // лічильник, якщо дорівнює 100, виходимо з циклу
         do {
             try {
-                gmailMessager.initializePOP3(testUser);
-                newMessageTime = gmailMessager.getLastMessageTime(testUser);
+                //gmailMessager.initializePOP3(testUser);
+                newMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail());
                 System.out.println("New last message time: " +newMessageTime);
             } catch (MessagingException e) {
                 e.printStackTrace();
@@ -66,7 +66,7 @@ public class RecoverySingleTest extends RecoveryTest {
             count++;
             if (count == 100) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
-        String activationLink = gmailMessager.openAndReturnLink(testUser, "Reset Password", confirmLink, "Regards");
+        String activationLink = gmailMessager.openAndReturnLink(testUser, testUser.getEmail(), "Reset Password", confirmLink, "Regards");
         assertEquals("Not same titles", recoveryPage.enterNewPassword(testUser, activationLink), "KairosNet");
 
     }

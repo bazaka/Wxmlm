@@ -1,7 +1,9 @@
 package FunctionalTests.Pages;
 
+import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,6 +28,15 @@ public class ProfilePage extends BasePage {
     private static final By identification = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[2]/td[2]/abbr");
     private static final By documents = By.xpath("//div[@class='tabbable']/ul/li/a[text()='Documents']");
     private static final By country = By.xpath("//select[@id='xmlm_bundle_userbundle_document_citizen']/option[@selected='selected']");
+    private static final By addEmail = By.id("addEmail");
+    private static final By secondMail = By.id("fos_user_profile_form_userContact_email1");
+    private static final By setAsMain = By.xpath("//div[@id='additional-email-1']//button[contains(text(),'Set as main')]");
+    private static final By emailSavedMessage = By.xpath("//[@id='gritter-notice-wrapper']//div/p[text()='Email saved.']");
+    private static final By checkNewEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-old-email']//h3[text()='Check your new email']");
+    private static final By closeNewEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-old-email']//button[text()='Close']");
+    private static final By changedEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-new-email']//h3[text()='Main E-mail has been changed']");
+    private static final By closeChangedEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-new-email']//button[text()='Close']");
+
 
     public ProfilePage(WebDriver driver){
         super(driver);
@@ -45,6 +56,40 @@ public class ProfilePage extends BasePage {
         driver.findElement(profilePage).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(fullName));
     }
+    public void addNewEmail(TestUser testUser){ //додати другу пошту
+        WebDriverWait wait = new WebDriverWait(driver, 20);
+        Actions builder = new Actions(driver);
+        driver.findElement(addEmail).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(secondMail));
+        driver.findElement(secondMail).clear();
+        driver.findElement(secondMail).sendKeys(testUser.getNewEmail());
+        driver.findElement(setAsMain).click();
+
+    }
+    public boolean addNewEmailError(){
+
+        return driver.findElement(emailSavedMessage).isDisplayed();
+    }
+    public String newMailConfirmation(String activationLink){ // конфірм першого листа зміни пошти
+        WebDriverWait wait = new WebDriverWait(driver, 40);
+        driver.get(activationLink);
+        wait.until(ExpectedConditions.presenceOfElementLocated(checkNewEmailMessage));
+        String successText = driver.findElement(checkNewEmailMessage).getText();
+        driver.findElement(closeNewEmailMessage).click();
+        return successText;
+    }
+    public String newChangedEmail(String activationLink){ // конфірм другого листа зміни пошти
+        WebDriverWait wait = new WebDriverWait(driver, 40);
+        driver.get(activationLink);
+        wait.until(ExpectedConditions.presenceOfElementLocated(changedEmailMessage));
+        String successText = driver.findElement(changedEmailMessage).getText();
+        driver.findElement(closeChangedEmailMessage).click();
+        return successText;
+    }
+
+
+
+
     public String getFullName(){
 
         return driver.findElement(fullName).getAttribute("value");
@@ -55,6 +100,8 @@ public class ProfilePage extends BasePage {
     public String getEmail(){
         return driver.findElement(email).getAttribute("value").trim();
     }
+    public String getSecondEmail(){return driver.findElement(secondMail).getAttribute("value").trim();}
+
     public String getPhone(){
         return driver.findElement(phone).getAttribute("value");
     }
@@ -70,4 +117,5 @@ public class ProfilePage extends BasePage {
         return driver.findElement(country).getText();
 
     }
+
 }
