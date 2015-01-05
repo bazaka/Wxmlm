@@ -69,7 +69,7 @@ public class Main
 
                 try {
                     newRecoveryTest.recoveryTest();
-                    System.out.println("RecoveryTest успешно пройден");
+                    System.out.println("Успешное восстановление пароля");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -82,7 +82,7 @@ public class Main
 
                 try {
                     newRegistrationTest.registrationTest();
-                    System.out.println("Registration Test успешно пройден");
+                    System.out.println("Успешная регистрация");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -95,7 +95,7 @@ public class Main
 
                 try {
                     changeMailTest.changeMailTest();
-                    System.out.println("ChangeMail Test успешно пройден");
+                    System.out.println("Успешная смена пароля");
 
                 } catch (Exception e) {
                     e.printStackTrace();

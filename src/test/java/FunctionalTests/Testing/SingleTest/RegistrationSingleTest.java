@@ -24,7 +24,7 @@ public class RegistrationSingleTest extends RegistrationTest{
     public void registrationSingleTest(TestUser testUser) throws IOException, MessagingException {
 
 
-        ProfilePage profilePage = new ProfilePage(driver);
+
         RegistrationPage registrationPage = new RegistrationPage(driver);
         GmailMessager gmailMessager = new GmailMessager();
 
@@ -65,7 +65,7 @@ public class RegistrationSingleTest extends RegistrationTest{
 
         assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
 
-        checkCorrectData(testUser);
+        //checkCorrectData(testUser);
 
 
         System.out.println("Тест для "+testUser.getEmail()+ " успешно пройден");
