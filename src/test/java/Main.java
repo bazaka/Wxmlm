@@ -1,3 +1,5 @@
+import ApiTests.BackendAPITest;
+import ApiTests.LoginFreeAPITest;
 import FunctionalTests.Testing.ChangeMailTest;
 import FunctionalTests.Testing.RecoveryTest;
 import FunctionalTests.Testing.RegistrationTest;
@@ -35,7 +37,7 @@ public class Main
         {
             System.out.println("\n" + "Начинаю тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName() + ". Тест-кейсы, в которых он используется: " + testUser[i].getUseInTest());
             // FreeLogin API (authorization don't needed)
-         /*   if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
             {
                 LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты LoginFree API
@@ -61,13 +63,13 @@ public class Main
                 catch (Exception e) { e.printStackTrace();
                     System.out.println("Проверка Backend API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
-            }*/
+            }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
                 RecoveryTest newRecoveryTest = new RecoveryTest();
 
                 try {
                     newRecoveryTest.recoveryTest();
-                    System.out.println("RecoveryTest успешно пройден");
+                    System.out.println("Успешное восстановление пароля");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -80,7 +82,7 @@ public class Main
 
                 try {
                     newRegistrationTest.registrationTest();
-                    System.out.println("Registration Test успешно пройден");
+                    System.out.println("Успешная регистрация");
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -93,7 +95,7 @@ public class Main
 
                 try {
                     changeMailTest.changeMailTest();
-                    System.out.println("ChangeMail Test успешно пройден");
+                    System.out.println("Успешная смена пароля");
 
                 } catch (Exception e) {
                     e.printStackTrace();
