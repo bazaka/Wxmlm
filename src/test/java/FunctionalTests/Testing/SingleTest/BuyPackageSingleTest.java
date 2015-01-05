@@ -1,63 +1,47 @@
 package FunctionalTests.Testing.SingleTest;
 
+import FunctionalTests.Pages.AuthorizedUserPage;
+import FunctionalTests.Pages.InvestmentPackagesPage;
+import FunctionalTests.Pages.LogInPage;
+import FunctionalTests.Pages.PackageCartPage;
 import UsedByAll.TestUser;
+import org.junit.After;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.junit.Assert;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 
 // * Created for W-xmlm by Fill on 05.01.2015.
 public class BuyPackageSingleTest {
-/*
+    WebDriver driver = new FirefoxDriver();
     @Test
-    public void buyPackageSingleTest(TestUser testUser) throws IOException, MessagingException {
-        GmailMessager gmailMessager = new GmailMessager();
+    public void buyPackageSingleTest(TestUser testUser) throws IOException {
+        WebDriverWait wait = new WebDriverWait(driver,5);
         LogInPage loginPage = new LogInPage(driver);
-        ProfilePage profilePage = new ProfilePage(driver);
-
-        String confirmOldMailLink = Config.getConfig().getScheme() + "users/email/checkOldConfirmation/";
-        String confirmNewMailLink = Config.getConfig().getScheme() + "users/email/checkNewConfirmation/";
-
-        String currentMessageTime = "";
-        String newMessageTime = "";
-
-
+        InvestmentPackagesPage investmentPackagesPage = new InvestmentPackagesPage();
+        PackageCartPage packageCartPage = new PackageCartPage();
+        AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage();
 
         loginPage.open();
         assertTrue("Page not opened", loginPage.isOpened());
 
         loginPage.goLogin(testUser);
         Assert.assertEquals(loginPage.getTitle(), "KairosNet"); // логінимось
+/*
+        wait.until(ExpectedConditions.visibilityOfElementLocated(authorizedUserPage.headNav));
+        System.out.println("1");
+*/
+        wait.until(ExpectedConditions.visibilityOfElementLocated(authorizedUserPage.products));
+        System.out.println("2");
 
-        profilePage.goProfilePage(); // заходимо на сторінку профіля
-        currentMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail()); //дата останнього листа
-        profilePage.addNewEmail(testUser);  //додаємо другу пошту
-        assertTrue("Second mail is not added", profilePage.isOpened());
-        int count = 1;
-        do{ //стара пошта
-            newMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getEmail());
-            count++;
-            if(count == 30) break;
-        }while(currentMessageTime.equals(newMessageTime)); // обновляемо пошту до моменту, коли не прийде лист, або до оверфлова лічильника
-        String changeConfirmationLink = gmailMessager.openAndReturnLink(testUser, testUser.getEmail(), "Email change confirmation", confirmOldMailLink, " "); //витягуємо з листа лінк
-
-        currentMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getNewEmail()); //заходимо на нову пошту, дата останнього листа;
-
-        assertEquals(profilePage.newMailConfirmation(changeConfirmationLink), "Check your new email"); //перейшли по лінку з листа, повинен відправитись лист на нову пошту
-        count = 1;
-        do{ //нова пошта
-            newMessageTime = gmailMessager.getLastMessageTime(testUser, testUser.getNewEmail());
-            count++;
-            if(count == 30) break;
-        }while(currentMessageTime.equals(newMessageTime)); // обновляемо пошту до моменту, коли не прийде лист, або до оверфлова лічильника
-
-        String newMailConfirmLink = gmailMessager.openAndReturnLink(testUser, testUser.getNewEmail(), "Main Email confirmation", confirmNewMailLink, " "); //витягуємо лінк з листа
-        assertEquals(profilePage.newChangedEmail(newMailConfirmLink), "Main E-mail has been changed"); //переход по лінку з листа і перевірка
-
-        //перевіряємо зміну пошт
-        profilePage.goProfilePage();
-        assertEquals(profilePage.getEmail(), testUser.getNewEmail());
-        assertEquals(profilePage.getSecondEmail(), testUser.getEmail());
-        System.out.println("Почта успешно изменена из " +testUser.getEmail() +" на "+testUser.getNewEmail());
+        driver.findElement(authorizedUserPage.products).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(InvestmentPackagesPage.firstActiveBuyButton));
+        System.out.println("Вижу активную кнопку \"Buy\"");
 
     }
     @After
@@ -66,5 +50,4 @@ public class BuyPackageSingleTest {
             driver.quit();
     }
 
-*/
 }

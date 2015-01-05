@@ -5,15 +5,16 @@ import UsedByAll.CsvUsersReader;
 import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
 import org.junit.Test;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.WebDriver;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertNotEquals;
 
 // * Created for W-xmlm by Fill on 05.01.2015.
 public class BuyPackageTest {
-/*
     @Test
-    public void changeMailTest(){
+    public void buyPackageTest(){
         BuyPackageSingleTest singleTest = new BuyPackageSingleTest();
         TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
 
@@ -24,20 +25,13 @@ public class BuyPackageTest {
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BuyPackageTest("))
             {
                 try {
-                    singleTest.(testUser[i]);
+                    singleTest.buyPackageSingleTest(testUser[i]);
                 } catch (IOException e) {
                     e.printStackTrace();
-                    driver.quit();
-                } catch (MessagingException e) {
-                    e.printStackTrace();
-                    driver.quit();
+                    singleTest.tearDown();
                 }
-                if(driver!=null)
-                    driver.quit();
             }
         }
-        System.out.println("ChangeMail Test успешно пройден");
+        System.out.println("BuyPackageTest Test успешно пройден");
     }
-
-*/
 }
