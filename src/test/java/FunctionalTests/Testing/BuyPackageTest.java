@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import java.io.IOException;
 
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 05.01.2015.
 public class BuyPackageTest {
@@ -21,17 +22,18 @@ public class BuyPackageTest {
         assertNotEquals("Нет пользователей для тестирования. Закрываюсь", testUser.length, 0);
         System.out.println("Количество пользователей для тестирования: "+ testUser.length);
 
-        for (int i = 0; i < testUser.length; i++) {
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BuyPackageTest("))
-            {
+        for (TestUser aTestUser : testUser) {
+            if (RegionMatch.IsStringRegionMatch(aTestUser.getUseInTest(), "_BuyPackageTest(")) {
                 try {
-                    singleTest.buyPackageSingleTest(testUser[i]);
-                } catch (IOException e) {
+                    singleTest.buyPackageSingleTest(aTestUser);
+                    System.out.println("BuyPackageTest Test успешно пройден");
+                } catch (Exception e) {
                     e.printStackTrace();
                     singleTest.tearDown();
+                    assertTrue("There is no exception", false);
                 }
+                singleTest.tearDown();
             }
         }
-        System.out.println("BuyPackageTest Test успешно пройден");
     }
 }
