@@ -12,7 +12,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        String scheme = Config.getConfig().getScheme(); // Урл проверяемого сайта. В будущем надо вынести в конфиг-файлq
+        Config config = Config.getConfig();
+        String scheme = config.getScheme(); // Урл проверяемого сайта. В будущем надо вынести в конфиг-файлq
         // Проверка - не тестируем на продакшене
         if(RegionMatch.IsStringRegionMatch(scheme, "kairosplanet.com"))
         {
@@ -35,13 +36,13 @@ public class Main
         // Цикл, выполняющий тесты для пользователей, указанных в конфиге
         for (int i = 0; i < testUser.length; i++)
         {
-            System.out.println("\n" + "Начинаю тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName() + ". Тест-кейсы, в которых он используется: " + testUser[i].getUseInTest());
             // FreeLogin API (authorization don't needed)
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
             {
+                System.out.println("Запуск тестов LoginFreeAPITest пользователем " + testUser[i].getFullName() + ", email - " + testUser[i].getEmail());
                 LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты LoginFree API
-                try { if (newLoginFreeAPITest.runLoginFreeAPITests(scheme, testUser[i]))
+                try { if (newLoginFreeAPITest.runLoginFreeAPITests(config, testUser[i]))
                     System.out.println("Проверка LoginFree API пройдена");
                     else
                     System.out.println("Проверка LoginFree API НЕ пройдена");
@@ -53,6 +54,7 @@ public class Main
             // Backend API (needed authorization by admin)
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BackendAPI("))
             {
+                System.out.println("Запуск тестов BackendAPITest пользователем " + testUser[i].getFullName() + ", email - " + testUser[i].getEmail());
                 BackendAPITest newBackendAPITest = new BackendAPITest(); // Создаём объект теста
                 //Вызов метода, запускающего тесты Backend API
                 try { if (newBackendAPITest.runBackendAPITests(scheme, testUser[i]))

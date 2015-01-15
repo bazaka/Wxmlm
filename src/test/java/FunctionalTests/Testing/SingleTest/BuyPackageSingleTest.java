@@ -4,6 +4,7 @@ import FunctionalTests.Pages.AuthorizedUserPage;
 import FunctionalTests.Pages.InvestmentPackagesPage;
 import FunctionalTests.Pages.LogInPage;
 import FunctionalTests.Pages.PackageCartPage;
+import UsedByAll.Element;
 import UsedByAll.TestUser;
 import org.junit.After;
 import org.junit.Test;
@@ -24,22 +25,36 @@ public class BuyPackageSingleTest {
         driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(driver,5);
         LogInPage loginPage = new LogInPage(driver);
+        Element element = new Element();
 
         loginPage.open();
         assertTrue("Page not opened", loginPage.isOpened());
 
         loginPage.goLogin(testUser);
         Assert.assertEquals(loginPage.getTitle(), "KairosNet"); // логінимось
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AuthorizedUserPage.headNav));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(AuthorizedUserPage.products));
-
-        driver.findElement(AuthorizedUserPage.products).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(InvestmentPackagesPage.products));
+        driver.findElement(InvestmentPackagesPage.products).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(InvestmentPackagesPage.firstActiveBuyButton));
-        System.out.println("Вижу активную кнопку \"Buy\"");
         driver.findElement(InvestmentPackagesPage.firstActiveBuyButton).click();
-        System.out.println("Кликнул активную кнопку \"Buy\"");
-        System.out.println("Price: " + PackageCartPage.getPrice(driver));
-        System.out.println("required fee to increase: " + PackageCartPage.getRequiredFeeToIncrease(driver));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
+        String packageName = PackageCartPage.packageNameElement.toString();
+        System.out.println(packageName);
+        String paymentAmount = PackageCartPage.getPrice(driver);
+        if (Element.isElementExists(driver, PackageCartPage.requiredFeeToIncreaseElement))
+        {
+            paymentAmount = PackageCartPage.getRequiredFeeToIncrease(driver);
+        }
+        System.out.println("Payment amount: " + paymentAmount);
+
+/*
+        driver.findElement(PackageCartPage.buyButtonElement).click();
+        System.out.println("Инициировал покупку пакета следующего уровня");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.successMessage));
+*/
+        driver.findElement(PackageCartPage.purchasesItem).click();
+        System.out.println("Перешел в мои покупки");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
+
 
     }
     @After

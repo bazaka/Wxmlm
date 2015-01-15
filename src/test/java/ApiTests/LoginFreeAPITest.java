@@ -3,17 +3,16 @@ package ApiTests;
 import ApiTests.LoginFree.GetApplicationInfo;
 import ApiTests.LoginFree.GetModuleContent;
 import ApiTests.LoginFree.GetModuleInfo;
+import UsedByAll.Config;
 import UsedByAll.TestUser;
 
 public class LoginFreeAPITest {
-    public boolean runLoginFreeAPITests(String scheme, TestUser user) throws Exception {
+    public boolean runLoginFreeAPITests(Config config, TestUser user) throws Exception {
+        String scheme = config.getScheme();
         boolean isComplete = true;
 
         // GET app info test run
-        if (new GetApplicationInfo().testGetApplicationInfo(scheme)) {
-            System.out.println("Проверка API GET app info пройдена");
-        }
-        else {
+        if (!(new GetApplicationInfo().testGetApplicationInfo(config))) {
             System.out.println("Проверка API GET app info НЕ пройдена");
             isComplete = false;
         }
