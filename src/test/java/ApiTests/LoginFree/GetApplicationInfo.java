@@ -27,18 +27,16 @@ public class GetApplicationInfo {
         if (!config.getIsHttpsConnection()) {
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
             startTime = System.currentTimeMillis();
-            inStrm = httpCon.getInputStream();
-            responseCode = httpCon.getResponseCode();
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+            inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;
         }
         else {
             HttpsURLConnection httpsCon = MakeRequest.getHttpsConnection(scheme, "application/api/desktop/get-application-info/", "GET");
             startTime = System.currentTimeMillis();
-            inStrm = httpsCon.getInputStream();
-            responseCode = httpsCon.getResponseCode();
-            elapsedTime = System.currentTimeMillis() - startTime;
             assertTrue("Check response code is 200", httpsCon.getResponseCode() == 200);
+            inStrm = httpsCon.getInputStream();
+            elapsedTime = System.currentTimeMillis() - startTime;
         }
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);

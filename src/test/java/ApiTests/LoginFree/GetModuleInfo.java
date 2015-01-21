@@ -26,11 +26,10 @@ public class GetModuleInfo {
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-info/?product_id=" + ids[i], "GET");
 
             // Отправляем запрос
+            assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200));
             InputStream inStrm = httpCon.getInputStream();
 
             // Читаем ответ
-            responseCode = httpCon.getResponseCode();
-            assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200 || httpCon.getResponseCode() == 404));
             InputStreamReader isReader = new InputStreamReader(inStrm);
             BufferedReader br = new BufferedReader(isReader);
             String result = "";
@@ -42,22 +41,15 @@ public class GetModuleInfo {
 
             //Парсим JSON
             JSONObject object = new JSONObject(result);
-            if (responseCode == 200) {
-                //Проверяем структуру
-                assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-                assertTrue("Incorrect product_id", (ValidationChecker.checkIdValue(object.getInt("product_id"))) && (ids[i] == object.getInt("product_id")));
-                assertTrue("Incorrect title", ValidationChecker.checkStringOrNull(object.getString("title")));
-                assertTrue("Incorrect version", ValidationChecker.checkStringNotNull(object.getString("version")));
-                assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.getString("description")));
-                assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
-                assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
-                assertEquals("Incorrect count of Json parameters", object.length(), 7);
-            }
-            else {
-                assertTrue("Object has no errors", object.has("errors"));
-                assertTrue("Error is different from \"Application not found\"", object.getString("errors").equals("Application not found"));
-                System.out.println("Product with ID " + ids[i] + ": application not found");
-            }
+            //Проверяем структуру
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+            assertTrue("Incorrect product_id", (ValidationChecker.checkIdValue(object.getInt("product_id"))) && (ids[i] == object.getInt("product_id")));
+            assertTrue("Incorrect title", ValidationChecker.checkStringOrNull(object.getString("title")));
+            assertTrue("Incorrect version", ValidationChecker.checkStringNotNull(object.getString("version")));
+            assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.getString("description")));
+            assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
+            assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
+            assertEquals("Incorrect count of Json parameters", object.length(), 7);
         }
         return true;
     }
