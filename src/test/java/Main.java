@@ -1,6 +1,7 @@
 import ApiTests.BackendAPITest;
 import ApiTests.LoginFreeAPITest;
 import FunctionalTests.Testing.ChangeMailTest;
+import FunctionalTests.Testing.ChangeProfileDataTest;
 import FunctionalTests.Testing.RecoveryTest;
 import FunctionalTests.Testing.RegistrationTest;
 import UsedByAll.Config;
@@ -105,7 +106,19 @@ public class Main
                 }
 
             }
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeProfileDataTest(")) {
+                ChangeProfileDataTest changeProfileDataTest = new ChangeProfileDataTest();
 
+                try {
+                    changeProfileDataTest.changeProfileDataTest();
+                    System.out.println("Успешное редактирование профила");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("ChangeProfileData Test НЕ пройден");
+                }
+
+            }
             System.out.println("Закончил тестировать с помощью пользователя № " + (i+1) + " - " + testUser[i].getFullName());
         }
         System.out.println("Тестирование успешно закончено");
