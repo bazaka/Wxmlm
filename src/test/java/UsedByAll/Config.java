@@ -18,6 +18,13 @@ public class Config {
     { return scheme; }
     public boolean getIsHttpsConnection()
     { return isHttpsConnection; }
+    public String getProtocol()
+    {
+        if (getIsHttpsConnection()){
+            return "https://";
+        }
+        else return "http://";
+    }
 
     public Config(String scheme, boolean isHttpsConnection){
         this.setScheme(scheme);
