@@ -3,11 +3,13 @@ package ApiTests.LoginFree;
 import ApiTests.Backend.GetProducts;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
+import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
 import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,38 +24,59 @@ public class GetModuleInfo {
         long startTime;
         long elapsedTime;
         int[] ids = GetProducts.getProductsIDs(scheme, user);
-        int responseCode;
+
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение
             startTime = System.currentTimeMillis();
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-info/?product_id=" + ids[i], "GET");
 
             // Отправляем запрос
-            assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200));
-            InputStream inStrm = httpCon.getInputStream();
+            int responseCode = httpCon.getResponseCode();
+            assertTrue("Check response code is 200", (responseCode == 404 || responseCode == 200));
+            InputStream inStrm;
+            try {
+                inStrm = httpCon.getInputStream();
+            }
+            catch (FileNotFoundException e){
+                inStrm = httpCon.getErrorStream();
+            }
             elapsedTime = System.currentTimeMillis() - startTime;
             // Читаем ответ
-            InputStreamReader isReader = new InputStreamReader(inStrm);
-            BufferedReader br = new BufferedReader(isReader);
             String result = "";
+            BufferedReader br;
+            InputStreamReader isReader = new InputStreamReader(inStrm);
+            br = new BufferedReader(isReader);
             String line;
             while ((line = br.readLine()) != null) {
                 result += line;
             }
             br.close();
-
+            if (RegionMatch.IsStringRegionMatch(result, "<br />")) {
+                System.out.println("Response contains html in its body. Look: " + result);
+                return false;
+            }
             //Парсим JSON
             JSONObject object = new JSONObject(result);
-            //Проверяем структуру
-            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect product_id", (ValidationChecker.checkIdValue(object.getInt("product_id"))) && (ids[i] == object.getInt("product_id")));
-            assertTrue("Incorrect title", ValidationChecker.checkStringOrNull(object.getString("title")));
-            assertTrue("Incorrect version", ValidationChecker.checkStringNotNull(object.getString("version")));
-            assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.getString("description")));
-            assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
-            assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
-            assertEquals("Incorrect count of Json parameters", object.length(), 7);
-            System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime +" by product_id = " +i);
+            if (object.has("errors")) {
+                assertTrue("Error is different from \"Application not found\"", object.getString("errors").equals("Application not found"));
+                System.out.println("Product with ID " + ids[i] + ": application not found");
+            }
+            else if (object.has("error")) {
+                assertTrue("Error is different from \"Application not found\"", object.getString("error").equals("Application not found"));
+                System.out.println("Product with ID " + ids[i] + ": application not found");
+            }
+            else {
+                //Проверяем структуру
+                assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+                assertTrue("Incorrect product_id", (ValidationChecker.checkIdValue(object.getInt("product_id"))) && (ids[i] == object.getInt("product_id")));
+                assertTrue("Incorrect title", ValidationChecker.checkStringOrNull(object.getString("title")));
+                assertTrue("Incorrect version", ValidationChecker.checkStringNotNull(object.getString("version")));
+                assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.getString("description")));
+                assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
+                assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
+                assertEquals("Incorrect count of Json parameters", object.length(), 7);
+            }
+            System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime + " by product_id = " + i);
         }
         return true;
     }

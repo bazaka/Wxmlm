@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -27,11 +28,16 @@ public class GetModuleContent {
             startTime = System.currentTimeMillis();
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-content/?product_id=" + ids[i], "GET");
 
-            // Отправляем запрос
-            InputStream inStrm = httpCon.getInputStream();
-
             // Читаем ответ
-            assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+            int responseCode = httpCon.getResponseCode();
+            assertTrue("Check response code is 200", (responseCode == 404 || responseCode == 200));
+            InputStream inStrm;
+            try {
+                inStrm = httpCon.getInputStream();
+            }
+            catch (FileNotFoundException e){
+                inStrm = httpCon.getErrorStream();
+            }
             InputStreamReader isReader = new InputStreamReader(inStrm);
             elapsedTime = System.currentTimeMillis() - startTime;
             BufferedReader br = new BufferedReader(isReader);
@@ -51,11 +57,15 @@ public class GetModuleContent {
                 assertTrue("Error is different from \"Application not found\"", object.getString("errors").equals("Application not found"));
                 System.out.println("Product with ID " + ids[i] + ": application not found");
             }
+            else if (object.has("error")) {
+                assertTrue("Error is different from \"Application not found\"", object.getString("error").equals("Application not found"));
+                System.out.println("Product with ID " + ids[i] + ": application not found");
+            }
             else {
                 //Проверяем структуру
                 assertTrue("Incorrect content", ValidationChecker.checkStringNotNull(object.getString("source")));
-                System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime +" by product_id = " +i);
             }
+            System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime +" by product_id = " +i);
         }
         return true;
     }
