@@ -3,6 +3,7 @@ package ApiTests.UsedByAll;
 import UsedByAll.TestUser;
 import org.apache.commons.codec.binary.Base64;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -72,5 +73,68 @@ public class MakeRequest{
         httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
         httpCon.setRequestMethod(requestMethod);
         return httpCon;
+    }
+
+    // Для GET-ов
+    public static HttpsURLConnection getHttpsConnection(String scheme, TestUser user, String urlPart, int valueInDays, String requestMethod) throws IOException {
+        // Создаем диапазон и ссылку
+        String calBeforeString = makeDateTimeString(Calendar.getInstance(), -valueInDays);
+        String calAfterString = makeDateTimeString(Calendar.getInstance(), valueInDays);
+        String urlString = "https://" + scheme + urlPart + "?limit=1000000&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
+
+        // Содзаем HttpUrlConnection
+        String authString = user.getEmail() + ":" + user.getPassword1();
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        URL url = new URL(urlString);
+        HttpsURLConnection httpsCon = (HttpsURLConnection) url.openConnection();
+        httpsCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpsCon.setRequestMethod(requestMethod);
+        return httpsCon;
+    }
+
+    // Для PUT-ов и POST-ов
+    public static HttpsURLConnection getHttpsConnection(String scheme, TestUser user, String urlPart, String requestMethod, String contentType, String accept, boolean setDoOutput) throws IOException {
+        String urlString = "https://" + scheme + urlPart;
+
+        // Содзаем HttpUrlConnection
+        String authString = user.getEmail() + ":" + user.getPassword1();
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        URL url = new URL(urlString);
+        HttpsURLConnection httpCon = (HttpsURLConnection) url.openConnection();
+        httpCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpCon.setRequestMethod(requestMethod);
+        httpCon.setRequestProperty("Content-Type", contentType);
+        httpCon.setRequestProperty("Accept", accept);
+        httpCon.setDoOutput(setDoOutput);
+        return httpCon;
+    }
+
+    // Для GET-ов без авторизации
+    public static HttpsURLConnection getHttpsConnection(String scheme, String urlPart, String requestMethod) throws IOException {
+        // Создаем диапазон и ссылку
+        String urlString = "https://" + scheme + urlPart;
+
+        // Содзаем HttpUrlConnection
+        URL url = new URL(urlString);
+        HttpsURLConnection httpsCon = (HttpsURLConnection) url.openConnection();
+        httpsCon.setRequestMethod(requestMethod);
+        return httpsCon;
+    }
+
+    //Для GET-ов без авторизации и без параметро даты и лимита
+    public static HttpsURLConnection getHttpsConnection(String scheme, TestUser user, String urlPart, String requestMethod) throws IOException {
+        String urlString = "https://" +scheme + urlPart;
+        //Создаем URL connection
+
+        String authString = user.getEmail() + ":" + user.getPassword1();
+        byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
+        String authStringEnc = new String(authEncBytes);
+        URL url = new URL(urlString);
+        HttpsURLConnection httpsCon = (HttpsURLConnection) url.openConnection();
+        httpsCon.setRequestProperty("Authorization", "Basic " + authStringEnc);
+        httpsCon.setRequestMethod(requestMethod);
+        return httpsCon;
     }
 }
