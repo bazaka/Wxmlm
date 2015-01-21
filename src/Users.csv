@@ -1,5 +1,5 @@
 email, newEmail, ePassword, fullName, password1, password2, newPassword1, newPassword2, phone, inviteCode, useInTest
-system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _BackendAPI()_
+system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _1BackendAPI()_
 system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _1LoginFreeAPI()_
 t.4webuser02@gmail.com, t4.webu.ser02@gmail.com , t4t4webuser02, User 02, 111111, 111111, 222222, 222222, 5555555, kairos, _1RecoveryTest()_
 t4web.user01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_
@@ -9,11 +9,18 @@ t4w.ebuser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111,
 t.4webuser01@gmail.com, t4webu.ser01@gmail.com , t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1ChangeMailTest()_
 t4webu.ser01@gmail.com, t.4webuser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1ChangeMailTest()_
 
-t4w.ebu.ser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _RegistrationTest()_
-t4w.ebu.ser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _ChangeMailTest()_
-t4.webu.ser01@gmail.com,  t4.webu.ser01@gmail.com, t4t4webuser01, User 03, 111111, 111111, 222222, 222222, 5555555, kairos, _RecoveryTest()_
-t.4webuser04@gmail.com, t4.webu.ser02@gmail.com , t4t4webuser02, User 02, 111111, 111111, 222222, 222222, 5555555, kairos, _ChangeProfileDataTest()_
+t4we.buser02@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser02, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4we.buser02@gmail.com, t4webuse.r02@gmail.com, t4t4webuser02, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _ChangeMailTest()_
+
+t4webuse.r02@gmail.com, t4.webu.ser02@gmail.com , t4t4webuser02, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _ChangeProfileDataTest()_
+t4webuse.r02@gmail.com,  t4.webu.ser01@gmail.com, t4t4webuser02, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _RecoveryTest()_
+t.4webuser01@gmail.com, t4webu.ser01@gmail.com , t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1ChangeMailTest()_
+t.4webuser01@gmail.com, t.4webuser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1TransferTest()_
 
 
-
-
+t4webuse.r01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 1User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4.webuser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 2User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4w.ebuser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 3User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4we.buser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 4User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4web.user01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 5User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_
+t4webu.ser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, 6User 01, 111111, 111111, 222222, 222222, 5555555, kairos, RegistrationTest()_

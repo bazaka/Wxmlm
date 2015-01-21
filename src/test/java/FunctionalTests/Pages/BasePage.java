@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
  * Created by User on 12/1/2014.
  */
 class BasePage {  //abstract class
-    protected String url = "http://" + Config.getConfig().getScheme();
+    protected String url = "https://" + Config.getConfig().getScheme();
     protected WebDriver driver;
 
 

@@ -85,7 +85,7 @@ public class GmailMessager {
         Message message = messages[messages.length-1];
 
         String messageSubject = message.getSubject();
-        //System.out.println("Subject: " + messageSubject);// Subject повідомлення
+        System.out.println("Subject: " + messageSubject);// Subject повідомлення
 
         if(!messageSubject.contains(requiredSubject))
             System.err.println("Неверная тема сообщения");
