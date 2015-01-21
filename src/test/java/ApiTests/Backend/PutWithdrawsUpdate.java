@@ -36,13 +36,18 @@ public class PutWithdrawsUpdate {
             System.out.println("Bank details is missing in object");
             return false;
         }
-
+        long startTime;
+        long elapsedTime;
         // Содзаем URL
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
+
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
+
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
         Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne));
@@ -57,6 +62,7 @@ public class PutWithdrawsUpdate {
         // Проверяем GET-запросом, что данные восстановились
         changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne));
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 }

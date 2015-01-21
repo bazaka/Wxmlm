@@ -24,13 +24,17 @@ public class GetDocumentsById {
     static final String url = "users/api/documents/get/?id=";
     @Test
     public boolean testGetDocumentsById(String scheme, TestUser testUser) throws IOException, JSONException {
+
+
         int[] ids = GetDocuments.getDocumentsId(scheme, testUser);
         for(int i=0; i<(ids.length -1); i++){
             System.out.println("id: "+ids[i]);
             //создаем соединение
+
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url+ids[i], "GET");
             InputStream inStrm = httpCon.getInputStream();
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+
             InputStreamReader isReader = new InputStreamReader(inStrm);
             BufferedReader br = new BufferedReader(isReader);
             String result = "";
@@ -64,6 +68,7 @@ public class GetDocumentsById {
             }
 
         }
+
         return true;
     }
 }

@@ -25,10 +25,13 @@ public class GetDocuments {
     static final String url = "users/api/documents/";
     @Test
     public boolean testGetDocuments(String scheme, TestUser testUser) throws IOException, JSONException {
-
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -57,13 +60,18 @@ public class GetDocuments {
 
             assertEquals("Incorrect count of JSON objects", object.length(), 9);
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
 
     }
     public static int[] getDocumentsId(String scheme, TestUser testUser) throws IOException, JSONException {
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -80,6 +88,7 @@ public class GetDocuments {
             JSONObject object = jsonArr.getJSONObject(i);
             ids[i] = object.getInt("id");
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return ids;
     }
 }

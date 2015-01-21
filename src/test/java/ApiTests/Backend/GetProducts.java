@@ -22,10 +22,14 @@ import static org.junit.Assert.assertTrue;
 public class GetProducts {
     @Test
     public boolean testGetProducts(String scheme, TestUser User) throws Exception {
+        long startTime;
+        long elapsedTime;
         String url = "products/api/products/";
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -82,6 +86,7 @@ public class GetProducts {
             }
             assertEquals("Incorrect count of object attributes", object.length(), 13);
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
     public static int[] getProductsIDs(String scheme, TestUser user) throws Exception {

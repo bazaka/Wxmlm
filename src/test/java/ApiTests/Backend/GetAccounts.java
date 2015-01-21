@@ -2,26 +2,32 @@ package ApiTests.Backend;
 
 import ApiTests.ObjectClasses.Account;
 import ApiTests.UsedByAll.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.junit.Test;
-import org.json.*;
-import ApiTests.UsedByAll.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import com.thoughtworks.selenium.SeleneseTestBase.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class GetAccounts {
 
     @Test
     public boolean testGetAccounts(String scheme, TestUser user) throws Exception {
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/accounts/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -51,6 +57,7 @@ public class GetAccounts {
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
             assertEquals("Incorrect count of Json parameters", object.length(), 8);
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 

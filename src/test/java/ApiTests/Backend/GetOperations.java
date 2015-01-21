@@ -17,9 +17,13 @@ public class GetOperations {
 
     @Test
     public boolean testGetOperations(String scheme, TestUser user) throws Exception {
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -53,6 +57,7 @@ public class GetOperations {
             assertTrue("Incorrect parent_operation_id", ValidationChecker.checkIdOrNull(object.get("parent_operation_id")));
             assertEquals("Incorrect count of Json parameters", object.length(), 12);
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 

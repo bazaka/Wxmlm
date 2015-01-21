@@ -23,10 +23,13 @@ public class GetPurchases {
 
     @Test
     public boolean testGetPurchases(String scheme, TestUser testUser) throws Exception{
-
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -52,7 +55,7 @@ public class GetPurchases {
             assertTrue("Incorrect terms", ValidationChecker.checkStringOrNull(object.get("terms")));
             assertEquals("Incorrect count of JSON Objects", object.length(),9);
         }
-
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 

@@ -19,16 +19,19 @@ import static org.junit.Assert.assertTrue;
 public class GetModuleInfo {
     @Test
     public boolean testGetModuleInfo(String scheme, TestUser user) throws Exception {
+        long startTime;
+        long elapsedTime;
         int[] ids = GetProducts.getProductsIDs(scheme, user);
         int responseCode;
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение
+            startTime = System.currentTimeMillis();
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-info/?product_id=" + ids[i], "GET");
 
             // Отправляем запрос
             assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200));
             InputStream inStrm = httpCon.getInputStream();
-
+            elapsedTime = System.currentTimeMillis() - startTime;
             // Читаем ответ
             InputStreamReader isReader = new InputStreamReader(inStrm);
             BufferedReader br = new BufferedReader(isReader);
@@ -50,6 +53,7 @@ public class GetModuleInfo {
             assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
             assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
             assertEquals("Incorrect count of Json parameters", object.length(), 7);
+            System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime +" by product_id = " +i);
         }
         return true;
     }

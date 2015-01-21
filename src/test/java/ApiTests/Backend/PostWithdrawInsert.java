@@ -35,14 +35,18 @@ public class PostWithdrawInsert {
             System.out.println("Bank details is missing in Withdraw object");
             return false;
         }
+        long startTime;
+        long elapsedTime;
 
         // Содзаем URL
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/insert/", "POST", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -61,6 +65,7 @@ public class PostWithdrawInsert {
         // Проверяем GET-запросом, что данные обновились
         Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", newOneId, user, scheme);
         assertTrue("Check modified data saved correctly", newOne.equalsWithNew(changedOne));
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 }

@@ -1,12 +1,12 @@
 package ApiTests.LoginFree;
 
-import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
+import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
-import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONObject;
 import org.junit.Test;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,8 +25,8 @@ public class GetApplicationInfo {
         long elapsedTime;
         int responseCode;
         if (!config.getIsHttpsConnection()) {
-            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
             startTime = System.currentTimeMillis();
+            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
             inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;
@@ -56,7 +56,7 @@ public class GetApplicationInfo {
         assertTrue("Incorrect path", ValidationChecker.checkStringNotNull(object.getString("path")));
         assertTrue("Incorrect status", object.getBoolean("status"));
         assertEquals("Incorrect count of Json parameters", object.length(), 5);
-        System.out.println("Проверка API GET app info пройдена. Total elapsed http request/response time in milliseconds: " + elapsedTime);
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 }

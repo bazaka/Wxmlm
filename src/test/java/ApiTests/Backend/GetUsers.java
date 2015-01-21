@@ -17,10 +17,14 @@ import static org.junit.Assert.*;
 public class GetUsers {
     @Test
     public boolean testGetUsers(String scheme, TestUser User) throws Exception{
+        long startTime;
+        long elapsedTime;
         String url = "users/api/users/";
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -76,6 +80,7 @@ public class GetUsers {
             assertTrue("Incorrect isApproved",ValidationChecker.checkBooleanValue(object.getBoolean("is_approved")));
             assertEquals("Incorrect count of Json Objects", object.length(), 35);
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 }

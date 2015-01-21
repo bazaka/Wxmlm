@@ -13,17 +13,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 //* Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
 public class GetModuleContent {
     @Test
     public boolean testGetModuleContent(String scheme, TestUser user) throws Exception {
+        long startTime;
+        long elapsedTime;
         int[] ids = GetProducts.getProductsIDs(scheme, user);
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение
+            startTime = System.currentTimeMillis();
             HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-content/?product_id=" + ids[i], "GET");
 
             // Отправляем запрос
@@ -32,6 +33,7 @@ public class GetModuleContent {
             // Читаем ответ
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
             InputStreamReader isReader = new InputStreamReader(inStrm);
+            elapsedTime = System.currentTimeMillis() - startTime;
             BufferedReader br = new BufferedReader(isReader);
             String result = "";
             String line;
@@ -52,6 +54,7 @@ public class GetModuleContent {
             else {
                 //Проверяем структуру
                 assertTrue("Incorrect content", ValidationChecker.checkStringNotNull(object.getString("source")));
+                System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime +" by product_id = " +i);
             }
         }
         return true;

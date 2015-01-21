@@ -21,9 +21,13 @@ public class GetWithdraws {
 
     @Test
     public boolean testGetWithdraws(String scheme, TestUser user) throws Exception {
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -66,6 +70,7 @@ public class GetWithdraws {
                 assertEquals("Incorrect count of Bank details parameters", details.length(), 6);
                 }
         }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 

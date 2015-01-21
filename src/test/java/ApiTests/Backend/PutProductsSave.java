@@ -64,13 +64,16 @@ public class PutProductsSave {
             System.out.println("Unrecognised category_id");
             return false;
         }
-
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         // Содзаем URL
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
         Product changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, scheme);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne, true));
@@ -85,6 +88,7 @@ public class PutProductsSave {
         // Проверяем GET-запросом, что данные восстановились
         changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, scheme);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne, true));
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 
@@ -126,12 +130,16 @@ public class PutProductsSave {
             System.out.println("Unrecognised category_id");
             return false;
         }
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";
@@ -150,6 +158,7 @@ public class PutProductsSave {
         //Проверяем Get-запросом, что данный обновились
         Product changedOne = new GetProducts().getProductByParameter("id", newOneId, testUser, scheme);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne, false));
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 }
