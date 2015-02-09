@@ -22,20 +22,18 @@ public class BuyPackageSingleTest {
     WebDriver driver = new FirefoxDriver();
     @Test
     public void buyPackageSingleTest(TestUser testUser) throws IOException {
+        InvestmentPackagesPage investmentPackagesPage = new InvestmentPackagesPage(driver);
         driver.manage().window().maximize();
         WebDriverWait wait = new WebDriverWait(driver,5);
         LogInPage loginPage = new LogInPage(driver);
-        Element element = new Element();
-
         loginPage.open();
         assertTrue("Page not opened", loginPage.isOpened());
-
         loginPage.goLogin(testUser);
-        Assert.assertEquals(loginPage.getTitle(), "KairosNet"); // логінимось
-        wait.until(ExpectedConditions.visibilityOfElementLocated(InvestmentPackagesPage.products));
-        driver.findElement(InvestmentPackagesPage.products).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(InvestmentPackagesPage.firstActiveBuyButton));
-        driver.findElement(InvestmentPackagesPage.firstActiveBuyButton).click();
+        Assert.assertEquals(loginPage.getTitle(), "KairosNet");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(AuthorizedUserPage.products));
+        driver.findElement(AuthorizedUserPage.products).click();
+        System.out.println("Перешли на Продукты");
+        investmentPackagesPage.clickFirstActiveBuyButton();
         wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
         String packageName = PackageCartPage.packageNameElement.toString();
         System.out.println(packageName);
@@ -45,7 +43,6 @@ public class BuyPackageSingleTest {
             paymentAmount = PackageCartPage.getRequiredFeeToIncrease(driver);
         }
         System.out.println("Payment amount: " + paymentAmount);
-
 /*
         driver.findElement(PackageCartPage.buyButtonElement).click();
         System.out.println("Инициировал покупку пакета следующего уровня");
@@ -53,7 +50,6 @@ public class BuyPackageSingleTest {
 */
         driver.findElement(PackageCartPage.purchasesItem).click();
         System.out.println("Перешел в мои покупки");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
 
 
     }
