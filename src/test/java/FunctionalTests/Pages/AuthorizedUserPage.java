@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // * Created for W-xmlm by Fill on 05.01.2015.
 public class AuthorizedUserPage {
     WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver,20);
+    WebDriverWait wait;
     public AuthorizedUserPage(WebDriver driver, WebDriverWait wait) {this.driver = driver; this.wait = wait;}
     private static final By home = By.xpath("//div[@id='head-nav']//li[4]/a[@href='/']");
     private static final By money = By.xpath("//div[@id='head-nav']//li[8]/a[@href='/money/']");
@@ -20,14 +20,17 @@ public class AuthorizedUserPage {
     public static final By mySettings = By.linkText("//a[text()='My Settings']");
     public static final By profile = By.linkText("//a[text()='Profile']");
     public static final By messages = By.linkText("//a[text()='Sign Out']");
-    public static final By successMessage = By.xpath("//div[@class='gritter-item']//span[text()='Success!']");
+    public static final By successMessage = By.xpath("//span[@class='gritter-title'][text()='Success!']");
 
     public void goUserMenu(){
         driver.findElement(userMenu).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[text()='Profile']")));
     }
     public void goProducts(){
-        WebDriverWait wait = new WebDriverWait(driver,20);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(products));
         driver.findElement(products).click();
+    }
+    public void waitForSuccessMessage(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.successMessage));
     }
 }

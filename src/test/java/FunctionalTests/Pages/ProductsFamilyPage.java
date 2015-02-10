@@ -12,4 +12,8 @@ public class ProductsFamilyPage extends AuthorizedUserPage {
     public static final By servicesItem = By.xpath("//a[contains(text(), '  Services')]");
     public static final By trainingItem = By.xpath("//a[contains(text(), '  Training')]");
     public static final By purchasesItem = By.xpath("//a[contains(text(), ' Purchases')]");
+
+    public void goToPurchases() {
+        driver.findElement(PackageCartPage.purchasesItem).click();
+    }
 }
