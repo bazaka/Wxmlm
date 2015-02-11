@@ -16,11 +16,11 @@ import static org.junit.Assert.*;
 
 public class GetPurchases {
     public String url = "products/api/purchase/";
-    public boolean testGetPurchases(String scheme, TestUser testUser) throws Exception{
+    public boolean testGetPurchases(String siteUrl, TestUser testUser) throws Exception{
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -53,8 +53,8 @@ public class GetPurchases {
         return true;
     }
 
-    public Purchases getAnyPurchase(TestUser testUser, String scheme) throws IOException, JSONException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET");
+    public Purchases getAnyPurchase(TestUser testUser, String siteUrl) throws IOException, JSONException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -75,8 +75,8 @@ public class GetPurchases {
         return new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
     }
 
-    public Purchases getPurchaseByParameter(String parameterName, int parameterValue, TestUser testUser, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 500, "GET" );
+    public Purchases getPurchaseByParameter(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET" );
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

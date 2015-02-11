@@ -15,11 +15,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetConfig {
-    public boolean testGetConfig(String scheme, TestUser user) throws Exception {
+    public boolean testGetConfig(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -51,8 +51,8 @@ public class GetConfig {
         return true;
     }
 
-    public Config getAnyConfig(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 50, "GET");
+    public Config getAnyConfig(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 50, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -73,8 +73,8 @@ public class GetConfig {
         }
     }
 
-    public Config getConfigByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "config/api/values/", 1, "GET");
+    public Config getConfigByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

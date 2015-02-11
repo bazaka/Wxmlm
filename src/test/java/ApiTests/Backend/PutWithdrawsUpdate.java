@@ -11,8 +11,8 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 02.12.2014. Update withdraws
 public class PutWithdrawsUpdate {
-    public boolean testPutWithdrawsUpdate(String scheme, TestUser user) throws IOException {
-        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
+    public boolean testPutWithdrawsUpdate(String siteUrl, TestUser user) throws IOException {
+        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, siteUrl);
         if (originalOne == null) {
             return false;
         }
@@ -37,7 +37,7 @@ public class PutWithdrawsUpdate {
         long elapsedTime;
         // Содзаем URL
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
 
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
@@ -46,18 +46,18 @@ public class PutWithdrawsUpdate {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
-        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
+        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne));
 
         // Содзаем URL
-        httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
+        httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/update/", "PUT", "application/json", "application/json", true);
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, scheme);
+        changedOne = new GetWithdraws().getWithdrawByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;

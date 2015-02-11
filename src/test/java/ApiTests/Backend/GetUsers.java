@@ -13,12 +13,12 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.*;
 
 public class GetUsers {
-    public boolean testGetUsers(String scheme, TestUser User) throws Exception{
+    public boolean testGetUsers(String siteUrl, TestUser User) throws Exception{
         long startTime;
         long elapsedTime;
         String url = "users/api/users/";
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, User, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

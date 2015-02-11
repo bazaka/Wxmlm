@@ -15,25 +15,25 @@ public class LoginFreeAPITest {
     @Test
     public void runLoginFreeAPITests() throws Exception {
         Config config = Config.getConfig();
-        String scheme = config.getScheme(); // Урл проверяемого сайта
+        String siteUrl = config.getProtocol() + config.getScheme(); // Урл проверяемого сайта
         TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
         boolean isComplete = true;
         for (TestUser aTestUser : testUser) {
-            if (RegionMatch.IsStringRegionMatch(aTestUser.getUseInTest(), "_BackendAPITest(")) {
+            if (RegionMatch.IsStringRegionMatch(aTestUser.getUseInTest(), "_LoginFreeAPITest(")) {
                 // GET app info test run
-                if (!(new GetApplicationInfo().testGetApplicationInfo(config))) {
+                if (!(new GetApplicationInfo().testGetApplicationInfo(siteUrl))) {
                     System.out.println("Проверка API GET app info НЕ пройдена");
                     isComplete = false;
                 }
                 // GET module info test run
-                if (new GetModuleInfo().testGetModuleInfo(scheme, aTestUser)) {
+                if (new GetModuleInfo().testGetModuleInfo(siteUrl, aTestUser)) {
                     System.out.println("Проверка API GET module info пройдена");
                 } else {
                     System.out.println("Проверка API GET module info НЕ пройдена");
                     isComplete = false;
                 }
                 // GET module content test run
-                if (new GetModuleContent().testGetModuleContent(scheme, aTestUser)) {
+                if (new GetModuleContent().testGetModuleContent(siteUrl, aTestUser)) {
                     System.out.println("Проверка API GET module content пройдена");
                 } else {
                     System.out.println("Проверка API GET module content НЕ пройдена");

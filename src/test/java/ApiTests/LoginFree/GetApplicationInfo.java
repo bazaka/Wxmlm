@@ -2,9 +2,7 @@ package ApiTests.LoginFree;
 
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
-import UsedByAll.Config;
 import org.json.JSONObject;
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,26 +12,15 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 04.12.2014. Gets application's current version
 public class GetApplicationInfo {
-    public boolean testGetApplicationInfo(Config config) throws Exception {
-        String scheme = config.getScheme();
+    public boolean testGetApplicationInfo(String siteUrl) throws Exception {
         InputStream inStrm;
         long startTime;
         long elapsedTime;
-        int responseCode;
-        if (!config.getIsHttpsConnection()) {
-            startTime = System.currentTimeMillis();
-            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-application-info/", "GET");
-            assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-            inStrm = httpCon.getInputStream();
-            elapsedTime = System.currentTimeMillis() - startTime;
-        }
-        else {
-            HttpsURLConnection httpsCon = MakeRequest.getHttpsConnection(scheme, "application/api/desktop/get-application-info/", "GET");
-            startTime = System.currentTimeMillis();
-            assertTrue("Check response code is 200", httpsCon.getResponseCode() == 200);
-            inStrm = httpsCon.getInputStream();
-            elapsedTime = System.currentTimeMillis() - startTime;
-        }
+        startTime = System.currentTimeMillis();
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "application/api/desktop/get-application-info/", "GET");
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        inStrm = httpCon.getInputStream();
+        elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
         String result = "";

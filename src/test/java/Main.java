@@ -38,7 +38,7 @@ public class Main
         for (int i = 0; i < testUser.length; i++)
         {
             // FreeLogin API (authorization don't needed)
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
+/*            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
             {
                 System.out.println("Запуск тестов LoginFreeAPITest пользователем " + testUser[i].getFullName() + ", email - " + testUser[i].getEmail());
                 LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
@@ -51,7 +51,7 @@ public class Main
                 catch (Exception e) { e.printStackTrace();
                     System.out.println("Проверка LoginFree API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
-            }
+            }*/
 
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
                 RecoveryTest newRecoveryTest = new RecoveryTest();

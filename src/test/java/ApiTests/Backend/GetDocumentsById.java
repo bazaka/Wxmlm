@@ -19,15 +19,15 @@ import static org.junit.Assert.assertTrue;
  */
 public class GetDocumentsById {
     static final String url = "users/api/documents/get/?id=";
-    public boolean testGetDocumentsById(String scheme, TestUser testUser) throws IOException, JSONException {
+    public boolean testGetDocumentsById(String siteUrl, TestUser testUser) throws IOException, JSONException {
 
 
-        int[] ids = GetDocuments.getDocumentsId(scheme, testUser);
+        int[] ids = GetDocuments.getDocumentsId(siteUrl, testUser);
         for(int i=0; i<(ids.length -1); i++){
             System.out.println("id: "+ids[i]);
             //создаем соединение
 
-            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url+ids[i], "GET");
+            HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url+ids[i], "GET");
             InputStream inStrm = httpCon.getInputStream();
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 

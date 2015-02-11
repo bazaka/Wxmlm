@@ -13,8 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 11.12.2014.
 public class PutProductsSave {
-    public boolean testPutProductsUpdate(String scheme, TestUser user) throws IOException {
-        Product originalOne = new GetProducts().getAnyProduct(user, scheme);
+    public boolean testPutProductsUpdate(String siteUrl, TestUser user) throws IOException {
+        Product originalOne = new GetProducts().getAnyProduct(user, siteUrl);
         if (originalOne == null) {
             return false;
         }
@@ -65,32 +65,32 @@ public class PutProductsSave {
         long elapsedTime;
         startTime = System.currentTimeMillis();
         // Содзаем URL
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "products/api/product/save/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
-        Product changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, scheme);
+        Product changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne, true));
 
         // Содзаем URL
-        httpCon = MakeRequest.getConnection(scheme, user, "products/api/product/save/", "PUT", "application/json", "application/json", true);
+        httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         // Проверяем GET-запросом, что данные восстановились
-        changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, scheme);
+        changedOne = new GetProducts().getProductByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne, true));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
 
-    public boolean testPutProductsInsert(String scheme, TestUser testUser) throws IOException, JSONException {
-        Product originalOne = new GetProducts().getAnyProduct(testUser, scheme);
+    public boolean testPutProductsInsert(String siteUrl, TestUser testUser) throws IOException, JSONException {
+        Product originalOne = new GetProducts().getAnyProduct(testUser, siteUrl);
         if (originalOne == null) {
             return false;
         }
@@ -130,7 +130,7 @@ public class PutProductsSave {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, "products/api/product/save/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "products/api/product/save/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
@@ -153,7 +153,7 @@ public class PutProductsSave {
         int newOneId = Integer.parseInt(report.replaceAll("[\\D]", ""));
 
         //Проверяем Get-запросом, что данный обновились
-        Product changedOne = new GetProducts().getProductByParameter("id", newOneId, testUser, scheme);
+        Product changedOne = new GetProducts().getProductByParameter("id", newOneId, testUser, siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne, false));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;

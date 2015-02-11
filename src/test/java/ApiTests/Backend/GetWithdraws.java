@@ -17,11 +17,11 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Get Withdraws test
 public class GetWithdraws {
-    public boolean testGetWithdraws(String scheme, TestUser user) throws Exception {
+    public boolean testGetWithdraws(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -71,8 +71,8 @@ public class GetWithdraws {
         return true;
     }
 
-    public Withdraw getAnyWithdraw(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
+    public Withdraw getAnyWithdraw(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -105,8 +105,8 @@ public class GetWithdraws {
         }
     }
 
-    public Withdraw getWithdrawByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/", 500, "GET");
+    public Withdraw getWithdrawByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

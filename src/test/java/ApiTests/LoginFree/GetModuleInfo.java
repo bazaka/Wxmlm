@@ -16,15 +16,15 @@ import static org.junit.Assert.assertTrue;
 
 //* Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
 public class GetModuleInfo {
-    public boolean testGetModuleInfo(String scheme, TestUser user) throws Exception {
+    public boolean testGetModuleInfo(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
-        int[] ids = GetProducts.getProductsIDs(scheme, user);
+        int[] ids = GetProducts.getProductsIDs(siteUrl, user);
 
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение
             startTime = System.currentTimeMillis();
-            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-info/?product_id=" + ids[i], "GET");
+            HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "application/api/desktop/get-module-info/?product_id=" + ids[i], "GET");
 
             // Отправляем запрос
             int responseCode = httpCon.getResponseCode();
@@ -69,7 +69,7 @@ public class GetModuleInfo {
                 assertTrue("Incorrect version", ValidationChecker.checkStringNotNull(object.getString("version")));
                 assertTrue("Incorrect description", ValidationChecker.checkStringOrNull(object.getString("description")));
                 assertTrue("Incorrect filename", ValidationChecker.checkStringNotNull(object.getString("filename")));
-                assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), scheme));
+                assertTrue("Incorrect url", ValidationChecker.checkURLOnDomain(object.getString("url"), siteUrl));
                 assertEquals("Incorrect count of Json parameters", object.length(), 7);
             }
             System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime + " by product_id = " + i);

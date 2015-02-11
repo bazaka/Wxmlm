@@ -14,11 +14,11 @@ import static org.junit.Assert.assertTrue;
 // * Created for W-xmlm by Fill on 25.11.2014. Проверяет метод АПИ GET Operations
 public class GetOperations {
 
-    public boolean testGetOperations(String scheme, TestUser user) throws Exception {
+    public boolean testGetOperations(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/operations/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -59,8 +59,8 @@ public class GetOperations {
         return true;
     }
 
-    public Operation getAnyOperation(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 500, "GET");
+    public Operation getAnyOperation(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/operations/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -84,8 +84,8 @@ public class GetOperations {
         }
     }
 
-    public Operation getOperationByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/", 1, "GET");
+    public Operation getOperationByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/operations/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

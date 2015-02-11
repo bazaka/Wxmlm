@@ -17,12 +17,12 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 08.12.2014. GET Products
 public class GetProducts {
-    public boolean testGetProducts(String scheme, TestUser User) throws Exception {
+    public boolean testGetProducts(String siteUrl, TestUser User) throws Exception {
         long startTime;
         long elapsedTime;
         String url = "products/api/products/";
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, User, url, 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, User, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -52,7 +52,7 @@ public class GetProducts {
             assertTrue("Incorrect type", ValidationChecker.checkProductTypeId(object.getInt("type")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect image_url", ValidationChecker.checkStringOrNull(object.get("image_url")));
-            assertTrue("Incorrect product_url", ValidationChecker.checkURLOnDomain(object.getString("product_url"), scheme));
+            assertTrue("Incorrect product_url", ValidationChecker.checkURLOnDomain(object.getString("product_url"), siteUrl));
             if (object.getInt("category_id") == 1) {
                 assertTrue("Incorrect available", ValidationChecker.checkStringOrNull(attributes.get("available")) || ValidationChecker.checkPositiveInt(attributes.getInt("available")));
                 assertTrue("Incorrect discSpace", ValidationChecker.checkStringOrNull(attributes.get("discSpace")));
@@ -85,9 +85,9 @@ public class GetProducts {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
-    public static int[] getProductsIDs(String scheme, TestUser user) throws Exception {
+    public static int[] getProductsIDs(String siteUrl, TestUser user) throws Exception {
         String url = "products/api/products/";
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, url, 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -108,8 +108,8 @@ public class GetProducts {
         }
         return ids;
     }
-    public Product getAnyProduct(TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "products/api/products/", 500, "GET");
+    public Product getAnyProduct(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/products/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -148,8 +148,8 @@ public class GetProducts {
             return null;
         }
     }
-    public Product getProductByParameter(String parameterName, int parameterValue, TestUser user, String scheme) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "products/api/products/", 1, "GET");
+    public Product getProductByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/products/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

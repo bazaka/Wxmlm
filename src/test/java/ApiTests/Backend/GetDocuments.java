@@ -20,11 +20,11 @@ import static org.junit.Assert.assertTrue;
  */
 public class GetDocuments {
     static final String url = "users/api/documents/";
-    public boolean testGetDocuments(String scheme, TestUser testUser) throws IOException, JSONException {
+    public boolean testGetDocuments(String siteUrl, TestUser testUser) throws IOException, JSONException {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -60,11 +60,11 @@ public class GetDocuments {
         return true;
 
     }
-    public static int[] getDocumentsId(String scheme, TestUser testUser) throws IOException, JSONException {
+    public static int[] getDocumentsId(String siteUrl, TestUser testUser) throws IOException, JSONException {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, testUser, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

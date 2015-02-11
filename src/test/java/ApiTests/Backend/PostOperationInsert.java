@@ -14,16 +14,16 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Insert single operation
 public class PostOperationInsert {
-    public boolean testPostOperationInsert(String scheme, TestUser user) throws IOException, JSONException {
+    public boolean testPostOperationInsert(String siteUrl, TestUser user) throws IOException, JSONException {
         long startTime;
         long elapsedTime;
-        Operation originalOne = new GetOperations().getAnyOperation(user, scheme);
+        Operation originalOne = new GetOperations().getAnyOperation(user, siteUrl);
         Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.getStatus(), originalOne.getType(), !originalOne.getQuarantine(), originalOne.getParentOperationId());
         String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + ", \"parent_operation_id\": " + newOne.getParentOperationId() + "}";
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/operations/insert/", "POST", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/operations/insert/", "POST", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
@@ -46,7 +46,7 @@ public class PostOperationInsert {
         int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Operation changedOne = new GetOperations().getOperationByParameter("id", newOneId, user, scheme);
+        Operation changedOne = new GetOperations().getOperationByParameter("id", newOneId, user, siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;

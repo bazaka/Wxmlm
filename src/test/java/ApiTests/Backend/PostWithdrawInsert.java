@@ -12,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 03.12.2014. Insert single withdraw by API
 public class PostWithdrawInsert {
-    public boolean testPostWithdrawInsert(String scheme, TestUser user) throws IOException, JSONException {
-        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
+    public boolean testPostWithdrawInsert(String siteUrl, TestUser user) throws IOException, JSONException {
+        Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, siteUrl);
         if (originalOne == null) {
             return false;
         }
@@ -36,7 +36,7 @@ public class PostWithdrawInsert {
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(scheme, user, "money/api/withdraws/insert/", "POST", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/withdraws/insert/", "POST", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
@@ -59,7 +59,7 @@ public class PostWithdrawInsert {
         int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", newOneId, user, scheme);
+        Withdraw changedOne = new GetWithdraws().getWithdrawByParameter("id", newOneId, user, siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsWithNew(changedOne));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;

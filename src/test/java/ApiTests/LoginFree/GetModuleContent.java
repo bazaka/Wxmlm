@@ -16,14 +16,14 @@ import static org.junit.Assert.assertTrue;
 
 //* Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
 public class GetModuleContent {
-    public boolean testGetModuleContent(String scheme, TestUser user) throws Exception {
+    public boolean testGetModuleContent(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
-        int[] ids = GetProducts.getProductsIDs(scheme, user);
+        int[] ids = GetProducts.getProductsIDs(siteUrl, user);
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение
             startTime = System.currentTimeMillis();
-            HttpURLConnection httpCon = MakeRequest.getConnection(scheme, "application/api/desktop/get-module-content/?product_id=" + ids[i], "GET");
+            HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "application/api/desktop/get-module-content/?product_id=" + ids[i], "GET");
 
             // Читаем ответ
             int responseCode = httpCon.getResponseCode();
