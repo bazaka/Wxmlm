@@ -15,4 +15,6 @@ public class PackageCartPage extends ProductsFamilyPage {
     public static String getPrice(WebDriver driver) {
         return driver.findElement(By.xpath("//td[text()=' Price:']/../td[@class='text-right']")).getText();
     }
+
+    public PackageCartPage(WebDriver driver){super(driver);}
 }

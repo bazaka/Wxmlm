@@ -1,6 +1,7 @@
 package FunctionalTests.Pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 // * Created for W-xmlm by Fill on 12.01.2015.
 public class ProductsFamilyPage extends AuthorizedUserPage {
@@ -9,4 +10,6 @@ public class ProductsFamilyPage extends AuthorizedUserPage {
     public static final By servicesItem = By.xpath("//a[contains(text(), '  Services')]");
     public static final By trainingItem = By.xpath("//a[contains(text(), '  Training')]");
     public static final By purchasesItem = By.xpath("//a[contains(text(), '  Purchases')]");
+
+    public ProductsFamilyPage(WebDriver driver){super(driver);}
 }
