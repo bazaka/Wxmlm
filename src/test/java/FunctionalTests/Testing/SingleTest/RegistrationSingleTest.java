@@ -63,7 +63,7 @@ public class RegistrationSingleTest extends RegistrationTest{
 
 
 
-        assertEquals(registrationPage.confirmActivation(activationLink), "Congrats " + testUser.getEmail() + ", your account is now activated.");
+        assertEquals(registrationPage.confirmActivation(activationLink), "Congrats, " + testUser.getEmail() + ", your account is now activated.");
 
         //checkCorrectData(testUser);
 
