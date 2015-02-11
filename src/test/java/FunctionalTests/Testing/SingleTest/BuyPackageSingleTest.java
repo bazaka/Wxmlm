@@ -1,9 +1,6 @@
 package FunctionalTests.Testing.SingleTest;
 
-import FunctionalTests.Pages.AuthorizedUserPage;
-import FunctionalTests.Pages.InvestmentPackagesPage;
-import FunctionalTests.Pages.LogInPage;
-import FunctionalTests.Pages.PackageCartPage;
+import FunctionalTests.Pages.*;
 import UsedByAll.Element;
 import UsedByAll.TestUser;
 import org.junit.After;
@@ -11,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.junit.Assert;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -23,9 +21,14 @@ public class BuyPackageSingleTest {
     WebDriverWait wait = new WebDriverWait(driver,5);
     @Test
     public void buyPackageSingleTest(TestUser testUser) throws IOException {
+
+        //Объявляем страницы, которые будут использоваться в тесте
         AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver, wait);
         InvestmentPackagesPage investmentPackagesPage = new InvestmentPackagesPage(driver, wait);
         PackageCartPage packageCartPage = new PackageCartPage(driver, wait);
+        PurchasesPage purchasesPage = new PurchasesPage(driver, wait);
+        AccountsPage accountsPage = new AccountsPage(driver,wait);
+        OperationHistoryPage operationHistoryPage = new OperationHistoryPage(driver, wait);
         driver.manage().window().maximize();
 
         //Авторизируемся
@@ -41,14 +44,23 @@ public class BuyPackageSingleTest {
         //Переходим в корзину
         investmentPackagesPage.clickFirstActiveBuyButton();
 
-        //В корзине запоминаем сумму к оплате и кликаем купить, после чего ждем сообщения о успешной покупке
+        //В корзине запоминаем цену, сумму к оплате и кликаем купить, после чего ждем сообщения о успешной покупке
+        String price = packageCartPage.getPrice();
         String paymentAmount = packageCartPage.getPaymentAmount();
         packageCartPage.clickBuyButton();
         packageCartPage.waitForSuccessMessage();
 
-        //Перехожу в "Мои покупки"
+        //Переходим в "Мои покупки", сравниваем цены
         packageCartPage.goToPurchases();
+        assertTrue("Price of last purchase is different from my purchase. Maybe my purchase item's not shown in purchases table", price.equals(purchasesPage.getLastPurchasePrice()));
 
+        //Переходим в "Мои операции", проверяем данные последней операции
+        packageCartPage.goMoney();
+        accountsPage.goToOperationHistory();
+        assertTrue("Type of last operation is different from \"Buy product\". Maybe my operation item's not shown in purchases table", "Buy product".equals(operationHistoryPage.getLastOperationType()));
+        assertTrue("Sender of last operation is different from \"Me, Current\". Maybe my operation item's not shown in purchases table", "Me, Current".equals(operationHistoryPage.getLastOperationSender()));
+        assertTrue("Amount of last operation is different from required fee for my purchase. Maybe my operation item's not shown in purchases table", paymentAmount.equals(operationHistoryPage.getLastOperationAmount()));
+        assertTrue("Status of last operation is different from \"Sent\". Maybe my operation item's not shown in purchases table", "Sent".equals(operationHistoryPage.getLastOperationStatus()));
     }
     @After
     public void tearDown(){

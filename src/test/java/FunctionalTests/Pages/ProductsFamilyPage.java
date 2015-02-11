@@ -14,6 +14,6 @@ public class ProductsFamilyPage extends AuthorizedUserPage {
     public static final By purchasesItem = By.xpath("//a[contains(text(), ' Purchases')]");
 
     public void goToPurchases() {
-        driver.findElement(PackageCartPage.purchasesItem).click();
+        driver.findElement(purchasesItem).click();
     }
 }

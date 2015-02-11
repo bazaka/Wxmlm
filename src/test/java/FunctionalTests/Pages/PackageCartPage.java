@@ -10,26 +10,32 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class PackageCartPage extends ProductsFamilyPage {
     public PackageCartPage(WebDriver driver, WebDriverWait wait) {super(driver, wait);}
     public static final By buyButtonElement = By.xpath("//a[contains(text(), ' Buy')]");
-    public static final By requiredFeeToIncreaseElement = By.xpath("//td[text()=' Required fee to increase: ']");
+    public static final By requiredFeeToIncreaseElement = By.xpath("//td[text()=' Required fee to increase: ']/../td[@class='text-right']");
+    public static final By price = By.xpath("//td[text()=' Price:']/../td[@class='text-right']");
     public static final By packageNameElement = By.xpath("//div[@class='content']//div[@class='header']/h3/strong");
 
     public String getRequiredFeeToIncrease() {
-        return driver.findElement(By.xpath("//td[text()=' Required fee to increase: ']/../td[@class='text-right']")).getText();
+        return driver.findElement(requiredFeeToIncreaseElement).getText();
     }
     public String getPrice() {
-        return driver.findElement(By.xpath("//td[text()=' Price:']/../td[@class='text-right']")).getText();
+        return driver.findElement(price).getText();
     }
     public String getPaymentAmount() {
-        PackageCartPage packageCartPage = new PackageCartPage(driver, wait);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
-        String paymentAmount = packageCartPage.getPrice();
-        if (Element.isElementExists(driver, PackageCartPage.requiredFeeToIncreaseElement))
+        wait.until(ExpectedConditions.visibilityOfElementLocated(buyButtonElement));
+        String paymentAmount = getPrice();
+        if (Element.isElementExists(driver, requiredFeeToIncreaseElement))
         {
-            paymentAmount = packageCartPage.getRequiredFeeToIncrease();
+            paymentAmount = getRequiredFeeToIncrease();
         }
         return paymentAmount;
     }
     public void clickBuyButton() {
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(buyButtonElement));
+        }  catch (Exception e) {
+            System.out.println("There is no buy button on cart");
+            e.printStackTrace();
+        }
         driver.findElement(buyButtonElement).click();
     }
 }

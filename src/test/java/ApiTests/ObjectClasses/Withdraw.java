@@ -1,7 +1,5 @@
 package ApiTests.ObjectClasses;
 
-import java.lang.Double;
-
 // * Created for W-xmlm by Fill on 01.12.2014.
 public class Withdraw {
     private int id;
