@@ -7,9 +7,6 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.Calendar;
@@ -17,13 +14,6 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Insert single operation
 public class PostOperationInsert {
-
-    @Before
-    public void setUp(String scheme) throws Exception {
-        System.out.println("Запускаю селениум для проверки API-метода PUT Operations update на " + scheme);
-    }
-
-    @Test
     public boolean testPostOperationInsert(String scheme, TestUser user) throws IOException, JSONException {
         long startTime;
         long elapsedTime;
@@ -61,6 +51,4 @@ public class PostOperationInsert {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
-    @After
-    public void tearDown() throws Exception {}
 }

@@ -5,8 +5,6 @@ import ApiTests.ObjectClasses.Purchases;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
 import org.json.JSONException;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -14,10 +12,9 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 12/10/2014.
+ * Created by User on 12/10/2014. Проверяет метод АПИ PUT Purchases update
  */
 public class PutPurchasesUpdate {
-    @Test
     public boolean testPutPurchasesUpdate(String scheme, TestUser testUser) throws IOException, JSONException {
         Purchases originalOne = new GetPurchases().getAnyPurchase(testUser, scheme);
         Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), originalOne.getDate(), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 1, originalOne.getTerms() );

@@ -3,21 +3,12 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Account;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 public class PutAccountsUpdate {
-    @Before
-    public void setUp(String scheme) throws Exception {
-        System.out.println("Запускаю селениум для проверки API-метода PUT Accounts update на " + scheme);
-    }
-
-    @Test
     public boolean testPutAccountsUpdate(String scheme, TestUser user) throws IOException {
         long startTime;
         long elapsedTime;
@@ -51,6 +42,4 @@ public class PutAccountsUpdate {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
     }
-    @After
-    public void tearDown() throws Exception {}
 }

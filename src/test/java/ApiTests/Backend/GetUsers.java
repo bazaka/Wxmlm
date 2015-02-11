@@ -5,8 +5,6 @@ import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,7 +13,6 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.*;
 
 public class GetUsers {
-    @Test
     public boolean testGetUsers(String scheme, TestUser User) throws Exception{
         long startTime;
         long elapsedTime;

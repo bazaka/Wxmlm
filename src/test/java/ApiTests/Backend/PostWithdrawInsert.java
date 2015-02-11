@@ -6,16 +6,12 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.*;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 03.12.2014. Insert single withdraw by API
 public class PostWithdrawInsert {
-    @Test
     public boolean testPostWithdrawInsert(String scheme, TestUser user) throws IOException, JSONException {
         Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
         if (originalOne == null) {

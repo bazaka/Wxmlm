@@ -4,20 +4,16 @@ import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 04.12.2014. Gets application's current version
 public class GetApplicationInfo {
-    @Test
     public boolean testGetApplicationInfo(Config config) throws Exception {
         String scheme = config.getScheme();
         InputStream inStrm;

@@ -3,8 +3,6 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Config;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -12,8 +10,6 @@ import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
 
 public class PutConfigUpdate {
-
-    @Test
     public boolean testPutConfigUpdate(String scheme, TestUser user) throws IOException {
         long startTime;
         long elapsedTime;

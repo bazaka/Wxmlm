@@ -1,6 +1,5 @@
 package ApiTests.Backend;
 
-
 import ApiTests.ObjectClasses.Purchases;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
@@ -8,20 +7,15 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.*;
 
 public class GetPurchases {
     public String url = "products/api/purchase/";
-
-    @Test
     public boolean testGetPurchases(String scheme, TestUser testUser) throws Exception{
         long startTime;
         long elapsedTime;

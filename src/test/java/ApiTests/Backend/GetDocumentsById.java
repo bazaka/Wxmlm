@@ -6,23 +6,19 @@ import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 12/12/2014.
+ * Created by User on 12/12/2014. Проверяет метод АПИ GET Documents by id
  */
 public class GetDocumentsById {
     static final String url = "users/api/documents/get/?id=";
-    @Test
     public boolean testGetDocumentsById(String scheme, TestUser testUser) throws IOException, JSONException {
 
 
@@ -68,7 +64,6 @@ public class GetDocumentsById {
             }
 
         }
-
         return true;
     }
 }

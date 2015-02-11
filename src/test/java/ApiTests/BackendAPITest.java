@@ -6,8 +6,6 @@ import UsedByAll.CsvUsersReader;
 import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
 import org.junit.Test;
-
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BackendAPITest {
@@ -129,8 +127,6 @@ public class BackendAPITest {
                     isComplete = false;
                 }
 
-
-// Раскомментировать, когда АПИ продуктов будет возвращать все продукты
                 // PUT API products insert test run
                 if (new PutProductsSave().testPutProductsInsert(scheme, aTestUser)) {
                     System.out.println("API PUT products insert success");

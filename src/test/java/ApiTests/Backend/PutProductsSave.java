@@ -6,8 +6,6 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 
@@ -15,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 11.12.2014.
 public class PutProductsSave {
-    @Test
     public boolean testPutProductsUpdate(String scheme, TestUser user) throws IOException {
         Product originalOne = new GetProducts().getAnyProduct(user, scheme);
         if (originalOne == null) {

@@ -6,16 +6,14 @@ import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
 import java.io.*;
 import java.net.HttpURLConnection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-// * Created for W-xmlm by Fill on 25.11.2014. Тест проверяет метод АПИ GET Operations
+// * Created for W-xmlm by Fill on 25.11.2014. Проверяет метод АПИ GET Operations
 public class GetOperations {
 
-    @Test
     public boolean testGetOperations(String scheme, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;

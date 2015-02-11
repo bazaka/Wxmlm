@@ -6,20 +6,15 @@ import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GetAccounts {
-
-    @Test
     public boolean testGetAccounts(String scheme, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;

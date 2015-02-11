@@ -6,21 +6,17 @@ import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 08.12.2014. GET Products
 public class GetProducts {
-    @Test
     public boolean testGetProducts(String scheme, TestUser User) throws Exception {
         long startTime;
         long elapsedTime;

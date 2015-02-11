@@ -7,8 +7,6 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.Calendar;
@@ -16,10 +14,9 @@ import java.util.Calendar;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 12/11/2014.
+ * Created by User on 12/11/2014. Проверяет метод АПИ POST Purchases insert
  */
 public class PostPurchasesInsert {
-    @Test
     public boolean testPostPurchasesInsert(String scheme, TestUser testUser) throws IOException, JSONException {
         long startTime;
         long elapsedTime;

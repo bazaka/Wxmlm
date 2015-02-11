@@ -6,24 +6,20 @@ import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 12/11/2014.
+ * Created by User on 12/11/2014. Проверяет метод АПИ GET Documents
  */
 public class GetDocuments {
     static final String url = "users/api/documents/";
-    @Test
     public boolean testGetDocuments(String scheme, TestUser testUser) throws IOException, JSONException {
         long startTime;
         long elapsedTime;

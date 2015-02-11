@@ -6,8 +6,6 @@ import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
 import org.json.JSONObject;
-import org.junit.Test;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -18,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 
 //* Created for W-xmlm by Fill on 05.12.2014. Gets module's current version by product_id
 public class GetModuleContent {
-    @Test
     public boolean testGetModuleContent(String scheme, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;

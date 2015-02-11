@@ -3,8 +3,6 @@ package ApiTests.Backend;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
@@ -13,7 +11,6 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 02.12.2014. Update withdraws
 public class PutWithdrawsUpdate {
-    @Test
     public boolean testPutWithdrawsUpdate(String scheme, TestUser user) throws IOException {
         Withdraw originalOne = new GetWithdraws().getAnyWithdraw(user, scheme);
         if (originalOne == null) {

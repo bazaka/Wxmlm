@@ -6,7 +6,6 @@ import ApiTests.ObjectClasses.Withdraw;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +17,6 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 01.12.2014. Get Withdraws test
 public class GetWithdraws {
-
-    @Test
     public boolean testGetWithdraws(String scheme, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;

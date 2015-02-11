@@ -3,15 +3,11 @@ package ApiTests.Backend;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Operation;
 import UsedByAll.TestUser;
-import org.junit.Test;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import static org.junit.Assert.assertTrue;
-
 public class PutOperationsUpdate {
-
-    @Test
     public boolean testPutOperationsUpdate(String scheme, TestUser user) throws IOException {
         long startTime;
         long elapsedTime;
