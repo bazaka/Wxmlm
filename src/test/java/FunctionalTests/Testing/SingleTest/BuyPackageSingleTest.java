@@ -20,41 +20,34 @@ import java.io.IOException;
 // * Created for W-xmlm by Fill on 05.01.2015.
 public class BuyPackageSingleTest {
     WebDriver driver = new FirefoxDriver();
+    WebDriverWait wait = new WebDriverWait(driver,5);
     @Test
     public void buyPackageSingleTest(TestUser testUser) throws IOException {
+        AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver, wait);
+        InvestmentPackagesPage investmentPackagesPage = new InvestmentPackagesPage(driver, wait);
+        PackageCartPage packageCartPage = new PackageCartPage(driver, wait);
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver,5);
-        LogInPage loginPage = new LogInPage(driver);
-        Element element = new Element();
 
+        //Авторизируемся
+        LogInPage loginPage = new LogInPage(driver);
         loginPage.open();
         assertTrue("Page not opened", loginPage.isOpened());
-
         loginPage.goLogin(testUser);
-        Assert.assertEquals(loginPage.getTitle(), "KairosNet"); // логінимось
-        wait.until(ExpectedConditions.visibilityOfElementLocated(InvestmentPackagesPage.products));
-        driver.findElement(InvestmentPackagesPage.products).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(InvestmentPackagesPage.firstActiveBuyButton));
-        driver.findElement(InvestmentPackagesPage.firstActiveBuyButton).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
-        String packageName = PackageCartPage.packageNameElement.toString();
-        System.out.println(packageName);
-        String paymentAmount = PackageCartPage.getPrice(driver);
-        if (Element.isElementExists(driver, PackageCartPage.requiredFeeToIncreaseElement))
-        {
-            paymentAmount = PackageCartPage.getRequiredFeeToIncrease(driver);
-        }
-        System.out.println("Payment amount: " + paymentAmount);
+        Assert.assertEquals(loginPage.getTitle(), "KairosNet");
 
-/*
-        driver.findElement(PackageCartPage.buyButtonElement).click();
-        System.out.println("Инициировал покупку пакета следующего уровня");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.successMessage));
-*/
-        driver.findElement(PackageCartPage.purchasesItem).click();
-        System.out.println("Перешел в мои покупки");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
+        //Переходим на страницу Инвест-пакетов
+        authorizedUserPage.goProducts();
 
+        //Переходим в корзину
+        investmentPackagesPage.clickFirstActiveBuyButton();
+
+        //В корзине запоминаем сумму к оплате и кликаем купить, после чего ждем сообщения о успешной покупке
+        String paymentAmount = packageCartPage.getPaymentAmount();
+        packageCartPage.clickBuyButton();
+        packageCartPage.waitForSuccessMessage();
+
+        //Перехожу в "Мои покупки"
+        packageCartPage.goToPurchases();
 
     }
     @After
