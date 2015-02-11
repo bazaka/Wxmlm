@@ -9,7 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by User on 12/1/2014.
  */
+
 public class LogInPage extends BasePage {
+
+
 
     private static final By username = By.id("username");
     private static final By password = By.id("password");

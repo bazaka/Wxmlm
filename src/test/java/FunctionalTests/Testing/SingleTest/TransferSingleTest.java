@@ -1,3 +1,4 @@
+/*
 package FunctionalTests.Testing.SingleTest;
 
 import FunctionalTests.Pages.AuthorizedUserPage;
@@ -12,9 +13,11 @@ import java.util.Random;
 
 import static junit.framework.TestCase.assertEquals;
 
+*/
 /**
  * Created by User on 1/6/2015.
- */
+ *//*
+
 public class TransferSingleTest extends TransferTest {
     @Test
     public void transferSingleTest(TestUser testUser){
@@ -46,3 +49,4 @@ public class TransferSingleTest extends TransferTest {
 
     }
 }
+*/

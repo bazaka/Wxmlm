@@ -12,6 +12,7 @@ import static org.junit.Assert.assertNotEquals;
 /**
  * Created by User on 12/1/2014.
  */
+
 public class LogInTest{
     public static WebDriver driver;
     @Test

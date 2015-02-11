@@ -1,3 +1,4 @@
+/*
 package FunctionalTests.Testing;
 
 import FunctionalTests.Testing.SingleTest.TransferSingleTest;
@@ -12,9 +13,11 @@ import java.util.Random;
 
 import static org.junit.Assert.assertNotEquals;
 
+*/
 /**
  * Created by User on 1/5/2015.
- */
+ *//*
+
 public class TransferTest {
     public static WebDriver driver;
     @Test
@@ -36,3 +39,4 @@ public class TransferTest {
         System.out.println("Change Transfer Test успешно пройден");
     }
 }
+*/

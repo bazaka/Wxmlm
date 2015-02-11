@@ -1,3 +1,4 @@
+/*
 package FunctionalTests.Pages;
 
 import org.openqa.selenium.By;
@@ -5,9 +6,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+*/
 /**
  * Created by User on 2/6/2015.
- */
+ *//*
+
 public class MoneyFamilyPage extends AuthorizedUserPage{
 
     public static final By bonuses = By.xpath("//div[@class='col-md-12']//a[@href='/money/bonuses/']");
@@ -23,3 +26,4 @@ public class MoneyFamilyPage extends AuthorizedUserPage{
         wait.until(ExpectedConditions.titleIs("Transfer"));
     }
 }
+*/
