@@ -52,21 +52,7 @@ public class Main
                     System.out.println("Проверка LoginFree API НЕ пройдена: " + e); }
                 //Вызов метода окончания теста
             }
-            // Backend API (needed authorization by admin)
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_BackendAPI("))
-            {
-                System.out.println("Запуск тестов BackendAPITest пользователем " + testUser[i].getFullName() + ", email - " + testUser[i].getEmail());
-                BackendAPITest newBackendAPITest = new BackendAPITest(); // Создаём объект теста
-                //Вызов метода, запускающего тесты Backend API
-                try { if (newBackendAPITest.runBackendAPITests(scheme, testUser[i]))
-                    System.out.println("Проверка Backend API пройдена");
-                    else
-                    System.out.println("Проверка Backend API НЕ пройдена");
-                }
-                catch (Exception e) { e.printStackTrace();
-                    System.out.println("Проверка Backend API НЕ пройдена: " + e); }
-                //Вызов метода окончания теста
-            }
+
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
                 RecoveryTest newRecoveryTest = new RecoveryTest();
 
