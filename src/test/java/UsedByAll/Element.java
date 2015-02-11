@@ -1,9 +1,10 @@
 package UsedByAll;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
-import java.util.NoSuchElementException;
+
 
 // * Created for W-xmlm by Fill on 12.01.2015.
 public class Element {

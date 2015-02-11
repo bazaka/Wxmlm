@@ -11,7 +11,12 @@ public class InvestmentPackagesPage extends ProductsFamilyPage {
     public static final By firstActiveBuyButton = By.xpath("//a[contains(@href, '/products/invest/buy/')]");
 
     public void clickFirstActiveBuyButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(firstActiveBuyButton));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(firstActiveBuyButton));
+        } catch (Exception e) {
+            System.out.println("There is no active buy button on investment packages page");
+            e.printStackTrace();
+        }
         driver.findElement(firstActiveBuyButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.buyButtonElement));
     }

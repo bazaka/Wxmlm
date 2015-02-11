@@ -30,7 +30,11 @@ public class BuyPackageTest {
                 } catch (Exception e) {
                     e.printStackTrace();
                     singleTest.tearDown();
-                    assertTrue("There is no exception", false);
+                    assertTrue("There is an exception", false);
+                } catch (AssertionError e) {
+                    e.printStackTrace();
+                    singleTest.tearDown();
+                    assertTrue("Assertion is failed", false);
                 }
                 singleTest.tearDown();
             }

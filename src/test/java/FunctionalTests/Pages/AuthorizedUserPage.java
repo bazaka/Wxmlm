@@ -30,7 +30,11 @@ public class AuthorizedUserPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(products));
         driver.findElement(products).click();
     }
+    public void goMoney(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(money));
+        driver.findElement(money).click();
+    }
     public void waitForSuccessMessage(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(PackageCartPage.successMessage));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
     }
 }

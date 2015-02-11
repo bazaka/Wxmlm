@@ -4,10 +4,10 @@ system@kairosplanet.com, -, -, Api Tester, 123, -, -, -, -, -, _1LoginFreeAPI()_
 t4webuser05@gmail.com, -, -, Api Tester, 123, -, -, -, -, -, _1BackendAPI()_
 t4webuser05@gmail.com, -, -, Api Tester, 123, -, -, -, -, -, _1LoginFreeAPI()_
 t.4webuser02@gmail.com, t4.webu.ser02@gmail.com , t4t4webuser02, User 02, 111111, 111111, 222222, 222222, 5555555, kairos, _1RecoveryTest()_
-t4web.user01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_
+t4webus.er01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _RegistrationTest()_
 t4webuser03@gmail.com, t4.webu.ser03@gmail.com, t4t4webuser03, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RecoveryTest()_
 t4webuser03@gmail.com, t4.webu.ser03@gmail.com, t4t4webuser03, User 03, 222222, 222222, 111111, 111111, 5555555, kairos, _1RecoveryTest()_
-t4w.ebuser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1LogInTest()_
+t4webus.er01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1LogInTest()_
 t.4webuser01@gmail.com, t4webu.ser01@gmail.com , t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1ChangeMailTest()_
 t4webu.ser01@gmail.com, t.4webuser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1ChangeMailTest()_
 t4w.ebu.ser01@gmail.com, t4.webu.ser01@gmail.com, t4t4webuser01, User 01, 111111, 111111, 222222, 222222, 5555555, kairos, _1RegistrationTest()_

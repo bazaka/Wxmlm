@@ -1,7 +1,5 @@
 package ApiTests.ObjectClasses;
 
-import java.lang.Double;
-
 // * Created for W-xmlm by Fill on 27.11.2014.
 public class Operation {
     private int id;
