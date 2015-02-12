@@ -16,6 +16,7 @@ public class BaseNewTest {
     public void preCondition(){
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
+        wait = new WebDriverWait(driver,10);
     }
     @After
     public void postCondition(){

@@ -1,43 +1,72 @@
 package FunctionalTests.Testing;
 
-import FunctionalTests.Testing.SingleTest.BuyPackageSingleTest;
+import FunctionalTests.Pages.*;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.RegionMatch;
 import UsedByAll.TestUser;
+import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import java.io.IOException;
-
-import static org.junit.Assert.assertNotEquals;
+import java.util.Collection;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 05.01.2015.
-public class BuyPackageTest {
+
+@RunWith(value = Parameterized.class)
+public class BuyPackageTest extends BaseNewTest {
+    private TestUser testUser;
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_BuyPackageTest(");
+    }
+
+    public BuyPackageTest(TestUser user){
+        this.testUser = user;
+    }
+
     @Test
-    public void buyPackageTest(){
-        BuyPackageSingleTest singleTest = new BuyPackageSingleTest();
-        TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
+    public void buyPackageTest() throws IOException {
 
-        assertNotEquals("Нет пользователей для тестирования. Закрываюсь", testUser.length, 0);
-        System.out.println("Количество пользователей для тестирования: "+ testUser.length);
+        //Объявляем страницы, которые будут использоваться в тесте
+        AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver, wait);
+        InvestmentPackagesPage investmentPackagesPage = new InvestmentPackagesPage(driver, wait);
+        PackageCartPage packageCartPage = new PackageCartPage(driver, wait);
+        PurchasesPage purchasesPage = new PurchasesPage(driver, wait);
+        AccountsPage accountsPage = new AccountsPage(driver,wait);
+        OperationHistoryPage operationHistoryPage = new OperationHistoryPage(driver, wait);
+        driver.manage().window().maximize();
 
-        for (TestUser aTestUser : testUser) {
-            if (RegionMatch.IsStringRegionMatch(aTestUser.getUseInTest(), "_BuyPackageTest(")) {
-                try {
-                    singleTest.buyPackageSingleTest(aTestUser);
-                    System.out.println("BuyPackageTest Test успешно пройден");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    singleTest.tearDown();
-                    assertTrue("There is an exception", false);
-                } catch (AssertionError e) {
-                    e.printStackTrace();
-                    singleTest.tearDown();
-                    assertTrue("Assertion is failed", false);
-                }
-                singleTest.tearDown();
-            }
-        }
+        //Авторизируемся
+        LogInPage loginPage = new LogInPage(driver);
+        loginPage.open();
+        assertTrue("Page not opened", loginPage.isOpened());
+        loginPage.goLogin(testUser);
+        Assert.assertEquals(loginPage.getTitle(), "KairosNet");
+
+        //Переходим на страницу Инвест-пакетов
+        authorizedUserPage.goProducts();
+
+        //Переходим в корзину
+        investmentPackagesPage.clickFirstActiveBuyButton();
+
+        //В корзине запоминаем цену, сумму к оплате и кликаем купить, после чего ждем сообщения о успешной покупке
+        String price = packageCartPage.getPrice();
+        String paymentAmount = packageCartPage.getPaymentAmount();
+        packageCartPage.clickBuyButton();
+        packageCartPage.waitForSuccessMessage();
+
+        //Переходим в "Мои покупки", сравниваем цены
+        packageCartPage.goToPurchases();
+        assertTrue("Price of last purchase is different from my purchase. Maybe my purchase item's not shown in purchases table", price.equals(purchasesPage.getLastPurchasePrice()));
+
+        //Переходим в "Мои операции", проверяем данные последней операции
+        packageCartPage.goMoney();
+        accountsPage.goToOperationHistory();
+        assertTrue("Type of last operation is different from \"Buy product\". Maybe my operation item's not shown in purchases table", "Buy product".equals(operationHistoryPage.getLastOperationType()));
+        assertTrue("Sender of last operation is different from \"Me, Current\". Maybe my operation item's not shown in purchases table", "Me, Current".equals(operationHistoryPage.getLastOperationSender()));
+        assertTrue("Amount of last operation is different from required fee for my purchase. Maybe my operation item's not shown in purchases table", paymentAmount.equals(operationHistoryPage.getLastOperationAmount()));
+        assertTrue("Status of last operation is different from \"Sent\". Maybe my operation item's not shown in purchases table", "Sent".equals(operationHistoryPage.getLastOperationStatus()));
     }
 }
