@@ -22,31 +22,18 @@ import static org.junit.Assert.assertTrue;
  */
 @RunWith(value = Parameterized.class)
 public class LoginNewTest extends BaseNewTest {
+    //private TestUser testUser;
     private String email;
     private String password;
 
     @Parameters
     public static Collection testData() {
-        TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
-        int arrLength = 0;
-        List<Integer> userIndex = new ArrayList<Integer>();
-        for (int i = 0; i < testUser.length; i++) {
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LogInTest(")){
-                arrLength++;
-                userIndex.add(i);
-            }
-        }
-        String testDatas[][] = new String[arrLength][2];
-        for (int i = 0; i < arrLength; i++) {
-            testDatas[i][0] = testUser[userIndex.get(i)].getEmail();
-            testDatas[i][1] = testUser[userIndex.get(i)].getPassword1();
-        }
-        return Arrays.asList(testDatas);
+        return CsvUsersReader.getDataForTest("_LogInTest(");
     }
 
-    public LoginNewTest(String email, String password){
-        this.email=email;
-        this.password=password;
+    public LoginNewTest(TestUser testUser /*String email, String password*/){
+        this.email=testUser.getEmail();
+        this.password=testUser.getPassword1();
     }
 
     @Test
@@ -58,10 +45,7 @@ public class LoginNewTest extends BaseNewTest {
         loginNewPage.goLogin(email, password);
         assertEquals(loginNewPage.getTitle(), "KairosNet");
 
-
-
-
-        System.out.println("LoginTest успешно пройден");
+        System.out.println("LoginTest passed successfully");
     }
 
 

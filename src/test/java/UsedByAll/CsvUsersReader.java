@@ -4,6 +4,8 @@ import com.Ostermiller.util.CSVParser;
 import com.Ostermiller.util.LabeledCSVParser;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class CsvUsersReader {
@@ -77,5 +79,21 @@ public class CsvUsersReader {
             System.out.println("File not found. Exception: " + e);
             return null;
         }
+    }
+    public static Collection getDataForTest(String testName) {
+        TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
+        int arrLength = 0;
+        List<Integer> userIndex = new ArrayList<Integer>();
+        for (int i = 0; i < testUser.length; i++) {
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), testName)){
+                arrLength++;
+                userIndex.add(i);
+            }
+        }
+        TestUser testDatas[][] = new TestUser[arrLength][1];
+        for (int i = 0; i < arrLength; i++) {
+            testDatas[i][0] = testUser[userIndex.get(i)];
+        }
+        return Arrays.asList(testDatas);
     }
 }
