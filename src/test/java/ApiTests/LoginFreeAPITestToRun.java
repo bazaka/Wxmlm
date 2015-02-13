@@ -16,7 +16,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
-public class LoginFreeAPITest {
+public class LoginFreeAPITestToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -24,7 +24,7 @@ public class LoginFreeAPITest {
         return CsvUsersReader.getDataForTest("_LoginFreeAPITest(");
     }
 
-    public LoginFreeAPITest(TestUser user){
+    public LoginFreeAPITestToRun(TestUser user){
         this.testUser = user;
     }
     @Test

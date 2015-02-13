@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 2/11/2015.
  */
 @RunWith(value = Parameterized.class)
-public class LoginNewTest extends BaseNewTest {
+public class LogInTestToRun extends BaseNewTest {
     //private TestUser testUser;
     private String email;
     private String password;
@@ -31,7 +31,7 @@ public class LoginNewTest extends BaseNewTest {
         return CsvUsersReader.getDataForTest("_LogInTest(");
     }
 
-    public LoginNewTest(TestUser testUser /*String email, String password*/){
+    public LogInTestToRun(TestUser testUser /*String email, String password*/){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
     }
@@ -47,6 +47,4 @@ public class LoginNewTest extends BaseNewTest {
 
         System.out.println("LoginTest passed successfully");
     }
-
-
 }

@@ -11,7 +11,7 @@ import java.util.Collection;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
-public class BackendAPITest {
+public class BackendAPITestToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -19,7 +19,7 @@ public class BackendAPITest {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public BackendAPITest(TestUser user){
+    public BackendAPITestToRun(TestUser user){
         this.testUser = user;
     }
     

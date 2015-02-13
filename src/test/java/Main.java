@@ -1,5 +1,3 @@
-import ApiTests.BackendAPITest;
-import ApiTests.LoginFreeAPITest;
 import FunctionalTests.Testing.ChangeMailTest;
 import FunctionalTests.Testing.ChangeProfileDataTest;
 import FunctionalTests.Testing.RecoveryTest;
