@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 25.11.2014. Проверяет метод АПИ GET Operations
 @RunWith(value = Parameterized.class)
-public class GetOperations {
+public class GetOperationsToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -30,7 +30,7 @@ public class GetOperations {
         return CsvUsersReader.getDataForTest("_GetOperationsToRun(");
     }
 
-    public GetOperations(TestUser user){
+    public GetOperationsToRun(TestUser user){
         this.testUser = user;
     }
 
