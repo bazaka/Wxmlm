@@ -14,11 +14,11 @@ public class LogOutPage extends BasePage {
     private static final By dropdownMenu = By.className("dropdown-menu");
     private static final By singOut = By.xpath("//a[contains(@href, '/logout')]");
 
-    public LogOutPage(WebDriver driver){
-        super(driver);
+    public LogOutPage(WebDriver driver, WebDriverWait wait){
+        super(driver, wait);
     }
     public void logOut(){
-        WebDriverWait wait = new WebDriverWait(driver,10);
+
         wait.until(ExpectedConditions.presenceOfElementLocated(dropdownToogle));
         driver.findElement(dropdownToogle).click();
 

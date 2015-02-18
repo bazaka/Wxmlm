@@ -39,11 +39,11 @@ public class BuyPackageTestToRun extends BaseNewTest {
         driver.manage().window().maximize();
 
         //Авторизируемся
-        LogInPage loginPage = new LogInPage(driver);
-        loginPage.open();
-        assertTrue("Page not opened", loginPage.isOpened());
-        loginPage.goLogin(testUser);
-        Assert.assertEquals(loginPage.getTitle(), "KairosNet");
+        LogInPage logInPage = new LogInPage(driver);
+        logInPage.open();
+        assertTrue("Page not opened", logInPage.isOpened());
+        logInPage.goLogin(testUser);
+        Assert.assertEquals(logInPage.getTitle(), "KairosNet");
 
         //Переходим на страницу Инвест-пакетов
         authorizedUserPage.goProducts();

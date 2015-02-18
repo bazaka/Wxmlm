@@ -1,6 +1,5 @@
 package FunctionalTests.Pages;
 
-import UsedByAll.ProfileData;
 import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -68,8 +67,8 @@ public class ProfilePage extends BasePage {
     private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success']");
 
 
-    public ProfilePage(WebDriver driver){
-        super(driver);
+    public ProfilePage(WebDriver driver, WebDriverWait wait){
+        super(driver, wait);
     }
     public int getCurrentValue(){
         return Integer.parseInt(driver.findElement(current).getText());
@@ -82,17 +81,17 @@ public class ProfilePage extends BasePage {
     }
 
     public void goProfilePage(){
-        WebDriverWait wait = new WebDriverWait(driver,20);
+       // WebDriverWait wait = new WebDriverWait(driver,20);
         driver.findElement(profilePage).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(fullName));
     }
-    public void addNewEmail(TestUser testUser){ //додати другу пошту
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        Actions builder = new Actions(driver);
+    public void addNewEmail(String newEmail){ //додати другу пошту
+       // WebDriverWait wait = new WebDriverWait(driver, 20);
+      //  Actions builder = new Actions(driver);
         driver.findElement(addEmail).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(secondMail));
         driver.findElement(secondMail).clear();
-        driver.findElement(secondMail).sendKeys(testUser.getNewEmail());
+        driver.findElement(secondMail).sendKeys(newEmail);
         driver.findElement(setAsMain).click();
 
     }
@@ -101,7 +100,7 @@ public class ProfilePage extends BasePage {
         return driver.findElement(emailSavedMessage).isDisplayed();
     }
     public String newMailConfirmation(String activationLink){ // конфірм першого листа зміни пошти
-        WebDriverWait wait = new WebDriverWait(driver, 40);
+        //WebDriverWait wait = new WebDriverWait(driver, 40);
         driver.get(activationLink);
         wait.until(ExpectedConditions.presenceOfElementLocated(checkNewEmailMessage));
         String successText = driver.findElement(checkNewEmailMessage).getText();
@@ -159,36 +158,37 @@ public class ProfilePage extends BasePage {
     public String getInviteCode(){return driver.findElement(inviteCode).getText();}
 
     public String getCountry(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+        //WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.findElement(documents).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(country));
         return driver.findElement(country).getText();
 
     }
-    public void editInformationTab(ProfileData profileData){  // редагування вкладки Information
+    public void editInformationTab(String profileFullName, String profileGender, String profileBirth, String profilePhone, String profileAddress ){  // редагування вкладки Information
 
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+       // WebDriverWait wait = new WebDriverWait(driver, 15);
         Actions builder = new Actions(driver);
+
         wait.until(ExpectedConditions.presenceOfElementLocated(fullName));
 
         driver.findElement(fullName).clear();
         driver.findElement(fullName).click();
-        driver.findElement(fullName).sendKeys(profileData.getUserFullName());
+        driver.findElement(fullName).sendKeys(profileFullName);
 
         Select dropdownGender = new Select(driver.findElement(gender));
-        dropdownGender.selectByVisibleText(profileData.getGender());
+        dropdownGender.selectByVisibleText(profileGender);
 
         driver.findElement(birthDate).clear();
         driver.findElement(birthDate).click();
-        driver.findElement(birthDate).sendKeys(profileData.getBirthDate());
+        driver.findElement(birthDate).sendKeys(profileBirth);
 
         driver.findElement(phone).clear();
         driver.findElement(phone).click();
-        driver.findElement(phone).sendKeys(profileData.getPhoneNumber());
+        driver.findElement(phone).sendKeys(profilePhone);
 
         driver.findElement(address).clear();
         driver.findElement(address).click();
-        driver.findElement(address).sendKeys(profileData.getAddress());
+        driver.findElement(address).sendKeys(profileAddress);
 
 
         driver.findElement(updateButton).click();
@@ -199,29 +199,29 @@ public class ProfilePage extends BasePage {
 
 
     }
-    public void editDocumentsTab(ProfileData profileData){
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+    public void editDocumentsTab(String profileCitizen, String profilePassportSeries, String profilePassportNum, String profileIssuedDate, String profileIssued ){
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
         driver.findElement(documentsTab).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(passportSeries));
 
         Select dropdownCitizen = new Select(driver.findElement(citizen));
-        dropdownCitizen.selectByVisibleText(profileData.getCitizen());
+        dropdownCitizen.selectByVisibleText(profileCitizen);
 
         driver.findElement(passportSeries).clear();
         driver.findElement(passportSeries).click();
-        driver.findElement(passportSeries).sendKeys(profileData.getPassportSeries());
+        driver.findElement(passportSeries).sendKeys(profilePassportSeries);
 
         driver.findElement(passportNumber).clear();
         driver.findElement(passportNumber).click();
-        driver.findElement(passportNumber).sendKeys(profileData.getPassportNum());
+        driver.findElement(passportNumber).sendKeys(profilePassportNum);
 
         driver.findElement(issuedDate).clear();
         driver.findElement(issuedDate).click();
-        driver.findElement(issuedDate).sendKeys(profileData.getIssuedDate());
+        driver.findElement(issuedDate).sendKeys(profileIssuedDate);
 
         driver.findElement(issued).clear();
         driver.findElement(issued).click();
-        driver.findElement(issued).sendKeys(profileData.getIssued());
+        driver.findElement(issued).sendKeys(profileIssued);
 
 
 
@@ -234,38 +234,38 @@ public class ProfilePage extends BasePage {
         driver.findElement(documentsTab).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(passportSeries));
     }
-    public void editBankTab(ProfileData profileData){
-        WebDriverWait wait = new WebDriverWait(driver, 120);
+    public void editBankTab(String profileBName, String profileBAddress, String profileBankName, String profileBankAddress,String profileIban, String profileSwift, String profileEpid  ){
+       // WebDriverWait wait = new WebDriverWait(driver, 120);
         driver.findElement(bankDetailsTab).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(bankUserName));
 
         driver.findElement(bankUserName).clear();
         driver.findElement(bankUserName).click();
-        driver.findElement(bankUserName).sendKeys(profileData.getBName());
+        driver.findElement(bankUserName).sendKeys(profileBName);
 
         driver.findElement(bankUserAddress).clear();
         driver.findElement(bankUserAddress).click();
-        driver.findElement(bankUserAddress).sendKeys(profileData.getBAddress());
+        driver.findElement(bankUserAddress).sendKeys(profileBAddress);
 
         driver.findElement(bankName).clear();
         driver.findElement(bankName).click();
-        driver.findElement(bankName).sendKeys(profileData.getBankName());
+        driver.findElement(bankName).sendKeys(profileBankName);
 
         driver.findElement(bankAddress).clear();
         driver.findElement(bankAddress).click();
-        driver.findElement(bankAddress).sendKeys(profileData.getBankAddress());
+        driver.findElement(bankAddress).sendKeys(profileBankAddress);
 
         driver.findElement(iban).clear();
         driver.findElement(iban).click();
-        driver.findElement(iban).sendKeys(profileData.getIban());
+        driver.findElement(iban).sendKeys(profileIban);
 
         driver.findElement(swift).clear();
         driver.findElement(swift).click();
-        driver.findElement(swift).sendKeys(profileData.getSwift());
+        driver.findElement(swift).sendKeys(profileSwift);
 
         driver.findElement(epid).clear();
         driver.findElement(epid).click();
-        driver.findElement(epid).sendKeys(profileData.getEpid());
+        driver.findElement(epid).sendKeys(profileEpid);
 
         driver.findElement(saveBankDetailsButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup1));
