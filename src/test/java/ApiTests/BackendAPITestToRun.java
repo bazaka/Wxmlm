@@ -38,20 +38,20 @@ public class BackendAPITestToRun {
         }
 
         // GET API accounts test run
-        if (new GetAccounts().testGetAccounts(siteUrl, testUser)) {
+/*        if (new GetAccounts().testGetAccounts(siteUrl, testUser)) {
             System.out.println("API GET accounts success");
         } else {
             System.out.println("API GET accounts test FAILED ");
             isComplete = false;
-        }
+        }*/
 
         // PUT API accounts update test run
-        if (new PutAccountsUpdate().testPutAccountsUpdate(siteUrl, testUser)) {
+/*        if (new PutAccountsUpdate().testPutAccountsUpdate(siteUrl, testUser)) {
             System.out.println("API PUT accounts update success");
         } else {
             System.out.println("API PUT accounts update test FAILED ");
             isComplete = false;
-        }
+        }*/
 
         //GET API operations test run
         if (new GetOperations().testGetOperations(siteUrl, testUser)) {
@@ -164,12 +164,12 @@ public class BackendAPITestToRun {
         }
 
         // GET API config test run
-        if (new GetConfig().testGetConfig(siteUrl, testUser)) {
+/*        if (new GetConfigToRun().testGetConfig(siteUrl, testUser)) {
             System.out.println("API GET config success");
         } else {
             System.out.println("API GET config test FAILED ");
             isComplete = false;
-        }
+        }*/
 
         // PUT API config update test run
         if (new PutConfigUpdate().testPutConfigUpdate(siteUrl, testUser)) {

@@ -3,23 +3,45 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Config;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
-public class GetConfig {
-    public boolean testGetConfig(String siteUrl, TestUser user) throws Exception {
+@RunWith(value = Parameterized.class)
+public class GetConfigToRun {
+    private TestUser testUser;
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetConfigToRun(");
+    }
+
+    public GetConfigToRun(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetConfig() throws Exception {
+        String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "config/api/values/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -35,10 +57,7 @@ public class GetConfig {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        if (jsonArr.length() == 0) {
-            System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
-            return false;
-        }
+        assertNotSame("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ", jsonArr.length(), 0);
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
@@ -48,7 +67,6 @@ public class GetConfig {
             assertEquals("Incorrect count of Json parameters", object.length(), 3);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
     }
 
     public Config getAnyConfig(TestUser user, String siteUrl) throws IOException {

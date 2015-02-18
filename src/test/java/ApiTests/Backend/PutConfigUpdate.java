@@ -13,7 +13,7 @@ public class PutConfigUpdate {
     public boolean testPutConfigUpdate(String siteUrl, TestUser user) throws IOException {
         long startTime;
         long elapsedTime;
-        Config originalOne = new GetConfig().getAnyConfig(user, siteUrl);
+        Config originalOne = new GetConfigToRun(user).getAnyConfig(user, siteUrl);
         Config modifiedOne = new Config(originalOne.getId(), originalOne.getName() + "name", originalOne.getValue() + " value");
         String originalJson = "[{\"id\":" + originalOne.getId() + ", \"name\":\"" + originalOne.getName() + "\", \"value\": \"" + originalOne.getValue() + "\"}]";
         String modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"name\":\"" + modifiedOne.getName() + "\", \"value\": \"" + modifiedOne.getValue() + "\"}]";
@@ -27,7 +27,7 @@ public class PutConfigUpdate {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
-        Config changedConfig = new GetConfig().getConfigByParameter("id", originalOne.getId(), user, siteUrl);
+        Config changedConfig = new GetConfigToRun(user).getConfigByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data saved correctly", modifiedOne.equals(changedConfig));
 
         // Содзаем URL
@@ -39,7 +39,7 @@ public class PutConfigUpdate {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
-        changedConfig = new GetConfig().getConfigByParameter("id", originalOne.getId(), user, siteUrl);
+        changedConfig = new GetConfigToRun(user).getConfigByParameter("id", originalOne.getId(), user, siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equals(changedConfig));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;

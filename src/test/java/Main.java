@@ -51,19 +51,6 @@ public class Main
                 //Вызов метода окончания теста
             }*/
 
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
-                RecoveryTest newRecoveryTest = new RecoveryTest();
-
-                try {
-                    newRecoveryTest.recoveryTest();
-                    System.out.println("Успешное восстановление пароля");
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.out.println("RecoveryTest НЕ пройден");
-                }
-
-            }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RegistrationTest(")) {
                RegistrationTest newRegistrationTest = new RegistrationTest();
 
@@ -77,16 +64,16 @@ public class Main
                 }
 
             }
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeMailTest(")) {
-                ChangeMailTest changeMailTest = new ChangeMailTest();
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
+                RecoveryTest newRecoveryTest = new RecoveryTest();
 
                 try {
-                    changeMailTest.changeMailTest();
-                    System.out.println("Успешная смена пароля");
+                    newRecoveryTest.recoveryTest();
+                    System.out.println("Успешное восстановление пароля");
 
                 } catch (Exception e) {
                     e.printStackTrace();
-                    System.out.println("ChangeMail Test НЕ пройден");
+                    System.out.println("RecoveryTest НЕ пройден");
                 }
 
             }
@@ -100,6 +87,19 @@ public class Main
                 } catch (Exception e) {
                     e.printStackTrace();
                     System.out.println("ChangeProfileData Test НЕ пройден");
+                }
+
+            }
+            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeMailTest(")) {
+                ChangeMailTest changeMailTest = new ChangeMailTest();
+
+                try {
+                    changeMailTest.changeMailTest();
+                    System.out.println("Успешная смена пароля");
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("ChangeMail Test НЕ пройден");
                 }
 
             }
