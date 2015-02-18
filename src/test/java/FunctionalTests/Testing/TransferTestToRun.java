@@ -20,7 +20,7 @@ import static org.junit.Assert.assertNotEquals;
 
 
 @RunWith(value = Parameterized.class)
-public class TransferTestToRun extends BaseClass {
+public class TransferTestToRun extends BaseTest {
     String email;
     String password;
 

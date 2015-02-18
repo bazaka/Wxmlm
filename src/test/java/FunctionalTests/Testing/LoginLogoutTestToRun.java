@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/2/2014. Login/Logout Test
  */
 @RunWith(value = Parameterized.class)
-public class LoginLogoutTestToRun extends BaseClass {
+public class LoginLogoutTestToRun extends BaseTest {
     private String email;
     private String password;
 

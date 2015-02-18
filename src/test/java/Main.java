@@ -1,11 +1,9 @@
-import FunctionalTests.Testing.ChangeMailTest;
-import FunctionalTests.Testing.ChangeProfileDataTest;
-import FunctionalTests.Testing.RecoveryTest;
-import FunctionalTests.Testing.RegistrationTest;
-import UsedByAll.Config;
-import UsedByAll.CsvUsersReader;
-import UsedByAll.RegionMatch;
-import UsedByAll.TestUser;
+
+import FunctionalTests.Testing.ChangeMailTestToRun;
+import FunctionalTests.Testing.ChangeProfileDataTestToRun;
+import FunctionalTests.Testing.RecoveryTestToRun;
+import FunctionalTests.Testing.RegistrationTestToRun;
+import UsedByAll.*;
 
 public class Main
 {
@@ -21,6 +19,7 @@ public class Main
         }
         // Вызываем чтение массива пользователей из CSV-файла src/Users.csv. Адрес файла тоже можно вынести в конфиг-файл
         TestUser[] testUser = new CsvUsersReader().getUsersFromFile("src/Users.csv");
+
 
 
 
@@ -52,7 +51,7 @@ public class Main
             }*/
 
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RegistrationTest(")) {
-               RegistrationTest newRegistrationTest = new RegistrationTest();
+               RegistrationTestToRun newRegistrationTest = new RegistrationTestToRun(testUser[i]);
 
                 try {
                     newRegistrationTest.registrationTest();
@@ -65,10 +64,10 @@ public class Main
 
             }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RecoveryTest(")) {
-                RecoveryTest newRecoveryTest = new RecoveryTest();
+                RecoveryTestToRun newRecoveryTest = new RecoveryTestToRun(testUser[i]);
 
                 try {
-                    newRecoveryTest.recoveryTest();
+                    newRecoveryTest.recoveryTestToRun();
                     System.out.println("Успешное восстановление пароля");
 
                 } catch (Exception e) {
@@ -78,10 +77,10 @@ public class Main
 
             }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeProfileDataTest(")) {
-                ChangeProfileDataTest changeProfileDataTest = new ChangeProfileDataTest();
+                ChangeProfileDataTestToRun changeProfileDataTest = new ChangeProfileDataTestToRun(testUser[i]);
 
                 try {
-                    changeProfileDataTest.changeProfileDataTest();
+                    changeProfileDataTest.changeProfileDataTestToRun();
                     System.out.println("Успешное редактирование профила");
 
                 } catch (Exception e) {
@@ -91,10 +90,10 @@ public class Main
 
             }
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_ChangeMailTest(")) {
-                ChangeMailTest changeMailTest = new ChangeMailTest();
+                ChangeMailTestToRun changeMailTest = new ChangeMailTestToRun(testUser[i]);
 
                 try {
-                    changeMailTest.changeMailTest();
+                    changeMailTest.changeMailTestToRun();
                     System.out.println("Успешная смена пароля");
 
                 } catch (Exception e) {

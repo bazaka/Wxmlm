@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/1/2014.
  */
 @RunWith(value=Parameterized.class )
-public class RegistrationTestToRun extends BaseClass{
+public class RegistrationTestToRun extends BaseTest {
 
     private String emailPassword;
 

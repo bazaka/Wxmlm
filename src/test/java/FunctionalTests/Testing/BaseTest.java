@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by User on 2/11/2015.
  */
-public class BaseClass {
+public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
     @Before

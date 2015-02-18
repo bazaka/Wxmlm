@@ -14,16 +14,19 @@ import static org.junit.Assert.assertTrue;
 // * Created for W-xmlm by Fill on 05.01.2015.
 
 @RunWith(value = Parameterized.class)
-public class BuyPackageTestToRun extends BaseNewTest {
-    private TestUser testUser;
+public class BuyPackageTestToRun extends BaseTest {
+    String email;
+    String password;
 
     @Parameterized.Parameters
     public static Collection testData() {
         return CsvUsersReader.getDataForTest("_BuyPackageTest(");
     }
 
-    public BuyPackageTestToRun(TestUser user){
-        this.testUser = user;
+    public BuyPackageTestToRun(TestUser testUser){
+
+        this.email = testUser.getEmail();
+        this.password = testUser.getPassword1();
     }
 
     @Test
@@ -39,10 +42,10 @@ public class BuyPackageTestToRun extends BaseNewTest {
         driver.manage().window().maximize();
 
         //Авторизируемся
-        LogInPage logInPage = new LogInPage(driver);
+        LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.open();
         assertTrue("Page not opened", logInPage.isOpened());
-        logInPage.goLogin(testUser);
+        logInPage.goLogin(email, password);
         Assert.assertEquals(logInPage.getTitle(), "KairosNet");
 
         //Переходим на страницу Инвест-пакетов

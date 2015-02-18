@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
-public class ChangeMailTestToRun extends BaseClass {
+public class ChangeMailTestToRun extends BaseTest {
     String email;
     String password;
     String emailPassword;

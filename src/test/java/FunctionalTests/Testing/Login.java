@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 2/11/2015.
  */
 @RunWith(value = Parameterized.class)
-public class Login extends BaseClass {
+public class Login extends BaseTest {
     //private TestUser testUser;
     private String email;
     private String password;
