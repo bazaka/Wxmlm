@@ -1,6 +1,5 @@
 package FunctionalTests.Pages;
 
-import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -28,24 +27,24 @@ public class RegistrationPage extends BasePage {
     private static final By closeActivationAlert = By.xpath("//div[@id='main-modal-window-confirmed-email']//button[text() = 'Close']");
 
 
-    public RegistrationPage(WebDriver driver){
-        super(driver);
+    public RegistrationPage(WebDriver driver, WebDriverWait wait){
+        super(driver, wait);
         url = url + "login/";
     }
 
     public void openRegistration(){
-        WebDriverWait wait = new WebDriverWait(driver,10);
+        //WebDriverWait wait = new WebDriverWait(driver,10);
         driver.findElement(registration).click();
         wait.until(ExpectedConditions.elementToBeClickable(email));
     }
 
-    public void firstStep(TestUser user){
+    public void firstStep(String userEmail, String pass1, String pass2, String userInviteCode ){
 
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        driver.findElement(email).sendKeys(user.getEmail());
-        driver.findElement(password1).sendKeys(user.getPassword1());
-        driver.findElement(password2).sendKeys(user.getPassword2());
-        driver.findElement(inviteCode).sendKeys(user.getInviteCode());
+        //WebDriverWait wait = new WebDriverWait(driver, 20);
+        driver.findElement(email).sendKeys(userEmail);
+        driver.findElement(password1).sendKeys(pass1);
+        driver.findElement(password2).sendKeys(pass2);
+        driver.findElement(inviteCode).sendKeys(userInviteCode);
 
         driver.findElement(nextStep).click();
         try {
@@ -56,10 +55,10 @@ public class RegistrationPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(fullName));
         System.out.println("Переход на следующий шаг");
     }
-    public void secondStep(TestUser user){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.findElement(fullName).sendKeys(user.getFullName());
-        driver.findElement(phone).sendKeys(user.getPhone());
+    public void secondStep(String userFullName, String userPhone){
+        //WebDriverWait wait = new WebDriverWait(driver, 10);
+        driver.findElement(fullName).sendKeys(userFullName);
+        driver.findElement(phone).sendKeys(userPhone);
         driver.findElement(agreement).click();
         driver.findElement(birth).sendKeys("1970-01-27");
 
@@ -73,7 +72,7 @@ public class RegistrationPage extends BasePage {
 
 
     public String confirmActivation(String activationLink){
-        WebDriverWait wait = new WebDriverWait(driver, 25);
+        //WebDriverWait wait = new WebDriverWait(driver, 25);
         driver.get(activationLink);
         wait.until(ExpectedConditions.presenceOfElementLocated(successConfirm));
         String successText = driver.findElement(successConfirm).getText();

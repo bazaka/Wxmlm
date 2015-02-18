@@ -13,9 +13,9 @@ import java.util.Properties;
 public class GmailMessager {
 
 
-    public Store initializePOP3 (TestUser testUser, String emailAddress) throws MessagingException {
+    public Store initializePOP3 (String emailPassword, String emailAddress) throws MessagingException {
         String POP_AUTH_USER = emailAddress;
-        String POP_AUTH_PWD = testUser.getEPassword();
+        String POP_AUTH_PWD = emailPassword;
 
 
         String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -40,10 +40,10 @@ public class GmailMessager {
         return store;
 
     }
-    public String getLastMessageTime(TestUser testUser, String emailAddress) throws MessagingException {
+    public String getLastMessageTime(String emailPassword, String emailAddress) throws MessagingException {
 
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
-        Store store = initializePOP3(testUser, emailAddress);
+        Store store = initializePOP3(emailPassword, emailAddress);
 
         store.connect();
 
@@ -66,11 +66,11 @@ public class GmailMessager {
         store.close();
         return detectMessageTime;
     }
-    public String openAndReturnLink(TestUser testUser, String emailAddress, String requiredSubject, String requiredLink, String Separator) throws MessagingException, IOException {
+    public String openAndReturnLink(String emailPassword, String emailAddress, String requiredSubject, String requiredLink) throws MessagingException, IOException {
         String FOLDER_INBOX = "INBOX"; //name of INBOX folder
        // String activationLink = null;
 
-        Store store = initializePOP3(testUser, emailAddress);
+        Store store = initializePOP3(emailPassword, emailAddress);
         store.connect();
 
         Folder folder = store.getFolder(FOLDER_INBOX);

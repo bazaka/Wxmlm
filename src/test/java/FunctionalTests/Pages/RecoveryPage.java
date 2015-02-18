@@ -1,7 +1,5 @@
 package FunctionalTests.Pages;
 
-import UsedByAll.Config;
-import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,16 +19,16 @@ public class RecoveryPage extends BasePage {
     public static final By newPassword2 = By.xpath("//div[@class='content']/div[2]//input[@id='password']");
     public static final By changePassword = By.xpath("//div[@class='content']/input[@value='Change password']");
 
-    public RecoveryPage(WebDriver driver){
-        super(driver);
+    public RecoveryPage(WebDriver driver, WebDriverWait wait){
+        super(driver, wait);
         url = url + "login/";
     }
-    public void sendRecoveryLink(TestUser testUser){
+    public void sendRecoveryLink(String userEmail){
         WebDriverWait wait = new WebDriverWait(driver, 10);
         driver.findElement(forgotPassword).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(email));
 
-        driver.findElement(email).sendKeys(testUser.getEmail());
+        driver.findElement(email).sendKeys(userEmail);
         driver.findElement(resetPassword).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(emailSent));
 
@@ -39,12 +37,12 @@ public class RecoveryPage extends BasePage {
 
         return (driver.findElement(emailSent).getText());
     }
-    public String enterNewPassword(TestUser testUser, String activationLink){
+    public String enterNewPassword(String newPass1, String newPass2, String activationLink){
         WebDriverWait wait = new WebDriverWait(driver, 25);
         driver.get(activationLink);
         wait.until(ExpectedConditions.presenceOfElementLocated(newPassword1));
-        driver.findElement(newPassword1).sendKeys(testUser.getNewPassword1());
-        driver.findElement(newPassword2).sendKeys(testUser.getNewPassword2());
+        driver.findElement(newPassword1).sendKeys(newPass1);
+        driver.findElement(newPassword2).sendKeys(newPass2);
         driver.findElement(changePassword).click();
         wait.until(ExpectedConditions.titleIs("KairosNet"));
         return(driver.getTitle());

@@ -37,22 +37,22 @@ public class TransferPage extends BasePage{
     public static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
 
 
-    public TransferPage(WebDriver driver) {
-        super(driver);
+    public TransferPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
-   /* public void openMoneyPage(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver);
-        authorizedUserPage.goMoney();
-        authorizedUserPage.goTransfer();
-        wait.until(ExpectedConditions.presenceOfElementLocated(transferPage));
+    /* public void openMoneyPage(){
+         WebDriverWait wait = new WebDriverWait(driver, 10);
+         AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver);
+         authorizedUserPage.goMoney();
+         authorizedUserPage.goTransfer();
+         wait.until(ExpectedConditions.presenceOfElementLocated(transferPage));
 
-    }
-    public void openTransferPage(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.findElement(transferPage).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(currentAccordion));
-    }*/
+     }
+     public void openTransferPage(){
+         WebDriverWait wait = new WebDriverWait(driver, 10);
+         driver.findElement(transferPage).click();
+         wait.until(ExpectedConditions.presenceOfElementLocated(currentAccordion));
+     }*/
     public String getTitle(){
         return driver.getTitle();
     }

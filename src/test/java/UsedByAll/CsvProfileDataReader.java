@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -106,5 +108,21 @@ public class CsvProfileDataReader {
             System.out.println("File not found. Exception: " + e);
             return null;
         }
+    }
+    public static Collection getProfileDataForTest() {
+        ProfileData[] profileDataCsv = new CsvProfileDataReader().getProfileDataFromFile("src/ProfileData.csv");
+        int arrLength = 0;
+        List<Integer> userIndex = new ArrayList<Integer>();
+        for (int i = 0; i < profileDataCsv.length; i++) {
+
+                arrLength++;
+                userIndex.add(i);
+
+        }
+        ProfileData testDatas[][] = new ProfileData[arrLength][1];
+        for (int i = 0; i < arrLength; i++) {
+            testDatas[i][0] = profileDataCsv[userIndex.get(i)];
+        }
+        return Arrays.asList(testDatas);
     }
 }
