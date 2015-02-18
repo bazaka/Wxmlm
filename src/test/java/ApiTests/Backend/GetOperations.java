@@ -3,22 +3,44 @@ package ApiTests.Backend;
 import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.ObjectClasses.Operation;
+import UsedByAll.Config;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 25.11.2014. Проверяет метод АПИ GET Operations
+@RunWith(value = Parameterized.class)
 public class GetOperations {
+    private TestUser testUser;
 
-    public boolean testGetOperations(String siteUrl, TestUser user) throws Exception {
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetOperationsToRun(");
+    }
+
+    public GetOperations(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetOperations() throws Exception {
+        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/operations/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/operations/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -34,10 +56,7 @@ public class GetOperations {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        if (jsonArr.length() == 0) {
-            System.out.print("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
-            return false;
-        }
+        assertNotSame("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ", jsonArr.length(), 0);
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
 
@@ -56,7 +75,6 @@ public class GetOperations {
             assertEquals("Incorrect count of Json parameters", object.length(), 12);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
     }
 
     public Operation getAnyOperation(TestUser user, String siteUrl) throws IOException {

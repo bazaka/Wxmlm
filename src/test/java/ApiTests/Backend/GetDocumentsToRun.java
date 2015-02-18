@@ -2,15 +2,23 @@ package ApiTests.Backend;
 
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
+import UsedByAll.Config;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -18,9 +26,23 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by User on 12/11/2014. Проверяет метод АПИ GET Documents
  */
-public class GetDocuments {
+@RunWith(value = Parameterized.class)
+public class GetDocumentsToRun {
+    private TestUser testUser;
     static final String url = "users/api/documents/";
-    public boolean testGetDocuments(String siteUrl, TestUser testUser) throws IOException, JSONException {
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetDocumentsToRun(");
+    }
+
+    public GetDocumentsToRun(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetDocuments() throws IOException, JSONException {
+        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme();
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
@@ -57,8 +79,6 @@ public class GetDocuments {
             assertEquals("Incorrect count of JSON objects", object.length(), 9);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
-
     }
     public static int[] getDocumentsId(String siteUrl, TestUser testUser) throws IOException, JSONException {
         long startTime;

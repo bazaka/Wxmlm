@@ -54,12 +54,12 @@ public class BackendAPITestToRun {
         }*/
 
         //GET API operations test run
-        if (new GetOperations().testGetOperations(siteUrl, testUser)) {
+/*        if (new GetOperations().testGetOperations(siteUrl, testUser)) {
             System.out.println("API GET operations success");
         } else {
             System.out.println("API GET operations test FAILED ");
             isComplete = false;
-        }
+        }*/
 
         // PUT API operations update test run
         if (new PutOperationsUpdate().testPutOperationsUpdate(siteUrl, testUser)) {
@@ -148,20 +148,22 @@ public class BackendAPITestToRun {
         }
 
         //GET API documents test run
-        if (new GetDocuments().testGetDocuments(siteUrl, testUser)) {
+/*        if (new GetDocuments().testGetDocuments(siteUrl, testUser)) {
             System.out.println("API GET documents success");
         } else {
             System.out.println("API GET documents test FAILED ");
             isComplete = false;
-        }
+        }*/
 
         //GET API documents by id test run
+/*
         if (new GetDocumentsById().testGetDocumentsById(siteUrl, testUser)) {
             System.out.println("API GET documents GET by ID success");
         } else {
             System.out.println("API GET documents GET by ID test FAILED ");
             isComplete = false;
         }
+*/
 
         // GET API config test run
 /*        if (new GetConfigToRun().testGetConfig(siteUrl, testUser)) {
@@ -172,12 +174,12 @@ public class BackendAPITestToRun {
         }*/
 
         // PUT API config update test run
-        if (new PutConfigUpdate().testPutConfigUpdate(siteUrl, testUser)) {
+/*        if (new PutConfigUpdate().testPutConfigUpdate(siteUrl, testUser)) {
             System.out.println("API PUT config update success");
         } else {
             System.out.println("API PUT config update test FAILED ");
             isComplete = false;
-        }
+        }*/
     assertTrue("BackendAPITests failed", isComplete);
     }
 }

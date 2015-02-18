@@ -17,7 +17,7 @@ public class PostOperationInsert {
     public boolean testPostOperationInsert(String siteUrl, TestUser user) throws IOException, JSONException {
         long startTime;
         long elapsedTime;
-        Operation originalOne = new GetOperations().getAnyOperation(user, siteUrl);
+        Operation originalOne = new GetOperations(user).getAnyOperation(user, siteUrl);
         Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.getStatus(), originalOne.getType(), !originalOne.getQuarantine(), originalOne.getParentOperationId());
         String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + ", \"parent_operation_id\": " + newOne.getParentOperationId() + "}";
 
@@ -46,7 +46,7 @@ public class PostOperationInsert {
         int newOneId = report.getInt("id");
 
         // Проверяем GET-запросом, что данные обновились
-        Operation changedOne = new GetOperations().getOperationByParameter("id", newOneId, user, siteUrl);
+        Operation changedOne = new GetOperations(user).getOperationByParameter("id", newOneId, user, siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return true;
