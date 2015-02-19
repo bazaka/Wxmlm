@@ -1,6 +1,6 @@
 package ApiTests.LoginFree;
 
-import ApiTests.Backend.GetProducts;
+import ApiTests.Backend.GetProductsToRun;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.RegionMatch;
@@ -19,7 +19,7 @@ public class GetModuleInfo {
     public boolean testGetModuleInfo(String siteUrl, TestUser user) throws Exception {
         long startTime;
         long elapsedTime;
-        int[] ids = GetProducts.getProductsIDs(siteUrl, user);
+        int[] ids = GetProductsToRun.getProductsIDs(siteUrl, user);
 
         for (int i = 0; i < (ids.length - 1); i++) {
             // Создаем соединение

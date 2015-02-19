@@ -2,23 +2,44 @@ package ApiTests.Backend;
 
 import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
+import UsedByAll.Config;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-public class GetUsers {
-    public boolean testGetUsers(String siteUrl, TestUser User) throws Exception{
+@RunWith(value = Parameterized.class)
+public class GetUsersToRun {
+    private TestUser testUser;
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetUsersToRun(");
+    }
+
+    public GetUsersToRun(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetUsers() throws Exception{
+        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         String url = "users/api/users/";
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, User, url, 5, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -78,6 +99,5 @@ public class GetUsers {
             assertEquals("Incorrect count of Json Objects", object.length(), 35);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
     }
 }

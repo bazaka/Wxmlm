@@ -3,26 +3,48 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Product;
 import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
+import UsedByAll.Config;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 08.12.2014. GET Products
-public class GetProducts {
-    public boolean testGetProducts(String siteUrl, TestUser User) throws Exception {
+@RunWith(value = Parameterized.class)
+public class GetProductsToRun {
+    private TestUser testUser;
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetOperationsToRun(");
+    }
+
+    public GetProductsToRun(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetProducts() throws Exception {
+        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         String url = "products/api/products/";
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, User, url, 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -53,6 +75,7 @@ public class GetProducts {
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect image_url", ValidationChecker.checkStringOrNull(object.get("image_url")));
             assertTrue("Incorrect product_url", ValidationChecker.checkURLOnDomain(object.getString("product_url"), siteUrl));
+            assertTrue("Unrecognised category_id", object.getInt("category_id") == 1 || object.getInt("category_id") == 2);
             if (object.getInt("category_id") == 1) {
                 assertTrue("Incorrect available", ValidationChecker.checkStringOrNull(attributes.get("available")) || ValidationChecker.checkPositiveInt(attributes.getInt("available")));
                 assertTrue("Incorrect discSpace", ValidationChecker.checkStringOrNull(attributes.get("discSpace")));
@@ -76,14 +99,9 @@ public class GetProducts {
                 assertTrue("Incorrect serviceId", ValidationChecker.checkIdValue(attributes.getInt("serviceId")));
                 assertEquals("Incorrect count of object additional attributes", attributes.length(), 6);
             }
-            else{
-                System.out.println("Unrecognised category_id");
-            return false;
-            }
             assertEquals("Incorrect count of object attributes", object.length(), 13);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
     }
     public static int[] getProductsIDs(String siteUrl, TestUser user) throws Exception {
         String url = "products/api/products/";

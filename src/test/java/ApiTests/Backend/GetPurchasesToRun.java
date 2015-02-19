@@ -3,20 +3,42 @@ package ApiTests.Backend;
 import ApiTests.ObjectClasses.Purchases;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
+import UsedByAll.Config;
+import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
-public class GetPurchases {
+@RunWith(value = Parameterized.class)
+public class GetPurchasesToRun {
+    private TestUser testUser;
     public String url = "products/api/purchase/";
-    public boolean testGetPurchases(String siteUrl, TestUser testUser) throws Exception{
+
+    @Parameterized.Parameters
+    public static Collection testData() {
+        return CsvUsersReader.getDataForTest("_GetPurchasesToRun(");
+    }
+
+    public GetPurchasesToRun(TestUser user){
+        this.testUser = user;
+    }
+
+    @Test
+    public void testGetPurchases() throws Exception{
+        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
@@ -36,7 +58,6 @@ public class GetPurchases {
         assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
 
         for (int i=0; i<jsonArr.length(); i++){
-
             JSONObject object = jsonArr.getJSONObject(i);
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect buyer_user_id", ValidationChecker.checkIdValue(object.getInt("buyer_user_id")));
@@ -50,7 +71,6 @@ public class GetPurchases {
             assertEquals("Incorrect count of JSON Objects", object.length(),9);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-        return true;
     }
 
     public Purchases getAnyPurchase(TestUser testUser, String siteUrl) throws IOException, JSONException {
@@ -98,9 +118,7 @@ public class GetPurchases {
                    // System.out.println(new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms));
                     return new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
                 }
-
             }
-
         }catch (Exception e){
             e.printStackTrace();
             return null;
