@@ -20,14 +20,14 @@ import static org.junit.Assert.assertNotEquals;
 
 
 @RunWith(value = Parameterized.class)
-public class TransferTestToRun extends BaseTest {
+public class TransferTest extends BaseTest {
     String email;
     String password;
 
     @Parameters
     public static Collection testDFata(){return CsvUsersReader.getDataForTest("_TransferTest(");}
 
-    public TransferTestToRun(TestUser testUser){
+    public TransferTest(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
     }

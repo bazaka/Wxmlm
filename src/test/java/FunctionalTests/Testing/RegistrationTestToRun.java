@@ -84,7 +84,7 @@ public class RegistrationTestToRun extends BaseTest {
                 e.printStackTrace();
             }
             count++;
-            if (count == 30) break;
+            if (count == 5) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
         String activationLink = gmailMessager.openAndReturnLink(emailPassword, emailAddress, "Welcome", confirmLink);
 
