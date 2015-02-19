@@ -34,22 +34,6 @@ public class Main
         // Цикл, выполняющий тесты для пользователей, указанных в конфиге
         for (int i = 0; i < testUser.length; i++)
         {
-            // FreeLogin API (authorization don't needed)
-/*            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_LoginFreeAPI("))
-            {
-                System.out.println("Запуск тестов LoginFreeAPITest пользователем " + testUser[i].getFullName() + ", email - " + testUser[i].getEmail());
-                LoginFreeAPITest newLoginFreeAPITest = new LoginFreeAPITest(); // Создаём объект теста
-                //Вызов метода, запускающего тесты LoginFree API
-                try { if (newLoginFreeAPITest.runLoginFreeAPITests(config, testUser[i]))
-                    System.out.println("Проверка LoginFree API пройдена");
-                    else
-                    System.out.println("Проверка LoginFree API НЕ пройдена");
-                }
-                catch (Exception e) { e.printStackTrace();
-                    System.out.println("Проверка LoginFree API НЕ пройдена: " + e); }
-                //Вызов метода окончания теста
-            }*/
-
             if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), "_RegistrationTest(")) {
                RegistrationTestToRun newRegistrationTest = new RegistrationTestToRun(testUser[i]);
 
