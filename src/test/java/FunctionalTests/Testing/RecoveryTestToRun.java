@@ -78,7 +78,7 @@ public class RecoveryTestToRun extends BaseTest/*extends BaseTest */{
                 e.printStackTrace();
             }
             count++;
-            if (count == 100) break;
+            if (count == 5) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
         String activationLink = gmailMessager.openAndReturnLink(emailPassword, emailAddress, "Reset Password", confirmLink);
         assertEquals("Not same titles", recoveryPage.enterNewPassword(newPassword1, newPassword2, activationLink), "KairosNet");

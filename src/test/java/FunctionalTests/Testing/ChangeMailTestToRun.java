@@ -63,7 +63,7 @@ public class ChangeMailTestToRun extends BaseTest {
         do{ //стара пошта
             newMessageTime = gmailMessager.getLastMessageTime(emailPassword, email);
             count++;
-            if(count == 30) break;
+            if(count == 5) break;
         }while(currentMessageTime.equals(newMessageTime)); // обновляемо пошту до моменту, коли не прийде лист, або до оверфлова лічильника
         String changeConfirmationLink = gmailMessager.openAndReturnLink(emailPassword, email, "Email change confirmation", confirmOldMailLink); //витягуємо з листа лінк
 
@@ -73,7 +73,7 @@ public class ChangeMailTestToRun extends BaseTest {
         do{ //нова пошта
             newMessageTime = gmailMessager.getLastMessageTime(emailPassword, newEmail);
             count++;
-            if(count == 30) break;
+            if(count == 5) break;
         }while(currentMessageTime.equals(newMessageTime)); // обновляемо пошту до моменту, коли не прийде лист, або до оверфлова лічильника
 
         String newMailConfirmLink = gmailMessager.openAndReturnLink(emailPassword, newEmail, "Main Email confirmation", confirmNewMailLink); //витягуємо лінк з листа

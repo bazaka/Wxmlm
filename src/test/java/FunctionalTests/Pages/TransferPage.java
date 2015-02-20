@@ -2,8 +2,11 @@ package FunctionalTests.Pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 /**
  * Created by User on 1/5/2015.
@@ -13,12 +16,12 @@ public class TransferPage extends BasePage{
     public static final By moneyPage  = By.xpath("//div[@id='head-nav']//a[@href='/money/']");
     public static final By transferPage = By.xpath("//div[@class='col-md-12']//a[@href='/money/buy/']");
     public static final By currentAccordion = By.xpath("//div[@id='accordion4']//strong[contains(text(), 'Current')]");
-    public static final By bonusesAccordion = By.xpath("//div[@id='accordion4']//strong[contains(text(), 'Bonuses')]");
-    public static final By salaryAccordion = By.xpath("//div[@id='accordion4']//strong[contains(text(), 'Salary')]");
+    public static final By bonusesAccordion = By.xpath("//div[@id='accordion4']//div[contains(@class,'panel-bonuses')]//a");
+    public static final By salaryAccordion = By.xpath("//div[@id='accordion4']//div[contains(@class,'panel-salary')]//a");
     public static final By fromBonusToCurrent = By.xpath("//div[@id='tab3-2']//div[@class='radio']/label[@data-type='current']/div");
     public static final By fromBonusToSalary = By.xpath("//div[@id='tab3-2']//div[@class='radio']/label[@data-type='salary']/div");
     //обов"язково перевірку ісСелект
-    public static final By fromSalaryToCurrent = By.xpath("//div[@id='tab3-3']//div[@class='radio']/label[@data-type='current']/div");
+    public static final By fromSalaryToCurrent = By.xpath("//div[@id='tab3-3']//div[@class='radio']/label/div");
     public static final By amountBonuses = By.id("transfer_amount_bonuses");
     public static final By transferButtonBonuses = By.id("transfer_bonuses");
     public static final By amountSalary = By.id("transfer_amount_salary");
@@ -40,25 +43,13 @@ public class TransferPage extends BasePage{
     public TransferPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
-    /* public void openMoneyPage(){
-         WebDriverWait wait = new WebDriverWait(driver, 10);
-         AuthorizedUserPage authorizedUserPage = new AuthorizedUserPage(driver);
-         authorizedUserPage.goMoney();
-         authorizedUserPage.goTransfer();
-         wait.until(ExpectedConditions.presenceOfElementLocated(transferPage));
 
-     }
-     public void openTransferPage(){
-         WebDriverWait wait = new WebDriverWait(driver, 10);
-         driver.findElement(transferPage).click();
-         wait.until(ExpectedConditions.presenceOfElementLocated(currentAccordion));
-     }*/
     public String getTitle(){
         return driver.getTitle();
     }
-
+/*
     public void positiveTransferFromBonusesToCurrent(String value){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
+
         driver.findElement(bonusesAccordion).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(fromBonusToCurrent));
         driver.findElement(fromBonusToCurrent).click();
@@ -68,10 +59,50 @@ public class TransferPage extends BasePage{
         driver.findElement(amountBonuses).sendKeys(value);
         driver.findElement(transferButtonBonuses).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+    }*/
+    public void clickBonusesAccordion(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(bonusesAccordion));
+        driver.findElement(bonusesAccordion).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fromBonusToCurrent));
     }
-    public void checkOperationHistory(){
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        driver.findElement(operationHistoryPage);
+    public void clickSalaryAccordion(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(salaryAccordion));
+        driver.findElement(salaryAccordion).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fromSalaryToCurrent));
+    }
+    public void clickOnFromBonusesToCurrentRadioButton(){
+        //List<WebElement> radioButton = driver.findElements(fromBonusToCurrent);
+        driver.findElement(fromBonusToCurrent).click();
+        //wait.until(ExpectedConditions.elementSelectionStateToBe(fromBonusToCurrent, true));
+    }
+
+
+    public void clickOnFromBonusesToSalaryRadioButton(){
+        driver.findElement(fromBonusToSalary).click();
+    }
+    public void clickOnFromSalaryToCurrantRadioButton(){driver.findElement(fromSalaryToCurrent).click();}
+    public void enterAmountFromBonuses(String amount){
+        driver.findElement(amountBonuses).clear();
+        driver.findElement(amountBonuses).click();
+        driver.findElement(amountBonuses).sendKeys(amount);
+
+    }
+    public void enterAmountFromSalary(String amount){
+        driver.findElement(amountSalary).clear();
+        driver.findElement(amountSalary).click();
+        driver.findElement(amountSalary).sendKeys(amount);
+    }
+    public void clickBonusTransfer(){
+        driver.findElement(transferButtonBonuses).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+    }
+    public void clickSalaryTransfer(){
+        driver.findElement(transferButtonSalary).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+    }
+    public void waitOperationHistoryLoading(){
+
+
         wait.until(ExpectedConditions.presenceOfElementLocated(lastType));
     }
     public String getOperationType(){
