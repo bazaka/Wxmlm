@@ -1,4 +1,4 @@
 email, newEmail, ePassword, fullName, password1, password2, newPassword1, newPassword2, phone, inviteCode, useInTest
 t4webuser05@gmail.com, -, -, Admin 4 tests, 123, -, -, -, -, -, _LoginFreeAPITest()_GetAccountsToRun()_PutAccountsUpdateToRun()_GetConfigToRun()_PutConfigUpdateToRun()_GetDocumentsToRun()_GetDocumentsByIdToRun()_GetOperationsToRun()_PutOperationsUpdateToRun()_PostOperationInsertToRun()_GetProducts()_PutProductsSave()_GetPurchases()_GetPurchasesToRun()_PutPurchasesUpdateToRun()_PostPurchasesInsertToRun()_GetUsersToRun()_GetWithdrawsToRun()_PutWithdrawsUpdateToRun()_PostWithdrawInsertToRun()_GetApplicationInfoToRun()_GetModuleContentToRun()_GetModuleInfoToRun()_PostConfigInsertToRun()_
 filonchenko@gmail.com, -, -, Api Tester, 111111, 111111, -, -, -, -,
-t.4webuser01@gmail.com, -, -, Admin 4 tests, 111111, -, -, -, -, -,_ChangeProfileDataTest()_LogInTest()_BuyPackageTest()_TransferTest()_RegistrationTest()_RecoveryTest()_ChangeMailTest()
+t.4webuser01@gmail.com, -, -, Admin 4 tests, 111111, -, -, -, -, -,_ChangeProfileDataTest()_LogInTest()_BuyPackageTest()_TransferTest()_1RegistrationTest()_1RecoveryTest()_1ChangeMailTest()
