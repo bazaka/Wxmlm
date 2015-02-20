@@ -1,3 +1,4 @@
+/*
 
 import FunctionalTests.Testing.ChangeMailTestToRun;
 import FunctionalTests.Testing.ChangeProfileDataTestToRun;
@@ -90,4 +91,4 @@ public class Main
         }
         System.out.println("Тестирование успешно закончено");
     }
-}
+}*/

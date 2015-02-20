@@ -1,13 +1,18 @@
 package ApiTests.ObjectClasses;
 
-public class Config {
+public class AConfig {
     private int id;
     private String name;
     private String value;
 
-    public Config(int id, String name, String value)
+    public AConfig(int id, String name, String value)
     {
         this.setId(id);
+        this.setName(name);
+        this.setValue(value);
+    }
+    public AConfig(String name, String value)
+    {
         this.setName(name);
         this.setValue(value);
     }
@@ -20,7 +25,7 @@ public class Config {
     public void setName(String a) {this.name = a;}
     public void setValue(String a) {this.value = a;}
 
-    public boolean equals(Config a)
+    public boolean equals(AConfig a)
     {
         if (this == a)
             return true;

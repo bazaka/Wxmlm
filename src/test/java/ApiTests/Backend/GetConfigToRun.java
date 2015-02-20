@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Config;
+import ApiTests.ObjectClasses.AConfig;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
@@ -69,7 +69,7 @@ public class GetConfigToRun {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
-    public Config getAnyConfig(TestUser user, String siteUrl) throws IOException {
+    public AConfig getAnyConfig(TestUser user, String siteUrl) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 50, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -84,14 +84,14 @@ public class GetConfigToRun {
         try {
             JSONArray jsonArr = new JSONArray(result);
             JSONObject object = jsonArr.getJSONObject(0);
-            return new Config(object.getInt("id"), object.getString("name"), object.getString("value"));
+            return new AConfig(object.getInt("id"), object.getString("name"), object.getString("value"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Config getConfigByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+    public AConfig getConfigByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "config/api/values/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -108,7 +108,7 @@ public class GetConfigToRun {
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Config(object.getInt("id"), object.getString("name"), object.getString("value"));
+                    return new AConfig(object.getInt("id"), object.getString("name"), object.getString("value"));
                 }
             }
         } catch (Exception e) {
