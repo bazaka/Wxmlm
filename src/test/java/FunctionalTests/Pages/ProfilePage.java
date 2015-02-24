@@ -63,8 +63,11 @@ public class ProfilePage extends BasePage {
     private static final By closeChangedEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-new-email']//button[text()='Close']");
 
    // private static final By popup = By.className("gritter-without-image");
-    private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success!']");
+   private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success!']");
     private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success']");
+
+  /*  private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
+    private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");*/
 
 
     public ProfilePage(WebDriver driver, WebDriverWait wait){
