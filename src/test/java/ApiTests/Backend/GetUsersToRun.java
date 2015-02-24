@@ -60,6 +60,7 @@ public class GetUsersToRun {
         for(int i = 0; i<jsonArr.length(); i++)
         {
             JSONObject object = jsonArr.getJSONObject(i);
+            JSONArray inviteCodes = object.getJSONArray("invite_code");
 
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
             assertTrue("Incorrect surname", ValidationChecker.checkStringOrNull(object.get("surname").toString()));
@@ -85,7 +86,6 @@ public class GetUsersToRun {
             assertTrue("Incorrect adress2",ValidationChecker.checkStringOrNull(object.get("adress2").toString()));
             assertTrue("Incorrect adress3",ValidationChecker.checkStringOrNull(object.get("adress3").toString()));
             assertTrue("Incorrect genderId",ValidationChecker.checkGenderId(object.getInt("gender_id")));
-            assertTrue("Incorrect invitationCode",ValidationChecker.checkStringNotNull(object.get("invitation_code").toString()));
             assertTrue("Incorrect userStatusId",ValidationChecker.checkUserStatusId(object.getInt("user_status_id")));
             assertTrue("Incorrect createdDate", ValidationChecker.checkStringOrNull(object.get("created_date")) || ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect createdBy",ValidationChecker.checkIdOrNull(object.get("created_by")));
@@ -96,6 +96,9 @@ public class GetUsersToRun {
             assertTrue("Incorrect network",ValidationChecker.checkBooleanValue(object.getBoolean("network")));
             assertTrue("Incorrect career",ValidationChecker.checkCareerId(object.getInt("career")));
             assertTrue("Incorrect isApproved",ValidationChecker.checkBooleanValue(object.getBoolean("is_approved")));
+            for (int j = 0; j < inviteCodes.length(); j++) {
+                assertTrue("Incorrect inviteCode",ValidationChecker.checkStringNotNull(inviteCodes.get(j).toString()));
+            }
             assertEquals("Incorrect count of Json Objects", object.length(), 35);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
