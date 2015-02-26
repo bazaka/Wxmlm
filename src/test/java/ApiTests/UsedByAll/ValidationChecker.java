@@ -6,6 +6,8 @@ import org.apache.commons.validator.routines.EmailValidator;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ValidationChecker {
     // Null - NotNull
@@ -57,4 +59,15 @@ public class ValidationChecker {
     public static boolean checkURLOnDomain(String url, String domain){return RegionMatch.IsStringRegionMatch(url, domain);}
     public static boolean checkPositiveInt(int count){return count >= 0;}
     public static boolean checkFileName(String fileName){return fileName.split("\\.")[0].length()>=1 && fileName.split("\\.")[1].length()>=3 && fileName.split("\\.")[1].length()<=4;}
+    public static boolean checkCardNumber(String cardNumber) {
+        Pattern p = Pattern.compile("^(\\d{4} ){3}\\d{4}$");
+        Matcher m = p.matcher(cardNumber);
+        return m.matches();
+    }
+    public static boolean checkExpDate(String expDate){
+        Pattern p = Pattern.compile("^([1-9]|1[0-2]|[0][1-9])\\/(\\d{2})$");
+        Matcher m = p.matcher(expDate);
+        return m.matches();
+
+    }
 }
