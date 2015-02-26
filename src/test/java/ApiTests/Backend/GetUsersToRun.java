@@ -34,6 +34,7 @@ public class GetUsersToRun {
 
     @Test
     public void testGetUsers() throws Exception{
+
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
