@@ -31,6 +31,7 @@ public class MakeRequest{
     // Для PUT-ов и POST-ов
     public static HttpURLConnection getConnection(String siteUrl, TestUser user, String urlPart, String requestMethod, String contentType, String accept, boolean setDoOutput) throws IOException {
         String urlString = siteUrl + urlPart;
+       // System.out.println(urlString);
         // Содзаем HttpUrlConnection
         String authString = user.getEmail() + ":" + user.getPassword1();
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
