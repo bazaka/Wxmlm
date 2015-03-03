@@ -28,7 +28,7 @@ public class GetConfigToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetConfigToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetConfigToRun(TestUser user){

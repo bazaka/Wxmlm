@@ -25,7 +25,7 @@ public class GetUsersToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetUsersToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetUsersToRun(TestUser user){
@@ -100,7 +100,8 @@ public class GetUsersToRun {
             for (int j = 0; j < inviteCodes.length(); j++) {
                 assertTrue("Incorrect inviteCode",ValidationChecker.checkStringNotNull(inviteCodes.get(j).toString()));
             }
-            assertEquals("Incorrect count of Json Objects", object.length(), 35);
+            assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
+            assertEquals("Incorrect count of Json Objects", object.length(), 36);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

@@ -24,7 +24,7 @@ public class PutWithdrawsUpdateToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PutWithdrawsUpdateToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PutWithdrawsUpdateToRun(TestUser user){

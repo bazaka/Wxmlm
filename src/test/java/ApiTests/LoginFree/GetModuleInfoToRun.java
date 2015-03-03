@@ -30,7 +30,7 @@ public class GetModuleInfoToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetModuleInfoToRun(");
+        return CsvUsersReader.getDataForTest("_LoginFreeAPITest(");
     }
 
     public GetModuleInfoToRun(TestUser user){

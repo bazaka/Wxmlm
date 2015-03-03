@@ -30,7 +30,7 @@ public class GetWithdrawsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetWithdrawsToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetWithdrawsToRun(TestUser user){

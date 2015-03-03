@@ -33,7 +33,7 @@ public class GetDocumentsByIdToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetDocumentsByIdToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetDocumentsByIdToRun(TestUser user){

@@ -27,7 +27,7 @@ public class PutPurchasesUpdateToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PutPurchasesUpdateToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PutPurchasesUpdateToRun(TestUser user){

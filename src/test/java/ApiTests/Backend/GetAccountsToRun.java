@@ -29,7 +29,7 @@ public class GetAccountsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetAccountsToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetAccountsToRun(TestUser user){

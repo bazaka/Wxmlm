@@ -26,7 +26,7 @@ public class GetApplicationInfoToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetApplicationInfoToRun(");
+        return CsvUsersReader.getDataForTest("_LoginFreeAPITest(");
     }
 
     public GetApplicationInfoToRun(TestUser user){

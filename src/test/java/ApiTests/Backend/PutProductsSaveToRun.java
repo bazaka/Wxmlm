@@ -26,7 +26,7 @@ public class PutProductsSaveToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PutProductsSave(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PutProductsSaveToRun(TestUser user){

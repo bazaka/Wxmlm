@@ -2,6 +2,7 @@ package ApiTests.Backend;
 
 // * Created for W-xmlm by Fill on 24.02.2015.
 
+import ApiTests.ObjectClasses.IncomeDetails;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
@@ -14,6 +15,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,7 +30,7 @@ public class GetIncomeDetailsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_" + GetIncomeDetailsToRun.class.getSimpleName() + "(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetIncomeDetailsToRun(TestUser user){
@@ -80,4 +82,63 @@ public class GetIncomeDetailsToRun {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
+    public IncomeDetails getAnyIncomeDetails(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/income-details/", 500, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            assertFalse("There is an empty Array", jsonArr.length() == 0);
+            JSONObject object = jsonArr.getJSONObject(0);
+            JSONArray purchaseIdsArray = object.getJSONArray("purchase_ids");
+            int[] purchaseIds = new int[purchaseIdsArray.length()];
+            for (int i = 0; i < purchaseIdsArray.length(); i++) {
+                purchaseIds[i] = purchaseIdsArray.getInt(i);
+            }
+            return new IncomeDetails(object.getInt("id"), object.getInt("operation_id"), object.getInt("user_id"), purchaseIds, object.getInt("time_online"), object.getInt("time_online_paid"), object.getString("created_date"), object.getString("updated_date"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public IncomeDetails getIncomeDetailsByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/income-details/", 1, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject object = jsonArr.getJSONObject(i);
+                if (object.getInt(parameterName) == parameterValue) {
+                    JSONArray purchaseIdsArray = object.getJSONArray("purchase_ids");
+                    int[] purchaseIds = new int[purchaseIdsArray.length()];
+                    for (int j = 0; j < purchaseIdsArray.length(); j++) {
+                        purchaseIds[j] = purchaseIdsArray.getInt(j);
+                    }
+                    return new IncomeDetails(object.getInt("id"), object.getInt("operation_id"), object.getInt("user_id"), purchaseIds, object.getInt("time_online"), object.getInt("time_online_paid"), object.getString("created_date"), object.getString("updated_date"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
+    }
 }

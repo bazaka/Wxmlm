@@ -27,7 +27,7 @@ public class GetOperationsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetOperationsToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetOperationsToRun(TestUser user){

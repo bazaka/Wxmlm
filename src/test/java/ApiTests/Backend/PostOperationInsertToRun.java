@@ -27,7 +27,7 @@ public class PostOperationInsertToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PostOperationInsertToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PostOperationInsertToRun(TestUser user){

@@ -21,7 +21,7 @@ public class PutConfigUpdateToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PutConfigUpdateToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PutConfigUpdateToRun(TestUser user){

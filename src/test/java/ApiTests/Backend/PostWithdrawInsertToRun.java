@@ -26,7 +26,7 @@ public class PostWithdrawInsertToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PostWithdrawInsertToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PostWithdrawInsertToRun(TestUser user){

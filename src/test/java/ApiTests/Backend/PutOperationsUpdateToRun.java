@@ -22,7 +22,7 @@ public class PutOperationsUpdateToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PutOperationsUpdateToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PutOperationsUpdateToRun(TestUser user){

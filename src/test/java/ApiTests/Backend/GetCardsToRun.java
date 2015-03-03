@@ -31,7 +31,7 @@ public class GetCardsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_GetCardsToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public GetCardsToRun(TestUser user) {this.testUser=user;}

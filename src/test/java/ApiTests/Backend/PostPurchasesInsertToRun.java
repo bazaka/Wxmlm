@@ -29,7 +29,7 @@ public class PostPurchasesInsertToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_PostPurchasesInsertToRun(");
+        return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
     public PostPurchasesInsertToRun(TestUser user){
