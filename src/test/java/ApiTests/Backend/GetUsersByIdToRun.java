@@ -45,7 +45,7 @@ public class GetUsersByIdToRun {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme();
         int[] ids = GetUsersToRun.getUserId(siteUrl, testUser);
 
-        for(int i=0; i<(ids.length -1); i++){
+        for(int i=0; i<(ids.length); i++){
 
             //создаем соединение
 
