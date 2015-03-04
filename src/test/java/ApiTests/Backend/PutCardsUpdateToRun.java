@@ -38,10 +38,6 @@ public class PutCardsUpdateToRun {
         Card modifiedCard = new Card(originalCard.getCardId(), originalCard.getUserId(), originalCard.getCardNumber(), originalCard.getExpDate(), "test_Card_holder_autotest", originalCard.getEnabled());
         String originalJson = "[{\"card_id\":" + originalCard.getCardId() + ", \"user_id\":" + originalCard.getUserId() + ", \"number\":\"" + originalCard.getCardNumber() + "\", \"cardholder\":\"" + originalCard.getCardHolder() + "\", \"expiration\": \"" + originalCard.getExpDate() + "\", \"enabled\": " + originalCard.getEnabled() + "}]";
         String modifiedJson = "[{\"card_id\":" + modifiedCard.getCardId() + ", \"user_id\":" + modifiedCard.getUserId() + ", \"number\":\"" + modifiedCard.getCardNumber() + "\", \"cardholder\":\"" + modifiedCard.getCardHolder() + "\", \"expiration\": \"" + modifiedCard.getExpDate() + "\", \"enabled\": " + modifiedCard.getEnabled() + "}]";
-        /*System.out.println("original:" +originalJson);
-        System.out.println("modified:" +modifiedJson);*/
-
-
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
@@ -49,10 +45,6 @@ public class PutCardsUpdateToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
-    /* System.out.println("code: " + httpCon.getResponseCode());
-        System.out.println("message: "+httpCon.getResponseMessage());*/
-
-
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
@@ -60,7 +52,6 @@ public class PutCardsUpdateToRun {
         assertTrue("Check modified data saved correctly", modifiedCard.equalsExceptDate(changedCard));
 
         // Содзаем URL
-     //  modifiedJson = originalJson;
         httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/cards/update/", "PUT", "application/json", "application/json", true  );
         out = new OutputStreamWriter(httpCon.getOutputStream());
 
@@ -72,9 +63,5 @@ public class PutCardsUpdateToRun {
         changedCard = new GetCardsToRun(testUser).getCardByParameter("card_id", originalCard.getCardId(), testUser, siteUrl);
         assertTrue("Check modified data returned correctly", originalCard.equalsExceptDate(changedCard));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-
-
-
-
     }
 }
