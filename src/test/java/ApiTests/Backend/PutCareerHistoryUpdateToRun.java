@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 03.03.2015.
 @RunWith(value = Parameterized.class)
-public class PutCareerHistoryUpdate {
+public class PutCareerHistoryUpdateToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -24,12 +24,12 @@ public class PutCareerHistoryUpdate {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public PutCareerHistoryUpdate(TestUser user) {
+    public PutCareerHistoryUpdateToRun(TestUser user) {
         this.testUser = user;
     }
 
     @Test
-    public void testPutIncomeDetailsUpdate() throws Exception {
+    public void testPutCareerHistoryUpdate() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
@@ -49,10 +49,9 @@ public class PutCareerHistoryUpdate {
         membersString = membersString + "]";
         String originalJson = "[{\"history_id\": " + originalOne.getHistoryId() + ", \"user_id\": " + originalOne.getUserId() + ", \"career\": " + originalOne.getCareer() + ", \"date\": \"" + originalOne.getDate() + "\", \"members\": " + membersString + "}]";
         String modifiedJson = "[{\"history_id\": " + modifiedOne.getHistoryId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"career\": " + modifiedOne.getCareer() + ", \"date\": \"" + modifiedOne.getDate() + "\", \"members\": " + membersString + "}]";
-
         // Содзаем URL
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/income-details/update/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "career/api/history/update/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
@@ -60,10 +59,10 @@ public class PutCareerHistoryUpdate {
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
         CareerHistory changedOne = new GetCareerHistoryToRun(testUser).getCareerHistoryByParameter("history_id", originalOne.getHistoryId(), testUser, siteUrl);
-/*        assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne, true));
+        assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne, true));
 
         // Содзаем URL
-        httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/income-details/update/", "PUT", "application/json", "application/json", true);
+        httpCon = MakeRequest.getConnection(siteUrl, testUser, "career/api/history/update/", "PUT", "application/json", "application/json", true);
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();
@@ -71,8 +70,8 @@ public class PutCareerHistoryUpdate {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
-        changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", originalOne.getId(), testUser, siteUrl);
+        changedOne = new GetCareerHistoryToRun(testUser).getCareerHistoryByParameter("history_id", originalOne.getHistoryId(), testUser, siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne, true));
-        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);*/
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 }

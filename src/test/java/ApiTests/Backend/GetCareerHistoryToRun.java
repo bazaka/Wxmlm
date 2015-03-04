@@ -37,7 +37,7 @@ public class GetCareerHistoryToRun {
     }
 
     @Test
-    public void testGetCards() throws Exception {
+    public void testGetCareerHistory() throws Exception {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
@@ -121,7 +121,7 @@ public class GetCareerHistoryToRun {
             JSONArray jsonArr = new JSONArray(result);
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             for (int i = 0; i < jsonArr.length(); i++) {
-                JSONObject object = jsonArr.getJSONObject(0);
+                JSONObject object = jsonArr.getJSONObject(i);
                 JSONArray membersArray = object.getJSONArray("members");
                 int[] members = new int[membersArray.length()];
                 for (int j = 0; j < membersArray.length(); j++) {

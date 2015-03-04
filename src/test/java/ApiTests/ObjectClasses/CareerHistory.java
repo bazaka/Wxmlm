@@ -41,4 +41,46 @@ public class CareerHistory {
     public void setMembers(int elementNumber, int a) {this.members[elementNumber] = a;}
     public void setCreatedDate(String a) {this.createdDate = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
+
+    public boolean equalsExceptUpdatedDate(CareerHistory a, boolean toCheckCreatedDate)
+    {
+        if (this == a)
+            return true;
+        if (a == null) {
+            System.out.println("1");
+            return false;
+        }
+        if (getClass() != a.getClass()) {
+            System.out.println("2");
+            return false;
+        }
+        if (getHistoryId() != a.getHistoryId()) {
+            System.out.println("3");
+            return false;
+        }
+        if (getUserId() != a.getUserId()) {
+            System.out.println("4");
+            return false;
+        }
+        if (getCareer() != a.getCareer()){
+            System.out.println("5");
+            return false;
+        }
+        if (!getDate().equals(a.getDate())) {
+            System.out.println("9");
+            return false;
+        }
+        for (int i = 0; i < getMembers().length; i++) {
+            if (getMembers(i) != a.getMembers(i)) {
+                System.out.println("6");
+                return false;
+            }
+        }
+        if (toCheckCreatedDate && !getCreatedDate().equals(a.getCreatedDate())) {
+            System.out.println("9");
+            return false;
+        }
+        return true;
+    }
+
 }
