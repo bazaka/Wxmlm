@@ -6,12 +6,14 @@ import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -22,6 +24,7 @@ import static org.junit.Assert.*;
 @RunWith(value = Parameterized.class)
 public class GetUsersToRun {
     private TestUser testUser;
+    static final String url = "users/api/users/";
 
     @Parameterized.Parameters
     public static Collection testData() {
@@ -38,7 +41,7 @@ public class GetUsersToRun {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
-        String url = "users/api/users/";
+
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 5, "GET");
         InputStream inStrm = httpCon.getInputStream();
@@ -104,5 +107,33 @@ public class GetUsersToRun {
             assertEquals("Incorrect count of Json Objects", object.length(), 36);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
+    }
+    public static int[] getUserId(String siteUrl, TestUser testUser) throws IOException, JSONException{
+        long startTime;
+        long elapsedTime;
+        startTime = System.currentTimeMillis();
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 5, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        elapsedTime = System.currentTimeMillis() - startTime;
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+
+        JSONArray jsonArr = new JSONArray(result);
+        int ids[] = new int[jsonArr.length()];
+        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        for(int i=0; i<jsonArr.length(); i++){
+            JSONObject object = jsonArr.getJSONObject(i);
+            ids[i] = object.getInt("user_id");
+        }
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
+        return ids;
+
     }
 }

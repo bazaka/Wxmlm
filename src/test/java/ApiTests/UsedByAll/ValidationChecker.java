@@ -21,7 +21,7 @@ public class ValidationChecker {
     public static boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
     public static boolean checkWithdrawStatusId(int statusId) {return (statusId>=1 && statusId<=3);}
     public static boolean checkProductStatusId(int statusId) {return (statusId>=1 && statusId<=4);}
-    public static boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=11);}
+    public static boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=12);}
     public static boolean checkProductTypeId(int typeId) {return (typeId>=11);}
     public static boolean checkCareerId(int careerId) {return (careerId>=0 && careerId<=11);}
     public static boolean checkProductId (int productId){return(productId == 1 || productId == 2 || productId == 3 || productId == 4);}
