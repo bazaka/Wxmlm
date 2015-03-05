@@ -18,7 +18,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
-public class ChangeMailTestToRun extends BaseTest {
+public class ChangeMailTest extends BaseTest {
     String email;
     String password;
     String emailPassword;
@@ -27,7 +27,7 @@ public class ChangeMailTestToRun extends BaseTest {
     @Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_ChangeMailTest(");}
 
-    public ChangeMailTestToRun(TestUser testUser){
+    public ChangeMailTest(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
         this.emailPassword=testUser.getEPassword();

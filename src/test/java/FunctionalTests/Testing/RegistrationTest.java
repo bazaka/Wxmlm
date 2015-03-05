@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/1/2014.
  */
 @RunWith(value=Parameterized.class )
-public class RegistrationTestToRun extends BaseTest {
+public class RegistrationTest extends BaseTest {
 
     private String emailPassword;
 
@@ -36,7 +36,7 @@ public class RegistrationTestToRun extends BaseTest {
     @Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RegistrationTest(");}
 
-    public RegistrationTestToRun(TestUser testUser) {
+    public RegistrationTest(TestUser testUser) {
 
         this.emailPassword=testUser.getEPassword();
         this.emailAddress=testUser.getEmail();

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/8/2014.
  */
 @RunWith(value=Parameterized.class )
-public class RecoveryTestToRun extends BaseTest/*extends BaseTest */{
+public class RecoveryTest extends BaseTest/*extends BaseTest */{
 
     private String emailPassword;
     private String emailAddress;
@@ -30,7 +30,7 @@ public class RecoveryTestToRun extends BaseTest/*extends BaseTest */{
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RecoveryTest(");}
 
-    public RecoveryTestToRun(TestUser testUser) {
+    public RecoveryTest(TestUser testUser) {
         this.emailAddress=testUser.getEmail();
         this.emailPassword=testUser.getEPassword();
         this.newPassword1=testUser.getNewPassword1();
