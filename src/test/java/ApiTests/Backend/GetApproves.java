@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.CareerHistory;
+import ApiTests.ObjectClasses.Approve;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
@@ -21,9 +21,9 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-// * Created for W-xmlm by Fill on 03.03.2015.
+// * Created for W-xmlm by Fill on 05.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetCareerHistoryToRun {
+public class GetApproves {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -31,17 +31,17 @@ public class GetCareerHistoryToRun {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public GetCareerHistoryToRun(TestUser user){
+    public GetApproves(TestUser user){
         this.testUser = user;
     }
 
     @Test
-    public void testGetCareerHistory() throws Exception {
+    public void testGetApproves() throws Exception {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "career/api/history/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -60,24 +60,27 @@ public class GetCareerHistoryToRun {
         assertNotSame("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ", jsonArr.length(), 0);
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
-            JSONArray members = object.getJSONArray("members");
+            JSONArray documents = object.getJSONArray("documents");
 
-            assertTrue("Incorrect history_id", ValidationChecker.checkIdValue(object.getInt("history_id")));
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect career", ValidationChecker.checkIdValue(object.getInt("career")));
-            assertTrue("Incorrect date", ValidationChecker.checkDateTimeString(object.getString("date")));
-            for (int j = 0; j < members.length(); j++) {
-                assertTrue("Incorrect members",ValidationChecker.checkIdValue(members.getInt(j)));
-            }
+            assertTrue("Incorrect approve_user_id", ValidationChecker.checkIdOrNull(object.getInt("approve_user_id")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 7);
+            assertTrue("Incorrect approve_date", ValidationChecker.checkStringOrNull(object.getString("updated_date")));
+            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.getString("user_comment")));
+            assertTrue("Incorrect admin_comment", ValidationChecker.checkStringOrNull(object.getString("admin_comment")));
+            assertTrue("Incorrect status", ValidationChecker.checkIdValue(object.getInt("status")));
+            for (int j = 0; j < documents.length(); j++) {
+                assertTrue("Incorrect documents",ValidationChecker.checkIdValue(documents.getInt(j)));
+            }
+            assertEquals("Incorrect count of Json parameters", object.length(), 10);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
-    public CareerHistory getAnyCareerHistory(TestUser user, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "career/api/history/", 500, "GET");
+    public Approve getAnyApprove(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "users/api/approves/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -92,20 +95,20 @@ public class GetCareerHistoryToRun {
             JSONArray jsonArr = new JSONArray(result);
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             JSONObject object = jsonArr.getJSONObject(0);
-            JSONArray membersArray = object.getJSONArray("members");
-            int[] members = new int[membersArray.length()];
-            for (int i = 0; i < membersArray.length(); i++) {
-                members[i] = membersArray.getInt(i);
+            JSONArray documentsArray = object.getJSONArray("documents");
+            int[] documents = new int[documentsArray.length()];
+            for (int i = 0; i < documentsArray.length(); i++) {
+                documents[i] = documentsArray.getInt(i);
             }
-            return new CareerHistory(object.getInt("history_id"), object.getInt("user_id"), object.getInt("career"), object.getString("date"), members, object.getString("created_date"), object.getString("updated_date"));
+            return new Approve(object.getInt("history_id"), object.getInt("user_id"), object.getInt("approve_id"), object.getString("created_date"), object.getString("updated_date"), object.getString("approve_date"), object.getString("user_comment"), object.getString("admin_comment"), object.getInt("status"), documents);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public CareerHistory getCareerHistoryByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "career/api/history/", 1, "GET");
+    public Approve getApproveByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "users/api/approves/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -121,13 +124,13 @@ public class GetCareerHistoryToRun {
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                JSONArray membersArray = object.getJSONArray("members");
-                int[] members = new int[membersArray.length()];
-                for (int j = 0; j < membersArray.length(); j++) {
-                    members[j] = membersArray.getInt(j);
+                JSONArray documentsArray = object.getJSONArray("members");
+                int[] documents = new int[documentsArray.length()];
+                for (int j = 0; j < documentsArray.length(); j++) {
+                    documents[j] = documentsArray.getInt(j);
                 }
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new CareerHistory(object.getInt("history_id"), object.getInt("user_id"), object.getInt("career"), object.getString("date"), members, object.getString("created_date"), object.getString("updated_date"));
+                    return new Approve(object.getInt("history_id"), object.getInt("user_id"), object.getInt("approve_id"), object.getString("created_date"), object.getString("updated_date"), object.getString("approve_date"), object.getString("user_comment"), object.getString("admin_comment"), object.getInt("status"), documents);
                 }
             }
         } catch (Exception e) {
