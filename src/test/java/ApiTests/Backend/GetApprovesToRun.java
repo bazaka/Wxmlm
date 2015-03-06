@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 05.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetApproves {
+public class GetApprovesToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -31,7 +31,7 @@ public class GetApproves {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public GetApproves(TestUser user){
+    public GetApprovesToRun(TestUser user){
         this.testUser = user;
     }
 
@@ -64,13 +64,13 @@ public class GetApproves {
 
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect approve_user_id", ValidationChecker.checkIdOrNull(object.getInt("approve_user_id")));
-            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
-            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertTrue("Incorrect approve_date", ValidationChecker.checkStringOrNull(object.getString("updated_date")));
-            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.getString("user_comment")));
-            assertTrue("Incorrect admin_comment", ValidationChecker.checkStringOrNull(object.getString("admin_comment")));
-            assertTrue("Incorrect status", ValidationChecker.checkIdValue(object.getInt("status")));
+            assertTrue("Incorrect approve_user_id", ValidationChecker.checkIdOrNull(object.get("approve_user_id")));
+            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("create_date")));
+            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("update_date")));
+            assertTrue("Incorrect approve_date", ValidationChecker.checkStringOrNull(object.getString("approve_date")));
+            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.get("user_comment")));
+            assertTrue("Incorrect admin_comment", ValidationChecker.checkStringOrNull(object.get("admin_comment")));
+            assertTrue("Incorrect status", ValidationChecker.checkApproveStatus(object.getInt("status")));
             for (int j = 0; j < documents.length(); j++) {
                 assertTrue("Incorrect documents",ValidationChecker.checkIdValue(documents.getInt(j)));
             }
@@ -100,7 +100,7 @@ public class GetApproves {
             for (int i = 0; i < documentsArray.length(); i++) {
                 documents[i] = documentsArray.getInt(i);
             }
-            return new Approve(object.getInt("history_id"), object.getInt("user_id"), object.getInt("approve_id"), object.getString("created_date"), object.getString("updated_date"), object.getString("approve_date"), object.getString("user_comment"), object.getString("admin_comment"), object.getInt("status"), documents);
+            return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -124,13 +124,13 @@ public class GetApproves {
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                JSONArray documentsArray = object.getJSONArray("members");
+                JSONArray documentsArray = object.getJSONArray("documents");
                 int[] documents = new int[documentsArray.length()];
                 for (int j = 0; j < documentsArray.length(); j++) {
                     documents[j] = documentsArray.getInt(j);
                 }
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Approve(object.getInt("history_id"), object.getInt("user_id"), object.getInt("approve_id"), object.getString("created_date"), object.getString("updated_date"), object.getString("approve_date"), object.getString("user_comment"), object.getString("admin_comment"), object.getInt("status"), documents);
+                    return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
                 }
             }
         } catch (Exception e) {

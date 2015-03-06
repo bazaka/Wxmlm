@@ -1,26 +1,28 @@
 package ApiTests.ObjectClasses;
 
+import java.util.Objects;
+
 // * Created for W-xmlm by Fill on 05.03.2015.
 public class Approve {
     private int id;
     private int userId;
-    private int approveUserId;
-    private String createdDate;
-    private String updatedDate;
-    private String approveDate;
-    private String userComment;
-    private String adminComment;
+    private Object approveUserId;
+    private String createDate;
+    private String updateDate;
+    private Object approveDate;
+    private Object userComment;
+    private Object adminComment;
     private int status;
     private int[] documents;
 
     // Constructors
-    public Approve(int id, int userId, int approveUserId, String createdDate, String updatedDate, String approveDate, String userComment, String adminComment, int status, int[] documents)
+    public Approve(int id, int userId, Object approveUserId, String createDate, String updateDate, Object approveDate, Object userComment, Object adminComment, int status, int[] documents)
     {
         this.setId(id);
         this.setUserId(userId);
         this.setApproveUserId(approveUserId);
-        this.setCreatedDate(createdDate);
-        this.setUpdatedDate(updatedDate);
+        this.setCreateDate(createDate);
+        this.setUpdateDate(updateDate);
         this.setApproveDate(approveDate);
         this.setUserComment(userComment);
         this.setAdminComment(adminComment);
@@ -31,12 +33,12 @@ public class Approve {
     // Getters
     public int getId() {return id;}
     public int getUserId() {return userId;}
-    public int getApproveUserId() {return approveUserId;}
-    public String getCreatedDate() {return createdDate;}
-    public String getUpdatedDate() {return updatedDate;}
-    public String getApproveDate() {return approveDate;}
-    public String getUserComment() {return userComment;}
-    public String getAdminComment() {return adminComment;}
+    public Object getApproveUserId() {return approveUserId;}
+    public String getCreateDate() {return createDate;}
+    public String getUpdateDate() {return updateDate;}
+    public Object getApproveDate() {return approveDate;}
+    public Object getUserComment() {return userComment;}
+    public Object getAdminComment() {return adminComment;}
     public int getStatus() {return status;}
     public int[] getDocuments() {return documents;}
     public int getDocuments(int i) {return documents[i];}
@@ -44,17 +46,17 @@ public class Approve {
     // Setters
     public void setId(int a) {this.id = a;}
     public void setUserId(int a) {this.userId = a;}
-    public void setApproveUserId(int a) {this.approveUserId = a;}
-    public void setCreatedDate(String a) {this.createdDate = a;}
-    public void setUpdatedDate(String a) {this.updatedDate = a;}
-    public void setApproveDate(String a) {this.approveDate = a;}
-    public void setUserComment(String a) {this.userComment = a;}
-    public void setAdminComment(String a) {this.adminComment = a;}
+    public void setApproveUserId(Object a) {this.approveUserId = a;}
+    public void setCreateDate(String a) {this.createDate = a;}
+    public void setUpdateDate(String a) {this.updateDate = a;}
+    public void setApproveDate(Object a) {this.approveDate = a;}
+    public void setUserComment(Object a) {this.userComment = a;}
+    public void setAdminComment(Object a) {this.adminComment = a;}
     public void setStatus(int a) {this.status = a;}
     public void setDocuments(int[] a) {this.documents = a;}
     public void setDocuments(int elementNumber, int a) {this.documents[elementNumber] = a;}
 
-    public boolean equalsExceptUpdatedDate(Approve a, boolean toCheckCreatedDate)
+    public boolean equalsExceptUpdatedDateAndApproveUserId(Approve a, boolean toCheckCreateDate)
     {
         if (this == a)
             return true;
@@ -74,11 +76,7 @@ public class Approve {
             System.out.println("4");
             return false;
         }
-        if (getApproveUserId() != a.getApproveUserId()){
-            System.out.println("5");
-            return false;
-        }
-        if (toCheckCreatedDate && !getCreatedDate().equals(a.getCreatedDate())) {
+        if (toCheckCreateDate && !getCreateDate().equals(a.getCreateDate())) {
             System.out.println("6");
             return false;
         }
@@ -86,7 +84,9 @@ public class Approve {
             System.out.println("7");
             return false;
         }
-        if (!getUserComment().equals(a.getUserComment())) {
+        if (!getUserComment().equals(a.getUserComment()) && !getUserComment().equals(null) && a.getUserComment().equals(null)) {
+            System.out.println(getUserComment());
+            System.out.println(a.getUserComment());
             System.out.println("8");
             return false;
         }
