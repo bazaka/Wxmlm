@@ -51,8 +51,6 @@ public class PutApprovesUpdateToRun {
         Approve modifiedOne = new Approve(originalOne.getId(), originalOne.getUserId(), 1, originalOne.getCreateDate(), originalOne.getUpdateDate(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getUserComment() + "1", originalOne.getAdminComment() + "2", statusValue, originalOne.getDocuments());
         String originalJson = "[{\"id\": " + originalOne.getId() + ", \"user_id\": " + originalOne.getUserId() + ", \"approve_user_id\": " + approveUserIdValue + ", \"create_date\": \"" + originalOne.getCreateDate() + "\", \"approve_date\": \"" + originalOne.getApproveDate() + "\", \"user_comment\": " + userCommentValue + ", \"admin_comment\": \"" + originalOne.getAdminComment() + "\", \"status\": " + originalOne.getStatus() + "}]";
         String modifiedJson = "[{\"id\": " + modifiedOne.getId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"approve_user_id\": " + modifiedOne.getApproveUserId() + ", \"create_date\": \"" + modifiedOne.getCreateDate() + "\", \"approve_date\": \"" + modifiedOne.getApproveDate() + "\", \"user_comment\": \"" + modifiedOne.getUserComment() + "\", \"admin_comment\": \"" + modifiedOne.getAdminComment() + "\", \"status\": " + modifiedOne.getStatus() + "}]";
-        System.out.println(originalJson);
-        System.out.println(modifiedJson);
         // Содзаем URL
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/update/", "PUT", "application/json", "application/json", true);
@@ -71,8 +69,6 @@ public class PutApprovesUpdateToRun {
         out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(originalJson);
         out.close();
-        System.out.println(httpCon.getResponseCode());
-        System.out.println(httpCon.getResponseMessage());
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
