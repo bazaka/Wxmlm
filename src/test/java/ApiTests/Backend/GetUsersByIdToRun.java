@@ -43,7 +43,7 @@ public class GetUsersByIdToRun {
     @Test
     public void testGetUsersById() throws IOException, JSONException {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme();
-        int[] ids = GetUsersToRun.getUserId(siteUrl, testUser);
+        int[] ids = GetUsersToRun.getUserById(siteUrl, testUser);
 
         for(int i=0; i<(ids.length); i++){
 

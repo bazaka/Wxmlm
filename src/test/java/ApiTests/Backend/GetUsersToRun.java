@@ -1,5 +1,7 @@
 package ApiTests.Backend;
 
+import ApiTests.ObjectClasses.Purchases;
+import ApiTests.ObjectClasses.User;
 import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.Config;
@@ -108,7 +110,7 @@ public class GetUsersToRun {
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
-    public static int[] getUserId(String siteUrl, TestUser testUser) throws IOException, JSONException{
+    public static int[] getUserById(String siteUrl, TestUser testUser) throws IOException, JSONException{
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
@@ -135,5 +137,68 @@ public class GetUsersToRun {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         return ids;
 
+    }
+    public User getAnyUser(TestUser user, String siteUrl) throws IOException, JSONException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET" );
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while((line=br.readLine()) !=null) {
+            result +=line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            assertFalse("There is an empty Array", jsonArr.length() == 0);
+            JSONObject object = jsonArr.getJSONObject(0);
+            JSONArray inviteCodesArray = object.getJSONArray("invite_code");
+            String[] inviteCodes = new String[inviteCodesArray.length()];
+            for (int j=0; j<inviteCodesArray.length(); j++){
+                inviteCodes[j]=inviteCodesArray.getString(j);
+            }
+            return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_series"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"));
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public User getUserByParameter(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET" );
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while((line=br.readLine()) !=null) {
+            result +=line;
+        }
+        br.close();
+        try{
+            JSONArray jsonArr = new JSONArray(result);
+            assertFalse("There is an empty Array", jsonArr.length() == 0);
+            for(int i=0; i<jsonArr.length(); i++) {
+                JSONObject object = jsonArr.getJSONObject(i);
+                if (object.getInt(parameterName) == parameterValue) {
+                    JSONArray inviteCodesArray = object.getJSONArray("invite_code");
+                    String[] inviteCodes = new String[inviteCodesArray.length()];
+                    for (int j=0; j<inviteCodesArray.length(); j++){
+                        inviteCodes[j]=inviteCodesArray.getString(j);
+                    }
+
+                    // System.out.println(new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms));
+                    return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_series"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"));
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 }

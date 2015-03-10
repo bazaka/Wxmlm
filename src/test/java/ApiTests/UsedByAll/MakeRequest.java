@@ -60,7 +60,6 @@ public class MakeRequest{
     public static HttpURLConnection getConnection(String siteUrl, TestUser user, String urlPart, String requestMethod) throws IOException {
         String urlString = siteUrl + urlPart;
         //Создаем URL connection
-
         String authString = user.getEmail() + ":" + user.getPassword1();
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());
         String authStringEnc = new String(authEncBytes);
@@ -70,4 +69,5 @@ public class MakeRequest{
         httpCon.setRequestMethod(requestMethod);
         return httpCon;
     }
+
 }
