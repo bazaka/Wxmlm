@@ -27,7 +27,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/10/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetSessionStatistics {
+public class GetSessionStatisticsToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -35,7 +35,7 @@ public class GetSessionStatistics {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public GetSessionStatistics(TestUser user){
+    public GetSessionStatisticsToRun(TestUser user){
         this.testUser = user;
     }
     @Test
