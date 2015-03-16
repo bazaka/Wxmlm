@@ -72,7 +72,7 @@ public class GetBankDetailsToRun {
                 assertTrue("Incorrect epid", ValidationChecker.checkStringOrNull(epayments.get("epid")));
                 assertTrue("Incorrect created date", ValidationChecker.checkDateTimeString(epayments.getString("created")));
                 assertTrue("Incorrect updated date", ValidationChecker.checkDateTimeString(epayments.getString("updated")));
-                assertEquals("Incorrect count of JSON parameters", object.length(), 3);
+                assertEquals("Incorrect count of JSON parameters", epayments.length(), 3);
             }
             else
                 assertTrue("Epayments not null, but hasn't any elements", ValidationChecker.checkNull(object.get("epayments")));

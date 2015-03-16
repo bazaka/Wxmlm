@@ -41,6 +41,10 @@ public class RegistrationPage extends BasePage {
     public void firstStep(String userEmail, String pass1, String pass2, String userInviteCode ){
 
         //WebDriverWait wait = new WebDriverWait(driver, 20);
+        checkEmptyField(email);
+        checkEmptyField(password1);
+        checkEmptyField(password2);
+        checkEmptyField(inviteCode);
         driver.findElement(email).sendKeys(userEmail);
         driver.findElement(password1).sendKeys(pass1);
         driver.findElement(password2).sendKeys(pass2);
@@ -57,6 +61,8 @@ public class RegistrationPage extends BasePage {
     }
     public void secondStep(String userFullName, String userPhone){
         //WebDriverWait wait = new WebDriverWait(driver, 10);
+        checkEmptyField(fullName);
+        checkEmptyField(phone);
         driver.findElement(fullName).sendKeys(userFullName);
         driver.findElement(phone).sendKeys(userPhone);
         driver.findElement(agreement).click();
@@ -83,6 +89,10 @@ public class RegistrationPage extends BasePage {
     }
     public boolean isError(){
         return driver.findElement(emailSent).isDisplayed();
+    }
+    public boolean checkEmptyField(By locator){
+        return(driver.findElement(locator).getText().isEmpty());
+
     }
 
 }
