@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 16.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetToken {
+public class GetTokenToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -27,7 +27,7 @@ public class GetToken {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetToken(TestUser user){
+    public GetTokenToRun(TestUser user){
         this.testUser = user;
     }
 
