@@ -20,6 +20,8 @@ public class ValidationChecker {
     public static boolean checkGenderId(int genderId){return (genderId == 1 || genderId == 2);}
     public static boolean checkUserStatusId(int userStatusId) {return (userStatusId>=1 && userStatusId<=4);}
     public static boolean checkOperationStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
+    public static boolean checkPurchaseStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
+    public static boolean checkPackageStatusId(int statusId) {return (statusId>=1 && statusId<=5);}
     public static boolean checkWithdrawStatusId(int statusId) {return (statusId>=1 && statusId<=3);}
     public static boolean checkProductStatusId(int statusId) {return (statusId>=1 && statusId<=4);}
     public static boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=12);}

@@ -66,7 +66,7 @@ public class GetPurchasesToRun {
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
             assertTrue("Incorrect price", ValidationChecker.checkMoneyFormat(object.get("price").toString()));
             assertTrue("Incorrect payment_amount", ValidationChecker.checkDoubleValue(object.getDouble("payment_amount")));
-            assertTrue("Incorrect status", ValidationChecker.checkOperationStatusId(object.getInt("status")));
+            assertTrue("Incorrect status", ValidationChecker.checkPurchaseStatusId(object.getInt("status")));
             assertTrue("Incorrect terms", ValidationChecker.checkStringOrNull(object.get("terms")));
             assertEquals("Incorrect count of JSON Objects", object.length(),9);
         }
