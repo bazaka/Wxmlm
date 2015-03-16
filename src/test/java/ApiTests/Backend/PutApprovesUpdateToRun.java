@@ -57,7 +57,6 @@ public class PutApprovesUpdateToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
-        System.out.println("1: " + httpCon.getResponseCode());
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
