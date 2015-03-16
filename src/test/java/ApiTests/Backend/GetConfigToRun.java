@@ -41,7 +41,7 @@ public class GetConfigToRun {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "config/api/values/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "config/api/values/", "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

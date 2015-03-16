@@ -62,6 +62,7 @@ public class ValidationChecker {
     public static boolean checkFileName(String fileName){return fileName.split("\\.")[0].length()>=1 && fileName.split("\\.")[1].length()>=3 && fileName.split("\\.")[1].length()<=4;}
     public static boolean checkApproveStatus(int status){return (status >= 0 && status <= 2);}
     public static boolean checkMerchantRequestStatus(int status){return (status >= 1 && status <= 3);}
+    public static boolean checkToken(String token){return (checkStringNotNull(token) && token.length() == 32);}
     public static boolean checkCardNumber(String cardNumber) {
         Pattern p = Pattern.compile("^(\\d{4} ){3}\\d{4}$");
         Matcher m = p.matcher(cardNumber);

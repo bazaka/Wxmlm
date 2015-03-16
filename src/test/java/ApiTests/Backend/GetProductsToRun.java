@@ -30,7 +30,7 @@ public class GetProductsToRun {
 
     @Parameterized.Parameters
     public static Collection testData() {
-        return CsvUsersReader.getDataForTest("_BackendAPITest(");
+        return CsvUsersReader.getDataForTest("_GetProductsTest(");
     }
 
     public GetProductsToRun(TestUser user){
