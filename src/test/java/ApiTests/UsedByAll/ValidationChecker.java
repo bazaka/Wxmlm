@@ -13,6 +13,7 @@ public class ValidationChecker {
     // Null - NotNull
     public static boolean checkStringNotNull(String str){return (str != null && !str.equals(""));}
     public static boolean checkStringOrNull(Object str) {return str == null || str.toString().length() >= 0;}
+    public static boolean checkNull(Object obj){return obj.equals(null);}
 
     // ID
     public static boolean checkIdValue(int id){return (id > 0);}
@@ -69,6 +70,21 @@ public class ValidationChecker {
         Pattern p = Pattern.compile("^([1-9]|1[0-2]|[0][1-9])\\/(\\d{2})$");
         Matcher m = p.matcher(expDate);
         return m.matches();
+    }
+    public static boolean checkSwift(Object swift){
+        int count = 0;
+        if(swift!=null){
 
+            int sfwt = Integer.valueOf(swift.toString());
+            //swift.
+            while(sfwt>1){
+                sfwt=sfwt/10;
+                count++;
+            }
+        }
+
+        return(swift == null || (count>=5 && count<=11));
+       /* String str = Integer.toString(swift);
+        return(str.length()==8);*/
     }
 }

@@ -43,16 +43,18 @@ public class GetUsersByIdToRun {
     @Test
     public void testGetUsersById() throws IOException, JSONException {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme();
+        long startTime;
+        long elapsedTime;
         int[] ids = GetUsersToRun.getUserById(siteUrl, testUser);
 
         for(int i=0; i<(ids.length); i++){
 
             //создаем соединение
-
+            startTime = System.currentTimeMillis();
             HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url + ids[i], "GET");
             InputStream inStrm = httpCon.getInputStream();
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-
+            elapsedTime = System.currentTimeMillis() - startTime;
             InputStreamReader isReader = new InputStreamReader(inStrm);
             BufferedReader br = new BufferedReader(isReader);
             String result = "";
@@ -111,7 +113,9 @@ public class GetUsersByIdToRun {
                 assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
                 assertEquals("Incorrect count of Json Objects", object.length(), 36);
             }
+            System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
             }
+
         }
 
 }
