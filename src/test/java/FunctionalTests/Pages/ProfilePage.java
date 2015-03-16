@@ -24,8 +24,8 @@ public class ProfilePage extends BasePage {
     private static final By updateButton = By.xpath("//div[@id='tab1']//a[text()='Update']");
 
     private static final By documentsTab = By.xpath("//div[@class='tabbable']//a[text()='Documents']"); //вкладка Documents
-    private static final By citizen = By.id("xmlm_bundle_userbundle_document_citizen");
-    private static final By citizenCurrent = By.xpath("//select[@id='xmlm_bundle_userbundle_document_citizen']/option[@selected='selected']");
+    private static final By citizen = By.id("xmlm_bundle_userbundle_document_user_citizen");
+    private static final By citizenCurrent = By.xpath("//select[@id='xmlm_bundle_userbundle_document_user_citizen']/option[@selected='selected']");
     private static final By passportSeries = By.id("xmlm_bundle_userbundle_document_series");
     private static final By passportNumber = By.id("xmlm_bundle_userbundle_document_number");
     private static final By issued = By.id("xmlm_bundle_userbundle_document_issued");

@@ -75,7 +75,7 @@ public class GetUsersToRun {
             assertTrue("Incorrect username",ValidationChecker.checkStringNotNull(object.getString("username")));
             assertTrue("Incorrect password",ValidationChecker.checkStringNotNull(object.getString("password")));
             assertTrue("Incorrect salt",ValidationChecker.checkStringNotNull(object.getString("salt")));
-            assertTrue("Incorrect countryId ",ValidationChecker.checkIdValue(object.getInt("country_id")));
+            assertTrue("Incorrect countryId ",ValidationChecker.checkIdOrNull(object.get("country_id")));
             assertTrue("Incorrect languageId",ValidationChecker.checkIdOrNull(object.get("language_id")));
             assertTrue("Incorrect birthDate",ValidationChecker.checkDateTimeString(object.getString("birth_date")));
             assertTrue("Incorrect emailMain",ValidationChecker.checkEmail(object.getString("email_main")));

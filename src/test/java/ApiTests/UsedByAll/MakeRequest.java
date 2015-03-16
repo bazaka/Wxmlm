@@ -15,7 +15,7 @@ public class MakeRequest{
         // Создаем диапазон и ссылку
         String calBeforeString = makeDateTimeString(Calendar.getInstance(), -valueInDays);
         String calAfterString = makeDateTimeString(Calendar.getInstance(), valueInDays);
-        String urlString = siteUrl + urlPart + "?limit=1000000&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
+        String urlString = siteUrl + urlPart + "?limit=100&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
 
         // Содзаем HttpUrlConnection
         String authString = user.getEmail() + ":" + user.getPassword1();
