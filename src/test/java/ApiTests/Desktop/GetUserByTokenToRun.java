@@ -35,7 +35,7 @@ public class GetUserByTokenToRun {
         this.testUser=user;
     }
     @Test
-    public void GetUserByToken() throws Exception {
+    public void getUserByToken() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
