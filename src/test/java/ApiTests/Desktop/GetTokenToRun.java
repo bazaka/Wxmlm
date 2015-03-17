@@ -49,13 +49,13 @@ public class GetTokenToRun {
             result += line;
         }
         br.close();
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);
         //Проверяем структуру
         assertTrue("Incorrect token", ValidationChecker.checkToken(object.getString("token")));
         assertEquals("Incorrect count of Json parameters", object.length(), 1);
-        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
     public String getToken() throws Exception {

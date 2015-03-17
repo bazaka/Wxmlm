@@ -51,6 +51,7 @@ public class GetMyPurchases {
             result += line;
         }
         br.close();
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);
