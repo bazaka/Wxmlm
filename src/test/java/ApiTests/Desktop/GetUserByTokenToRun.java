@@ -54,6 +54,7 @@ public class GetUserByTokenToRun {
             result += line;
         }
         br.close();
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);
@@ -70,6 +71,5 @@ public class GetUserByTokenToRun {
         assertTrue("Incorrect user_status_id", ValidationChecker.checkUserStatusId(user.getInt("user_status_id")));
         assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(user.getString("created_date")));
         assertEquals("Incorrect count of JSON Object",user.length(), 9 );
-        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 }
