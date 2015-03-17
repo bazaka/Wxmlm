@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Purchases;
+import ApiTests.ObjectClasses.Purchase;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
@@ -73,7 +73,7 @@ public class GetPurchasesToRun {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
-    public Purchases getAnyPurchase(TestUser testUser, String siteUrl) throws IOException, JSONException {
+    public Purchase getAnyPurchase(TestUser testUser, String siteUrl) throws IOException, JSONException {
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -92,10 +92,10 @@ public class GetPurchasesToRun {
         String terms = null;
         if(object.get("terms")!= null)
             terms = object.get("terms").toString();
-        return new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
+        return new Purchase(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
     }
 
-    public Purchases getPurchaseByParameter(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException {
+    public Purchase getPurchaseByParameter(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET" );
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -116,7 +116,7 @@ public class GetPurchasesToRun {
                     if(object.get("terms") != null)
                         terms = object.get("terms").toString();
                    // System.out.println(new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms));
-                    return new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
+                    return new Purchase(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms);
                 }
             }
         }catch (Exception e){

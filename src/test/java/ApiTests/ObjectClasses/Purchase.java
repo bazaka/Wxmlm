@@ -3,7 +3,7 @@ package ApiTests.ObjectClasses;
 /**
  * Created by User on 12/10/2014.
  */
-public class Purchases {
+public class Purchase {
     public int id;
     public int buyerUserId;
     public int productId;
@@ -13,8 +13,9 @@ public class Purchases {
     public double paymentAmount;
     public int status;
     public String terms;
+    public int packageStatus;
 
-    public Purchases(int pId, int pBuyerUserId, int pProductId, String pDate, String pPrice, double pPaymentAmount, int pStatus, String pTerms){
+    public Purchase(int pId, int pBuyerUserId, int pProductId, String pDate, String pPrice, double pPaymentAmount, int pStatus, String pTerms){
         this.setId(pId);
         this.setBuyerUserId(pBuyerUserId);
         this.setProductId(pProductId);
@@ -23,6 +24,17 @@ public class Purchases {
         this.setPaymentAmount(pPaymentAmount);
         this.setStatus(pStatus);
         this.setTerms(pTerms);
+    }
+
+    public Purchase(int pId, int pBuyerUserId, int pProductId, String pDate, String pPrice, int pStatus, String pTerms, int pPackageStatus){
+        this.setId(pId);
+        this.setBuyerUserId(pBuyerUserId);
+        this.setProductId(pProductId);
+        this.setDate(pDate);
+        this.setPrice(pPrice);
+        this.setStatus(pStatus);
+        this.setTerms(pTerms);
+        this.setPackageStatus(pPackageStatus);
     }
 
     public int getId(){return id;}
@@ -34,6 +46,7 @@ public class Purchases {
     public double getPaymentAmount(){return paymentAmount;}
     public int getStatus(){return status;}
     public String getTerms(){return terms;}
+    public int getPackageStatus(){return  packageStatus;}
 
     public void setId(int a) {this.id = a;}
     public void setBuyerUserId(int a) {this.buyerUserId = a;}
@@ -44,8 +57,9 @@ public class Purchases {
     public void setPaymentAmount(double a) {this.paymentAmount = (double)((Math.round(a*100))/100);}
     public void setStatus(int a){this.status = a;}
     public void setTerms(String a){this.terms = a;}
+    public void setPackageStatus(int a){this.packageStatus = a;}
 
-    public boolean equalsExceptUpdatedDate(Purchases a){
+    public boolean equalsExceptUpdatedDate(Purchase a){
         if(this ==a)
             return true;
         if (a==null){
@@ -86,6 +100,10 @@ public class Purchases {
                 System.out.println("9");
                 return false;
             }
+        }
+        if(getPackageStatus() != a.getPackageStatus()){
+            System.out.println("10");
+            return false;
         }
         return true;
 

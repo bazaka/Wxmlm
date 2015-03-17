@@ -56,7 +56,21 @@ public class MakeRequest{
         return httpCon;
     }
 
-    //Для GET-ов без авторизации и без параметро даты и лимита
+    // Для PUT-ов без авторизации
+    public static HttpURLConnection getConnection(String siteUrl, String urlPart, String requestMethod, String contentType, String accept, boolean setDoOutput) throws IOException {
+        // Создаем диапазон и ссылку
+        String urlString = siteUrl + urlPart;
+        // Содзаем HttpUrlConnection
+        URL url = new URL(urlString);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestMethod(requestMethod);
+        httpCon.setRequestProperty("Content-Type", contentType);
+        httpCon.setRequestProperty("Accept", accept);
+        httpCon.setDoOutput(setDoOutput);
+        return httpCon;
+    }
+
+    //Для GET-ов без параметро даты и лимита
     public static HttpURLConnection getConnection(String siteUrl, TestUser user, String urlPart, String requestMethod) throws IOException {
         String urlString = siteUrl + urlPart;
         //Создаем URL connection

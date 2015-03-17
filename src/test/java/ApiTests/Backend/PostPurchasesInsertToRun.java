@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Purchases;
+import ApiTests.ObjectClasses.Purchase;
 import ApiTests.UsedByAll.DateForAPI;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.Config;
@@ -41,8 +41,8 @@ public class PostPurchasesInsertToRun {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
-        Purchases originalOne = new GetPurchasesToRun(testUser).getAnyPurchase(testUser, siteUrl);
-        Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 5, originalOne.getTerms() );
+        Purchase originalOne = new GetPurchasesToRun(testUser).getAnyPurchase(testUser, siteUrl);
+        Purchase newOne = new Purchase(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 5, originalOne.getTerms() );
         String newJson = "{\"buyer_user_id\":" + newOne.getBuyerUserId() + ", \"product_id\":" + newOne.getProductId() + ", \"date\":" + "\"" + newOne.getDate() + "\"" + ", \"price\":" + newOne.getPrice() + ", \"payment_amount\":" + newOne.getPaymentAmount() + ", \"status\":" + newOne.getStatus() + ", \"terms\":" +newOne.getTerms()+"}";
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "products/api/purchase/insert/", "POST", "application/json", "application/json", true);
@@ -69,7 +69,7 @@ public class PostPurchasesInsertToRun {
 
 
         //Проверяем Get-запросом, что данный обновились
-        Purchases changedPurchase = new GetPurchasesToRun(testUser).getPurchaseByParameter("id", newOneId, testUser, siteUrl);
+        Purchase changedPurchase = new GetPurchasesToRun(testUser).getPurchaseByParameter("id", newOneId, testUser, siteUrl);
 
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedPurchase));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);

@@ -1,5 +1,6 @@
 package ApiTests.Desktop;
 
+import ApiTests.ObjectClasses.Purchase;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
@@ -39,7 +40,7 @@ public class GetMyPurchasesToRun {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -69,5 +70,38 @@ public class GetMyPurchasesToRun {
             assertTrue("Incorrect date", ValidationChecker.checkDateTimeString(purchase.getString("date")));
             assertEquals("Incorrect count of JSON Objects", purchase.length(),8);
         }
+    }
+
+    public Purchase getMyNotActivePackage() throws Exception {
+        String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
+        String token = new GetTokenToRun(testUser).getToken();
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONObject response = new JSONObject(result);
+            JSONArray jsonArr = response.getJSONArray("purchases");
+            for (int i = 0; i < jsonArr.length(); i++) {
+                JSONObject object = jsonArr.getJSONObject(i);
+                if (object.getInt("status") == 1 && object.getInt("package_status") == 1) {
+                    String terms = null;
+                    if(object.get("terms")!= null)
+                        terms = object.get("terms").toString();
+                    return new Purchase(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"), object.get("price").toString(), object.getInt("status"), terms, object.getInt("package_status"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return null;
     }
 }

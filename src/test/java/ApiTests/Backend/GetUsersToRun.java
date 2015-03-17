@@ -1,6 +1,5 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Purchases;
 import ApiTests.ObjectClasses.User;
 import ApiTests.UsedByAll.ValidationChecker;
 import ApiTests.UsedByAll.MakeRequest;
