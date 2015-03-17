@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 16.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetMyPurchases {
+public class GetMyPurchasesToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -28,7 +28,7 @@ public class GetMyPurchases {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetMyPurchases(TestUser user){
+    public GetMyPurchasesToRun(TestUser user){
         this.testUser = user;
     }
 
