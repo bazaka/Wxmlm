@@ -19,9 +19,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 08.12.2014. GET Products
 @RunWith(value = Parameterized.class)
@@ -57,7 +55,7 @@ public class GetProductsToRun {
         }
         br.close();
         JSONArray jsonArr = new JSONArray(result);
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length(), 0);
 
         for (int i = 0; i < jsonArr.length(); i++) {
 

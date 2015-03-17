@@ -16,9 +16,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by User on 3/17/2015.
@@ -59,7 +57,7 @@ public class GetUserByTokenToRun {
         //Парсим JSON
         JSONObject object = new JSONObject(result);
 
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", object.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", object.length(), 0);
         JSONObject user = object.getJSONObject("user");
         assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(user.getInt("user_id")));
         assertTrue("Incorrect user_name", ValidationChecker.checkStringNotNull(user.getString("user_name")));

@@ -87,7 +87,7 @@ public class GetPurchasesToRun {
         br.close();
 
         JSONArray jsonArr = new JSONArray(result);
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length(), 0);
         JSONObject object = jsonArr.getJSONObject(0);
         String terms = null;
         if(object.get("terms")!= null)

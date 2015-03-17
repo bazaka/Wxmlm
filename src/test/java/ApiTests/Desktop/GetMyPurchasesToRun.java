@@ -57,7 +57,7 @@ public class GetMyPurchasesToRun {
         //Парсим JSON
         JSONObject object = new JSONObject(result);
         JSONArray purchases = object.getJSONArray("purchases");
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", purchases.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", purchases.length(), 0);
         for (int i=0; i<purchases.length(); i++){
             JSONObject purchase = purchases.getJSONObject(i);
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(purchase.getInt("id")));

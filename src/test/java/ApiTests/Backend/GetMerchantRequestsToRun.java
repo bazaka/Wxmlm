@@ -19,10 +19,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 16.03.2015.
 @RunWith(value = Parameterized.class)
@@ -60,7 +57,7 @@ public class GetMerchantRequestsToRun {
         //Парсим JSON
         JSONArray jsonArr = new JSONArray(result);
         //Проверяем структуру
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length(), 0);
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
             JSONArray files = object.getJSONArray("files");

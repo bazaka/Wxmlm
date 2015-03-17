@@ -60,7 +60,7 @@ public class GetUsersToRun {
         //JSON
         JSONArray jsonArr = new JSONArray(result);
         //Structure
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length(), 0);
 
         for(int i = 0; i<jsonArr.length(); i++)
         {

@@ -45,10 +45,23 @@ public class MakeRequest{
         return httpCon;
     }
 
-    // Для GET-ов без авторизации
+    // Для GET-ов без авторизации и диапазона
     public static HttpURLConnection getConnection(String siteUrl, String urlPart, String requestMethod) throws IOException {
         // Создаем диапазон и ссылку
         String urlString = siteUrl + urlPart;
+        // Содзаем HttpUrlConnection
+        URL url = new URL(urlString);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestMethod(requestMethod);
+        return httpCon;
+    }
+
+    // Для GET-ов без авторизации с диапазоном
+    public static HttpURLConnection getConnection(String siteUrl, String urlPart, int valueInDays, String requestMethod) throws IOException {
+        // Создаем диапазон и ссылку
+        String calBeforeString = makeDateTimeString(Calendar.getInstance(), -valueInDays);
+        String calAfterString = makeDateTimeString(Calendar.getInstance(), valueInDays);
+        String urlString = siteUrl + urlPart + "limit=100&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
         // Содзаем HttpUrlConnection
         URL url = new URL(urlString);
         HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();

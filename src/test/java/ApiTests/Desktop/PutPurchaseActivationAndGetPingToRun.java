@@ -79,7 +79,6 @@ public class PutPurchaseActivationAndGetPingToRun {
             isReader = new InputStreamReader(inStrm);
             br = new BufferedReader(isReader);
             result = "";
-            line = null;
             while ((line = br.readLine()) != null) {
                 result += line;
             }
