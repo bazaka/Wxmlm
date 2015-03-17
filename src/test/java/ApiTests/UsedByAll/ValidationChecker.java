@@ -92,7 +92,7 @@ public class ValidationChecker {
        /* String str = Integer.toString(swift);
         return(str.length()==8);*/
     }
-    public static boolean checkEvents(Object event){
+    public static boolean checkEventName(Object event){
         return(event.toString().equals("purchase") || event.toString().equals("user"));
     }
 }

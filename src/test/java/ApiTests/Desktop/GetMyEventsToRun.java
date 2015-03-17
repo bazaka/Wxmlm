@@ -66,7 +66,7 @@ public class GetMyEventsToRun {
                 JSONObject object = jsonArr.getJSONObject(j);
                 JSONArray events = object.getJSONArray("object");
                 for(int i=0; i<events.length(); i++) {
-                    assertTrue("Incorrect event name", ValidationChecker.checkEvents(events.get(i)));
+                    assertTrue("Incorrect event name", ValidationChecker.checkEventName(events.get(i)));
                     System.out.println(events.get(i).toString());}
                 assertEquals("Incorrect count of JSON object", object.length(), 1);
                 System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
