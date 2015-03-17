@@ -1,7 +1,7 @@
 package ApiTests.Backend;
 
 
-import ApiTests.ObjectClasses.Purchases;
+import ApiTests.ObjectClasses.Purchase;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
@@ -37,8 +37,8 @@ public class PutPurchasesUpdateToRun {
     @Test
     public void testPutPurchasesUpdate() throws IOException, JSONException {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
-        Purchases originalOne = new GetPurchasesToRun(testUser).getAnyPurchase(testUser, siteUrl);
-        Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), originalOne.getDate(), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 1, originalOne.getTerms() );
+        Purchase originalOne = new GetPurchasesToRun(testUser).getAnyPurchase(testUser, siteUrl);
+        Purchase newOne = new Purchase(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), originalOne.getDate(), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 1, originalOne.getTerms() );
         String originalJson = "[{\"id\":" + originalOne.getId() + ", \"buyer_user_id\":" + originalOne.getBuyerUserId() + ", \"product_id\":" + originalOne.getProductId() + ", \"date\":" + "\"" + originalOne.getDate() + "\"" + ", \"price\":" + originalOne.getPrice() + ", \"payment_amount\":" + originalOne.getPaymentAmount() + ", \"status\":" + originalOne.getStatus() + ", \"terms\":" +originalOne.getTerms()+"}]";
         String modifiedJson = "[{\"id\":" + newOne.getId() + ", \"buyer_user_id\":" + newOne.getBuyerUserId() + ", \"product_id\":" + newOne.getProductId() + ", \"date\":" + "\"" + newOne.getDate() + "\"" + ", \"price\":" + newOne.getPrice() + ", \"payment_amount\":" + newOne.getPaymentAmount() + ", \"status\":" + newOne.getStatus() + ", \"terms\":" +newOne.getTerms()+"}]";
         long startTime;
@@ -56,7 +56,7 @@ public class PutPurchasesUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         //Проверяем Get-запросом, что данные обновились
-        Purchases changedPurchase = new GetPurchasesToRun(testUser).getPurchaseByParameter("id", originalOne.getId(), testUser, siteUrl);
+        Purchase changedPurchase = new GetPurchasesToRun(testUser).getPurchaseByParameter("id", originalOne.getId(), testUser, siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedPurchase));
 
         //Создаем url
