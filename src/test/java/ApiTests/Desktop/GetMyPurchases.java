@@ -4,6 +4,7 @@ import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +20,7 @@ import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 16.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetTokenToRun {
+public class GetMyPurchases {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -27,17 +28,18 @@ public class GetTokenToRun {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetTokenToRun(TestUser user){
+    public GetMyPurchases(TestUser user){
         this.testUser = user;
     }
 
     @Test
     public void testGetToken() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
+        String token = new GetTokenToRun(testUser).getToken();
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-token/", "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -52,33 +54,19 @@ public class GetTokenToRun {
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);
-        //Проверяем структуру
-        assertTrue("Incorrect token", ValidationChecker.checkToken(object.getString("token")));
-        assertEquals("Incorrect count of Json parameters", object.length(), 1);
-        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
-    }
-
-    public String getToken() throws Exception {
-        String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
-        long startTime;
-        long elapsedTime;
-        startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-token/", "GET");
-        InputStream inStrm = httpCon.getInputStream();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-        elapsedTime = System.currentTimeMillis() - startTime;
-        InputStreamReader isReader = new InputStreamReader(inStrm);
-        BufferedReader br = new BufferedReader(isReader);
-        String result = "";
-        String line;
-        while ((line = br.readLine()) != null) {
-            result += line;
+        JSONArray purchases = object.getJSONArray("purchases");
+        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", purchases.length());
+        for (int i=0; i<purchases.length(); i++){
+            JSONObject purchase = purchases.getJSONObject(i);
+            assertTrue("Incorrect id", ValidationChecker.checkIdValue(purchase.getInt("id")));
+            assertTrue("Incorrect buyer_user_id", ValidationChecker.checkIdValue(purchase.getInt("buyer_user_id")));
+            assertTrue("Incorrect product_id", ValidationChecker.checkProductId(purchase.getInt("product_id")));
+            assertTrue("Incorrect price", ValidationChecker.checkMoneyFormat(purchase.get("price").toString()));
+            assertTrue("Incorrect status", ValidationChecker.checkPurchaseStatusId(purchase.getInt("status")));
+            assertTrue("Incorrect terms", ValidationChecker.checkStringOrNull(purchase.get("terms")));
+            assertTrue("Incorrect package_status", ValidationChecker.checkPackageStatusId(purchase.getInt("status")));
+            assertTrue("Incorrect date", ValidationChecker.checkDateTimeString(purchase.getString("date")));
+            assertEquals("Incorrect count of JSON Objects", purchase.length(),8);
         }
-        br.close();
-
-        //Парсим JSON
-        JSONObject object = new JSONObject(result);
-        //Проверяем структуру
-        return object.getString("token");
     }
 }
