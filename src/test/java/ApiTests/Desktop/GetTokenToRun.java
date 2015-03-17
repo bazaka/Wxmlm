@@ -4,12 +4,14 @@ import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -56,4 +58,5 @@ public class GetTokenToRun {
         assertEquals("Incorrect count of Json parameters", object.length(), 1);
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
+
 }
