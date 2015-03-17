@@ -42,7 +42,7 @@ public class GetMyEventsToRun {
 
         String token = new GetTokenToRun(testUser).getToken();
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-events/?_format=json&token=" + token, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-events/?_format=json&token=" + token, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
