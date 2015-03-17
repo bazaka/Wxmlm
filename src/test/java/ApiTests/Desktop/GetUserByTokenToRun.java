@@ -24,14 +24,14 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/17/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetUserByToken {
+public class GetUserByTokenToRun {
     private TestUser testUser;
     @Parameterized.Parameters
     public static Collection testData() {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetUserByToken(TestUser user){
+    public GetUserByTokenToRun(TestUser user){
         this.testUser=user;
     }
     @Test
