@@ -42,7 +42,7 @@ public class PostPurchasesInsertToRun {
         long startTime;
         long elapsedTime;
         Purchases originalOne = new GetPurchasesToRun(testUser).getAnyPurchase(testUser, siteUrl);
-        Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getPrice(), originalOne.getPaymentAmount()+777, originalOne.getStatus(), originalOne.getTerms() );
+        Purchases newOne = new Purchases(originalOne.getId(), originalOne.getBuyerUserId(), originalOne.getProductId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getPrice(), originalOne.getPaymentAmount()+777, 5, originalOne.getTerms() );
         String newJson = "{\"buyer_user_id\":" + newOne.getBuyerUserId() + ", \"product_id\":" + newOne.getProductId() + ", \"date\":" + "\"" + newOne.getDate() + "\"" + ", \"price\":" + newOne.getPrice() + ", \"payment_amount\":" + newOne.getPaymentAmount() + ", \"status\":" + newOne.getStatus() + ", \"terms\":" +newOne.getTerms()+"}";
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "products/api/purchase/insert/", "POST", "application/json", "application/json", true);
