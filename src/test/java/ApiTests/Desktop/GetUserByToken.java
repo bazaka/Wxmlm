@@ -4,6 +4,7 @@ import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,31 +21,28 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 3/16/2015.
+ * Created by User on 3/17/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetNewTokenToRun {
+public class GetUserByToken {
     private TestUser testUser;
-
     @Parameterized.Parameters
     public static Collection testData() {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetNewTokenToRun(TestUser user){
+    public GetUserByToken(TestUser user){
         this.testUser=user;
     }
-
-
     @Test
-    public void GetNewToken() throws  Exception{
+    public void GetUserByToken() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
 
         String token = new GetTokenToRun(testUser).getToken();
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-new-token/?_format=json&token="+token, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-user/?_format=json&token=" + token, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -59,10 +57,19 @@ public class GetNewTokenToRun {
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", object.length());
-        assertTrue("Incorrect token", ValidationChecker.checkToken(object.getString("token")));
-        assertEquals("Incorrect count of JSON Objects", object.length(), 1);
-        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
 
+        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", object.length());
+        JSONObject user = object.getJSONObject("user");
+        assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(user.getInt("user_id")));
+        assertTrue("Incorrect user_name", ValidationChecker.checkStringNotNull(user.getString("user_name")));
+        assertTrue("Incorrect country", ValidationChecker.checkStringNotNull(user.getString("country")));
+        assertTrue("Incorrect birth_date", ValidationChecker.checkDateTimeString(user.getString("birth_date")));
+        assertTrue("Incorrect email", ValidationChecker.checkEmail(user.getString("email")));
+        assertTrue("Incorrect phone", ValidationChecker.checkStringNotNull(user.getString("phone_number_main")));
+        assertTrue("Incorrect gender_id", ValidationChecker.checkGenderId(user.getInt("gender_id")));
+        assertTrue("Incorrect user_status_id", ValidationChecker.checkUserStatusId(user.getInt("user_status_id")));
+        assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(user.getString("created_date")));
+        assertEquals("Incorrect count of JSON Object",user.length(), 9 );
+        System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 }
