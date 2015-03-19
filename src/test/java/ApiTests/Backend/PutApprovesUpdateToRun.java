@@ -35,7 +35,7 @@ public class PutApprovesUpdateToRun {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
-        Approve originalOne = new GetApprovesToRun(testUser).getAnyApprove(testUser, siteUrl);
+        Approve originalOne = new GetApprovesToRun(testUser).getAnyApprove(siteUrl);
         int statusValue = originalOne.getStatus() - 1;
         String approveUserIdValue = originalOne.getApproveUserId().toString();
         String userCommentValue = "\"" + originalOne.getUserComment().toString() + "\"";
@@ -60,7 +60,7 @@ public class PutApprovesUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
-        Approve changedOne = new GetApprovesToRun(testUser).getApproveByParameter("id", originalOne.getId(), testUser, siteUrl);
+        Approve changedOne = new GetApprovesToRun(testUser).getApproveByParameter("id", originalOne.getId(), siteUrl);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDateAndApproveUserId(changedOne, true));
 
         // Содзаем URL
@@ -72,7 +72,7 @@ public class PutApprovesUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
-        changedOne = new GetApprovesToRun(testUser).getApproveByParameter("id", originalOne.getId(), testUser, siteUrl);
+        changedOne = new GetApprovesToRun(testUser).getApproveByParameter("id", originalOne.getId(), siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDateAndApproveUserId(changedOne, true));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

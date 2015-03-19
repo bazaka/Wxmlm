@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.Approve;
+import ApiTests.ObjectClasses.Bonus;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
@@ -21,9 +21,9 @@ import java.util.Collection;
 
 import static org.junit.Assert.*;
 
-// * Created for W-xmlm by Fill on 05.03.2015.
+// * Created for W-xmlm by Fill on 19.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetApprovesToRun {
+public class GetBonusesToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -31,17 +31,17 @@ public class GetApprovesToRun {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public GetApprovesToRun(TestUser user){
+    public GetBonusesToRun(TestUser user){
         this.testUser = user;
     }
 
     @Test
-    public void testGetApproves() throws Exception {
+    public void testGetBonuses() throws Exception {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/", 500, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/bonuses/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -60,27 +60,23 @@ public class GetApprovesToRun {
         assertNotSame("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ", jsonArr.length(), 0);
         for (int i = 0; i < jsonArr.length(); i++) {
             JSONObject object = jsonArr.getJSONObject(i);
-            JSONArray documents = object.getJSONArray("documents");
 
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect approve_user_id", ValidationChecker.checkIdOrNull(object.get("approve_user_id")));
-            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("create_date")));
-            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("update_date")));
-            assertTrue("Incorrect approve_date", ValidationChecker.checkStringOrNull(object.getString("approve_date")));
-            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.get("user_comment")));
-            assertTrue("Incorrect admin_comment", ValidationChecker.checkStringOrNull(object.get("admin_comment")));
-            assertTrue("Incorrect status", ValidationChecker.checkApproveStatus(object.getInt("status")));
-            for (int j = 0; j < documents.length(); j++) {
-                assertTrue("Incorrect documents",ValidationChecker.checkIdValue(documents.getInt(j)));
-            }
-            assertEquals("Incorrect count of Json parameters", object.length(), 10);
+            assertTrue("Incorrect partner_id", ValidationChecker.checkIdValue(object.getInt("partner_id")));
+            assertTrue("Incorrect operation_id", ValidationChecker.checkIdValue(object.getInt("operation_id")));
+            assertTrue("Incorrect purchase_id", ValidationChecker.checkIdValue(object.getInt("purchase_id")));
+            assertTrue("Incorrect type", ValidationChecker.checkBonusTypeValue(object.getInt("type")));
+            assertTrue("Incorrect percent", ValidationChecker.checkPositiveInt(object.getInt("percent")));
+            assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
+            assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
+            assertEquals("Incorrect count of Json parameters", object.length(), 9);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
-    public Approve getAnyApprove(String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/", 500, "GET");
+    public Bonus getAnyBonus(String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/bonuses/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -95,20 +91,15 @@ public class GetApprovesToRun {
             JSONArray jsonArr = new JSONArray(result);
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             JSONObject object = jsonArr.getJSONObject(0);
-            JSONArray documentsArray = object.getJSONArray("documents");
-            int[] documents = new int[documentsArray.length()];
-            for (int i = 0; i < documentsArray.length(); i++) {
-                documents[i] = documentsArray.getInt(i);
-            }
-            return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
+            return new Bonus(object.getInt("id"), object.getInt("user_id"), object.getInt("partner_id"), object.getInt("operation_id"), object.getInt("purchase_id"), object.getInt("type"), object.getInt("percent"), object.getString("created_date"), object.getString("updated_date"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public Approve getApproveByParameter(String parameterName, int parameterValue, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/", 1, "GET");
+    public Bonus getBonusByParameter(String parameterName, int parameterValue, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/bonuses/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -124,13 +115,8 @@ public class GetApprovesToRun {
             assertFalse("There is an empty Array", jsonArr.length() == 0);
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                JSONArray documentsArray = object.getJSONArray("documents");
-                int[] documents = new int[documentsArray.length()];
-                for (int j = 0; j < documentsArray.length(); j++) {
-                    documents[j] = documentsArray.getInt(j);
-                }
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
+                    return new Bonus(object.getInt("id"), object.getInt("user_id"), object.getInt("partner_id"), object.getInt("operation_id"), object.getInt("purchase_id"), object.getInt("type"), object.getInt("percent"), object.getString("created_date"), object.getString("updated_date"));
                 }
             }
         } catch (Exception e) {

@@ -57,6 +57,7 @@ public class ValidationChecker {
     // Special
     public static boolean checkAccountNumberValue(String accountNumber){return (accountNumber.length() >= 12);}
     public static boolean checkAccountTypeValue(int accountType){return (accountType == 10 || accountType == 20 || accountType == 30);}
+    public static boolean checkBonusTypeValue(int bonusType){return bonusType >= 1 && bonusType <= 7;}
     public static boolean checkMoneyFormat(String amount){return Integer.valueOf(amount) == Integer.parseInt(amount) || (Integer.valueOf(amount.split(".")[0]) > 0 && Integer.valueOf(amount.split(".")[1]) > 0 && amount.split(".")[1].length() <= 2);}
     public static boolean checkEmail (String email) {return (EmailValidator.getInstance().isValid(email));}
     public static boolean checkURLOnDomain(String url, String domain){return RegionMatch.IsStringRegionMatch(url, domain);}

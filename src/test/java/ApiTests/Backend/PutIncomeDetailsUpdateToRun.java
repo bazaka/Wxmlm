@@ -33,7 +33,7 @@ public class PutIncomeDetailsUpdateToRun {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
-        IncomeDetails originalOne = new GetIncomeDetailsToRun(testUser).getAnyIncomeDetails(testUser, siteUrl);
+        IncomeDetails originalOne = new GetIncomeDetailsToRun(testUser).getAnyIncomeDetails(siteUrl);
         IncomeDetails modifiedOne = new IncomeDetails(originalOne.getId(), originalOne.getOperationId(), originalOne.getUserId(), originalOne.getPurchaseIds(), originalOne.getTimeOnline() + 500, originalOne.getTimeOnlinePaid() + 200, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
         String purchaseIdsString = "[";
         for (int i = 0; i < originalOne.getPurchaseIds().length; i++) {
@@ -55,7 +55,7 @@ public class PutIncomeDetailsUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
-        IncomeDetails changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", originalOne.getId(), testUser, siteUrl);
+        IncomeDetails changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", originalOne.getId(), siteUrl);
         assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptUpdatedDate(changedOne, true));
 
         // Содзаем URL
@@ -67,7 +67,7 @@ public class PutIncomeDetailsUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
-        changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", originalOne.getId(), testUser, siteUrl);
+        changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", originalOne.getId(), siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDate(changedOne, true));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

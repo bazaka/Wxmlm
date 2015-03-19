@@ -1,6 +1,6 @@
 package ApiTests.Backend;
 
-import ApiTests.ObjectClasses.IncomeDetails;
+import ApiTests.ObjectClasses.Bonus;
 import ApiTests.UsedByAll.MakeRequest;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
@@ -12,17 +12,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.Collection;
-import java.io.*;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-// * Created for W-xmlm by Fill on 03.03.2015.
+// * Created for W-xmlm by Fill on 19.03.2015.
 @RunWith(value = Parameterized.class)
-public class PostIncomeDetailsInsertToRun {
+public class PostBonusInsertToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -30,7 +28,7 @@ public class PostIncomeDetailsInsertToRun {
         return CsvUsersReader.getDataForTest("_BackendAPITest(");
     }
 
-    public PostIncomeDetailsInsertToRun(TestUser user) {
+    public PostBonusInsertToRun(TestUser user) {
         this.testUser = user;
     }
 
@@ -39,21 +37,17 @@ public class PostIncomeDetailsInsertToRun {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
-        IncomeDetails originalOne = new GetIncomeDetailsToRun(testUser).getAnyIncomeDetails(siteUrl);
-        IncomeDetails newOne = new IncomeDetails(originalOne.getId(), originalOne.getOperationId(), originalOne.getUserId(), originalOne.getPurchaseIds(), originalOne.getTimeOnline() + 500, originalOne.getTimeOnlinePaid() + 200, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
-        String purchaseIdsString = "[";
-        for (int i = 0; i < originalOne.getPurchaseIds().length; i++) {
-            if (i!=0){
-                purchaseIdsString = purchaseIdsString + ", ";
-            }
-            purchaseIdsString = purchaseIdsString + originalOne.getPurchaseIds(i);
+        Bonus originalOne = new GetBonusesToRun(testUser).getAnyBonus(siteUrl);
+        int typeValue = originalOne.getType() - 1;
+        if(typeValue == -1){
+            typeValue = 7;
         }
-        purchaseIdsString = purchaseIdsString + "]";
-        String newJson = "{\"time_online\": " + newOne.getTimeOnline() + ", \"time_online_paid\": " + newOne.getTimeOnlinePaid() + ", \"operation_id\": " + newOne.getOperationId() + ", \"purchase_ids\": " + purchaseIdsString + ", \"user_id\": " + newOne.getUserId() + "}";
+        Bonus newOne = new Bonus(originalOne.getId(), originalOne.getUserId(), originalOne.getPartnerId(), originalOne.getOperationId(), originalOne.getPurchaseId(), typeValue, originalOne.getPercent() + 1, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
+        String newJson = "{\"user_id\": " + newOne.getUserId() + ", \"partner_id\": " + newOne.getPartnerId() + ", \"operation_id\": " + newOne.getOperationId() + ", \"purchase_id\": " + newOne.getPurchaseId() + ", \"type\": " + newOne.getType() + ", \"percent\": " + newOne.getPercent() + "}";
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/income-details/insert/", "POST", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/bonuses/insert/", "POST", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
@@ -76,8 +70,9 @@ public class PostIncomeDetailsInsertToRun {
         newOne.setId(report.getInt("id"));
 
         // Проверяем GET-запросом, что данные обновились
-        IncomeDetails changedOne = new GetIncomeDetailsToRun(testUser).getIncomeDetailsByParameter("id", newOne.getId(), siteUrl);
+        Bonus changedOne = new GetBonusesToRun(testUser).getBonusByParameter("id", newOne.getId(), siteUrl);
         assertTrue("Check modified data saved correctly", newOne.equalsExceptUpdatedDate(changedOne, false));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
+
 }

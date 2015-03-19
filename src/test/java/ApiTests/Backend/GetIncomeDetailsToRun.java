@@ -82,8 +82,8 @@ public class GetIncomeDetailsToRun {
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 
-    public IncomeDetails getAnyIncomeDetails(TestUser user, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/income-details/", 500, "GET");
+    public IncomeDetails getAnyIncomeDetails(String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/income-details/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -110,8 +110,8 @@ public class GetIncomeDetailsToRun {
         }
     }
 
-    public IncomeDetails getIncomeDetailsByParameter(String parameterName, int parameterValue, TestUser user, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "money/api/income-details/", 1, "GET");
+    public IncomeDetails getIncomeDetailsByParameter(String parameterName, int parameterValue, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/income-details/", 1, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
