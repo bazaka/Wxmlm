@@ -26,7 +26,7 @@ public class ValidationChecker {
     public static boolean checkProductStatusId(int statusId) {return (statusId>=1 && statusId<=4);}
     public static boolean checkOperationTypeId(int typeId) {return (typeId>=1 && typeId<=12);}
     public static boolean checkProductTypeId(int typeId) {return (typeId>=11);}
-    public static boolean checkCareerId(int careerId) {return (careerId>=0 && careerId<=11);}
+    public static boolean checkCareerId(int careerId) {return (careerId>=0 && careerId<=12);}
     public static boolean checkProductId (int productId){return(productId == 1 || productId == 2 || productId == 3 || productId == 4);}
     public static boolean checkIdOrNull(Object id){return (checkStringOrNull(id) || checkIdValue(Integer.valueOf(id.toString())));} // Проверка что поле содержит необязательный Id
 

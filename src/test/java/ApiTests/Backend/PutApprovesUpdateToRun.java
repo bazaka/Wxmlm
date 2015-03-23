@@ -72,7 +72,9 @@ public class PutApprovesUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
+
         changedOne = new GetApprovesToRun(testUser).getApproveByParameter("id", originalOne.getId(), siteUrl);
+
         assertTrue("Check modified data returned correctly", originalOne.equalsExceptUpdatedDateAndApproveUserId(changedOne, true));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

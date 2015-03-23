@@ -68,6 +68,8 @@ public class ProfilePage extends BasePage {
 
   /*  private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
     private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");*/
+    public static final By bankCardsTab = By.xpath("//div[@class='tabbable']//a[text()='Bank Cards']");
+    public static final By addCardButton = By.id("add-new-card");
 
 
     public ProfilePage(WebDriver driver, WebDriverWait wait){

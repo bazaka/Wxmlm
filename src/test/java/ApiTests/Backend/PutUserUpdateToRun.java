@@ -55,6 +55,8 @@ public class PutUserUpdateToRun {
         String originalJson = "[{\"id\": " + originalUser.getUserId() + ", \"career\": " + originalUser.getCareer() + ", \"status\": " + originalUser.getUserStatusId() +", \"debtor\": "+originalUser.getDebtor()+"}]";
         String modifiedJson = "[{\"id\": " + modifiedUser.getUserId() + ", \"career\": " + careerValue + ", \"status\": " + status +", \"debtor\": "+debtor+"}]";
 
+
+
         // Содзаем URL
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, "PUT", "application/json", "application/json", true);
@@ -74,7 +76,7 @@ public class PutUserUpdateToRun {
         out.close();
         httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
-
+        System.out.println();
         // Проверяем GET-запросом, что данные восстановились
         changedUser = new GetUsersToRun(testUser).getUserByParameter("user_id", originalUser.getUserId(), testUser, siteUrl );
         assertTrue("Check modified data returned correctly", originalUser.exceptedChangedDate(changedUser));

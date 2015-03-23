@@ -24,6 +24,10 @@ public class ProfileData {
         private String iban;
         private String swift;
         private String epid;
+        private String userTitle;
+        private String cardNumber;
+        private String cardHolder;
+        private String cardDate;
 
         // Сеттеры
         public void setUserFullName(String a)
@@ -60,6 +64,18 @@ public class ProfileData {
         { this.swift = a; }
         public void setEpid(String a)
         { this.epid = a; }
+        public void setUserTitle(String a){
+            this.userTitle = a;
+        }
+        public void setCardNumber(String a){
+            this.cardNumber = a;
+        }
+        public void setCardHolder(String a){
+            this.cardHolder = a;
+        }
+        public void setCardDate(String a){
+            this.cardDate = a;
+        }
 
 
         // Геттеры
@@ -97,5 +113,17 @@ public class ProfileData {
         { return swift ; }
         public String getEpid()
         { return epid ; }
+        public String getUserTitle(){
+            return userTitle;
+        }
+        public String getCardNumber(){
+            return cardNumber;
+        }
+        public String getCardHolder(){
+            return cardHolder;
+        }
+        public String getCardDate(){
+            return cardDate;
+        }
 
 }

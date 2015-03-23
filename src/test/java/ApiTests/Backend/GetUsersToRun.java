@@ -166,7 +166,7 @@ public class GetUsersToRun {
 
     }
     public User getUserByParameter(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException {
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 500, "GET" );
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 1, "GET" );
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -175,6 +175,7 @@ public class GetUsersToRun {
         String line;
         while((line=br.readLine()) !=null) {
             result +=line;
+
         }
         br.close();
         try{

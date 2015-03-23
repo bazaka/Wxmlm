@@ -84,13 +84,13 @@ public class Approve {
             System.out.println("7");
             return false;
         }
-        if (!getUserComment().equals(a.getUserComment()) && !getUserComment().equals(null) && a.getUserComment().equals(null)) {
-            System.out.println(getUserComment());
-            System.out.println(a.getUserComment());
+        if (!getUserComment().equals(a.getUserComment()) && !getUserComment().equals("") && a.getUserComment().equals("")) {
+
             System.out.println("8");
             return false;
         }
-        if (!getAdminComment().equals(a.getAdminComment())) {
+        if (!getAdminComment().equals(a.getAdminComment()) && !getAdminComment().equals(null) && a.getAdminComment().equals(null)) {
+
             System.out.println("9");
             return false;
         }

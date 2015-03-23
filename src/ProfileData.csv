@@ -1,2 +1,2 @@
-userFullName, gender, birthDate, phoneNumber, address, citizen, passportSeries, passportNum, issued, issuedDate, bName, bAddress, bankName, bankAddress, iban, swift, epid
-UserName, Male, 2012-12-12, 333-44-55, Street1, Egypt, MU, 323232, Somewhere, 2015-12-12, UserBank, UserAddress, NameBank, AddressBank, KZ75 125K ZT10 0130 0335, 33478443, 3434
+userFullName, gender, birthDate, phoneNumber, address, citizen, passportSeries, passportNum, issued, issuedDate, bName, bAddress, bankName, bankAddress, iban, swift, epid, userTitle, cardNumber, cardHolder, cardDate,
+UserName, Male, 2012-12-12, 333-44-55, Street1, Egypt, MU, 323232, Somewhere, 2015-12-12, UserBank, UserAddress, NameBank, AddressBank, KZ75 125K ZT10 0130 0335, 33478443, 3434, CardUser1, 1234432156788765, TestCardHolder, 1212,

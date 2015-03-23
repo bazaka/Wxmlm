@@ -37,6 +37,10 @@ public class CsvProfileDataReader {
         List<String> ibans = new ArrayList<String>();
         List<String> swifts = new ArrayList<String>();
         List<String> epids = new ArrayList<String>();
+        List<String> userTitles = new ArrayList<String>();
+        List<String> cardNumbers = new ArrayList<String>();
+        List<String> cardHolders = new ArrayList<String>();
+        List<String> cardDates = new ArrayList<String>();
 
         //Читаем .csv-файл и заполняем списки данных значениями из файла. В списки попадают данные только тех пользователей, которые в поле "useInTest" имеют значение "+"
         try {
@@ -59,6 +63,10 @@ public class CsvProfileDataReader {
                 ibans.add(parser.getValueByLabel("iban"));
                 swifts.add(parser.getValueByLabel("swift"));
                 epids.add(parser.getValueByLabel("epid"));
+                userTitles.add(parser.getValueByLabel("userTitle"));
+                cardNumbers.add(parser.getValueByLabel("cardNumber"));
+                cardHolders.add(parser.getValueByLabel("cardHolder"));
+                cardDates.add(parser.getValueByLabel("cardDate"));
             }
             // Создаем по спискам данных массив тестовых пользователей
             String[] userFullNamesArray = userFullNames.toArray(new String[userFullNames.size()]);
@@ -78,6 +86,10 @@ public class CsvProfileDataReader {
             String[] ibansArray = ibans.toArray(new String[ibans.size()]);
             String[] swiftsArray = swifts.toArray(new String[swifts.size()]);
             String[] epidsArray = epids.toArray(new String[epids.size()]);
+            String[] userTitlesArray = userTitles.toArray(new String[userTitles.size()]);
+            String[] cardNumbersArray = cardNumbers.toArray(new String[cardNumbers.size()]);
+            String[] cardHoldersArray = cardHolders.toArray(new String[cardHolders.size()]);
+            String[] cardDatesArray = cardDates.toArray(new String[cardDates.size()]);
 
             ProfileData[] profileData = new ProfileData[userFullNames.size()];
             for (int i = 0; i < profileData.length; i++) {
@@ -99,6 +111,10 @@ public class CsvProfileDataReader {
                 profileData[i].setIban(ibansArray[i]);
                 profileData[i].setSwift(swiftsArray[i]);
                 profileData[i].setEpid(epidsArray[i]);
+                profileData[i].setUserTitle(userTitlesArray[i]);
+                profileData[i].setCardNumber(cardNumbersArray[i]);
+                profileData[i].setCardHolder(cardHoldersArray[i]);
+                profileData[i].setCardDate(cardDatesArray[i]);
             }
 
             return profileData;

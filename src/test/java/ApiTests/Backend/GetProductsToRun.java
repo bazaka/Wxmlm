@@ -145,7 +145,7 @@ public class GetProductsToRun {
             JSONObject object = jsonArr.getJSONObject(0);
             JSONObject attributes = object.getJSONObject("attributes");
             if (object.getInt("category_id") == 1) {
-                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.getDouble("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
+                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.get("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
             }
             else if (object.getInt("category_id") == 2) {
                 JSONArray requiredForTrialArray = attributes.getJSONArray("requiredForTrial");
@@ -153,7 +153,7 @@ public class GetProductsToRun {
                 for (int i = 0; i < requiredForTrialArray.length(); i++){
                     requiredForTrial[i] = requiredForTrialArray.optInt(i);
                 }
-                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), requiredForTrial, attributes.getString("trialPeriod"), attributes.getString("quotaPrefix"), attributes.getInt("quota"), attributes.getString("quotaMeasurement"), attributes.getInt("serviceId"));
+                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), requiredForTrial, attributes.getString("trialPeriod"), attributes.getString("quotaPrefix"), attributes.getInt("quota"), attributes.getString("quotaMeasurement"), attributes.getInt("serviceId"));
             }
             else {
                 System.out.println("Unrecognised category_id");
