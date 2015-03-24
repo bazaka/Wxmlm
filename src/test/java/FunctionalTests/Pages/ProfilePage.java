@@ -3,10 +3,13 @@ package FunctionalTests.Pages;
 import UsedByAll.TestUser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 /**
  * Created by User on 12/22/2014.
@@ -70,6 +73,21 @@ public class ProfilePage extends BasePage {
     private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");*/
     public static final By bankCardsTab = By.xpath("//div[@class='tabbable']//a[text()='Bank Cards']");
     public static final By addCardButton = By.id("add-new-card");
+    public static final By cardTitle = By.id("xmlm_bundle_userbundle_card_title");
+    public static final By cardNumber = By.id("xmlm_bundle_userbundle_card_number");
+    public static final By cardHolder = By.id("xmlm_bundle_userbundle_card_cardholder");
+    public static final By expDate = By.id("xmlm_bundle_userbundle_card_expiration");
+    public static final By mainCard = By.id("xmlm_bundle_userbundle_card_main");
+    public static final By saveCardButton = By.xpath("//form[@id='addNewCardForm']//button[text()='Save card']");
+
+    public static final By tableCardTitle = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[1]/a");
+    public static final By tableCardNumber = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[2]");
+    public static final By tableCardHolder = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[3]");
+    public static final By tableExpires = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[4]");
+    public static final By tableDeleteCard = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[5]/a");
+    public static final By tableRows = By.xpath("//table[@id='my-credit-cards']/tbody/tr");
+
+
 
 
     public ProfilePage(WebDriver driver, WebDriverWait wait){
@@ -285,6 +303,59 @@ public class ProfilePage extends BasePage {
         driver.findElement(bankDetailsTab).click();
 
         wait.until(ExpectedConditions.presenceOfElementLocated(bankUserName));
+
+    }
+    public void editBankCardTab(String cardFileName, String cardFileNumber, String cardFileHolderName, String fileExpirationDate){
+        driver.findElement(bankCardsTab).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(addCardButton));
+        driver.findElement(addCardButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cardTitle));
+
+        driver.findElement(cardTitle).clear();
+        driver.findElement(cardTitle).click();
+        driver.findElement(cardTitle).sendKeys(cardFileName);
+
+       // driver.findElement(cardNumber).clear();
+        driver.findElement(cardNumber).click();
+        driver.findElement(cardNumber).sendKeys(cardFileNumber);
+
+        driver.findElement(cardHolder).clear();
+        driver.findElement(cardHolder).click();
+        driver.findElement(cardHolder).sendKeys(cardFileHolderName);
+
+        //driver.findElement(expDate ).clear();
+        driver.findElement(expDate ).click();
+        driver.findElement(expDate ).sendKeys(fileExpirationDate);
+
+        driver.findElement(saveCardButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.presenceOfElementLocated(profilePage));
+        goProfilePage();
+        driver.findElement(bankCardsTab).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(addCardButton));
+    }
+    public String getCardTitle(){
+        return(driver.findElement(tableCardTitle).getText());
+    }
+    public String getCardNumber(){
+        return(driver.findElement(tableCardNumber).getText().trim());
+    }
+    public String getCardHolder(){
+        return(driver.findElement(tableCardHolder).getText());
+    }
+    public String getExpDate(){
+        return(driver.findElement(tableExpires).getText());
+    }
+
+    public int getCardsCount(){
+        List<WebElement> cards = driver.findElements(tableRows);
+        return (cards.size());
+    }
+    public void deleteFirstCard(){
+
+        driver.findElement(tableDeleteCard).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
 
     }
 
