@@ -18,7 +18,7 @@ public class Product {
     private Object timeOnline;
     private int basicIncome;
     private int basicIncomePeriod;
-    private Object profit;
+    private String profit;
     private int investmentPeriod;
     private String start;
     private int[] requiredForTrial;
@@ -28,7 +28,7 @@ public class Product {
     private String quotaMeasurement;
     private int serviceId;
     // Constructors
-    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, Object imageUrl, Object available, Object discSpace, Object timeOnline, int basicIncome, int basicIncomePeriod, Object profit, int investmentPeriod, String start)
+    public Product(int id, int categoryId, int ownerId, int creatorId, String title, String description, double price, int status, int type, String createdDate, Object imageUrl, Object available, Object discSpace, Object timeOnline, int basicIncome, int basicIncomePeriod, String profit, int investmentPeriod, String start)
     {
         this.setId(id);
         this.setCategoryId(categoryId);
@@ -87,7 +87,7 @@ public class Product {
     public Object getTimeOnline() {return timeOnline;}
     public int getBasicIncome() {return basicIncome;}
     public int getBasicIncomePeriod() {return basicIncomePeriod;}
-    public Object getProfit() {return profit;}
+    public String getProfit() {return profit;}
     public int getInvestmentPeriod() {return investmentPeriod;}
     public String getStart() {return start;}
     public int[] getRequiredForTrial() {return requiredForTrial;}
@@ -115,7 +115,7 @@ public class Product {
     public void setTimeOnline(Object a) {this.timeOnline = a;}
     public void setBasicIncome(int a) {this.basicIncome = a;}
     public void setBasicIncomePeriod(int a) {this.basicIncomePeriod = a;}
-    public void setProfit(Object a) {this.profit = a;}
+    public void setProfit(String a) {this.profit = a;}
     public void setInvestmentPeriod(int a) {this.investmentPeriod = a;}
     public void setStart(String a) {this.start = a;}
     public void setRequiredForTrial(int[] a) {this.requiredForTrial = a;}
@@ -217,7 +217,9 @@ public class Product {
                 System.out.println("17");
                 return false;
             }
-            if (getProfit() != a.getProfit()) {
+            if (!getProfit().equals(a.getProfit())) {
+                System.out.println(getProfit());
+                System.out.println(a.getProfit());
                 System.out.println("18");
                 return false;
             }
