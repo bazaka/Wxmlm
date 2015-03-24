@@ -26,5 +26,10 @@ public class MoneyFamilyPage extends AuthorizedUserPage {
         driver.findElement(transfer).click();
         wait.until(ExpectedConditions.titleIs("Transfer"));
     }
+    public void goToRecharge(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(recharge));
+        driver.findElement(recharge).click();
+        wait.until(ExpectedConditions.titleIs("Recharge"));
+    }
 
 }
