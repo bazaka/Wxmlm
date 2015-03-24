@@ -14,6 +14,7 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -74,6 +75,21 @@ public class ChangeProfileDataTestToRun extends BaseTest {
         assertEquals("Iban not changed", profilePage.getIban() , profileData[0].getIban());
         assertEquals("Swift code not changed", profilePage.getSwift() , profileData[0].getSwift());
         assertEquals("Epid code not changed", profilePage.getEpid() ,  profileData[0].getEpid());
+
+        profilePage.editBankCardTab(profileData[0].getUserTitle(), profileData[0].getCardNumber(), profileData[0].getCardHolder(), profileData[0].getCardDate());
+
+        assertEquals("Card Title not changed", profilePage.getCardTitle(), profileData[0].getUserTitle());
+        assertEquals("Card Number not changed", profilePage.getCardNumber(), profileData[0].getCardNumber());
+        assertEquals("Card Holder not changed", profilePage.getCardHolder(), profileData[0].getCardHolder());
+        assertEquals("Expiration date not chenged", profilePage.getExpDate(), profileData[0].getCardDate());
+
+        int cardCount = profilePage.getCardsCount(); //подсчитать количество карт в таблице
+
+        profilePage.deleteFirstCard(); //удалить карту
+        assertEquals("Card not deleted", cardCount - 1, profilePage.getCardsCount()); // проверка, что количество карт в таблице уменьшилось на 1
+
+
+
         System.out.println("Change Profile Data Test успешно пройден");
     }
 }
