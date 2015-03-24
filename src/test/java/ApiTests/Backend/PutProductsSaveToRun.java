@@ -36,7 +36,7 @@ public class PutProductsSaveToRun {
     @Test
     public void testPutProductsUpdate() throws IOException {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
-        Product originalOne = new GetProductsToRun(testUser).getAnyProduct(testUser, siteUrl);
+        Product originalOne = new GetProductsToRun(testUser).getFirstProduct(testUser, siteUrl);
         assertFalse("Product not found", originalOne == null);
         String imageUrlOrigString;
         String imageUrlModString;
@@ -58,8 +58,8 @@ public class PutProductsSaveToRun {
         assertTrue("Unrecognised category_id", originalOne.getCategoryId() == 1 || originalOne.getCategoryId() == 2);
         if (originalOne.getCategoryId() == 1) {
             modifiedOne = new Product(originalOne.getId(), originalOne.getCategoryId(), originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), originalOne.getType(), originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getAvailable(), originalOne.getDiscSpace(), originalOne.getTimeOnline(), originalOne.getBasicIncome(), originalOne.getBasicIncomePeriod(), originalOne.getProfit(), originalOne.getInvestmentPeriod(), originalOne.getStart());
-            originalJson = "[{\"id\":" + originalOne.getId() + ", \"category_id\": " + originalOne.getCategoryId() + ", \"owner_id\": " + originalOne.getOwnerId() + ", \"creator_id\":" + originalOne.getCreatorId() + ", \"title\": \"" + originalOne.getTitle() + "\", \"description\": \"" + originalOne.getDescription() + "\", \"price\": " + originalOne.getPrice() + ", \"status\": " + originalOne.getStatus() + ", \"type\": " + originalOne.getType() + ", \"image_url\": " + imageUrlOrigString + ", \"attributes\": { \"available\": " + originalOne.getAvailable() + ", \"discSpace\": " + originalOne.getDiscSpace() + ", \"timeOnline\": " + originalOne.getTimeOnline() + ", \"basicIncome\": " + originalOne.getBasicIncome() + ", \"basicIncomePeriod\": " + originalOne.getBasicIncomePeriod() + ", \"profit\": " + originalOne.getProfit() + ", \"investmentPeriod\": " + originalOne.getInvestmentPeriod() + ", \"start\": \"" + originalOne.getStart() + "\"}}]";
-            modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"category_id\": " + modifiedOne.getCategoryId() + ", \"owner_id\": " + modifiedOne.getOwnerId() + ", \"creator_id\":" + modifiedOne.getCreatorId() + ", \"title\": \"" + modifiedOne.getTitle() + "\", \"description\": \"" + modifiedOne.getDescription() + "\", \"price\": " + modifiedOne.getPrice() + ", \"status\": " + modifiedOne.getStatus() + ", \"type\": " + modifiedOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + modifiedOne.getAvailable() + ", \"discSpace\": " + modifiedOne.getDiscSpace() + ", \"timeOnline\": " + modifiedOne.getTimeOnline() + ", \"basicIncome\": " + modifiedOne.getBasicIncome() + ", \"basicIncomePeriod\": " + modifiedOne.getBasicIncomePeriod() + ", \"profit\": " + modifiedOne.getProfit() + ", \"investmentPeriod\": " + modifiedOne.getInvestmentPeriod() + ", \"start\": \"" + modifiedOne.getStart() + "\"}}]";
+            originalJson = "[{\"id\":" + originalOne.getId() + ", \"category_id\": " + originalOne.getCategoryId() + ", \"owner_id\": " + originalOne.getOwnerId() + ", \"creator_id\":" + originalOne.getCreatorId() + ", \"title\": \"" + originalOne.getTitle() + "\", \"description\": \"" + originalOne.getDescription() + "\", \"price\": " + originalOne.getPrice() + ", \"status\": " + originalOne.getStatus() + ", \"type\": " + originalOne.getType() + ", \"image_url\": " + imageUrlOrigString + ", \"attributes\": { \"available\": " + originalOne.getAvailable() + ", \"discSpace\": " + originalOne.getDiscSpace() + ", \"timeOnline\": \"" + originalOne.getTimeOnline() + "\", \"basicIncome\": " + originalOne.getBasicIncome() + ", \"basicIncomePeriod\": " + originalOne.getBasicIncomePeriod() + ", \"profit\": \"" + originalOne.getProfit() + "\", \"investmentPeriod\": " + originalOne.getInvestmentPeriod() + ", \"start\": \"" + originalOne.getStart() + "\"}}]";
+            modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"category_id\": " + modifiedOne.getCategoryId() + ", \"owner_id\": " + modifiedOne.getOwnerId() + ", \"creator_id\":" + modifiedOne.getCreatorId() + ", \"title\": \"" + modifiedOne.getTitle() + "\", \"description\": \"" + modifiedOne.getDescription() + "\", \"price\": " + modifiedOne.getPrice() + ", \"status\": " + modifiedOne.getStatus() + ", \"type\": " + modifiedOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + modifiedOne.getAvailable() + ", \"discSpace\": " + modifiedOne.getDiscSpace() + ", \"timeOnline\": \"" + modifiedOne.getTimeOnline() + "\", \"basicIncome\": " + modifiedOne.getBasicIncome() + ", \"basicIncomePeriod\": " + modifiedOne.getBasicIncomePeriod() + ", \"profit\": \"" + modifiedOne.getProfit() + "\", \"investmentPeriod\": " + modifiedOne.getInvestmentPeriod() + ", \"start\": \"" + modifiedOne.getStart() + "\"}}]";
         }
         else if (originalOne.getCategoryId() == 2) {
             modifiedOne = new Product(originalOne.getId(), originalOne.getCategoryId(), originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), originalOne.getType(), originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getRequiredForTrial(), originalOne.getTrialPeriod(), originalOne.getQuotaPrefix() + " quotaPrefix", originalOne.getQuota() + 1, originalOne.getQuotaMeasurement() + "QuotaMeasurement", originalOne.getServiceId());
@@ -78,6 +78,8 @@ public class PutProductsSaveToRun {
             originalJson = "[{\"id\":" + originalOne.getId() + ", \"category_id\": " + originalOne.getCategoryId() + ", \"owner_id\": " + originalOne.getOwnerId() + ", \"creator_id\":" + originalOne.getCreatorId() + ", \"title\": \"" + originalOne.getTitle() + "\", \"description\": \"" + originalOne.getDescription() + "\", \"price\": " + originalOne.getPrice() + ", \"status\": " + originalOne.getStatus() + ", \"type\": " + originalOne.getType() + ", \"image_url\": " + imageUrlOrigString + ", \"attributes\": { \"requiredForTrial\": " + requiredForTrialStringOri + ", \"trialPeriod\": \"" + originalOne.getTrialPeriod() + "\", \"quotaPrefix\": \"" + originalOne.getQuotaPrefix() + "\", \"quota\": " + originalOne.getQuota() + ", \"quotaMeasurement\": \"" + originalOne.getQuotaMeasurement() + "\", \"serviceId\": " + originalOne.getServiceId() + "}}]";
             modifiedJson = "[{\"id\":" + modifiedOne.getId() + ", \"category_id\": " + modifiedOne.getCategoryId() + ", \"owner_id\": " + modifiedOne.getOwnerId() + ", \"creator_id\":" + modifiedOne.getCreatorId() + ", \"title\": \"" + modifiedOne.getTitle() + "\", \"description\": \"" + modifiedOne.getDescription() + "\", \"price\": " + modifiedOne.getPrice() + ", \"status\": " + modifiedOne.getStatus() + ", \"type\": " + modifiedOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"requiredForTrial\": " + requiredForTrialStringMod + ", \"trialPeriod\": \"" + modifiedOne.getTrialPeriod() + "\", \"quotaPrefix\": \"" + modifiedOne.getQuotaPrefix() + "\", \"quota\": " + modifiedOne.getQuota() + ", \"quotaMeasurement\": \"" + modifiedOne.getQuotaMeasurement() + "\", \"serviceId\": " + modifiedOne.getServiceId() + "}}]";
         }
+        System.out.println(modifiedJson);
+        System.out.println("id: " + modifiedOne.getId());
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
@@ -108,7 +110,7 @@ public class PutProductsSaveToRun {
     @Test
     public void testPutProductsInsert() throws IOException, JSONException {
         String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme(); // Урл проверяемого сайта
-        Product originalOne = new GetProductsToRun(testUser).getAnyProduct(testUser, siteUrl);
+        Product originalOne = new GetProductsToRun(testUser).getLastUpdatedProduct(testUser, siteUrl);
         assertFalse("Product not found", originalOne == null);
         String imageUrlModString;
         String newJson = null;
@@ -122,7 +124,7 @@ public class PutProductsSaveToRun {
         assertTrue("Unrecognised category_id", originalOne.getCategoryId() == 1 || originalOne.getCategoryId() == 2);
         if (originalOne.getCategoryId() == 1) {
             newOne = new Product(originalOne.getId() + 30, originalOne.getCategoryId(), originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), 41, originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getAvailable(), originalOne.getDiscSpace(), originalOne.getTimeOnline(), originalOne.getBasicIncome(), originalOne.getBasicIncomePeriod(), originalOne.getProfit(), originalOne.getInvestmentPeriod(), originalOne.getStart());
-            newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + newOne.getAvailable() + ", \"discSpace\": " + newOne.getDiscSpace() + ", \"timeOnline\": " + newOne.getTimeOnline() + ", \"basicIncome\": " + newOne.getBasicIncome() + ", \"basicIncomePeriod\": " + newOne.getBasicIncomePeriod() + ", \"profit\": " + newOne.getProfit() + ", \"investmentPeriod\": " + newOne.getInvestmentPeriod() + ", \"start\": \"" + newOne.getStart() + "\"}}]";
+            newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"available\": " + newOne.getAvailable() + ", \"discSpace\": " + newOne.getDiscSpace() + ", \"timeOnline\": \"" + newOne.getTimeOnline() + "\", \"basicIncome\": " + newOne.getBasicIncome() + ", \"basicIncomePeriod\": " + newOne.getBasicIncomePeriod() + ", \"profit\": \"" + newOne.getProfit() + "\", \"investmentPeriod\": " + newOne.getInvestmentPeriod() + ", \"start\": \"" + newOne.getStart() + "\"}}]";
         }
         else if (originalOne.getCategoryId() == 2) {
             newOne = new Product(originalOne.getId() + 30, originalOne.getCategoryId(), originalOne.getOwnerId(), originalOne.getCreatorId(), originalOne.getTitle() + " title", originalOne.getDescription() + " description", originalOne.getPrice() + 100, originalOne.getStatus(), originalOne.getType(), originalOne.getCreatedDate(), originalOne.getImageUrl(), originalOne.getRequiredForTrial(), originalOne.getTrialPeriod(), originalOne.getQuotaPrefix() + " quotaPrefix", originalOne.getQuota() + 1, originalOne.getQuotaMeasurement() + "QuotaMeasurement", originalOne.getServiceId());
@@ -140,6 +142,9 @@ public class PutProductsSaveToRun {
             requiredForTrialStringOri = requiredForTrialStringOri + "]";
             newJson = "[{\"id\":" + newOne.getId() + ", \"category_id\": " + newOne.getCategoryId() + ", \"owner_id\": " + newOne.getOwnerId() + ", \"creator_id\":" + newOne.getCreatorId() + ", \"title\": \"" + newOne.getTitle() + "\", \"description\": \"" + newOne.getDescription() + "\", \"price\": " + newOne.getPrice() + ", \"status\": " + newOne.getStatus() + ", \"type\": " + newOne.getType() + ", \"image_url\": " + imageUrlModString + ", \"attributes\": { \"requiredForTrial\": " + requiredForTrialStringMod + ", \"trialPeriod\": \"" + newOne.getTrialPeriod() + "\", \"quotaPrefix\": \"" + newOne.getQuotaPrefix() + "\", \"quota\": " + newOne.getQuota() + ", \"quotaMeasurement\": \"" + newOne.getQuotaMeasurement() + "\", \"serviceId\": " + newOne.getServiceId() + "}}]";
         }
+        System.out.println(newJson);
+        System.out.println("old id" + originalOne.getId());
+        System.out.println("new id: " + newOne.getId());
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
@@ -160,10 +165,12 @@ public class PutProductsSaveToRun {
         br.close();
 
         //берем из респонса id новой операции
+        System.out.println(result);
         JSONObject response = new JSONObject(result);
         JSONArray reports = response.getJSONArray("reports");
         String report = reports.getString(0);
         int newOneId = Integer.parseInt(report.replaceAll("[\\D]", ""));
+        System.out.println(newOneId);
 
         //Проверяем Get-запросом, что данный обновились
         Product changedOne = new GetProductsToRun(testUser).getProductByParameter("id", newOneId, testUser, siteUrl);

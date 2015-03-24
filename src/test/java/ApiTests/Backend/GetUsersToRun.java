@@ -128,7 +128,7 @@ public class GetUsersToRun {
 
         JSONArray jsonArr = new JSONArray(result);
         int ids[] = new int[jsonArr.length()];
-        assertNotNull("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length());
+        assertNotEquals("Получен пустой массив. Проверить метод с наличием объектов.", jsonArr.length(), 0);
         for(int i=0; i<jsonArr.length(); i++){
             JSONObject object = jsonArr.getJSONObject(i);
             ids[i] = object.getInt("user_id");

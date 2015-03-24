@@ -124,7 +124,7 @@ public class GetProductsToRun {
         }
         return ids;
     }
-    public Product getAnyProduct(TestUser user, String siteUrl) throws IOException {
+    public Product getFirstProduct(TestUser user, String siteUrl) throws IOException {
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/products/", 500, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -145,7 +145,47 @@ public class GetProductsToRun {
             JSONObject object = jsonArr.getJSONObject(0);
             JSONObject attributes = object.getJSONObject("attributes");
             if (object.getInt("category_id") == 1) {
-                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.get("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
+                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.getString("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
+            }
+            else if (object.getInt("category_id") == 2) {
+                JSONArray requiredForTrialArray = attributes.getJSONArray("requiredForTrial");
+                int[] requiredForTrial = new int[requiredForTrialArray.length()];
+                for (int i = 0; i < requiredForTrialArray.length(); i++){
+                    requiredForTrial[i] = requiredForTrialArray.optInt(i);
+                }
+                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), requiredForTrial, attributes.getString("trialPeriod"), attributes.getString("quotaPrefix"), attributes.getInt("quota"), attributes.getString("quotaMeasurement"), attributes.getInt("serviceId"));
+            }
+            else {
+                System.out.println("Unrecognised category_id");
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public Product getLastUpdatedProduct(TestUser user, String siteUrl) throws IOException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, user, "products/api/products/", 500, "GET");
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        br.close();
+        try {
+            JSONArray jsonArr = new JSONArray(result);
+            if (jsonArr.length() == 0) {
+                System.out.println("Получен пустой массив. Рекомендуется проверить метод с наличием объектов. ");
+                return null;
+            }
+            JSONObject object = jsonArr.getJSONObject(jsonArr.length() - 1);
+            JSONObject attributes = object.getJSONObject("attributes");
+            if (object.getInt("category_id") == 1) {
+                return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.get("description").toString(), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.getString("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
             }
             else if (object.getInt("category_id") == 2) {
                 JSONArray requiredForTrialArray = attributes.getJSONArray("requiredForTrial");
@@ -187,7 +227,7 @@ public class GetProductsToRun {
                 JSONObject attributes = object.getJSONObject("attributes");
                 if (object.getInt(parameterName) == parameterValue) {
                     if (object.getInt("category_id") == 1) {
-                        return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.getDouble("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
+                        return new Product(object.getInt("id"), object.getInt("category_id"), object.getInt("owner_id"), object.getInt("creator_id"), object.getString("title"), object.getString("description"), object.getDouble("price"), object.getInt("status"), object.getInt("type"), object.getString("created_date"), object.get("image_url"), attributes.get("available"), attributes.get("discSpace"), attributes.get("timeOnline"), attributes.getInt("basicIncome"), attributes.getInt("basicIncomePeriod"), attributes.getString("profit"), attributes.getInt("investmentPeriod"), attributes.getString("start"));
                     }
                     else if (object.getInt("category_id") == 2) {
                         JSONArray requiredForTrialArray = attributes.getJSONArray("requiredForTrial");
