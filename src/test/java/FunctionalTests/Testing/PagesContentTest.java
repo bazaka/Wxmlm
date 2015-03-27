@@ -8,6 +8,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.lang.reflect.Field;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -32,7 +36,7 @@ public class PagesContentTest extends BaseTest {
     }
 
     @Test
-    public void pagesContentTest() throws IOException, JSONException {
+    public void pagesContentTest() throws IOException, JSONException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         //Авторизируемся
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.open();
@@ -42,13 +46,18 @@ public class PagesContentTest extends BaseTest {
 
         CsvPagesReader csvPagesReader = new CsvPagesReader();
         Page[] pages = csvPagesReader.getPagesFromFile("src/Pages.csv");
+        System.out.println(pages[0].getPageName());
         for (Page page : pages) {
+            System.out.println(page.getPageName());
+            Class<?> currentPage = Class.forName(page.getPageName());
             driver.get(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
-/*
-            for (String element : page.getElements()) {
-                assertTrue("Element " + element + "is not visible", );
+            for (String elementName : page.getElements()) {
+                System.out.println("currentElement: " + elementName);
+                Field field = currentPage.getField(elementName);
+                System.out.println(field);
+                //assertTrue("Element " + elementName + " is not visible", currentElement);
             }
-*/
+
             System.out.println(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
         }
     }
