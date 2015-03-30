@@ -57,7 +57,7 @@ public class PagesContentTest extends BaseTest {
             // Для каждой страницы, в цикле вызываем каждый ее элемент для проверки
             for (String elementName : page.getElements()) {
                 By element = (By) ReflectUtils.getFieldRecursive(currentPage, elementName).get(currentPage);
-                assertTrue("Element " + elementName + " is not visible",  new ElementProperty().isElementVisible(driver, element));
+                assertTrue("Element \"" + elementName + "\"(" + element + ") is not visible on page \"" + currentPage.getSimpleName() + "\"",  new ElementProperty().isElementVisible(driver, element));
             }
         }
     }
