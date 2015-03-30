@@ -24,8 +24,6 @@ public class CsvPagesReader {
             routes.add(parser.getValueByLabel("route"));
             pageNames.add(parser.getValueByLabel("pageName"));
             elementJsons.add(parser.getValueByLabel("visibleElements"));
-            System.out.println("Route: " + parser.getValueByLabel("route"));
-            System.out.println("Page Name: " + parser.getValueByLabel("pageName"));
             System.out.println("Visible Elements: " + parser.getValueByLabel("visibleElements"));
             }
         // Создаем по спискам данных массив тестовых пользователей

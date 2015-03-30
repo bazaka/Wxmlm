@@ -15,62 +15,62 @@ import java.util.List;
  * Created by User on 12/22/2014.
  */
 public class ProfilePage extends BasePage {
-    private static final By profilePage = By.cssSelector("img[alt=\"Avatar\"]");
-    private static final By fullName = By.id("fos_user_profile_form_fullName"); // вкладка Information
-    private static final By gender = By.id("fos_user_profile_form_gender");
-    private static final By genderCurrent = By.xpath("//select[@id='fos_user_profile_form_gender']/option[@selected='selected']");
+    public static final By profilePage = By.cssSelector("img[alt=\"Avatar\"]");
+    public static final By fullName = By.id("fos_user_profile_form_fullName"); // вкладка Information
+    public static final By gender = By.id("fos_user_profile_form_gender");
+    public static final By genderCurrent = By.xpath("//select[@id='fos_user_profile_form_gender']/option[@selected='selected']");
 
-    private static final By birthDate = By.id("fos_user_profile_form_birthday");
-    private static final By address = By.id("fos_user_profile_form_userContact_mailingAddress");
-    private static final By email = By.xpath("//div[@id='main-email']/div/div/input");
-    private static final By phone = By.id("fos_user_profile_form_phone");
-    private static final By updateButton = By.xpath("//div[@id='tab1']//a[text()='Update']");
+    public static final By birthDate = By.id("fos_user_profile_form_birthday");
+    public static final By address = By.id("fos_user_profile_form_userContact_mailingAddress");
+    public static final By email = By.xpath("//div[@id='main-email']/div/div/input");
+    public static final By phone = By.id("fos_user_profile_form_phone");
+    public static final By updateButton = By.xpath("//div[@id='tab1']//a[text()='Update']");
 
-    private static final By documentsTab = By.xpath("//div[@class='tabbable']//a[text()='Documents']"); //вкладка Documents
-    private static final By citizen = By.id("xmlm_bundle_userbundle_document_user_citizen");
-    private static final By citizenCurrent = By.xpath("//select[@id='xmlm_bundle_userbundle_document_user_citizen']/option[@selected='selected']");
-    private static final By passportSeries = By.id("xmlm_bundle_userbundle_document_series");
-    private static final By passportNumber = By.id("xmlm_bundle_userbundle_document_number");
-    private static final By issued = By.id("xmlm_bundle_userbundle_document_issued");
-    private static final By issuedDate = By.id("xmlm_bundle_userbundle_document_issuedDate");
-    private static final By saveDocumentsButton = By.id("saveProfileDocument");
+    public static final By documentsTab = By.xpath("//div[@class='tabbable']//a[text()='Documents']"); //вкладка Documents
+    public static final By citizen = By.id("xmlm_bundle_userbundle_document_user_citizen");
+    public static final By citizenCurrent = By.xpath("//select[@id='xmlm_bundle_userbundle_document_user_citizen']/option[@selected='selected']");
+    public static final By passportSeries = By.id("xmlm_bundle_userbundle_document_series");
+    public static final By passportNumber = By.id("xmlm_bundle_userbundle_document_number");
+    public static final By issued = By.id("xmlm_bundle_userbundle_document_issued");
+    public static final By issuedDate = By.id("xmlm_bundle_userbundle_document_issuedDate");
+    public static final By saveDocumentsButton = By.id("saveProfileDocument");
 
-    private static final By bankDetailsTab = By.xpath("//div[@class='tabbable']//a[text()='Bank details']"); // вкладка Bank Details
-    private static final By bankUserName = By.id("xmlm_bundle_moneybundle_bankdetails_swift_name");
-    private static final By bankUserAddress = By.id("xmlm_bundle_moneybundle_bankdetails_swift_address");
-    private static final By bankName = By.id("xmlm_bundle_moneybundle_bankdetails_swift_bankName");
-    private static final By bankAddress = By.id("xmlm_bundle_moneybundle_bankdetails_swift_bankAddress");
-    private static final By iban = By.id("xmlm_bundle_moneybundle_bankdetails_swift_accountIban");
-    private static final By swift = By.id("xmlm_bundle_moneybundle_bankdetails_swift_swiftCode");
-    private static final By epid = By.id("xmlm_bundle_moneybundle_bankdetails_epayments_epid");
-    private static final By saveBankDetailsButton = By.id("saveBankDetails");
+    public static final By bankDetailsTab = By.xpath("//div[@class='tabbable']//a[text()='Bank details']"); // вкладка Bank Details
+    public static final By bankUserName = By.id("xmlm_bundle_moneybundle_bankdetails_swift_name");
+    public static final By bankUserAddress = By.id("xmlm_bundle_moneybundle_bankdetails_swift_address");
+    public static final By bankName = By.id("xmlm_bundle_moneybundle_bankdetails_swift_bankName");
+    public static final By bankAddress = By.id("xmlm_bundle_moneybundle_bankdetails_swift_bankAddress");
+    public static final By iban = By.id("xmlm_bundle_moneybundle_bankdetails_swift_accountIban");
+    public static final By swift = By.id("xmlm_bundle_moneybundle_bankdetails_swift_swiftCode");
+    public static final By epid = By.id("xmlm_bundle_moneybundle_bankdetails_epayments_epid");
+    public static final By saveBankDetailsButton = By.id("saveBankDetails");
 
-    private static final By current = By.xpath("//div[@class='user-wallets']/div[1]/div/div/h1");
-    private static final By bonuses = By.xpath("//div[@class='user-wallets']/div[2]/div/div/h1");
-    private static final By salary = By.xpath("//div[@class='user-wallets']/div[3]/div/div/h1");
+    public static final By current = By.xpath("//div[@class='user-wallets']/div[1]/div/div/h1");
+    public static final By bonuses = By.xpath("//div[@class='user-wallets']/div[2]/div/div/h1");
+    public static final By salary = By.xpath("//div[@class='user-wallets']/div[3]/div/div/h1");
 
-    private static final By inviteCode = By.xpath("//div[@class='row']//div[@class='invite-in-profile']/table/tbody/tr/td[2]");
-    private static final By career = By.xpath("//body//div[@class='row']/div[3]/table/tbody/tr[3]/td[2]/abbr");
-    private static final By status = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[1]/td[2]/abbr");
-    private static final By identification = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[2]/td[2]/abbr");
-    private static final By documents = By.xpath("//div[@class='tabbable']/ul/li/a[text()='Documents']");
-    private static final By country = By.xpath("//select[@id='xmlm_bundle_userbundle_document_citizen']/option[@selected='selected']");
+    public static final By inviteCode = By.xpath("//div[@class='row']//div[@class='invite-in-profile']/table/tbody/tr/td[2]");
+    public static final By career = By.xpath("//body//div[@class='row']/div[3]/table/tbody/tr[3]/td[2]/abbr");
+    public static final By status = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[1]/td[2]/abbr");
+    public static final By identification = By.xpath("//body//div[@class='row']/div[4]/table/tbody/tr[2]/td[2]/abbr");
+    public static final By documents = By.xpath("//div[@class='tabbable']/ul/li/a[text()='Documents']");
+    public static final By country = By.xpath("//select[@id='xmlm_bundle_userbundle_document_citizen']/option[@selected='selected']");
 
-    private static final By addEmail = By.id("addEmail");
-    private static final By secondMail = By.id("fos_user_profile_form_userContact_email1");
-    private static final By setAsMain = By.xpath("//div[@id='additional-email-1']//button[contains(text(),'Set as main')]");
-    private static final By emailSavedMessage = By.xpath("//[@id='gritter-notice-wrapper']//div/p[text()='Email saved.']");
-    private static final By checkNewEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-old-email']//h3[text()='Check your new email']");
-    private static final By closeNewEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-old-email']//button[text()='Close']");
-    private static final By changedEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-new-email']//h3[text()='Main E-mail has been changed']");
-    private static final By closeChangedEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-new-email']//button[text()='Close']");
+    public static final By addEmail = By.id("addEmail");
+    public static final By secondMail = By.id("fos_user_profile_form_userContact_email1");
+    public static final By setAsMain = By.xpath("//div[@id='additional-email-1']//button[contains(text(),'Set as main')]");
+    public static final By emailSavedMessage = By.xpath("//[@id='gritter-notice-wrapper']//div/p[text()='Email saved.']");
+    public static final By checkNewEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-old-email']//h3[text()='Check your new email']");
+    public static final By closeNewEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-old-email']//button[text()='Close']");
+    public static final By changedEmailMessage = By.xpath("//div[@id='main-modal-window-confirmed-new-email']//h3[text()='Main E-mail has been changed']");
+    public static final By closeChangedEmailMessage =  By.xpath("//div[@id='main-modal-window-confirmed-new-email']//button[text()='Close']");
 
-   // private static final By popup = By.className("gritter-without-image");
-   private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success!']");
-    private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success']");
+   // public static final By popup = By.className("gritter-without-image");
+   public static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success!']");
+    public static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success']");
 
-  /*  private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
-    private static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");*/
+  /*  public static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
+    public static final By popup1 = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");*/
     public static final By bankCardsTab = By.xpath("//div[@class='tabbable']//a[text()='Bank Cards']");
     public static final By addCardButton = By.id("add-new-card");
     public static final By cardTitle = By.id("xmlm_bundle_userbundle_card_title");

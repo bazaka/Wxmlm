@@ -10,21 +10,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class RegistrationPage extends BasePage {
 
-    private static final By registration = By.linkText("Registration");
-    private static final By email = By.id("fos_user_registration_form_email");
-    private static final By password1 = By.id("fos_user_registration_form_plainPassword_first");
-    private static final By password2 = By.id("fos_user_registration_form_plainPassword_second");
-    private static final By inviteCode = By.id("fos_user_registration_form_code");
-    private static final By nextStep = By.xpath(".//*[@id='step1']/div[5]/div/button/i");
-    private static final By fullName = By.xpath("//*[@id='fos_user_registration_form_fullName']");
-    private static final By phone = By.id("fos_user_registration_form_phone");
-    private static final By birth = By.id("fos_user_registration_form_birthday");
-    private static final By agreement = By.id("fos_user_registration_form_agreement");
-    private static final By register = By.xpath("//div[@id='step2']/div[8]/div/button[2]");
-   // private static final By emailSent = By.xpath("//div[contains(., 'An email has been sent to')]\\");
-    private static final By emailSent = By.className("step-content");
-    private static final By successConfirm = By.xpath("//div[@id='main-modal-window-confirmed-email']//p[contains(text(), 'Congrats')]");
-    private static final By closeActivationAlert = By.xpath("//div[@id='main-modal-window-confirmed-email']//button[text() = 'Close']");
+    public static final By registration = By.linkText("Registration");
+    public static final By email = By.id("fos_user_registration_form_email");
+    public static final By password1 = By.id("fos_user_registration_form_plainPassword_first");
+    public static final By password2 = By.id("fos_user_registration_form_plainPassword_second");
+    public static final By inviteCode = By.id("fos_user_registration_form_code");
+    public static final By nextStep = By.xpath(".//*[@id='step1']/div[5]/div/button/i");
+    public static final By fullName = By.xpath("//*[@id='fos_user_registration_form_fullName']");
+    public static final By phone = By.id("fos_user_registration_form_phone");
+    public static final By birth = By.id("fos_user_registration_form_birthday");
+    public static final By agreement = By.id("fos_user_registration_form_agreement");
+    public static final By register = By.xpath("//div[@id='step2']/div[8]/div/button[2]");
+   // public static final By emailSent = By.xpath("//div[contains(., 'An email has been sent to')]\\");
+    public static final By emailSent = By.className("step-content");
+    public static final By successConfirm = By.xpath("//div[@id='main-modal-window-confirmed-email']//p[contains(text(), 'Congrats')]");
+    public static final By closeActivationAlert = By.xpath("//div[@id='main-modal-window-confirmed-email']//button[text() = 'Close']");
 
 
     public RegistrationPage(WebDriver driver, WebDriverWait wait){

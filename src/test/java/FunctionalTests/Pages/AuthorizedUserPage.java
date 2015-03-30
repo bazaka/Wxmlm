@@ -10,11 +10,11 @@ public class AuthorizedUserPage {
     WebDriver driver;
     WebDriverWait wait;
     public AuthorizedUserPage(WebDriver driver, WebDriverWait wait) {this.driver = driver; this.wait = wait;}
-    private static final By home = By.xpath("//div[@id='head-nav']//li[4]/a[@href='/']");
-    private static final By money = By.xpath("//div[@id='head-nav']//li[8]/a[@href='/money/']");
+    public static final By home = By.xpath("//div[@id='head-nav']//li[4]/a[@href='/']");
+    public static final By money = By.xpath("//div[@id='head-nav']//li[8]/a[@href='/money/']");
     public static final By products = By.xpath("//div[@id='head-nav']//li[12]/a[@href='/products/']");
-    private static final By net = By.xpath("//div[@id='head-nav']//li[16]/a[@href='/network/']");
-    private static final By career = By.xpath("//div[@id='head-nav']//li[20]/a[@href='/career/']");
+    public static final By net = By.xpath("//div[@id='head-nav']//li[16]/a[@href='/network/']");
+    public static final By career = By.xpath("//div[@id='head-nav']//li[20]/a[@href='/career/']");
     public static final By profilePage = By.xpath("//img[@alt='Avatar']");
     public static final By userMenu = By.xpath("//li[@class='dropdown']/a[@class='dropdown-toggle']");
     public static final By mySettings = By.linkText("//a[text()='My Settings']");

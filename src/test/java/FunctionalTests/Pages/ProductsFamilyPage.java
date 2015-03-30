@@ -7,10 +7,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // * Created for W-xmlm by Fill on 12.01.2015.
 public class ProductsFamilyPage extends AuthorizedUserPage {
     public ProductsFamilyPage(WebDriver driver, WebDriverWait wait) {super(driver, wait);}
-    public static final By investmentPackagesItem = By.xpath("//a[contains(text(), '  Investment packages')]/..");
-    public static final By itProductsItem = By.xpath("//a[contains(text(), '  IT products')]/..");
-    public static final By servicesItem = By.xpath("//a[contains(text(), '  Services')]/..");
-    public static final By trainingItem = By.xpath("//a[contains(text(), '  Training')]/..");
+    public static final By investmentPackagesItem = By.xpath("//span[contains(text(), 'Investment packages')]/..");
+    public static final By itProductsItem = By.xpath("//span[contains(text(), 'IT products')]/..");
+    public static final By servicesItem = By.xpath("//span[contains(text(), 'Services')]/..");
+    public static final By trainingItem = By.xpath("//span[contains(text(), 'Training')]/..");
     public static final By purchasesItem = By.xpath("//span[contains(text(), 'Purchases')]/..");
     public static final By toggleItem = By.xpath("//a[@id='change-grid']");
     public static final By operationsWidget = By.xpath("//div[@class='global__operation-widget']/div");

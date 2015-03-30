@@ -20,10 +20,11 @@ public class Config {
     { return isHttpsConnection; }
     public String getProtocol()
     {
+        String protocol = "http://";
         if (getIsHttpsConnection()){
-            return "https://";
+            protocol = "https://";
         }
-        else return "http://";
+        return protocol;
     }
 
     public Config(String scheme, boolean isHttpsConnection){

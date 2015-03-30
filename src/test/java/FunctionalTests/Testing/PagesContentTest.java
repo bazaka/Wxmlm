@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import FunctionalTests.Pages.*;
 
 import java.lang.reflect.Field;
 
@@ -36,7 +37,7 @@ public class PagesContentTest extends BaseTest {
     }
 
     @Test
-    public void pagesContentTest() throws IOException, JSONException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
+    public void pagesContentTest() throws IOException, JSONException, ClassNotFoundException, IllegalAccessException, NullPointerException {
         //Авторизируемся
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.open();
@@ -44,22 +45,20 @@ public class PagesContentTest extends BaseTest {
         logInPage.goLogin(email, password);
         Assert.assertEquals(logInPage.getTitle(), "KairosNet");
 
+        // Определяем масив страниц и элементов, которые нужно проверить на странице, из файла "Pages.csv"
         CsvPagesReader csvPagesReader = new CsvPagesReader();
         Page[] pages = csvPagesReader.getPagesFromFile("src/Pages.csv");
-        System.out.println(pages[0].getPageName());
+
+        // В цикле вызываем каждую страницу для проверки
         for (Page page : pages) {
-            System.out.println(page.getPageName());
             Class<?> currentPage = Class.forName(page.getPageName());
             driver.get(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
-            for (String elementName : page.getElements()) {
-                System.out.println("currentElement: " + elementName);
-                Field field = currentPage.getField(elementName);
-                System.out.println(field);
-                //assertTrue("Element " + elementName + " is not visible", currentElement);
-            }
 
-            System.out.println(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
+            // Для каждой страницы, в цикле вызываем каждый ее элемент для проверки
+            for (String elementName : page.getElements()) {
+                By element = (By) ReflectUtils.getFieldRecursive(currentPage, elementName).get(currentPage);
+                assertTrue("Element " + elementName + " is not visible",  new ElementProperty().isElementVisible(driver, element));
+            }
         }
     }
-
 }
