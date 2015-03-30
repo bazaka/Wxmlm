@@ -16,6 +16,8 @@ import java.util.List;
  */
 public class ProfilePage extends BasePage {
     private static final By profilePage = By.cssSelector("img[alt=\"Avatar\"]");
+    private static final By closeProfilePage = By.xpath("//div[@class='modal-header']/button");
+
     private static final By fullName = By.id("fos_user_profile_form_fullName"); // вкладка Information
     private static final By gender = By.id("fos_user_profile_form_gender");
     private static final By genderCurrent = By.xpath("//select[@id='fos_user_profile_form_gender']/option[@selected='selected']");
@@ -108,6 +110,15 @@ public class ProfilePage extends BasePage {
         driver.findElement(profilePage).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(fullName));
     }
+    public void closeProfilePage(){
+        driver.findElement(closeProfilePage).click();
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(closeProfilePage));
+    }
+    public String getInviteCode(){
+        String inviteCodeLink = driver.findElement(inviteCode).getText();
+        return (inviteCodeLink.split("#")[1]);
+
+    }
     public void addNewEmail(String newEmail){ //додати другу пошту
        // WebDriverWait wait = new WebDriverWait(driver, 20);
       //  Actions builder = new Actions(driver);
@@ -178,7 +189,7 @@ public class ProfilePage extends BasePage {
     public String getCareer() { return driver.findElement(career).getText(); }
     public String getStatus() { return driver.findElement(status).getText(); }
     public String getIdentification() {return driver.findElement(identification).getText(); }
-    public String getInviteCode(){return driver.findElement(inviteCode).getText();}
+    //public String getInviteCode(){return driver.findElement(inviteCode).getText();}
 
     public String getCountry(){
         //WebDriverWait wait = new WebDriverWait(driver, 10);

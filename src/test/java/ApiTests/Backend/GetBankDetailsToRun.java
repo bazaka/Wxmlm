@@ -1,5 +1,6 @@
 package ApiTests.Backend;
 
+import ApiTests.ObjectClasses.BankDetails;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.Config;
@@ -19,9 +20,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by User on 3/16/2015.
@@ -94,5 +93,44 @@ public class GetBankDetailsToRun {
             System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
         }
 
+    }
+    public BankDetails getBankDetailsById(String parameterName, int parameterValue, TestUser testUser, String siteUrl) throws IOException, JSONException {
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url+parameterValue, "GET" );
+        InputStream inStrm = httpCon.getInputStream();
+        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStreamReader isReader = new InputStreamReader(inStrm);
+        BufferedReader br = new BufferedReader(isReader);
+        String result = "";
+        String line;
+        while((line=br.readLine()) !=null) {
+            result +=line;
+
+        }
+        br.close();
+
+        JSONObject object = new JSONObject(result);
+
+
+            if (object.getInt(parameterName) == parameterValue) {
+                if(object.get("epayments")==null && object.get("swift")==null)
+                    return new BankDetails(object.getInt("user_id"), object.get("epayments"), object.get("swift"));
+                if(object.get("epayments")!=null && object.get("swift")==null){
+                    JSONObject epayments = object.getJSONObject("epayments");
+                    return new BankDetails(object.getInt("user_id"), epayments.getString("epid"), epayments.getString("created"), epayments.getString("updated"), object.get("swift"));
+                }
+                if(object.get("epayments")==null && object.get("swift")!=null){
+                    JSONObject swift = object.getJSONObject("swift");
+                    return new BankDetails(object.getInt("user_id"), object.get("epayments"), swift.getString("name"), swift.getString("address"), swift.getString("bank_name"), swift.getString("bank_address"), swift.getString("account_iban"), swift.getString("swift_code"), swift.getString("created"), swift.getString("updated"));
+
+                }
+                else{
+                    JSONObject epayments = object.getJSONObject("epayments");
+                    JSONObject swift = object.getJSONObject("swift");
+                    return new BankDetails(object.getInt("user_id"), epayments.getString("epid"), epayments.getString("created"), epayments.getString("updated"),swift.getString("name"), swift.getString("address"), swift.getString("bank_name"), swift.getString("bank_address"), swift.getString("account_iban"), swift.getString("swift_code"), swift.getString("created"), swift.getString("updated"));
+                }
+
+            }
+
+        return null;
     }
 }

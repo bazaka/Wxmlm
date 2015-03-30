@@ -82,14 +82,7 @@ public class TransferTest extends BaseTest {
         System.out.println("Transfer Test успешно пройден");
     }
 
-    public String makeRandomValue(){
-        Random random = new Random();
-        float f = random.nextFloat();
-        f = f * 1000;
-        int a = (int)Math.round(f);
-        f = (float)a/100;
-        return Float.toString(f);
-    }
+
     public void checkOperationHistoryData(String accountType, String sendAccountType, String value){
         TransferPage transferPage = new TransferPage(driver, wait);
         assertEquals(transferPage.getTitle(), "Operations");

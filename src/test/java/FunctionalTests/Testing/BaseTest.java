@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Random;
+
 /**
  * Created by User on 2/11/2015.
  */
@@ -23,5 +25,13 @@ public class BaseTest {
     public void postCondition(){
         if(driver!=null)
             driver.quit();
+    }
+    public String makeRandomValue(){
+        Random random = new Random();
+        float f = random.nextFloat();
+        f = f * 1000;
+        int a = (int)Math.round(f);
+        f = (float)a/100;
+        return Float.toString(f);
     }
 }
