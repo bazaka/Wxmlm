@@ -6,6 +6,7 @@ import ApiTests.UsedByAll.MakeRequest;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
+import UsedByAll.MakeRandomValue;
 import UsedByAll.TestUser;
 
 import org.json.JSONException;
@@ -66,7 +67,8 @@ public class RechargeSwiftTest extends BaseTest {
 
         profilePage.closeProfilePage(); // закрыть профиль
 
-        String sum = makeRandomValue(); // сгенерировать сумму
+        MakeRandomValue getRandomValue = new MakeRandomValue();
+        String sum = getRandomValue.makeRandomValue(); // сгенерировать сумму
         swiftPage.enterAmount(sum);
         swiftPage.createInvoice(); // создать инвойс
 

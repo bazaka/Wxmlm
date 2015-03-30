@@ -5,6 +5,7 @@ import FunctionalTests.Pages.LogInPage;
 import FunctionalTests.Pages.MoneyFamilyPage;
 import FunctionalTests.Pages.TransferPage;
 import UsedByAll.CsvUsersReader;
+import UsedByAll.MakeRandomValue;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,9 +47,9 @@ public class TransferTest extends BaseTest {
         assertEquals(logInPage.getTitle(), "KairosNet");
         userPage.goMoney();
         moneyPage.goToTransfer();
+        MakeRandomValue getRandomValue = new MakeRandomValue();
 
-
-        String value = makeRandomValue(); // generate random number
+        String value = getRandomValue.makeRandomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonuses to current
         transferPage.clickOnFromBonusesToCurrentRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -58,7 +59,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Current", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = makeRandomValue(); // generate random number
+        value = getRandomValue.makeRandomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonuses to salary
         transferPage.clickOnFromBonusesToSalaryRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -68,7 +69,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Withdraw", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = makeRandomValue(); // generate random number
+        value = getRandomValue.makeRandomValue(); // generate random number
         transferPage.clickSalaryAccordion(); // start sending from salary to current
         transferPage.clickOnFromSalaryToCurrantRadioButton();
         transferPage.enterAmountFromSalary(value);
