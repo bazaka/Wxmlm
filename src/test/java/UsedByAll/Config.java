@@ -9,15 +9,20 @@ import java.io.FileReader;
 public class Config {
     private String scheme;
     private boolean isHttpsConnection;
+    private TestUser admin;
 
     public void setScheme(String a)
     { this.scheme = a; }
     public void setIsHttpsConnection(boolean a)
     { this.isHttpsConnection = a; }
+    public void setAdmin(TestUser a)
+    { this.admin = a; }
     public String getScheme()
     { return scheme; }
     public boolean getIsHttpsConnection()
     { return isHttpsConnection; }
+    public TestUser getAdmin()
+    { return admin; }
     public String getProtocol()
     {
         String protocol = "http://";
@@ -27,9 +32,11 @@ public class Config {
         return protocol;
     }
 
-    public Config(String scheme, boolean isHttpsConnection){
+    public Config(String scheme, boolean isHttpsConnection, TestUser admin){
         this.setScheme(scheme);
         this.setIsHttpsConnection(isHttpsConnection);
+        this.setAdmin(admin);
+
     }
 
     public static Config getConfig()
@@ -46,8 +53,12 @@ public class Config {
             }
             br.close();
             JSONObject object = new JSONObject(result);
+            JSONObject adminObject = object.getJSONObject("admin");
+            TestUser admin = new TestUser();
+            admin.setEmail(adminObject.getString("login"));
+            admin.setPassword1(adminObject.getString("password"));
             // Отдаем конфиг
-            return new Config(object.getString("scheme"), object.getBoolean("isHttpsConnection"));
+            return new Config(object.getString("scheme"), object.getBoolean("isHttpsConnection"), admin);
             }
         catch (Exception e){
             System.out.println("File not found. Exception: " + e);
