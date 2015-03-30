@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class LogOutPage extends BasePage {
 
-    private static final By dropdownToogle = By.xpath("//div[@class='container-fluid']//li[@class='dropdown']/a");
-    private static final By dropdownMenu = By.className("dropdown-menu");
-    private static final By singOut = By.xpath("//a[contains(@href, '/logout')]");
+    public static final By dropdownToogle = By.xpath("//div[@class='container-fluid']//li[@class='dropdown']/a");
+    public static final By dropdownMenu = By.className("dropdown-menu");
+    public static final By singOut = By.xpath("//a[contains(@href, '/logout')]");
 
     public LogOutPage(WebDriver driver, WebDriverWait wait){
         super(driver, wait);

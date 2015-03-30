@@ -9,9 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by User on 2/11/2015.
  */
 public class LogInPage extends BasePage{
-    private static final By username = By.id("username");
-    private static final By password = By.id("password");
-    private static final By logIn = By.id("xmlm_login_button_login");
+    public static final By username = By.id("username");
+    public static final By password = By.id("password");
+    public static final By logIn = By.id("xmlm_login_button_login");
 
 
     public LogInPage(WebDriver driver, WebDriverWait wait){

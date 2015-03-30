@@ -16,9 +16,8 @@ import java.util.List;
  */
 public class ProfilePage extends BasePage {
     private static final By profilePage = By.cssSelector("img[alt=\"Avatar\"]");
-    private static final By closeProfilePage = By.xpath("//div[@class='modal-header']/button");
-
     private static final By fullName = By.id("fos_user_profile_form_fullName"); // вкладка Information
+    private static final By closeProfilePage = By.xpath("//div[@class='modal-header']/button");
     private static final By gender = By.id("fos_user_profile_form_gender");
     private static final By genderCurrent = By.xpath("//select[@id='fos_user_profile_form_gender']/option[@selected='selected']");
 

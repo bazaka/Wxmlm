@@ -34,7 +34,7 @@ public class PutPurchaseActivationAndGetPingToRun {
     }
 
     @Test
-    public void testGetToken() throws Exception {
+    public void testPutPurchaseActivationAndGetPing() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         Purchase purchaseToActivate = new GetMyPurchasesToRun(testUser).getMyNotActivePackage();
         assertNotNull("There is no Not Active Purchase for this user", purchaseToActivate);

@@ -25,10 +25,11 @@ public class Config {
     { return admin; }
     public String getProtocol()
     {
+        String protocol = "http://";
         if (getIsHttpsConnection()){
-            return "https://";
+            protocol = "https://";
         }
-        else return "http://";
+        return protocol;
     }
 
     public Config(String scheme, boolean isHttpsConnection, TestUser admin){

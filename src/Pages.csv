@@ -1,0 +1,2 @@
+route, pageName, visibleElements
+products/invest/, "FunctionalTests.Pages.InvestmentPackagesPage", "firstActiveBuyButton, home, money, products, net, career, profilePage, userMenu, investmentPackagesItem, itProductsItem, servicesItem, trainingItem, purchasesItem, toggleItem, operationsWidget, newPartnersItem, newPurchasesItem, myNewBonusesItem, myInvestmentIncomeItem, pageHeader, investmentPackagesTable"
