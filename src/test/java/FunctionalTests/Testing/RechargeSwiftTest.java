@@ -35,7 +35,7 @@ public class RechargeSwiftTest extends BaseTest {
     TestUser testUser;
 
     @Parameterized.Parameters
-    public static Collection testDFata(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
+    public static Collection testData(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
 
     public RechargeSwiftTest(TestUser testUser){
         this.email=testUser.getEmail();
