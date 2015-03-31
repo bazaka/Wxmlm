@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 import static UsedByAll.Config.getConfig;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 26.03.2015.
@@ -51,14 +53,29 @@ public class PagesContentTest extends BaseTest {
 
         // В цикле вызываем каждую страницу для проверки
         for (Page page : pages) {
-            Class<?> currentPage = Class.forName(page.getPageName());
+            Class<?> currentPage;
+            try {
+                currentPage = Class.forName(page.getPageName());
+            }
+            catch(ClassNotFoundException e) {
+                currentPage = null;
+            }
+            assertNotNull("Page class \"" + page.getPageName() + "\" is not found", currentPage);
             driver.get(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
 
             // Для каждой страницы, в цикле вызываем каждый ее элемент для проверки
             for (String elementName : page.getElements()) {
-                By element = (By) ReflectUtils.getFieldRecursive(currentPage, elementName).get(currentPage);
+                By element;
+                try {
+                    element = (By) ReflectUtils.getFieldRecursive(currentPage, elementName).get(currentPage);
+                }
+                catch(NullPointerException e) {
+                    element = null;
+                }
+                assertNotNull("Element \"" + elementName + "\" is not found in a " + currentPage.getSimpleName() + " class", element);
                 assertTrue("Element \"" + elementName + "\"(" + element + ") is not visible on page \"" + currentPage.getSimpleName() + "\"",  new ElementProperty().isElementVisible(driver, element));
             }
+            System.out.println("Page \"" + page.getRoute() + "\" verified");
         }
     }
 }
