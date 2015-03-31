@@ -10,8 +10,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class RechargePage extends MoneyFamilyPage{
     public RechargePage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
     public static final By swift = By.xpath("//a[contains(text(), 'Swift')]");
+    public static final By interkassa = By.id("b-Interkassa");
 
     public void goSwift(){
         driver.findElement(swift).click();
+    }
+    public void goInterkassa(){
+        driver.findElement(interkassa).click();
     }
 }

@@ -9,6 +9,7 @@ import UsedByAll.CsvUsersReader;
 import UsedByAll.MakeRandomValue;
 import UsedByAll.TestUser;
 
+import junit.framework.TestCase;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -35,7 +36,7 @@ public class RechargeSwiftTest extends BaseTest {
     TestUser testUser;
 
     @Parameterized.Parameters
-    public static Collection testDFata(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
+    public static Collection testData(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
 
     public RechargeSwiftTest(TestUser testUser){
         this.email=testUser.getEmail();
@@ -66,23 +67,24 @@ public class RechargeSwiftTest extends BaseTest {
 
 
         profilePage.closeProfilePage(); // закрыть профиль
+        TestCase.assertTrue("Incorrect image", swiftPage.getImageLink().contains("swift"));
 
         MakeRandomValue getRandomValue = new MakeRandomValue();
         String sum = getRandomValue.makeRandomValue(); // сгенерировать сумму
         swiftPage.enterAmount(sum);
         swiftPage.createInvoice(); // создать инвойс
 
-        BankDetails bankDetails = new GetBankDetailsToRun(testUser).getBankDetailsById("user_id", 1, Config.getConfig().getAdmin(), siteUrl); // взять данные админа
+        BankDetails adminBankDetails = new GetBankDetailsToRun(testUser).getBankDetailsById("user_id", 1, Config.getConfig().getAdmin(), siteUrl); // взять данные админа
         assertEquals("Incorrect full name", fullName, swiftPage.getInvoiceFullName());
         assertEquals("Incorrect email", email, swiftPage.getInvoiceEmail());
         assertEquals("Incorrect invite code", inviteCode, swiftPage.getInvoiceInviteCode());
         assertTrue("Payment purpose contains incorrect invite code", swiftPage.getPaymentPurpose().contains(inviteCode));
-        assertEquals("Incorrect admin name", bankDetails.getName(), swiftPage.getAdminName());
-        assertEquals("Incorrect admin address", bankDetails.getAddress(), swiftPage.getAdminAddress());
-        assertEquals("Incorrect bank name", bankDetails.getBankName(), swiftPage.getAdminBank());
-        assertEquals("Incorrect bank address", bankDetails.getBankAddress(), swiftPage.getAdminBankAddress());
-        assertEquals("Incorrect iban", bankDetails.getIban(), swiftPage.getAdminIban());
-        assertEquals("Incorrect swift code", bankDetails.getSwiftCode(), swiftPage.getAdminSwift());
+        assertEquals("Incorrect admin name", adminBankDetails.getName(), swiftPage.getAdminName());
+        assertEquals("Incorrect admin address", adminBankDetails.getAddress(), swiftPage.getAdminAddress());
+        assertEquals("Incorrect bank name", adminBankDetails.getBankName(), swiftPage.getAdminBank());
+        assertEquals("Incorrect bank address", adminBankDetails.getBankAddress(), swiftPage.getAdminBankAddress());
+        assertEquals("Incorrect iban", adminBankDetails.getIban(), swiftPage.getAdminIban());
+        assertEquals("Incorrect swift code", adminBankDetails.getSwiftCode(), swiftPage.getAdminSwift());
         assertTrue("Incorrect recharge amount", swiftPage.getAmountInvoice().contains(sum));
 
     }
