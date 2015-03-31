@@ -15,6 +15,7 @@ import java.util.Set;
 public class SwiftPage extends RechargePage {
     public SwiftPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
     public static final By summ = By.xpath("//div[@id='Swift']//input[@name='amount']");
+    public static final By swiftImage = By.xpath("//form[@action='/money/invoice']//img");
     public static final By createInvoice = By.xpath("//div[@id='Swift']//button[text()='Create invoice']");
     public static final By invoiceFullName = By.xpath("//body/div[2]//div[@class='row']/div/div/div[3]//h4/strong");
     public static final By invoiceInviteCode = By.xpath("//body/div[2]//div[@class='row']/div/div/div[3]//h4/em");
@@ -51,6 +52,10 @@ public class SwiftPage extends RechargePage {
         driver.switchTo().window(newWindow);
 
     }
+    public String getImageLink(){
+        return(driver.findElement(swiftImage).getAttribute("src"));
+    }
+
     public String getPaymentPurpose(){
         return(driver.findElement(paymentPurpose).getText());
     }
