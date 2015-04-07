@@ -23,10 +23,8 @@ public class BaseTest {
     }
     @After
     public void postCondition(){
-/*
         if(driver!=null)
             driver.quit();
-*/
     }
 
 }
