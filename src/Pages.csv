@@ -7,7 +7,8 @@ money/buy/#Swift, "FunctionalTests.Pages.RechargePage", "home, money, products, 
 , "FunctionalTests.Pages.DashboardPage", "home"
 money/buy/#Interkassa, "FunctionalTests.Pages.RechargePage", "home, money, products, net, career, profilePage, userMenu, accountsItem, bonusesItem, rechargeItem, transferItem, withdrawItem, operationHistoryItem, myRequestsItem, toggleItem, operationsWidget, newPartnersItem, newPurchasesItem, myNewBonusesItem, myInvestmentIncomeItem, interkassaImage, iAmount, rechargeButton"
 , "FunctionalTests.Pages.DashboardPage", "home"
-
+money/buy/#VisaMasterCard, "FunctionalTests.Pages.RechargePage", "home, money, products, net, career, profilePage, userMenu, accountsItem, bonusesItem, rechargeItem, transferItem, withdrawItem, operationHistoryItem, myRequestsItem, toggleItem, operationsWidget, newPartnersItem, newPurchasesItem, myNewBonusesItem, myInvestmentIncomeItem, visaMCImage, visaMCAmount, visaMCRechargeButton"
+, "FunctionalTests.Pages.DashboardPage", "home"
 
 products/invest/, "FunctionalTests.Pages.InvestmentPackagesPage", "home, money, products, net, career, profilePage, userMenu, investmentPackagesItem, itProductsItem, servicesItem, trainingItem, purchasesItem, toggleItem, operationsWidget, newPartnersItem, newPurchasesItem, myNewBonusesItem, myInvestmentIncomeItem, pageHeader, investmentPackagesTable"
 products/it/, "FunctionalTests.Pages.ITProductsPage", "home, money, products, net, career, profilePage, userMenu, investmentPackagesItem, itProductsItem, servicesItem, trainingItem, purchasesItem, toggleItem, operationsWidget, newPartnersItem, newPurchasesItem, myNewBonusesItem, myInvestmentIncomeItem, pageHeader, itProductsTable"

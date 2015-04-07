@@ -41,6 +41,9 @@ public class RechargePage extends MoneyFamilyPage{
     public static By paymentSumm = By.xpath("//span[@class='payment-summ-amount ng-binding']");
     public static By paymentDescription = By.xpath("//div[@class='payment-description ng-binding']");
 
+    public static By visaMCImage = By.xpath("//form[@id='liqpay_form']//img");
+    public static By visaMCAmount = By.xpath("//form[@id='liqpay_form']//input[@name='amount']");
+    public static By visaMCRechargeButton = By.xpath("//form[@id='liqpay_form']//button[@id='xmlm_bundle_moneybundle_recharge_liqpay_amount']");
 
     public void waitForPageLoading(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(iAmount));

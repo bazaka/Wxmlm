@@ -39,7 +39,7 @@ public class PagesContentTestToRun extends BaseTest {
     }
 
     @Test
-    public void pagesContentTest() throws IOException, JSONException, ClassNotFoundException, IllegalAccessException, NullPointerException {
+    public void pagesContentTest() throws IOException, JSONException, ClassNotFoundException, IllegalAccessException, NullPointerException, InterruptedException {
         //Авторизируемся
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.open();
@@ -62,7 +62,7 @@ public class PagesContentTestToRun extends BaseTest {
             }
             assertNotNull("Page class \"" + page.getPageName() + "\" is not found", currentPage);
             driver.get(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
-
+            Thread.sleep(1000);
 
             // Для каждой страницы, в цикле вызываем каждый ее элемент для проверки
             for (String elementName : page.getElements()) {
