@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by User on 3/31/2015.
  */
-public class ItProductsPage extends ProductsFamilyPage {
+public class ITProductsPage extends ProductsFamilyPage {
     public static final By notActiveTrial = By.xpath("//a[@data-modal='create-account']");
     public static final By trialLoginField = By.id("xmlm_bundle_productBundle_it_product_trial_login");
     public static final By domainName = By.xpath("//div[@class='newaccount-inner']/div/label");
@@ -55,6 +55,4 @@ public class ItProductsPage extends ProductsFamilyPage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
         driver.findElement(closePopup).click();
     }
-
-
 }

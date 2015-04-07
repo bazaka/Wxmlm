@@ -3,14 +3,13 @@ package FunctionalTests.Testing;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.MakeRandomString;
+import UsedByAll.RandomString;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Collection;
-import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -38,8 +37,8 @@ public class TrialActivatesTest extends BaseTest {
         LogInPage loginPage = new LogInPage(driver, wait);
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         ProductsFamilyPage productPage = new ProductsFamilyPage(driver, wait);
-        ItProductsPage itProductsPage = new ItProductsPage(driver, wait);
-        MakeRandomString randomString = new MakeRandomString();
+        ITProductsPage itProductsPage = new ITProductsPage(driver, wait);
+        RandomString randomString = new RandomString();
 
 
         loginPage.open();

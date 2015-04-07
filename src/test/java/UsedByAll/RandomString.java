@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by User on 3/31/2015.
  */
-public class MakeRandomString {
+public class RandomString {
     static final String letters = "abcdefghijklmnopqrstuvwxyz";
     static Random random = new Random();
 

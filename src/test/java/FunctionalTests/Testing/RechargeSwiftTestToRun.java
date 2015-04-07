@@ -5,7 +5,7 @@ import ApiTests.ObjectClasses.BankDetails;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.MakeRandomValue;
+import UsedByAll.RandomValue;
 import UsedByAll.TestUser;
 
 import junit.framework.TestCase;
@@ -62,8 +62,8 @@ public class RechargeSwiftTestToRun extends BaseTest {
         profilePage.closeProfilePage(); // закрыть профиль
         TestCase.assertTrue("Incorrect image", rechargePage.getSwiftImageLink().contains("swift"));
 
-        MakeRandomValue getRandomValue = new MakeRandomValue();
-        String sum = getRandomValue.makeRandomValue(); // сгенерировать сумму
+        RandomValue randomValue = new RandomValue();
+        String sum = randomValue.RandomValue(); // сгенерировать сумму
         rechargePage.enterSwiftAmount(sum);
         rechargePage.createInvoice(); // создать инвойс
 

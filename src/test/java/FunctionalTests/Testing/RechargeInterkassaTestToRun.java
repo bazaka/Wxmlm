@@ -5,7 +5,7 @@ import ApiTests.ObjectClasses.AConfig;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.MakeRandomValue;
+import UsedByAll.RandomValue;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +56,8 @@ public class RechargeInterkassaTestToRun extends BaseTest {
         profilePage.closeProfilePage();
 
         assertTrue("Incorrect image", rechargePage.getInterkassaImageLink().contains("interkassa")); //проверка линка картинки
-        MakeRandomValue getRandomValue = new MakeRandomValue(); // сгенерировать сумму
-        String sum = getRandomValue.makeRandomValue();
+        RandomValue randomValue = new RandomValue(); // сгенерировать сумму
+        String sum = randomValue.RandomValue();
         rechargePage.enterAmount(sum);
 
         //расчитать сумму с комиссией, вытянув процент из конфига
