@@ -19,7 +19,7 @@ public class ITProductsPage extends ProductsFamilyPage {
     private static final By closePopup = By.xpath("//div[@id='gritter-notice-wrapper']//a[@class='gritter-close']");
 
 
-    public ItProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
+    public ITProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
     public void waitForPageLoad(){
         try{
