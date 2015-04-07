@@ -13,15 +13,16 @@ import org.openqa.selenium.NoSuchElementException;
 public class ElementProperty {
 
     // Метод, проверяющий видимость элемента на странице
-    public boolean isElementVisible(WebDriver driver, By element){
-        if (isElementPresent(driver, element)) {
+    public boolean isElementVisible(WebDriver driver, WebDriverWait wait, By element){
+        if (isElementPresent(driver, wait, element)) {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
             return driver.findElement(element).isDisplayed();
         }
         return false;
     }
 
     // Метод, проверяющий наличие элемента на странице
-    public boolean isElementPresent(WebDriver driver, By element) {
+    public boolean isElementPresent(WebDriver driver, WebDriverWait wait, By element) {
         try {
             driver.findElement(element);
             return true;

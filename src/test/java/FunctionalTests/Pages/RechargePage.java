@@ -13,12 +13,16 @@ import java.util.Set;
  */
 public class RechargePage extends MoneyFamilyPage{
     public RechargePage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
-    public static final By swift = By.xpath("//a[contains(text(), 'Swift')]");
-    public static final By interkassa = By.id("b-Interkassa");
+    public static final By pageHeader = By.xpath("//div[@class='header']/h3[contains(text(), 'Recharge')]");
+    public static final By swiftTab = By.xpath("//a[@href='#Swift']");
+    public static final By interkassaTab = By.id("//a[@href='#Interkassa']");
+    public static final By visaMCTab = By.id("//a[@href='#VisaMasterCard']");
+    public static final By merchantsTab = By.id("//a[@href='#Merchants']");
+    public static final By epaymentsTab = By.id("//a[@href='#Epayments']");
 
-    public static final By summ = By.xpath("//div[@id='Swift']//input[@name='amount']");
+    public static final By summInput = By.xpath("//div[@id='Swift']//input[@name='amount']");
     public static final By swiftImage = By.xpath("//form[@action='/money/invoice']//img");
-    public static final By createInvoice = By.xpath("//div[@id='Swift']//button[text()='Create invoice']");
+    public static final By createInvoiceButton = By.xpath("//div[@id='Swift']//button[text()='Create invoice']");
     public static final By invoiceFullName = By.xpath("//body/div[2]//div[@class='row']/div/div/div[3]//h4/strong");
     public static final By invoiceInviteCode = By.xpath("//body/div[2]//div[@class='row']/div/div/div[3]//h4/em");
     public static final By paymentPurpose = By.xpath("//table[@class='payment-details']/tbody/tr[1]/td[2]");
@@ -83,16 +87,16 @@ public class RechargePage extends MoneyFamilyPage{
     }
 
     public void enterSwiftAmount(String value){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summ));
-        driver.findElement(summ).clear();
-        driver.findElement(summ).click();
-        driver.findElement(summ).sendKeys(value);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(summInput));
+        driver.findElement(summInput).clear();
+        driver.findElement(summInput).click();
+        driver.findElement(summInput).sendKeys(value);
     }
     public void createInvoice(){
 
         String originalWindow = driver.getWindowHandle();
         final Set<String> oldWindowsSet = driver.getWindowHandles(); //набор текущих открытых окон
-        driver.findElement(createInvoice).click();
+        driver.findElement(createInvoiceButton).click();
 
         String newWindow = wait.until(new ExpectedCondition<String>() {
                                           public String apply(WebDriver driver){
@@ -147,9 +151,9 @@ public class RechargePage extends MoneyFamilyPage{
 
 
     public void goSwift(){
-        driver.findElement(swift).click();
+        driver.findElement(swiftTab).click();
     }
     public void goInterkassa(){
-        driver.findElement(interkassa).click();
+        driver.findElement(interkassaTab).click();
     }
 }
