@@ -10,8 +10,6 @@ import UsedByAll.TestUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -43,7 +41,6 @@ public class RechargeInterkassaTest extends BaseTest {
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         MoneyFamilyPage moneyPage = new MoneyFamilyPage(driver, wait);
         RechargePage rechargePage = new RechargePage(driver, wait);
-        InterkassaPage interkassaPage = new InterkassaPage(driver, wait);
         ProfilePage profilePage = new ProfilePage(driver, wait);
 
         loginPage.open();
@@ -52,16 +49,16 @@ public class RechargeInterkassaTest extends BaseTest {
         userPage.goMoney();
         moneyPage.goToRecharge();
         rechargePage.goInterkassa();
-        interkassaPage.waitForPageLoading();
+        rechargePage.waitForPageLoading();
         profilePage.goProfilePage();
 
         String inviteCode = profilePage.getInviteCode();
         profilePage.closeProfilePage();
 
-        assertTrue("Incorrect image", interkassaPage.getImageLink().contains("interkassa")); //проверка линка картинки
+        assertTrue("Incorrect image", rechargePage.getInterkassaImageLink().contains("interkassa")); //проверка линка картинки
         MakeRandomValue getRandomValue = new MakeRandomValue(); // сгенерировать сумму
         String sum = getRandomValue.makeRandomValue();
-        interkassaPage.enterAmount(sum);
+        rechargePage.enterAmount(sum);
 
         //расчитать сумму с комиссией, вытянув процент из конфига
         AConfig interkassaFeeConfig = new GetConfigToRun(testUser).getConfigByParameter("id", 8, Config.getConfig().getAdmin(), siteUrl);
@@ -71,13 +68,13 @@ public class RechargeInterkassaTest extends BaseTest {
         int iSum = (int)Math.round(sumWithFee);
         sumWithFee = (float)iSum/100;
 
-        assertEquals("Incorrect sum with fee", sumWithFee.toString(), interkassaPage.getSumWithFee());
+        assertEquals("Incorrect sum with fee", sumWithFee.toString(), rechargePage.getSumWithFee());
 
-        interkassaPage.createPayment();
-        interkassaPage.waitForPaymentFormLoading();
-        assertEquals("Incorrect payment sum", sumWithFee.toString(), interkassaPage.getPaymentSumm());
-        assertEquals("Incorrect email in payment", interkassaPage.getEmailFromPaymentForm(), email);
-        assertEquals("Incorrect invite code in payment", interkassaPage.getInviteCodeFromPaymentForm(), inviteCode);
+        rechargePage.createPayment();
+        rechargePage.waitForPaymentFormLoading();
+        assertEquals("Incorrect payment sum", sumWithFee.toString(), rechargePage.getPaymentSumm());
+        assertEquals("Incorrect email in payment", rechargePage.getEmailFromPaymentForm(), email);
+        assertEquals("Incorrect invite code in payment", rechargePage.getInviteCodeFromPaymentForm(), inviteCode);
 
 
 

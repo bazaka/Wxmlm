@@ -25,7 +25,7 @@ public class InterkassaPage extends RechargePage {
     public void waitForPageLoading(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(iAmount));
     }
-    public String getImageLink(){
+    public String getInterkassaImageLink(){
         return(driver.findElement(interkassaImage).getAttribute("src"));
     }
     public void enterAmount(String value){
