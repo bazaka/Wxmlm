@@ -17,6 +17,8 @@ public class ITProductsPage extends ProductsFamilyPage {
     public static final By createTrial = By.id("xmlm_bundle_productBundle_it_product_trial_create");
     private static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div/div[@class='gritter-without-image']/span[text()='Success']");
     private static final By closePopup = By.xpath("//div[@id='gritter-notice-wrapper']//a[@class='gritter-close']");
+    public static final By pageHeader = By.xpath("//div[@class='header']/h3[contains(text(), 'IT Products')]");
+    public static final By itProductsTable = By.xpath("//table[@class='table no-v-borders it-products__table']");
 
 
     public ITProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}

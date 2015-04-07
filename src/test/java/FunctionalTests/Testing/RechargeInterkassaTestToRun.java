@@ -75,13 +75,5 @@ public class RechargeInterkassaTestToRun extends BaseTest {
         assertEquals("Incorrect payment sum", sumWithFee.toString(), rechargePage.getPaymentSumm());
         assertEquals("Incorrect email in payment", rechargePage.getEmailFromPaymentForm(), email);
         assertEquals("Incorrect invite code in payment", rechargePage.getInviteCodeFromPaymentForm(), inviteCode);
-
-
-
-
-
-
-
     }
-
 }

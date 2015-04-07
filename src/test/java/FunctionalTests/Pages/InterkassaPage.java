@@ -38,7 +38,7 @@ public class InterkassaPage extends RechargePage {
     }
     public void createPayment(){
 
-        String originalWindow = driver.getWindowHandle();
+
         final Set<String> oldWindowsSet = driver.getWindowHandles(); //набор текущих открытых окон
         driver.findElement(rechargeButton).click();
 
