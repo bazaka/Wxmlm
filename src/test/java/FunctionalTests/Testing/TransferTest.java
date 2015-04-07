@@ -50,7 +50,7 @@ public class TransferTest extends BaseTest {
         MakeRandomValue getRandomValue = new MakeRandomValue();
 
         String value = getRandomValue.makeRandomValue(); // generate random number
-        transferPage.clickBonusesAccordion(); // start sending from bonuses to current
+        transferPage.clickBonusesAccordion(); // start sending from bonusesItem to current
         transferPage.clickOnFromBonusesToCurrentRadioButton();
         transferPage.enterAmountFromBonuses(value);
         transferPage.clickBonusTransfer();
@@ -60,7 +60,7 @@ public class TransferTest extends BaseTest {
 
         moneyPage.goToTransfer();
         value = getRandomValue.makeRandomValue(); // generate random number
-        transferPage.clickBonusesAccordion(); // start sending from bonuses to salary
+        transferPage.clickBonusesAccordion(); // start sending from bonusesItem to salary
         transferPage.clickOnFromBonusesToSalaryRadioButton();
         transferPage.enterAmountFromBonuses(value);
         transferPage.clickBonusTransfer();
