@@ -5,7 +5,7 @@ import FunctionalTests.Pages.LogInPage;
 import FunctionalTests.Pages.MoneyFamilyPage;
 import FunctionalTests.Pages.TransferPage;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.MakeRandomValue;
+import UsedByAll.RandomValue;
 import UsedByAll.TestUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +13,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Collection;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -47,9 +46,9 @@ public class TransferTest extends BaseTest {
         assertEquals(logInPage.getTitle(), "KairosNet");
         userPage.goMoney();
         moneyPage.goToTransfer();
-        MakeRandomValue getRandomValue = new MakeRandomValue();
+        RandomValue randomValue = new RandomValue();
 
-        String value = getRandomValue.makeRandomValue(); // generate random number
+        String value = randomValue.RandomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonusesItem to current
         transferPage.clickOnFromBonusesToCurrentRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -59,7 +58,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Current", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = getRandomValue.makeRandomValue(); // generate random number
+        value = randomValue.RandomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonusesItem to salary
         transferPage.clickOnFromBonusesToSalaryRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -69,7 +68,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Withdraw", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = getRandomValue.makeRandomValue(); // generate random number
+        value = randomValue.RandomValue(); // generate random number
         transferPage.clickSalaryAccordion(); // start sending from salary to current
         transferPage.clickOnFromSalaryToCurrantRadioButton();
         transferPage.enterAmountFromSalary(value);

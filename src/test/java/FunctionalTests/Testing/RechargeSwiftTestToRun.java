@@ -5,7 +5,7 @@ import ApiTests.ObjectClasses.BankDetails;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
-import UsedByAll.MakeRandomValue;
+import UsedByAll.RandomValue;
 import UsedByAll.TestUser;
 
 import junit.framework.TestCase;
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/24/2015.
  */
 @RunWith(value = Parameterized.class)
-public class RechargeSwiftTest extends BaseTest {
+public class RechargeSwiftTestToRun extends BaseTest {
     String email;
     String password;
     TestUser testUser;
@@ -32,7 +32,7 @@ public class RechargeSwiftTest extends BaseTest {
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
 
-    public RechargeSwiftTest(TestUser testUser){
+    public RechargeSwiftTestToRun(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
         this.testUser=testUser;
@@ -49,7 +49,7 @@ public class RechargeSwiftTest extends BaseTest {
 
         logInPage.open();
         logInPage.goLogin(email, password);
-        assertEquals(logInPage.getTitle(), "KairosNet");
+        assertEquals(logInPage.getTitle(), "KairosNet"); //
         userPage.goMoney();
         moneyPage.goToRecharge();
         rechargePage.goSwift();
@@ -62,8 +62,8 @@ public class RechargeSwiftTest extends BaseTest {
         profilePage.closeProfilePage(); // закрыть профиль
         TestCase.assertTrue("Incorrect image", rechargePage.getSwiftImageLink().contains("swift"));
 
-        MakeRandomValue getRandomValue = new MakeRandomValue();
-        String sum = getRandomValue.makeRandomValue(); // сгенерировать сумму
+        RandomValue randomValue = new RandomValue();
+        String sum = randomValue.RandomValue(); // сгенерировать сумму
         rechargePage.enterSwiftAmount(sum);
         rechargePage.createInvoice(); // создать инвойс
 

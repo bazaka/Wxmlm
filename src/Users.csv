@@ -2,3 +2,5 @@ email, newEmail, ePassword, fullName, password1, password2, newPassword1, newPas
 t4webuser05@gmail.com, -, -, Admin 4 tests, 123, -, -, -, -, -, _BackendAPITest()_GetProductsTest()_LoginFreeAPITest()_
 t.4webuser01@gmail.com, -, -, Admin 4 tests, 111111, -, -, -, -, -,_RechargeSwiftTest()_RechargeInterkassaTest()_ChangeProfileDataTest()_1LogInTest()_BuyPackageTest()_TransferTest()_1RegistrationTest()_1RecoveryTest()_1ChangeMailTest()_PagesContentTest()_
 t.4webuser04@gmail.com, -, -, User 04, 111111, -, -, -, -, -,_DesktopAPITest()_GetProductsTest()_
+t.4webuser03@gmail.com, -, -, User 03, 502badrequest, -, -, -, -, -,_TrialActivatesTest()_
+
