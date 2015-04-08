@@ -47,6 +47,11 @@ public class ValidationChecker {
             return true; }
         catch (ParseException e) {return false;}
     }
+    public static boolean checkDateTimeOrNull(Object dateTime) {
+        return dateTime.equals(null) || (checkDateTimeString(dateTime.toString()));
+
+    }
+
 
     // Boolean
     public static boolean checkBooleanValue(boolean boo){return true;}
