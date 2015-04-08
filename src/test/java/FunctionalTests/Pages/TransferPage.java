@@ -26,10 +26,6 @@ public class TransferPage extends MoneyFamilyPage{
     public static final By transferButtonSalary = By.id("transfer_salary");
 
 
-
-    public static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
-
-
     public TransferPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -83,12 +79,15 @@ public class TransferPage extends MoneyFamilyPage{
         driver.findElement(amountSalary).sendKeys(amount);
     }
     public void clickBonusTransfer(){
+        AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         driver.findElement(transferButtonBonuses).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+        userPage.waitForSuccessMessage();
     }
     public void clickSalaryTransfer(){
+        AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         driver.findElement(transferButtonSalary).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+        userPage.waitForSuccessMessage();
+
     }
 
 }
