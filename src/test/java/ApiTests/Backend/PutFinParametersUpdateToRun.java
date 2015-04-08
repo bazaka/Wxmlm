@@ -60,6 +60,7 @@ public class PutFinParametersUpdateToRun {
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
 
         // Проверяем GET-запросом, что данные восстановились
+
         changedOne = new GetFinParameterToRun(testUser).getFinParameterByParameter("id", originalOne.getId(), testUser, siteUrl);
         assertTrue("Check modified data returned correctly", originalOne.equalsFin(changedOne));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
