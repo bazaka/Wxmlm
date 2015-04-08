@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by User on 3/31/2015.
  */
-public class ItProductsPage extends ProductsFamilyPage {
+public class ITProductsPage extends ProductsFamilyPage {
     public static final By notActiveTrial = By.xpath("//a[@data-modal='create-account']");
     public static final By trialLoginField = By.id("xmlm_bundle_productBundle_it_product_trial_login");
     public static final By domainName = By.xpath("//div[@class='newaccount-inner']/div/label");
@@ -21,7 +21,7 @@ public class ItProductsPage extends ProductsFamilyPage {
     public static final By itProductsTable = By.xpath("//table[@class='table no-v-borders it-products__table']");
 
 
-    public ItProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
+    public ITProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
     public void waitForPageLoad(){
         try{
