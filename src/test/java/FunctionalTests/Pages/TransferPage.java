@@ -11,10 +11,8 @@ import java.util.List;
 /**
  * Created by User on 1/5/2015.
  */
-public class TransferPage extends BasePage{
+public class TransferPage extends MoneyFamilyPage{
 
-    public static final By moneyPage  = By.xpath("//div[@id='head-nav']//a[@href='/money/']");
-    public static final By transferPage = By.xpath("//div[@class='col-md-12']//a[@href='/money/buy/']");
     public static final By currentAccordion = By.xpath("//div[@id='accordion4']//strong[contains(text(), 'Current')]");
     public static final By bonusesAccordion = By.xpath("//div[@id='accordion4']//div[contains(@class,'panel-bonuses')]//a");
     public static final By salaryAccordion = By.xpath("//div[@id='accordion4']//div[contains(@class,'panel-salary')]//a");
@@ -26,12 +24,7 @@ public class TransferPage extends BasePage{
     public static final By transferButtonBonuses = By.id("transfer_bonuses");
     public static final By amountSalary = By.id("transfer_amount_salary");
     public static final By transferButtonSalary = By.id("transfer_salary");
-    public static final By incorrectValueBonuses = By.xpath("//div[@id='tab3-2']//li[@class='parsley-pattern']");
-    public static final By requiredValueBonuses = By.xpath("//div[@id='tab3-2']//li[@class='parsley-required']");
-    public static final By incorrectValueSalary = By.xpath("//div[@id='tab3-2']//li[@class='parsley-pattern']");
-    public static final By requiredValueSalary = By.xpath("//div[@id='tab3-2']//li[@class='parsley-required']");
 
-    public static final By operationHistoryPage = By.xpath("//div[@class='col-md-12']//a[@href='/money/operation/']");
     public static final By lastType = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[3]");
     public static final By lastSender = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[4]");
     public static final By lastAmount = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[5]");
