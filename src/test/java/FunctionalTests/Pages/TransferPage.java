@@ -25,10 +25,7 @@ public class TransferPage extends MoneyFamilyPage{
     public static final By amountSalary = By.id("transfer_amount_salary");
     public static final By transferButtonSalary = By.id("transfer_salary");
 
-    public static final By lastType = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[3]");
-    public static final By lastSender = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[4]");
-    public static final By lastAmount = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[5]");
-    public static final By lastStatus = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[6]");
+
 
     public static final By popup = By.xpath("//div[@id='gritter-notice-wrapper']/div/div[@class='gritter-item']/div/p");
 
@@ -93,21 +90,5 @@ public class TransferPage extends MoneyFamilyPage{
         driver.findElement(transferButtonSalary).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
     }
-    public void waitOperationHistoryLoading(){
 
-
-        wait.until(ExpectedConditions.presenceOfElementLocated(lastType));
-    }
-    public String getOperationType(){
-        return driver.findElement(lastType).getText();
-    }
-    public String getOperationSender(){
-        return driver.findElement(lastSender).getText();
-    }
-    public String getOperationAmount(){
-        return driver.findElement(lastAmount).getText();
-    }
-    public String getOperationStatus(){
-        return driver.findElement(lastStatus).getText();
-    }
 }

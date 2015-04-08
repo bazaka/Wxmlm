@@ -13,6 +13,30 @@ public class OperationHistoryPage extends MoneyFamilyPage {
     public static final By lastOperationSenderCell = By.xpath("//table[@role='grid']/tbody/tr[1]/td[4]");
     public static final By lastOperationAmountCell = By.xpath("//table[@role='grid']/tbody/tr[1]/td[5]");
     public static final By lastOperationStatusCell = By.xpath("//table[@role='grid']/tbody/tr[1]/td[6]");
+    public static final By lastType = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[3]");
+    public static final By lastSender = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[4]");
+    public static final By lastAmount = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[5]");
+    public static final By lastStatus = By.xpath("//table[@id='datatable2']/tbody/tr[1]/td[6]");
+
+
+    public String getTitle(){
+        return driver.getTitle();
+    }
+    public void waitOperationHistoryLoading(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(lastType));
+    }
+    public String getOperationType(){
+        return driver.findElement(lastType).getText();
+    }
+    public String getOperationSender(){
+        return driver.findElement(lastSender).getText();
+    }
+    public String getOperationAmount(){
+        return driver.findElement(lastAmount).getText();
+    }
+    public String getOperationStatus(){
+        return driver.findElement(lastStatus).getText();
+    }
 
     public String getLastOperationDate(){
         wait.until(ExpectedConditions.presenceOfElementLocated(lastOperationDateCell));

@@ -1,9 +1,6 @@
 package FunctionalTests.Testing;
 
-import FunctionalTests.Pages.AuthorizedUserPage;
-import FunctionalTests.Pages.LogInPage;
-import FunctionalTests.Pages.MoneyFamilyPage;
-import FunctionalTests.Pages.TransferPage;
+import FunctionalTests.Pages.*;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RandomValue;
 import UsedByAll.TestUser;
@@ -40,6 +37,7 @@ public class TransferTest extends BaseTest {
         TransferPage transferPage = new TransferPage(driver, wait);
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         MoneyFamilyPage moneyPage = new MoneyFamilyPage(driver, wait);
+        OperationHistoryPage operationHistoryPage = new OperationHistoryPage(driver, wait);
 
         logInPage.open();
         logInPage.goLogin(email, password);
@@ -54,7 +52,7 @@ public class TransferTest extends BaseTest {
         transferPage.enterAmountFromBonuses(value);
         transferPage.clickBonusTransfer();
         moneyPage.goToOperationHistory();
-        transferPage.waitOperationHistoryLoading();
+        operationHistoryPage.waitOperationHistoryLoading();
         checkOperationHistoryData("Current", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
@@ -64,7 +62,7 @@ public class TransferTest extends BaseTest {
         transferPage.enterAmountFromBonuses(value);
         transferPage.clickBonusTransfer();
         moneyPage.goToOperationHistory();
-        transferPage.waitOperationHistoryLoading();
+        operationHistoryPage.waitOperationHistoryLoading();
         checkOperationHistoryData("Withdraw", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
@@ -74,7 +72,7 @@ public class TransferTest extends BaseTest {
         transferPage.enterAmountFromSalary(value);
         transferPage.clickSalaryTransfer();
         moneyPage.goToOperationHistory();
-        transferPage.waitOperationHistoryLoading();
+        operationHistoryPage.waitOperationHistoryLoading();
         checkOperationHistoryData("Current", "Salary", value);
 
 
@@ -84,12 +82,13 @@ public class TransferTest extends BaseTest {
 
 
     public void checkOperationHistoryData(String accountType, String sendAccountType, String value){
-        TransferPage transferPage = new TransferPage(driver, wait);
-        assertEquals(transferPage.getTitle(), "Operations");
-        assertEquals(transferPage.getOperationType(), "Transfer to "+accountType);
-        assertEquals(transferPage.getOperationSender(), "Me, "+sendAccountType);
-        assertEquals(transferPage.getOperationAmount(), value);
-        assertEquals(transferPage.getOperationStatus(), "Sent");
+        OperationHistoryPage operationHistoryPage = new OperationHistoryPage(driver, wait);
+
+        assertEquals(operationHistoryPage.getTitle(), "Operations");
+        assertEquals(operationHistoryPage.getOperationType(), "Transfer to "+accountType);
+        assertEquals(operationHistoryPage.getOperationSender(), "Me, "+sendAccountType);
+        assertEquals(operationHistoryPage.getOperationAmount(), value);
+        assertEquals(operationHistoryPage.getOperationStatus(), "Sent");
 
     }
 
