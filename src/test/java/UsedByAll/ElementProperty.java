@@ -15,7 +15,6 @@ public class ElementProperty {
     // Метод, проверяющий видимость элемента на странице
     public boolean isElementVisible(WebDriver driver, WebDriverWait wait, By element){
         if (isElementPresent(driver, wait, element)) {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
             return driver.findElement(element).isDisplayed();
         }
         return false;

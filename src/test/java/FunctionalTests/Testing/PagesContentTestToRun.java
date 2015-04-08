@@ -62,7 +62,7 @@ public class PagesContentTestToRun extends BaseTest {
             }
             assertNotNull("Page class \"" + page.getPageName() + "\" is not found", currentPage);
             driver.get(getConfig().getProtocol() + getConfig().getScheme() + page.getRoute());
-            Thread.sleep(1000);
+            Thread.sleep(2000);
 
             // Для каждой страницы, в цикле вызываем каждый ее элемент для проверки
             for (String elementName : page.getElements()) {

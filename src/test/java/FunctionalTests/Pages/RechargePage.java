@@ -42,8 +42,17 @@ public class RechargePage extends MoneyFamilyPage{
     public static By paymentDescription = By.xpath("//div[@class='payment-description ng-binding']");
 
     public static By visaMCImage = By.xpath("//form[@id='liqpay_form']//img");
-    public static By visaMCAmount = By.xpath("//form[@id='liqpay_form']//input[@name='amount']");
-    public static By visaMCRechargeButton = By.xpath("//form[@id='liqpay_form']//button[@id='xmlm_bundle_moneybundle_recharge_liqpay_amount']");
+    public static By visaMCAmount = By.xpath("//form[@id='liqpay_form']//input[@id='xmlm_bundle_moneybundle_recharge_liqpay_amount']");
+    public static By visaMCRechargeButton = By.xpath("//form[@id='liqpay_form']//button[text()='Recharge']");
+
+    public static By merchantsPaymentForm = By.xpath("//form[@id='form-merchantRequestPrint']");
+    public static By merchantsCreatePaymentFormButton = By.xpath("//form[@id='form-merchantRequestPrint']//button[@id='form-merchantRequestPrint-submit']");
+    public static By merchantsDownloadEmptyFormButton = By.xpath("//form[@id='form-merchantRequestPrintEmpty']//button[text()='Download empty payment form']");
+    public static By merchantsScanUploader = By.xpath("//form[@id='dropzone-merchantRequest']");
+    public static By merchantsSendRequestForm = By.xpath("//form[@id='form-merchantRequest']");
+    public static By merchantsSendRequestButton = By.xpath("//form[@id='form-merchantRequest']//button[@id='form-merchantRequest-submit']");
+
+    public static By epaymentsContentDiv = By.xpath("//div[@class='tab-content ']//div[@id='Epayments']");
 
     public void waitForPageLoading(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(iAmount));
