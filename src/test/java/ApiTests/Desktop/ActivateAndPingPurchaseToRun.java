@@ -88,7 +88,7 @@ public class ActivateAndPingPurchaseToRun {
             System.out.println(result);
             assertTrue("Incorrect lifetime", ValidationChecker.checkPositiveInt(object.getInt("lifetime")));
             assertEquals("Incorrect count of JSON Objects", object.length(),1);
-            Thread.sleep(1000);
+            Thread.sleep(60000);
         }
     }
 }

@@ -56,6 +56,7 @@ public class GetTokenToRun {
         //Проверяем структуру
         assertTrue("Incorrect token", ValidationChecker.checkToken(object.getString("token")));
         assertEquals("Incorrect count of Json parameters", object.length(), 1);
+        System.out.println(object.getString("token"));
     }
 
     public String getToken() throws Exception {

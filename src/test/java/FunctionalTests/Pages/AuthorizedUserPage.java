@@ -13,7 +13,7 @@ public class AuthorizedUserPage {
     public static final By home = By.xpath("//div[@id='head-nav']//li[4]/a[@href='/']");
     public static final By money = By.xpath("//div[@id='head-nav']//li[8]/a[@href='/money/']");
     public static final By products = By.xpath("//div[@id='head-nav']//li[12]/a[@href='/products/']");
-    public static final By net = By.xpath("//div[@id='head-nav']//li[16]/a[@href='/network/']");
+    public static final By net = By.xpath("//div[@id='head-nav']//li[@id='menu-net']/a[@href='/network/']");
     public static final By career = By.xpath("//div[@id='head-nav']//li[20]/a[@href='/career/']");
     public static final By profilePage = By.xpath("//img[@alt='Avatar']");
     public static final By userMenu = By.xpath("//li[@class='dropdown']/a[@class='dropdown-toggle']");
