@@ -31,7 +31,7 @@ package FunctionalTests.Pages;
                         e.printStackTrace();
                     }
             }
-        public boolean getCountOfNonActiveTrials(int amount){
+        public boolean isAllTrialsAvailable(int amount){
                 List trialCount = driver.findElements(notActiveTrial);
                 if(trialCount.size()!=amount){
                         System.out.println("Not all trials are non-active for this user");

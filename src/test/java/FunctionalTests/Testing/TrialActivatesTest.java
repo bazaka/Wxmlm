@@ -49,7 +49,7 @@ public class TrialActivatesTest extends BaseTest {
 
         //проверяем, что у юзера есть возможность активировать все 4 триала
 
-        assertTrue("This user must have "+trialAmount+" unactive trials to continue this test", itProductsPage.getCountOfNonActiveTrials(trialAmount));
+        assertTrue("This user must have " + trialAmount + " unactive trials to continue this test", itProductsPage.isAllTrialsAvailable(trialAmount));
 
         //активируем все 4 продукта в цикле
         String[] trialLogins = new String[trialAmount]; //массив случайно сгенерированных имен триалов для подальшей проверки
