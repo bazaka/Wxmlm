@@ -15,10 +15,10 @@ public class RechargePage extends MoneyFamilyPage{
     public RechargePage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
     public static final By pageHeader = By.xpath("//div[@class='header']/h3[contains(text(), 'Recharge')]");
     public static final By swiftTab = By.xpath("//a[@href='#Swift']");
-    public static final By interkassaTab = By.id("//a[@href='#Interkassa']");
-    public static final By visaMCTab = By.id("//a[@href='#VisaMasterCard']");
-    public static final By merchantsTab = By.id("//a[@href='#Merchants']");
-    public static final By epaymentsTab = By.id("//a[@href='#Epayments']");
+    public static final By interkassaTab = By.xpath("//a[@href='#Interkassa']");
+    public static final By visaMCTab = By.xpath("//a[@href='#VisaMasterCard']");
+    public static final By merchantsTab = By.xpath("//a[@href='#Merchants']");
+    public static final By epaymentsTab = By.xpath("//a[@href='#Epayments']");
 
     public static final By summInput = By.xpath("//div[@id='Swift']//input[@name='amount']");
     public static final By swiftImage = By.xpath("//form[@action='/money/invoice']//img");
