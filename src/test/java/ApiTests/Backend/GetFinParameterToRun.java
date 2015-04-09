@@ -66,7 +66,7 @@ public class GetFinParameterToRun {
             JSONObject object = jsonArr.getJSONObject(i);
 
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect operation_type_id", ValidationChecker.checkIdValue(object.getInt("operation_type_id")));
+            assertTrue("Incorrect operation_type_id", ValidationChecker.checkOperationTypeId(object.getInt("operation_type_id")));
             assertTrue("Incorrect merchant_id", ValidationChecker.checkIdOrNull(object.get("merchant_id")));
             assertTrue("Incorrect payment_merchant_id", ValidationChecker.checkIdOrNull(object.get("payment_merchant_id")));
             assertTrue("Incorrect parameter_id", ValidationChecker.checkIdValue(object.getInt("parameter_id")));
