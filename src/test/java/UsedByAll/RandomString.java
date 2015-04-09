@@ -9,7 +9,7 @@ public class RandomString {
     static final String letters = "abcdefghijklmnopqrstuvwxyz";
     static Random random = new Random();
 
-    public String generateString(int length){
+    public static String generateString(int length){
         StringBuilder sb = new StringBuilder(length);
         for(int i=0; i<length; i++)
             sb.append(letters.charAt(random.nextInt(letters.length())));

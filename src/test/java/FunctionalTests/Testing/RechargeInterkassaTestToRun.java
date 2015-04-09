@@ -56,8 +56,8 @@ public class RechargeInterkassaTestToRun extends BaseTest {
         profilePage.closeProfilePage();
 
         assertTrue("Incorrect image", rechargePage.getInterkassaImageLink().contains("interkassa")); //проверка линка картинки
-        RandomValue randomValue = new RandomValue(); // сгенерировать сумму
-        String sum = randomValue.RandomValue();
+        // сгенерировать сумму
+        String sum = RandomValue.RandomValue();
         rechargePage.enterAmount(sum);
 
         //расчитать сумму с комиссией, вытянув процент из конфига

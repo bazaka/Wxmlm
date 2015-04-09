@@ -1,7 +1,6 @@
 package FunctionalTests.Testing;
 
 import FunctionalTests.Pages.*;
-import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RandomString;
 import UsedByAll.TestUser;
@@ -33,21 +32,20 @@ public class TrialActivatesTest extends BaseTest {
     }
     @Test
     public void TrialActivates(){
-        String siteUrl = Config.getConfig().getProtocol() + Config.getConfig().getScheme();
+
         LogInPage loginPage = new LogInPage(driver, wait);
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         ProductsFamilyPage productPage = new ProductsFamilyPage(driver, wait);
         ITProductsPage itProductsPage = new ITProductsPage(driver, wait);
-        RandomString randomString = new RandomString();
 
 
         loginPage.open();
         loginPage.goLogin(email, password);
         assertEquals(loginPage.getTitle(), "KairosNet");
         userPage.goProducts();
-        productPage.waitFroPageLoading();
+        productPage.waitForPageLoading();
         productPage.goItProducts();
-        itProductsPage.waitForPageLoad();
+        itProductsPage.checkNonActiveTrials();
 
         //проверяем, что у юзера есть возможность активировать все 4 триала
 
@@ -57,7 +55,7 @@ public class TrialActivatesTest extends BaseTest {
         String[] trialLogins = new String[trialAmount]; //массив случайно сгенерированных имен триалов для подальшей проверки
         for(int i=0; i<trialAmount; i++){
             itProductsPage.clickActivateButton();
-            trialLogins[i]=randomString.generateString(6); //длина рандомной строки = 6
+            trialLogins[i]= RandomString.generateString(6); //длина рандомной строки = 6
             itProductsPage.enterTrialLogin(trialLogins[i]);
             //проверка корректности домена
             assertEquals("Incorrect domain. Domain is: "+itProductsPage.getDomainName(), itProductsPage.getDomainName(), domain);
@@ -67,8 +65,17 @@ public class TrialActivatesTest extends BaseTest {
         PurchasesPage purchasesPage = new PurchasesPage(driver, wait);
         purchasesPage.waitForPageLoading();
         purchasesPage.goItProductsTable();
+
+        String[] invertLoginList = new String[purchasesPage.getTrialTableLogins().length];
+        //переворачиваем массив логинов
+        int count = invertLoginList.length-1;
+        for(int i=0; i<invertLoginList.length; i++){
+            invertLoginList[i]=purchasesPage.getTrialTableLogins()[count];
+            count--;
+        }
+
         for(int i=0; i<trialAmount; i++){
-            assertEquals("Not same activated trial names: "+trialLogins[i]+"@kairosplanet.com and "+purchasesPage.getTrialTableLogins()[i], trialLogins[i]+"@kairosplanet.com",purchasesPage.getTrialTableLogins()[i]) ;
+            assertEquals("Not same activated trial names: "+trialLogins[i]+"@kairosplanet.com and "+invertLoginList[i], trialLogins[i]+"@kairosplanet.com",invertLoginList[i]) ;
         }
        /* for(int i=0; i<trialAmount; i++){
             System.out.println("triallogins" +purchasesPage.getTrialTableLogins()[i]+" ");

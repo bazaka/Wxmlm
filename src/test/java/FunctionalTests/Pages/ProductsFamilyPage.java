@@ -20,7 +20,7 @@ public class ProductsFamilyPage extends AuthorizedUserPage {
     public static final By myNewBonusesItem = By.xpath("//div[@class='fd-tile detail tile-blue no-margin tile-new-bonuses']");
     public static final By myInvestmentIncomeItem = By.xpath("//div[@class='fd-tile detail tile-lemon tile-investment-income']");
 
-    public void waitFroPageLoading(){wait.until(ExpectedConditions.visibilityOfElementLocated(itProductsItem));}
+    public void waitForPageLoading(){wait.until(ExpectedConditions.visibilityOfElementLocated(itProductsItem));}
 
     public void goToPurchases() {
         driver.findElement(purchasesItem).click();

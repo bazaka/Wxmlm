@@ -21,10 +21,9 @@ package FunctionalTests.Pages;
         public static final By pageHeader = By.xpath("//div[@class='header']/h3[contains(text(), 'IT Products')]");
         public static final By itProductsTable = By.xpath("//table[@class='table no-v-borders it-products__table']");
 
+            public ITProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
-                public ITProductsPage(WebDriver driver, WebDriverWait wait){super(driver, wait);}
-
-                public void waitForPageLoad(){
+                public void checkNonActiveTrials(){
                 try{
                         wait.until(ExpectedConditions.visibilityOfElementLocated(notActiveTrial));
                     }catch (Exception e){
