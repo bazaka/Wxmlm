@@ -25,7 +25,7 @@ public class MoneyFamilyPage extends AuthorizedUserPage {
     public void goToOperationHistory() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(operationHistoryItem));
         driver.findElement(operationHistoryItem).click();
-        wait.until(ExpectedConditions.titleIs("Operations"));
+        wait.until(ExpectedConditions.titleIs("Operation history"));
     }
     public void goToTransfer(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(transferItem));
