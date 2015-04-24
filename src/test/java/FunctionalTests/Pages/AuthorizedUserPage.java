@@ -21,6 +21,7 @@ public class AuthorizedUserPage {
     public static final By profile = By.linkText("//a[text()='Profile']");
     public static final By messages = By.linkText("//a[text()='Sign Out']");
     public static final By successMessage = By.xpath("//span[@class='gritter-title'][text()='Success!']");
+    public static final By successMessage2 = By.xpath("//span[@class='gritter-title'][text()='Success']");
 
     public void goUserMenu(){
         driver.findElement(userMenu).click();
@@ -36,5 +37,8 @@ public class AuthorizedUserPage {
     }
     public void waitForSuccessMessage(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage));
+    }
+    public void waitForSuccessMessage2(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage2));
     }
 }

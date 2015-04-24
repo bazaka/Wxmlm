@@ -112,13 +112,13 @@ public class GetBankDetailsToRun {
 
 
             if (object.getInt(parameterName) == parameterValue) {
-                if(object.get("epayments")==null && object.get("swift")==null)
+                if(object.get("epayments").equals(null) && object.get("swift").equals(null))
                     return new BankDetails(object.getInt("user_id"), object.get("epayments"), object.get("swift"));
-                if(object.get("epayments")!=null && object.get("swift")==null){
+                if(object.get("epayments")!=null && object.get("swift").equals(null)){
                     JSONObject epayments = object.getJSONObject("epayments");
                     return new BankDetails(object.getInt("user_id"), epayments.getString("epid"), epayments.getString("created"), epayments.getString("updated"), object.get("swift"));
                 }
-                if(object.get("epayments")==null && object.get("swift")!=null){
+                if(object.get("epayments").equals(null) && object.get("swift")!=null){
                     JSONObject swift = object.getJSONObject("swift");
                     return new BankDetails(object.getInt("user_id"), object.get("epayments"), swift.getString("name"), swift.getString("address"), swift.getString("bank_name"), swift.getString("bank_address"), swift.getString("account_iban"), swift.getString("swift_code"), swift.getString("created"), swift.getString("updated"));
 
