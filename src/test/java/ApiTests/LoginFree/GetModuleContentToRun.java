@@ -69,12 +69,14 @@ public class GetModuleContentToRun {
             //Парсим JSON
             JSONObject object = new JSONObject(result);
             if (object.has("errors")) {
-                assertTrue("Error is different from \"Application not found\"", object.getString("errors").equals("Application not found"));
+                System.out.println(object.getString("errors"));
+                assertTrue("Error is different from \"Application not found\"1", object.getString("errors").equals("File not found")||(object.getString("error").equals("Application not found")));
                 System.out.println("Product with ID " + ids[i] + ": application not found");
             }
             else if (object.has("error")) {
-                assertTrue("Error is different from \"Application not found\"", object.getString("error").equals("Application not found"));
-                System.out.println("Product with ID " + ids[i] + ": application not found");
+                System.out.println(object.getString("error"));
+                assertTrue("Error is different from \"Application not found\"2", (object.getString("error").equals("File not found"))||(object.getString("error").equals("Application not found")));
+                System.out.println("Product with ID " + ids[i] + ": Application not found");
             }
             else {
                 //Проверяем структуру

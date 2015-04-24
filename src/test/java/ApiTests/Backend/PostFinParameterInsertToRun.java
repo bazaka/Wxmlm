@@ -40,7 +40,7 @@ public class PostFinParameterInsertToRun {
         long startTime;
         long elapsedTime;
         FinParameter originalOne = new GetFinParameterToRun(testUser).getAnyFinParameter(testUser, siteUrl);
-        FinParameter newOne = new FinParameter(originalOne.getId(), originalOne.getOperationTypeId(), originalOne.getMerchantId(), originalOne.getPaymentMerchantId(), originalOne.getParameterId(), originalOne.getValue(), originalOne.getDateStart(), originalOne.getDateEnd(), originalOne.getEnabled());
+        FinParameter newOne = new FinParameter(originalOne.getId(), originalOne.getOperationTypeId(), originalOne.getMerchantId(), originalOne.getPaymentMerchantId(), originalOne.getParameterId(), originalOne.getValue(), originalOne.getDateStart(), originalOne.getDateEnd(), false);
 
 
 

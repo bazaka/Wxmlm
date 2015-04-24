@@ -50,7 +50,7 @@ public class GetDocumentsByIdToRun {
 
             HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url+ids[i], "GET");
             InputStream inStrm = httpCon.getInputStream();
-            assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+            assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200) || (httpCon.getResponseCode() == 404));
 
             InputStreamReader isReader = new InputStreamReader(inStrm);
             BufferedReader br = new BufferedReader(isReader);

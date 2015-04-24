@@ -36,7 +36,7 @@ public class PutFinParametersUpdateToRun {
         long startTime;
         long elapsedTime;
         FinParameter originalOne = new GetFinParameterToRun(testUser).getAnyFinParameter(testUser, siteUrl);
-        FinParameter modifiedOne = new FinParameter(originalOne.getId(), originalOne.getOperationTypeId(), originalOne.getMerchantId(), originalOne.getPaymentMerchantId(), originalOne.getParameterId(), originalOne.getValue()+"1", originalOne.getDateStart(), originalOne.getDateEnd(), originalOne.getEnabled());
+        FinParameter modifiedOne = new FinParameter(originalOne.getId(), originalOne.getOperationTypeId(), originalOne.getMerchantId(), originalOne.getPaymentMerchantId(), originalOne.getParameterId(), originalOne.getValue()+"1", originalOne.getDateStart(), originalOne.getDateEnd(), false);
 
         String originalJson = "[{\"id\":"+originalOne.getId()+", \"operation_type_id\":"+originalOne.getOperationTypeId() +", \"merchant_id\":" +originalOne.getMerchantId()+", \"payment_merchant_id\":"+originalOne.getPaymentMerchantId()+", \"parameter_id\":"+originalOne.getParameterId()+", \"value\":\"" + originalOne.getValue()+"\", \"date_start\":\""+originalOne.getDateStart()+"\", \"date_end\":\""+originalOne.getDateEnd()+"\", \"enabled\":"+originalOne.getEnabled()+"}]";
         String modifiedJson = "[{\"id\":"+modifiedOne.getId()+", \"operation_type_id\":"+modifiedOne.getOperationTypeId() +", \"merchant_id\":" +modifiedOne.getMerchantId()+", \"payment_merchant_id\":"+modifiedOne.getPaymentMerchantId()+", \"parameter_id\":"+modifiedOne.getParameterId()+", \"value\":\"" + modifiedOne.getValue()+"\", \"date_start\":\""+modifiedOne.getDateStart()+"\", \"date_end\":\""+modifiedOne.getDateEnd()+"\", \"enabled\":"+modifiedOne.getEnabled()+"}]";
