@@ -40,11 +40,13 @@ public class User {
     private boolean isApproved;
     private String[] inviteCode;
     private boolean debtor;
+    private double turnover;
+    private Object turnoverDate;
 
 
     public User(int userId, Object surname, String name,Object patronymic, String username, String password, String salt, int countryId,Object languageId,String birthDate, String emailMain, Object email2, Object email3,
                 String phoneNumberMain, Object phoneNumber2, Object phoneNumber3, Object passportNumber, Object passportSeries, Object passportIssuedBy, Object passportIssueDate, Object adressMain, Object adress2, Object adress3,
-                int genderId, int userStatusId, Object createdDate, Object createdBy ,Object changedBy,Object changedDate,Object parentId,Object leaderId,boolean network,int career, boolean isApproved, String[] inviteCode, boolean debtor)
+                int genderId, int userStatusId, Object createdDate, Object createdBy ,Object changedBy,Object changedDate,Object parentId,Object leaderId,boolean network,int career, boolean isApproved, String[] inviteCode, boolean debtor, double turnover, Object turnoverDate)
     {
 
         this.setUserId(userId);
@@ -83,6 +85,8 @@ public class User {
         this.setIsApproved(isApproved);
         this.setInviteCode(inviteCode);
         this.setDebtor(debtor);
+        this.setTurnover(turnover);
+        this.setTurnoverDate(turnoverDate);
     }
 
     public int getUserId(){return userId;}
@@ -122,6 +126,8 @@ public class User {
     public String[] getInviteCode(){return inviteCode;}
     public String getInviteCode(int i){return inviteCode[i];}
     public boolean getDebtor(){return debtor;}
+    public double getTurnover(){return turnover;}
+    public Object getTurnoverDate(){return turnoverDate;}
 
 
 
@@ -162,6 +168,8 @@ public class User {
     public void setInviteCode(String[] a){this.inviteCode=a;}
     public void setInviteCode(String a, int elementNumber){this.inviteCode[elementNumber]=a;}
     public void setDebtor(boolean a){this.debtor = a;}
+    public void setTurnover(double a){this.turnover = a;}
+    public void setTurnoverDate(Object a){this.turnoverDate = a;}
 
 
 
@@ -322,17 +330,25 @@ public class User {
             return false;
         }
         if(getIsApproved()!=a.getIsApproved()){
-            System.out.println("");
+            System.out.println("36");
             return false;
         }
         for(int i=0; i<getInviteCode().length; i++){
             if(!getInviteCode(i).equals(a.getInviteCode(i))){
-                System.out.println();
+                System.out.println("36-"+i);
                 return false;
             }
         }
         if(getDebtor()!=a.getDebtor()){
-            System.out.println("");
+            System.out.println("37");
+            return false;
+        }
+        if(getTurnover()!=a.getTurnover()){
+            System.out.println("38");
+            return false;
+        }
+        if(getTurnoverDate()!=a.getTurnoverDate()){
+            System.out.println("39");
             return false;
         }
 

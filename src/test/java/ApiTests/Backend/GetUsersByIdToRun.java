@@ -111,7 +111,9 @@ public class GetUsersByIdToRun {
                     assertTrue("Incorrect inviteCode",ValidationChecker.checkStringNotNull(inviteCodes.get(j).toString()));
                 }
                 assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
-                assertEquals("Incorrect count of Json Objects", object.length(), 36);
+                assertTrue("Incorrect turnover", ValidationChecker.checkDoubleValue(object.getDouble("turnover")));
+                assertTrue("Incorrect turnover_date", ValidationChecker.checkDateTimeOrNull(object.get("turnover_date")));
+                assertEquals("Incorrect count of Json Objects", object.length(), 38);
             }
             System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
             }
