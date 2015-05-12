@@ -21,10 +21,6 @@ public class InterkassaPage extends RechargePage {
     public static By paymentSumm = By.xpath("//span[@class='payment-summ-amount ng-binding']");
     public static By paymentDescription = By.xpath("//div[@class='payment-description ng-binding']");
 
-
-    public void waitForPageLoading(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(iAmount));
-    }
     public String getInterkassaImageLink(){
         return(driver.findElement(interkassaImage).getAttribute("src"));
     }

@@ -25,7 +25,7 @@ public class ProfilePage extends BasePage {
     private static final By address = By.id("fos_user_profile_form_userContact_mailingAddress");
     private static final By email = By.xpath("//div[@id='main-email']/div/div/input");
     private static final By phone = By.id("fos_user_profile_form_phone");
-    private static final By updateButton = By.xpath("//div[@id='tab1']//a[text()='Update']");
+    private static final By updateButton = By.xpath("//div[@id='tab1']//a[text()='Save changes']");
 
     private static final By documentsTab = By.xpath("//div[@class='tabbable']//a[text()='Documents']"); //вкладка Documents
     private static final By citizen = By.id("xmlm_bundle_userbundle_document_user_citizen");

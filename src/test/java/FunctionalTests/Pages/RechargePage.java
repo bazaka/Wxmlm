@@ -54,7 +54,7 @@ public class RechargePage extends MoneyFamilyPage{
 
     public static By epaymentsContentDiv = By.xpath("//div[@class='tab-content ']//div[@id='Epayments']");
 
-    public void waitForPageLoading(){
+    public void waitForInterkassaTabLoading(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(iAmount));
     }
     public String getInterkassaImageLink(){
@@ -65,12 +65,14 @@ public class RechargePage extends MoneyFamilyPage{
         driver.findElement(iAmount).click();
         driver.findElement(iAmount).sendKeys(value);
     }
+
     public String getSumWithFee(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(iFee));
         return(driver.findElement(iFee).getText());
     }
     public void createPayment(){
 
-        String originalWindow = driver.getWindowHandle();
+
         final Set<String> oldWindowsSet = driver.getWindowHandles(); //набор текущих открытых окон
         driver.findElement(rechargeButton).click();
 
@@ -168,4 +170,6 @@ public class RechargePage extends MoneyFamilyPage{
     public void goInterkassa(){
         driver.findElement(interkassaTab).click();
     }
+
+
 }

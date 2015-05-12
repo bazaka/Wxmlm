@@ -56,7 +56,7 @@ public class RechargeSwiftTestToRun extends BaseTest {
         profilePage.goProfilePage(); // открыть профиль
 
         String inviteCode = profilePage.getInviteCode(); // достать инвайт код
-        String fullName = profilePage.getFullName();
+        String userFullName = profilePage.getFullName();
 
 
         profilePage.closeProfilePage(); // закрыть профиль
@@ -67,7 +67,7 @@ public class RechargeSwiftTestToRun extends BaseTest {
         rechargePage.createInvoice(); // создать инвойс
 
         BankDetails adminBankDetails = new GetBankDetailsToRun(testUser).getBankDetailsById("user_id", 1, Config.getConfig().getAdmin(), siteUrl); // взять данные админа
-        assertEquals("Incorrect full name", fullName, rechargePage.getInvoiceFullName());
+        assertEquals("Incorrect full name", userFullName, rechargePage.getInvoiceFullName());
         assertEquals("Incorrect email", email, rechargePage.getInvoiceEmail());
         assertEquals("Incorrect invite code", inviteCode, rechargePage.getInvoiceInviteCode());
         assertTrue("Payment purpose contains incorrect invite code", rechargePage.getPaymentPurpose().contains(inviteCode));

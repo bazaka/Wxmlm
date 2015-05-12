@@ -87,11 +87,11 @@ public class TransferPage extends MoneyFamilyPage{
     public void clickBonusTransfer(){
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         driver.findElement(bonusesTransferButton).click();
-        userPage.waitForSuccessMessage();
+        userPage.waitForSuccessMessage2();
     }
     public void clickSalaryTransfer(){
         AuthorizedUserPage userPage = new AuthorizedUserPage(driver, wait);
         driver.findElement(salaryTransferButton).click();
-        userPage.waitForSuccessMessage();
+        userPage.waitForSuccessMessage2();
     }
 }
