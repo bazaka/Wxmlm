@@ -70,7 +70,7 @@ public class ActivateAndPingPurchaseToRun {
         assertEquals("Incorrect count of JSON Objects", object.length(),1);
 
         //Ping
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5000; i++) {
             startTime = System.currentTimeMillis();
             httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/ping/?_format=json&token=" + token + "&packagesecurekey=" + packageSecureKey, "GET");
             inStrm = httpCon.getInputStream();
@@ -88,7 +88,7 @@ public class ActivateAndPingPurchaseToRun {
             System.out.println(result);
             assertTrue("Incorrect lifetime", ValidationChecker.checkPositiveInt(object.getInt("lifetime")));
             assertEquals("Incorrect count of JSON Objects", object.length(),1);
-            Thread.sleep(60000);
+            //Thread.sleep(100);
         }
     }
 }

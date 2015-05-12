@@ -54,6 +54,7 @@ public class PutUserUpdateToRun {
         User modifiedUser = new User(originalUser.getUserId(),originalUser.getSurname(), originalUser.getName(), originalUser.getPatronymic(), originalUser.getUsername(), originalUser.getPassword(), originalUser.getSalt(), originalUser.getCountryId(), originalUser.getLanguageId(), originalUser.getBirthDate(), originalUser.getEmailMain(), originalUser.getEmail2(), originalUser.getEmail3(), originalUser.getPhoneNumberMain(), originalUser.getPhoneNumber2(), originalUser.getPhoneNumber3(), originalUser.getPassportNumber(), originalUser.getPassportSeries(), originalUser.getPassportIssuedBy(), originalUser.getPassportIssueDate(), originalUser.getAdressMain(), originalUser.getAdress2(), originalUser.getAdress3(), originalUser.getGenderId(), status, originalUser.getCreatedDate(), originalUser.getCreatedBy(), originalUser.getChangedBy(), originalUser.getChangedDate(), originalUser.getParentId(), originalUser.getLeaderId(), originalUser.getNetwork(), careerValue, originalUser.getIsApproved(), originalUser.getInviteCode(), debtor);
         String originalJson = "[{\"id\": " + originalUser.getUserId() + ", \"career\": " + originalUser.getCareer() + ", \"status\": " + originalUser.getUserStatusId() +", \"debtor\": "+originalUser.getDebtor()+"}]";
         String modifiedJson = "[{\"id\": " + modifiedUser.getUserId() + ", \"career\": " + careerValue + ", \"status\": " + status +", \"debtor\": "+debtor+"}]";
+        System.out.println(modifiedJson);
 
 
 
