@@ -41,6 +41,8 @@ public class PutBonusesUpdateToRun {
         Bonus modifiedOne = new Bonus(originalOne.getId(), originalOne.getUserId(), originalOne.getPartnerId(), originalOne.getOperationId(), originalOne.getPurchaseId(), typeValue, originalOne.getPercent() + 1, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
         String originalJson = "[{\"id\": " + originalOne.getId() + ", \"user_id\": " + originalOne.getUserId() + ", \"partner_id\": " + originalOne.getPartnerId() + ", \"operation_id\": " + originalOne.getOperationId() + ", \"purchase_id\": " + originalOne.getPurchaseId() + ", \"type\": " + originalOne.getType() + ", \"percent\": " + originalOne.getPercent() + "}]";
         String modifiedJson = "[{\"id\": " + modifiedOne.getId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"partner_id\": " + modifiedOne.getPartnerId() + ", \"operation_id\": " + modifiedOne.getOperationId() + ", \"purchase_id\": " + modifiedOne.getPurchaseId() + ", \"type\": " + modifiedOne.getType() + ", \"percent\": " + modifiedOne.getPercent() + "}]";
+
+        System.out.println(originalJson);
         System.out.println(modifiedJson);
         // Содзаем URL
         startTime = System.currentTimeMillis();

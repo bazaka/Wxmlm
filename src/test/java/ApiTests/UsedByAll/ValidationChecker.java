@@ -29,6 +29,8 @@ public class ValidationChecker {
     public static boolean checkCareerId(int careerId) {return (careerId>=0 && careerId<=12);}
     public static boolean checkProductId (int productId){return(productId == 1 || productId == 2 || productId == 3 || productId == 4);}
     public static boolean checkIdOrNull(Object id){return (checkStringOrNull(id) || checkIdValue(Integer.valueOf(id.toString())));} // Проверка что поле содержит необязательный Id
+    public static boolean checkObjectType(int type){return (type>=1 && type<=6); }
+    public static boolean checkCommentType(int type) {return (type>=1 && type<=3); }
 
     // Date, Time
     public static boolean checkDateTimeString(String dateTime) {
