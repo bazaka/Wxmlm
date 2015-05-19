@@ -60,6 +60,7 @@ public class GetBankDetailsToRun {
                 result += line;
             }
             br.close();
+            System.out.println(result);
             JSONObject object = new JSONObject(result);
 
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));

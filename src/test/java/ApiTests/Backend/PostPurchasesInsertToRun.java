@@ -66,6 +66,7 @@ public class PostPurchasesInsertToRun {
         JSONArray reports = response.getJSONArray("reports");
         JSONObject report = reports.getJSONObject(0);
         int newOneId = report.getInt("id");
+        System.out.println(newOneId);
 
 
         //Проверяем Get-запросом, что данный обновились

@@ -57,6 +57,7 @@ public class ValidationChecker {
 
     // Boolean
     public static boolean checkBooleanValue(boolean boo){return true;}
+    public static boolean checkBooleanNumber(int boo){return (boo == 1 || boo == 0);}
 
     // Double
     public static boolean checkDoubleValue(double dbl){return  true;}
@@ -86,7 +87,7 @@ public class ValidationChecker {
     }
     public static boolean checkSwift(Object swift){
         int count = 0;
-        if(swift!=null){
+        if(!swift.equals(null)){
 
             int sfwt = Integer.valueOf(swift.toString());
             //swift.
@@ -95,8 +96,7 @@ public class ValidationChecker {
                 count++;
             }
         }
-
-        return(swift == null || (count>=5 && count<=11));
+        return(swift.equals(null) || (count>=5 && count<=11));
        /* String str = Integer.toString(swift);
         return(str.length()==8);*/
     }
