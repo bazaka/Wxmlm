@@ -19,9 +19,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by User on 5/18/2015.
@@ -68,6 +66,7 @@ public class GetCommentToRun {
             assertTrue("Incorrect text", ValidationChecker.checkStringNotNull(object.getString("text")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
+            assertEquals("Incorrect count of JSON parameters", object.length(), 7);
 
 
         }

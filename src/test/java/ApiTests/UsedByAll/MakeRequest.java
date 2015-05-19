@@ -16,7 +16,7 @@ public class MakeRequest{
         String calBeforeString = makeDateTimeString(Calendar.getInstance(), -valueInDays);
         String calAfterString = makeDateTimeString(Calendar.getInstance(), valueInDays);
         String urlString = siteUrl + urlPart + "?limit=1000&offset=0&dt_from=" + calBeforeString + "&dt_to=" + calAfterString;
-        System.out.println(urlString);
+        //System.out.println(urlString);
 
         // Содзаем HttpUrlConnection
         String authString = user.getEmail() + ":" + user.getPassword1();

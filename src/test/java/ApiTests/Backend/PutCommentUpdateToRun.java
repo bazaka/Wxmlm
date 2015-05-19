@@ -53,7 +53,7 @@ public class PutCommentUpdateToRun {
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
         Comment changedOne = new GetCommentToRun(testUser).getCommentByParameter("id", originalOne.getId(), siteUrl);
-        assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptDates(changedOne));
+        assertTrue("Check modified data saved correctly", modifiedOne.equalsExceptDates(changedOne, true));
 
         // Содзаем URL
         httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/comment/update/", "PUT", "application/json", "application/json", true);
@@ -65,7 +65,7 @@ public class PutCommentUpdateToRun {
 
         // Проверяем GET-запросом, что данные восстановились
         changedOne = new GetCommentToRun(testUser).getCommentByParameter("id", originalOne.getId(), siteUrl);
-        assertTrue("Check modified data returned correctly", originalOne.equalsExceptDates(changedOne));
+        assertTrue("Check modified data returned correctly", originalOne.equalsExceptDates(changedOne, true));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
 

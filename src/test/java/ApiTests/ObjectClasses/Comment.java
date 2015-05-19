@@ -45,7 +45,7 @@ public class Comment {
     public void setCreatedDate(String a){this.createdDate=a;}
     public void setUpdatedDate(String a){this.updatedDate=a;}
 
-    public boolean equalsExceptDates(Comment a){
+    public boolean equalsExceptDates(Comment a, boolean toCheckCreatedDate){
         if(this==a)
             return true;
         if(a==null){
@@ -74,6 +74,10 @@ public class Comment {
         }
         if(!getText().equals(a.getText())){
             System.out.println("7");
+            return false;
+        }
+        if(toCheckCreatedDate && !getCreatedDate().equals(a.getCreatedDate())){
+            System.out.println("8");
             return false;
         }
         return true;
