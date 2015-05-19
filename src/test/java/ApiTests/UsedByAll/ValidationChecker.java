@@ -55,6 +55,7 @@ public class ValidationChecker {
 
     // Boolean
     public static boolean checkBooleanValue(boolean boo){return true;}
+    public static boolean checkBooleanNumber(int boo){return (boo == 1 || boo == 0);}
 
     // Double
     public static boolean checkDoubleValue(double dbl){return  true;}
