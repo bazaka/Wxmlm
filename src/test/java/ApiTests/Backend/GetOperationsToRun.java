@@ -72,7 +72,9 @@ public class GetOperationsToRun {
             assertTrue("Incorrect type", ValidationChecker.checkOperationTypeId(object.getInt("type")));
             assertTrue("Incorrect quarantine", ValidationChecker.checkBooleanValue(object.getBoolean("quarantine")));
             assertTrue("Incorrect parent_operation_id", ValidationChecker.checkIdOrNull(object.get("parent_operation_id")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 12);
+            assertTrue("Incorrect source_user_id", ValidationChecker.checkIdValue(object.getInt("source_user_id")));
+            assertTrue("Incorrect target_user_id", ValidationChecker.checkIdValue(object.getInt("target_user_id")));
+            assertEquals("Incorrect count of Json parameters", object.length(), 14);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
@@ -95,7 +97,7 @@ public class GetOperationsToRun {
             String purchase_id = null;
             if (object.get("purchase_id") != null)
                 purchase_id = object.get("purchase_id").toString();
-            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"));
+            return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"), object.getInt("source_user_id"), object.getInt("target_user_id"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -122,7 +124,7 @@ public class GetOperationsToRun {
                     String purchase_id = null;
                     if (object.get("purchase_id") != null)
                         purchase_id = object.get("purchase_id").toString();
-                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"));
+                    return new Operation(object.getInt("id"), object.getInt("target_account_id"), object.getInt("source_account_id"), purchase_id, object.getInt("initiator_user_id"), object.getString("created_date"), object.getDouble("amount"), object.getInt("status"), object.getInt("type"), object.getBoolean("quarantine"), object.get("parent_operation_id"), object.getInt("source_user_id"), object.getInt("target_user_id"));
                 }
             }
         } catch (Exception e) {

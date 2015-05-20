@@ -40,8 +40,8 @@ public class PostOperationInsertToRun {
         long startTime;
         long elapsedTime;
         Operation originalOne = new GetOperationsToRun(testUser).getAnyOperation(testUser, siteUrl);
-        Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.getStatus(), originalOne.getType(), !originalOne.getQuarantine(), originalOne.getParentOperationId());
-        String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + ", \"parent_operation_id\": " + newOne.getParentOperationId() + "}";
+        Operation newOne = new Operation(originalOne.getId(), originalOne.getTargetAccountId(), originalOne.getSourceAccountId(), originalOne.getPurchaseId(), originalOne.getInitiatorUserId(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), originalOne.getAmount() + 50, originalOne.getStatus(), originalOne.getType(), !originalOne.getQuarantine(), originalOne.getParentOperationId(), originalOne.getSourceUserId(), originalOne.getTargetUserId());
+        String newJson = "{\"target_account_id\":\"" + newOne.getTargetAccountId() + "\", \"source_account_id\":" + newOne.getSourceAccountId() + ", \"purchase_id\":" + newOne.getPurchaseId() + ", \"initiator_user_id\": " + newOne.getInitiatorUserId() + ", \"created_date\": \"" + newOne.getCreatedDate() + "\", \"amount\": \"" + newOne.getAmount() + "\", \"status\": \"" + newOne.getStatus() + "\", \"type\": " + newOne.getType() + ", \"quarantine\": " + newOne.getQuarantine() + ", \"parent_operation_id\": " + newOne.getParentOperationId() + ", \"source_user_id\": " + newOne.getSourceUserId() + ", \"target_user_id\": " + newOne.getTargetUserId() + "}";
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
@@ -62,6 +62,7 @@ public class PostOperationInsertToRun {
         br.close();
 
         // Берем из респонса id новой операции
+        System.out.println(result);
         JSONObject response = new JSONObject(result);
         JSONArray reports = response.getJSONArray("reports");
         JSONObject report = reports.getJSONObject(0);

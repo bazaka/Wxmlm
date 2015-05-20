@@ -14,8 +14,10 @@ public class Operation {
     private int type;
     private boolean quarantine;
     private Object parentOperationId;
+    private int sourceUserId;
+    private int targetUserId;
 
-    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine, Object oParentOperationId)
+    public Operation(int oId, int oTargetAccountId, int oSourceAccountId, String oPurchaseId, int oInitiatorUserId, String oCreatedDate, double oAmount, int oStatus, int oType, boolean oQuarantine, Object oParentOperationId, int oSourceUserId, int oTargetUserId)
     {
         this.setId(oId);
         this.setTargetAccountId(oTargetAccountId);
@@ -27,7 +29,9 @@ public class Operation {
         this.setStatus(oStatus);
         this.setType(oType);
         this.setQuarantine(oQuarantine);
-
+        this.setParentOperationId(oParentOperationId);
+        this.setSourceUserId(oSourceUserId);
+        this.setTargetUserId(oTargetUserId);
     }
 
     public int getId() {return id;}
@@ -42,6 +46,8 @@ public class Operation {
     public int getType() {return type;}
     public boolean getQuarantine() {return quarantine;}
     public Object getParentOperationId() {return parentOperationId;}
+    public int getSourceUserId() {return sourceUserId;};
+    public int getTargetUserId() {return targetUserId;};
 
     public void setId(int a) {this.id = a;}
     public void setTargetAccountId(int a) {this.targetAccountId = a;}
@@ -55,6 +61,8 @@ public class Operation {
     public void setType(int a) {this.type = a;}
     public void setQuarantine(boolean a) {this.quarantine = a;}
     public void setParentOperationId(Object a) {this.parentOperationId = a;}
+    public void setSourceUserId(int a) {this.sourceUserId = a;}
+    public void setTargetUserId(int a) {this.targetUserId = a;}
 
     public boolean equalsExceptUpdatedDate(Operation a)
     {
@@ -109,6 +117,14 @@ public class Operation {
         }
         if (getParentOperationId() != a.getParentOperationId()) {
             System.out.println("11");
+            return false;
+        }
+        if (getSourceUserId() != a.getSourceUserId()) {
+            System.out.println("12");
+            return false;
+        }
+        if (getTargetUserId() != a.getTargetUserId()) {
+            System.out.println("13");
             return false;
         }
         return true;
