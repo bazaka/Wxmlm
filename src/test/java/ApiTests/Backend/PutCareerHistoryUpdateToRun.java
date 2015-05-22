@@ -49,6 +49,8 @@ public class PutCareerHistoryUpdateToRun {
         membersString = membersString + "]";
         String originalJson = "[{\"history_id\": " + originalOne.getHistoryId() + ", \"user_id\": " + originalOne.getUserId() + ", \"career\": " + originalOne.getCareer() + ", \"date\": \"" + originalOne.getDate() + "\", \"members\": " + membersString + "}]";
         String modifiedJson = "[{\"history_id\": " + modifiedOne.getHistoryId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"career\": " + modifiedOne.getCareer() + ", \"date\": \"" + modifiedOne.getDate() + "\", \"members\": " + membersString + "}]";
+        System.out.println("original: " + originalJson);
+        System.out.println("modified: " + modifiedJson);
         // Содзаем URL
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "career/api/history/update/", "PUT", "application/json", "application/json", true);

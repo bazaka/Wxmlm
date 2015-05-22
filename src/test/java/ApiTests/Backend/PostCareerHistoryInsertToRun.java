@@ -52,6 +52,7 @@ public class PostCareerHistoryInsertToRun {
         }
         membersString = membersString + "]";
         String newJson = "{\"user_id\": " + newOne.getUserId() + ", \"career\": " + newOne.getCareer() + ", \"date\": \"" + newOne.getDate() + "\", \"members\": " + membersString + "}";
+        System.out.println(newJson);
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
