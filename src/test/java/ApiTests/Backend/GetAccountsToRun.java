@@ -64,7 +64,7 @@ public class GetAccountsToRun {
 
             assertTrue("Incorrect account_id", ValidationChecker.checkIdValue(object.getInt("account_id")));
             assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-            assertTrue("Incorrect account_number", ValidationChecker.checkAccountNumberValue(object.getString("account_number")));
+            assertTrue("Incorrect account_number, id:" + object.getInt("account_id"), ValidationChecker.checkAccountNumberValue(object.getString("account_number")));
             assertTrue("Incorrect account_type", ValidationChecker.checkAccountTypeValue(object.getInt("account_type")));
             assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
             assertTrue("Incorrect account_info", ValidationChecker.checkStringNotNull(object.getString("account_info")));

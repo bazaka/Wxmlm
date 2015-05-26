@@ -65,9 +65,9 @@ public class PostFinParameterInsertToRun {
 
         // Берем из респонса id новой операции
         JSONObject response = new JSONObject(result);
-        JSONObject report = response.getJSONObject("reports");
-        int id = report.getInt("id");
-        newOne.setId(id);
+        JSONArray reports = response.getJSONArray("reports");
+        JSONObject report = reports.getJSONObject(0);
+        newOne.setId(report.getInt("id"));
 
         // Проверяем GET-запросом, что данные обновились
         FinParameter changedOne = new GetFinParameterToRun(testUser).getFinParameterByParameter("id", newOne.getId(), testUser, siteUrl);

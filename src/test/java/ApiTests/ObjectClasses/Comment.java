@@ -6,7 +6,6 @@ import org.junit.runners.Parameterized;
 /**
  * Created by User on 5/18/2015.
  */
-@RunWith(value = Parameterized.class)
 public class Comment {
     private int id;
     private int objectType;

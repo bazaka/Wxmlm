@@ -347,7 +347,7 @@ public class User {
             System.out.println("38");
             return false;
         }
-        if(getTurnoverDate()!=a.getTurnoverDate()){
+        if(!getTurnoverDate().equals(getTurnoverDate())){
             System.out.println("39");
             return false;
         }

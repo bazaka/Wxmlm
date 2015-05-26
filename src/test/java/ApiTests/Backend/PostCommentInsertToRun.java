@@ -6,6 +6,7 @@ import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
 import UsedByAll.RandomString;
 import UsedByAll.TestUser;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -60,9 +61,9 @@ public class PostCommentInsertToRun {
         br.close();
         // Берем из респонса id новой операции
         JSONObject response = new JSONObject(result);
-        JSONObject reports = response.getJSONObject("reports");
-        //JSONObject report = reports.getJSONObject();
-        newOne.setId(reports.getInt("id"));
+        JSONArray reports = response.getJSONArray("reports");
+        JSONObject report = reports.getJSONObject(0);
+        newOne.setId(report.getInt("id"));
 
         // Проверяем GET-запросом, что данные обновились
         Comment changedOne = new GetCommentToRun(testUser).getCommentByParameter("id", newOne.getId(), siteUrl);

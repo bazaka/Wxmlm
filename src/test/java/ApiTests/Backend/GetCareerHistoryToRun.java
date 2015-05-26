@@ -88,6 +88,7 @@ public class GetCareerHistoryToRun {
             result += line;
         }
         br.close();
+        System.out.println(result);
         try {
             JSONArray jsonArr = new JSONArray(result);
             assertFalse("There is an empty Array", jsonArr.length() == 0);
@@ -115,6 +116,7 @@ public class GetCareerHistoryToRun {
         while ((line = br.readLine()) != null) {
             result += line;
         }
+        System.out.println("final: " + result);
         br.close();
         try {
             JSONArray jsonArr = new JSONArray(result);
