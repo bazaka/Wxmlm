@@ -63,7 +63,7 @@ public class DeleteNetPurchaseToRun {
         JSONArray reports = response.getJSONArray("reports");
         JSONObject report = reports.getJSONObject(0);
 
-        // Проверяем GET-запросом, что данные обновились
+        // Проверяем GET-запросом, что данные удалились
         NetPurchase changedOne = new GetNetPurchasesToRun(testUser).getNetPurchaseByParameter("id", originalOne.getId(), testUser, siteUrl);
         assertNull("Check data deleted correctly", changedOne);
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
