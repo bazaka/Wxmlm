@@ -71,7 +71,7 @@ public class CareerHistory {
             return false;
         }
         for (int i = 0; i < getMembers().length; i++) {
-            if (getMembers(getMembers().length - (i + 1)) != a.getMembers(i)) {
+            if (getMembers(i) != a.getMembers(i)) {
                 System.out.println("6");
                 return false;
             }
