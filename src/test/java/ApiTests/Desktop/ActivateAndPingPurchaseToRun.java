@@ -36,10 +36,11 @@ public class ActivateAndPingPurchaseToRun {
     @Test
     public void testPutPurchaseActivationAndGetPing() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
-        Purchase purchaseToActivate = new GetMyPurchasesToRun(testUser).getMyNotActivePackage();
-        assertNotNull("There is no Not Active Purchase for this user", purchaseToActivate);
+        Purchase purchaseToActivate = new GetMyPurchasesToRun(testUser).getMyPackageToActivate();
+        assertNotNull("There is no Purchase to activate", purchaseToActivate);
         String token = new GetTokenToRun(testUser).getToken();
         String modifiedJson = "{\"token\": \"" + token + "\", \"purchase_id\":" + purchaseToActivate.getId() + "}";
+        System.out.println(modifiedJson);
 
         long startTime;
         long elapsedTime;
@@ -48,8 +49,9 @@ public class ActivateAndPingPurchaseToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
-        InputStream inStrm = httpCon.getInputStream();
+        System.out.println(httpCon.getResponseCode());
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        InputStream inStrm = httpCon.getInputStream();
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
@@ -66,15 +68,20 @@ public class ActivateAndPingPurchaseToRun {
 
         assertFalse("Sory, something went wrong: " + result, object.has("errors"));
         String packageSecureKey = object.getString("packagesecurekey");
+        System.out.println("PackageSecureKey: " + packageSecureKey);
         assertTrue("Incorrect packagesecurekey", ValidationChecker.checkPackageSecureKey(packageSecureKey));
         assertEquals("Incorrect count of JSON Objects", object.length(),1);
 
         //Ping
-        for (int i = 0; i < 20; i++) {
+        System.out.println();
+        for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
             httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/ping/?_format=json&token=" + token + "&packagesecurekey=" + packageSecureKey, "GET");
-            inStrm = httpCon.getInputStream();
+            System.out.println(httpCon.getResponseCode());
+            System.out.println(httpCon.getResponseMessage());
+            System.out.println(httpCon.getContent());
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+            inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;
             isReader = new InputStreamReader(inStrm);
             br = new BufferedReader(isReader);
@@ -88,7 +95,7 @@ public class ActivateAndPingPurchaseToRun {
             System.out.println(result);
             assertTrue("Incorrect lifetime", ValidationChecker.checkPositiveInt(object.getInt("lifetime")));
             assertEquals("Incorrect count of JSON Objects", object.length(),1);
-            Thread.sleep(10000);
+            Thread.sleep(3000);
         }
     }
 }

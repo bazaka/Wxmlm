@@ -41,6 +41,7 @@ public class PostCommentInsertToRun {
         Comment newOne = new Comment(originalOne.getId(), originalOne.getObjectType(), originalOne.getObjectId(), originalOne.getType(), RandomString.generateString(6), originalOne.getCreatedDate(), originalOne.getUpdatedDate() );
 
         String newJson = "{\"object_type\":"+ newOne.getObjectType() +", \"object_id\":" + newOne.getObjectId() +", \"type\": "+newOne.getType()+", \"text\": \""+newOne.getText()+"\"}";
+        System.out.println(newJson);
 
         // Содзаем URL
         startTime = System.currentTimeMillis();

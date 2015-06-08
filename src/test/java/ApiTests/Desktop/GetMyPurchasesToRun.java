@@ -72,7 +72,7 @@ public class GetMyPurchasesToRun {
         }
     }
 
-    public Purchase getMyNotActivePackage() throws Exception {
+    public Purchase getMyPackageToActivate() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         String token = new GetTokenToRun(testUser).getToken();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
@@ -91,7 +91,7 @@ public class GetMyPurchasesToRun {
             JSONArray jsonArr = response.getJSONArray("purchases");
             for (int i = 0; i < jsonArr.length(); i++) {
                 JSONObject object = jsonArr.getJSONObject(i);
-                if (object.getInt("status") == 1 && object.getInt("package_status") == 1) {
+                if (object.getInt("status") == 1 && (object.getInt("package_status") == 1 || object.getInt("package_status") == 3)) {
                     String terms = null;
                     if(object.get("terms")!= null)
                         terms = object.get("terms").toString();
