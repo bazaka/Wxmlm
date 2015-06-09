@@ -78,10 +78,16 @@ public class ChangeProfileDataTestToRun extends BaseTest {
 
         profilePage.editBankCardTab(profileData[0].getUserTitle(), profileData[0].getCardNumber(), profileData[0].getCardHolder(), profileData[0].getCardDate());
 
-        assertEquals("Card Title not changed", profilePage.getCardTitle(), profileData[0].getUserTitle());
-        assertEquals("Card Number not changed", profilePage.getCardNumber(), profileData[0].getCardNumber());
-        assertEquals("Card Holder not changed", profilePage.getCardHolder(), profileData[0].getCardHolder());
-        assertEquals("Expiration date not chenged", profilePage.getExpDate(), profileData[0].getCardDate());
+        assertEquals("Card Title not changed", profilePage.getLastCardTitle(), profileData[0].getUserTitle());
+        assertEquals("Card Number not changed", profilePage.getLastCardNumber(), profileData[0].getCardNumber());
+        assertEquals("Card Holder not changed", profilePage.getLastCardHolder(), profileData[0].getCardHolder());
+        assertEquals("Expiration date not chenged", profilePage.getLastExpDate(), profileData[0].getCardDate());
+
+        String cardStatusBeforeEdit = profilePage.getCardStatusInFirstCard(); //статус карты до редактирования
+        profilePage.editFirstCardToMainCard(); //редактируем карту как Main Card
+        String cardStatusAfterEdit = profilePage.getCardStatusInLastCard(); //статус карты после редактирования, после редактирования она находиться в конце списка
+
+        assertNotEquals("Card not edited", cardStatusBeforeEdit, cardStatusAfterEdit); //сравниваем значения классов
 
         int cardCount = profilePage.getCardsCount(); //подсчитать количество карт в таблице
 

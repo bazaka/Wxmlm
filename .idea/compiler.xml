@@ -27,7 +27,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="XMLM" target="1.5" />
+      <module name="XMLM" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

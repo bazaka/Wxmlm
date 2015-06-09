@@ -78,7 +78,8 @@ public class ProfilePage extends BasePage {
     public static final By cardNumber = By.id("xmlm_bundle_userbundle_card_number");
     public static final By cardHolder = By.id("xmlm_bundle_userbundle_card_cardholder");
     public static final By expDate = By.id("xmlm_bundle_userbundle_card_expiration");
-    public static final By mainCard = By.id("xmlm_bundle_userbundle_card_main");
+   // public static final By mainCard = By.id("xmlm_bundle_userbundle_card_main");
+    public static final By mainCard = By.xpath("//div[@class='form-outer']/select");
     public static final By saveCardButton = By.xpath("//form[@id='addNewCardForm']//button[text()='Save card']");
 
     public static final By tableCardTitle = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[1]/a");
@@ -87,6 +88,11 @@ public class ProfilePage extends BasePage {
     public static final By tableExpires = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[4]");
     public static final By tableDeleteCard = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[5]/a");
     public static final By tableRows = By.xpath("//table[@id='my-credit-cards']/tbody/tr");
+
+    public static final By saveCardInEditor = By.xpath("//form[@id='editCardForm']//button[text()='Save card']");
+    public static final By mainCardStatus = By.xpath("//a[@class='card-edit']/i");
+
+
 
 
 
@@ -345,23 +351,53 @@ public class ProfilePage extends BasePage {
         driver.findElement(bankCardsTab).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(addCardButton));
     }
-    public String getCardTitle(){
-        return(driver.findElement(tableCardTitle).getText());
+    public String getLastCardTitle(){
+        List<WebElement> cardTitles = driver.findElements(tableCardTitle);
+        int titleCounts = cardTitles.size() - 1;
+        return(cardTitles.get(titleCounts).getText());
+
     }
-    public String getCardNumber(){
-        return(driver.findElement(tableCardNumber).getText().trim());
+    public String getLastCardNumber(){
+        List<WebElement> cardNum = driver.findElements(tableCardNumber);
+        int numCounts = cardNum.size() - 1;
+        return(cardNum.get(numCounts).getText().trim());
     }
-    public String getCardHolder(){
-        return(driver.findElement(tableCardHolder).getText());
+    public String getLastCardHolder(){
+        List<WebElement> cardHolder = driver.findElements(tableCardHolder);
+        int holderCounts = cardHolder.size() - 1;
+        return(cardHolder.get(holderCounts).getText());
     }
-    public String getExpDate(){
-        return(driver.findElement(tableExpires).getText());
+    public String getLastExpDate(){
+        List<WebElement> cardDates = driver.findElements(tableExpires);
+        int dateCounts = cardDates.size() - 1;
+        return(cardDates.get(dateCounts).getText());
+
     }
 
     public int getCardsCount(){
         List<WebElement> cards = driver.findElements(tableRows);
         return (cards.size());
     }
+    public String getCardStatusInFirstCard(){ //берем значение класса первой карты
+        return(driver.findElement(mainCardStatus).getAttribute("class"));
+
+    }
+    public void editFirstCardToMainCard(){
+        driver.findElement(tableCardTitle).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(mainCard));
+        Select dropdownMainCard = new Select(driver.findElement(mainCard));
+        dropdownMainCard.selectByVisibleText("Yes");
+        //dropdownMainCard.selectByValue("1");
+        driver.findElement(saveCardInEditor).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popup));
+    }
+    public String getCardStatusInLastCard(){ //заносим все карты в список и берем значение атрибута последнего
+        List<WebElement> cards = driver.findElements(mainCardStatus);
+        int cardCounts = cards.size() - 1;
+        return(cards.get(cardCounts).getAttribute("class"));
+    }
+
+
     public void deleteFirstCard(){
 
         driver.findElement(tableDeleteCard).click();
