@@ -82,7 +82,7 @@ public class GetDocumentsToRun {
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 150, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url, 70, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

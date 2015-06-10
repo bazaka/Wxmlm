@@ -35,17 +35,12 @@ public class PutMerchantRequestsUpdateToRun {
         long elapsedTime;
         MerchantRequest originalOne = new GetMerchantRequestsToRun(testUser).getAnyMerchantRequest(testUser, siteUrl);
         int statusValue = originalOne.getStatus() - 1;
-        String userCommentValue = "\"" + originalOne.getUserComment().toString() + "\"";
         if(statusValue == 0){
             statusValue = 3;
         }
-        if(userCommentValue.equals("\"null\"")){
-            userCommentValue = "\"\"";
-        }
-        String adminCommentValue = userCommentValue;
-        MerchantRequest modifiedOne = new MerchantRequest(originalOne.getRequestId(), originalOne.getUserId(), originalOne.getFiles(), originalOne.getUserComment(), statusValue, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
-        String originalJson = "[{\"request_id\": " + originalOne.getRequestId() + ", \"user_id\": " + originalOne.getUserId() + ", \"admin_comment\": " + adminCommentValue + ", \"status\": " + originalOne.getStatus() + "}]";
-        String modifiedJson = "[{\"request_id\": " + originalOne.getRequestId() + ", \"user_id\": " + originalOne.getUserId() + ", \"admin_comment\": " + adminCommentValue + ", \"status\": " + statusValue + "}]";
+        MerchantRequest modifiedOne = new MerchantRequest(originalOne.getRequestId(), originalOne.getUserId(), originalOne.getFiles(), statusValue, originalOne.getCreatedDate(), originalOne.getUpdatedDate());
+        String originalJson = "[{\"request_id\": " + originalOne.getRequestId() + ", \"user_id\": " + originalOne.getUserId() + ", \"status\": " + originalOne.getStatus() + "}]";
+        String modifiedJson = "[{\"request_id\": " + originalOne.getRequestId() + ", \"user_id\": " + originalOne.getUserId() + ", \"status\": " + statusValue + "}]";
         // Содзаем URL
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "money/api/merchant-requests/update/", "PUT", "application/json", "application/json", true);

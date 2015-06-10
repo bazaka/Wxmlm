@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class ValidationChecker {
     // Null - NotNull
-    public static boolean checkStringNotNull(String str){return (str != null && !str.equals(""));}
+    public static boolean checkStringNotNull(String str){return (str != null && str.length() >= 0);}
     public static boolean checkStringOrNull(Object str) {return str == null || str.toString().length() >= 0;}
     public static boolean checkNull(Object obj){return obj.equals(null);}
 

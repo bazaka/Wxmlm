@@ -68,13 +68,11 @@ public class GetApprovesToRun {
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("create_date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("update_date")));
             assertTrue("Incorrect approve_date", ValidationChecker.checkStringOrNull(object.getString("approve_date")));
-            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.get("user_comment")));
-            assertTrue("Incorrect admin_comment", ValidationChecker.checkStringOrNull(object.get("admin_comment")));
             assertTrue("Incorrect status", ValidationChecker.checkApproveStatus(object.getInt("status")));
             for (int j = 0; j < documents.length(); j++) {
                 assertTrue("Incorrect documents",ValidationChecker.checkIdValue(documents.getInt(j)));
             }
-            assertEquals("Incorrect count of Json parameters", object.length(), 10);
+            assertEquals("Incorrect count of Json parameters", object.length(), 8);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
@@ -100,7 +98,7 @@ public class GetApprovesToRun {
             for (int i = 0; i < documentsArray.length(); i++) {
                 documents[i] = documentsArray.getInt(i);
             }
-            return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
+            return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.getInt("status"), documents);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -130,7 +128,7 @@ public class GetApprovesToRun {
                     documents[j] = documentsArray.getInt(j);
                 }
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.get("user_comment"), object.get("admin_comment"), object.getInt("status"), documents);
+                    return new Approve(object.getInt("id"), object.getInt("user_id"), object.get("approve_user_id"), object.getString("create_date"), object.getString("update_date"), object.get("approve_date"), object.getInt("status"), documents);
                 }
             }
         } catch (Exception e) {

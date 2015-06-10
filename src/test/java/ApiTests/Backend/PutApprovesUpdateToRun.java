@@ -38,23 +38,15 @@ public class PutApprovesUpdateToRun {
         Approve originalOne = new GetApprovesToRun(testUser).getAnyApprove(siteUrl);
         int statusValue = originalOne.getStatus() - 1;
         String approveUserIdValue = originalOne.getApproveUserId().toString();
-        String userCommentValue = originalOne.getUserComment().toString().replaceAll("\r\n", "\\\\r\\\\n");
-        String adminCommentValue = originalOne.getAdminComment().toString().replaceAll("\r\n", "\\\\r\\\\n");
         if(statusValue == -1){
             statusValue = 2;
         }
         if(approveUserIdValue.equals("")){
             approveUserIdValue = "1";
         }
-        if(userCommentValue.equals("null")){
-            userCommentValue = "";
-        }
-        if(adminCommentValue.equals("null")){
-            adminCommentValue = "";
-        }
-        Approve modifiedOne = new Approve(originalOne.getId(), originalOne.getUserId(), 1, originalOne.getCreateDate(), originalOne.getUpdateDate(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), userCommentValue + "1", adminCommentValue + "2", statusValue, originalOne.getDocuments());
-        String originalJson = "[{\"id\": " + originalOne.getId() + ", \"user_id\": " + originalOne.getUserId() + ", \"approve_user_id\": " + approveUserIdValue + ", \"create_date\": \"" + originalOne.getCreateDate() + "\", \"approve_date\": \"" + originalOne.getApproveDate() + "\", \"user_comment\": \"" + userCommentValue + "\", \"admin_comment\": \"" + adminCommentValue + "\", \"status\": " + originalOne.getStatus() + "}]";
-        String modifiedJson = "[{\"id\": " + modifiedOne.getId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"approve_user_id\": " + modifiedOne.getApproveUserId() + ", \"create_date\": \"" + modifiedOne.getCreateDate() + "\", \"approve_date\": \"" + modifiedOne.getApproveDate() + "\", \"user_comment\": \"" + modifiedOne.getUserComment() + "\", \"admin_comment\": \"" + modifiedOne.getAdminComment() + "\", \"status\": " + modifiedOne.getStatus() + "}]";
+        Approve modifiedOne = new Approve(originalOne.getId(), originalOne.getUserId(), 1, originalOne.getCreateDate(), originalOne.getUpdateDate(), DateForAPI.makeDateTimeString(Calendar.getInstance(), 0), statusValue, originalOne.getDocuments());
+        String originalJson = "[{\"id\": " + originalOne.getId() + ", \"user_id\": " + originalOne.getUserId() + ", \"approve_user_id\": " + approveUserIdValue + ", \"create_date\": \"" + originalOne.getCreateDate() + "\", \"approve_date\": \"" + originalOne.getApproveDate() + "\", \"status\": " + originalOne.getStatus() + "}]";
+        String modifiedJson = "[{\"id\": " + modifiedOne.getId() + ", \"user_id\": " + modifiedOne.getUserId() + ", \"approve_user_id\": " + modifiedOne.getApproveUserId() + ", \"create_date\": \"" + modifiedOne.getCreateDate() + "\", \"approve_date\": \"" + modifiedOne.getApproveDate() + "\", \"status\": " + modifiedOne.getStatus() + "}]";
         // Содзаем URL
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/approves/update/", "PUT", "application/json", "application/json", true);

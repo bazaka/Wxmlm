@@ -67,11 +67,10 @@ public class GetMerchantRequestsToRun {
             for (int j = 0; j < files.length(); j++) {
                 assertTrue("Incorrect files",ValidationChecker.checkURLOnDomain(files.getString(j), siteUrl));
             }
-            assertTrue("Incorrect user_comment", ValidationChecker.checkStringOrNull(object.get("user_comment")));
             assertTrue("Incorrect status", ValidationChecker.checkMerchantRequestStatus(object.getInt("status")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 7);
+            assertEquals("Incorrect count of Json parameters", 6, object.length());
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
@@ -97,7 +96,7 @@ public class GetMerchantRequestsToRun {
             for (int i = 0; i < filesArray.length(); i++) {
                 files[i] = filesArray.getString(i);
             }
-            return new MerchantRequest(object.getInt("request_id"), object.getInt("user_id"), files, object.get("user_comment"), object.getInt("status"), object.getString("created_date"), object.getString("updated_date"));
+            return new MerchantRequest(object.getInt("request_id"), object.getInt("user_id"), files, object.getInt("status"), object.getString("created_date"), object.getString("updated_date"));
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -126,7 +125,7 @@ public class GetMerchantRequestsToRun {
                     for (int j = 0; j < filesArray.length(); j++) {
                         files[j] = filesArray.getString(j);
                     }
-                    return new MerchantRequest(object.getInt("request_id"), object.getInt("user_id"), files, object.get("user_comment"), object.getInt("status"), object.getString("created_date"), object.getString("updated_date"));
+                    return new MerchantRequest(object.getInt("request_id"), object.getInt("user_id"), files, object.getInt("status"), object.getString("created_date"), object.getString("updated_date"));
                 }
             }
         } catch (Exception e) {

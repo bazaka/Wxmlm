@@ -70,7 +70,7 @@ public class GetAccountsToRun {
             assertTrue("Incorrect account_info", ValidationChecker.checkStringNotNull(object.getString("account_info")));
             assertTrue("Incorrect amount", ValidationChecker.checkDoubleValue(object.getDouble("amount")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertEquals("Incorrect count of Json parameters", object.length(), 8);
+            assertEquals("Incorrect count of Json parameters", 8, object.length());
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

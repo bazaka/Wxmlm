@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.nio.BufferOverflowException;
 import java.util.Collection;
 
 import static junit.framework.TestCase.assertFalse;
@@ -49,32 +50,50 @@ public class GetDocumentsByIdToRun {
             //создаем соединение
 
             HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, url+ids[i], "GET");
+            InputStream inStrm;
+            InputStreamReader isReader;
+            BufferedReader br;
+            String result;
             assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200) || (httpCon.getResponseCode() == 404));
-            InputStream inStrm = httpCon.getInputStream();
-            InputStreamReader isReader = new InputStreamReader(inStrm);
-            BufferedReader br = new BufferedReader(isReader);
-            String result = "";
-            String line;
-            while((line=br.readLine()) !=null){
-                result+=line;
+            if (httpCon.getResponseCode() == 404) {
+                inStrm = httpCon.getErrorStream();
+                isReader = new InputStreamReader(inStrm);
+                br = new BufferedReader(isReader);
+                result = "";
+                String line;
+                while((line=br.readLine()) !=null){
+                    result+=line;
+                }
+                System.out.println(result);
+                br.close();
             }
-            br.close();
-            assertFalse("Response contains html in its body", RegionMatch.IsStringRegionMatch(result, "<br />"));
-            JSONObject object = new JSONObject(result);
-            if(object.has("[]")) {
-                assertTrue("Object have empty array", object.has("[]"));
-                System.out.println("Product with ID" + ids[i] + " is not found");
-            }else
-            {
-                assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-                assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
-                assertTrue("Incorrect file_name", ValidationChecker.checkFileName(object.getString("file_name")));
-                assertTrue("Incorrect path", ValidationChecker.checkStringNotNull(object.getString("path")));
-                assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
-                assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
-                assertTrue("Incorrect source", ValidationChecker.checkStringNotNull(object.get("source").toString()));
-                assertTrue("Incorrect md5", ValidationChecker.checkStringNotNull(object.getString("md5")));
-                assertEquals("Incorrect count of object attributes", object.length(), 8);
+            else {
+                inStrm = httpCon.getInputStream();
+                isReader = new InputStreamReader(inStrm);
+                br = new BufferedReader(isReader);
+                result = "";
+                String line;
+                while((line=br.readLine()) !=null){
+                    result+=line;
+                }
+                br.close();
+                assertFalse("Response contains html in its body", RegionMatch.IsStringRegionMatch(result, "<br />"));
+                JSONObject object = new JSONObject(result);
+                if(object.has("[]")) {
+                    assertTrue("Object have empty array", object.has("[]"));
+                    System.out.println("Product with ID" + ids[i] + " is not found");
+                }else
+                {
+                    assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
+                    assertTrue("Incorrect user_id", ValidationChecker.checkIdValue(object.getInt("user_id")));
+                    assertTrue("Incorrect file_name", ValidationChecker.checkFileName(object.getString("file_name")));
+                    assertTrue("Incorrect path", ValidationChecker.checkStringNotNull(object.getString("path")));
+                    assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
+                    assertTrue("Incorrect status", ValidationChecker.checkBooleanValue(object.getBoolean("status")));
+                    assertTrue("Incorrect source", ValidationChecker.checkStringNotNull(object.get("source").toString()));
+                    assertTrue("Incorrect md5", ValidationChecker.checkStringNotNull(object.getString("md5")));
+                    assertEquals("Incorrect count of object attributes", object.length(), 8);
+                }
             }
         }
     }

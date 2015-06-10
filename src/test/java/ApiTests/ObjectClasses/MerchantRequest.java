@@ -5,17 +5,15 @@ public class MerchantRequest {
     private int requestId;
     private int userId;
     private String[] files;
-    private Object userComment;
     private int status;
     private String createdDate;
     private String updatedDate;
 
-    public MerchantRequest(int requestId, int userId, String[] files, Object userComment, int status, String createdDate, String updatedDate)
+    public MerchantRequest(int requestId, int userId, String[] files, int status, String createdDate, String updatedDate)
     {
         this.setRequestId(requestId);
         this.setUserId(userId);
         this.setFiles(files);
-        this.setUserComment(userComment);
         this.setStatus(status);
         this.setCreatedDate(createdDate);
         this.setUpdatedDate(updatedDate);
@@ -25,7 +23,6 @@ public class MerchantRequest {
     public int getUserId() {return userId;}
     public String[] getFiles() {return files;}
     public String getFile(int i) {return files[i];}
-    public Object getUserComment() {return userComment;}
     public int getStatus() {return status;}
     public String getCreatedDate() {return createdDate;}
     public String getUpdatedDate() {return updatedDate;}
@@ -34,7 +31,6 @@ public class MerchantRequest {
     public void setUserId(int a) {this.userId = a;}
     public void setFiles(String[] a) {this.files = a;}
     public void setFile(int elementNumber, String a) {this.files[elementNumber] = a;}
-    public void setUserComment(Object a) {this.userComment = a;}
     public void setStatus(int a) {this.status = a;}
     public void setCreatedDate(String a) {this.createdDate = a;}
     public void setUpdatedDate(String a) {this.updatedDate = a;}
@@ -64,10 +60,6 @@ public class MerchantRequest {
                 System.out.println("6");
                 return false;
             }
-        }
-        if (!getUserComment().equals(a.getUserComment())) {
-            System.out.println("7");
-            return false;
         }
         if (getStatus() != a.getStatus()) {
             System.out.println("8");

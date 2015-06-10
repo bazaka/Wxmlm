@@ -60,8 +60,8 @@ public class GetCommentToRun {
             JSONObject object = jsonArr.getJSONObject(i);
 
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect object_type", ValidationChecker.checkObjectType(object.getInt("object_type")));
-            assertTrue("Incorrect object_id", ValidationChecker.checkIdValue(object.getInt("object_id")));
+            assertTrue("Incorrect object_type", ValidationChecker.checkIdOrNull(object.get("object_type")));
+            assertTrue("Incorrect object_id", ValidationChecker.checkIdOrNull(object.get("object_id")));
             assertTrue("Incorrect type", ValidationChecker.checkCommentType(object.getInt("type")));
             assertTrue("Incorrect text", ValidationChecker.checkStringNotNull(object.getString("text")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));

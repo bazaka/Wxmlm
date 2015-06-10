@@ -10,13 +10,11 @@ public class Approve {
     private String createDate;
     private String updateDate;
     private Object approveDate;
-    private Object userComment;
-    private Object adminComment;
     private int status;
     private int[] documents;
 
     // Constructors
-    public Approve(int id, int userId, Object approveUserId, String createDate, String updateDate, Object approveDate, Object userComment, Object adminComment, int status, int[] documents)
+    public Approve(int id, int userId, Object approveUserId, String createDate, String updateDate, Object approveDate, int status, int[] documents)
     {
         this.setId(id);
         this.setUserId(userId);
@@ -24,8 +22,6 @@ public class Approve {
         this.setCreateDate(createDate);
         this.setUpdateDate(updateDate);
         this.setApproveDate(approveDate);
-        this.setUserComment(userComment);
-        this.setAdminComment(adminComment);
         this.setStatus(status);
         this.setDocuments(documents);
     }
@@ -37,8 +33,6 @@ public class Approve {
     public String getCreateDate() {return createDate;}
     public String getUpdateDate() {return updateDate;}
     public Object getApproveDate() {return approveDate;}
-    public Object getUserComment() {return userComment;}
-    public Object getAdminComment() {return adminComment;}
     public int getStatus() {return status;}
     public int[] getDocuments() {return documents;}
     public int getDocuments(int i) {return documents[i];}
@@ -50,8 +44,6 @@ public class Approve {
     public void setCreateDate(String a) {this.createDate = a;}
     public void setUpdateDate(String a) {this.updateDate = a;}
     public void setApproveDate(Object a) {this.approveDate = a;}
-    public void setUserComment(Object a) {this.userComment = a;}
-    public void setAdminComment(Object a) {this.adminComment = a;}
     public void setStatus(int a) {this.status = a;}
     public void setDocuments(int[] a) {this.documents = a;}
     public void setDocuments(int elementNumber, int a) {this.documents[elementNumber] = a;}
@@ -82,16 +74,6 @@ public class Approve {
         }
         if (!getApproveDate().equals(a.getApproveDate())) {
             System.out.println("7");
-            return false;
-        }
-        if (!getUserComment().equals(a.getUserComment()) && !getUserComment().equals("") && a.getUserComment().equals("")) {
-
-            System.out.println("8");
-            return false;
-        }
-        if (!getAdminComment().equals(a.getAdminComment()) && !getAdminComment().equals(null) && a.getAdminComment().equals(null)) {
-
-            System.out.println("9");
             return false;
         }
         if (getStatus() != a.getStatus()) {
