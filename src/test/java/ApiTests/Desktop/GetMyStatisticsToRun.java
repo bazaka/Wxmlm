@@ -33,11 +33,11 @@ public class GetMyStatisticsToRun {
     @Test
     public void testGetMyStatistics() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
-        String token = new GetTokenToRun(testUser).getToken();
+        //String token = new GetTokenToRun(testUser).getToken();
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-statistic/?_format=json&token=" + token + "&", 20, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl,testUser, "users/api/desktop/get-statistic/?_format=json", 20, "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

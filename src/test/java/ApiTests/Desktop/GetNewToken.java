@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/16/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetNewTokenToRun {
+public class GetNewToken {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -31,7 +31,7 @@ public class GetNewTokenToRun {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetNewTokenToRun(TestUser user){
+    public GetNewToken(TestUser user){
         this.testUser=user;
     }
 
@@ -42,7 +42,7 @@ public class GetNewTokenToRun {
         long startTime;
         long elapsedTime;
 
-        String token = new GetTokenToRun(testUser).getToken();
+        String token = new GetToken(testUser).getToken();
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-new-token/?_format=json&token="+token, "GET");
         InputStream inStrm = httpCon.getInputStream();

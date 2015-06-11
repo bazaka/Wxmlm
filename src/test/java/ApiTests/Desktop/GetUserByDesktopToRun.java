@@ -22,25 +22,25 @@ import static org.junit.Assert.*;
  * Created by User on 3/17/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetUserByTokenToRun {
+public class GetUserByDesktopToRun {
     private TestUser testUser;
     @Parameterized.Parameters
     public static Collection testData() {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetUserByTokenToRun(TestUser user){
+    public GetUserByDesktopToRun(TestUser user){
         this.testUser=user;
     }
     @Test
-    public void getUserByToken() throws Exception {
+    public void getUserByDesktop() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         long startTime;
         long elapsedTime;
 
-        String token = new GetTokenToRun(testUser).getToken();
+        //String token = new GetTokenToRun(testUser).getToken();
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-user/?_format=json&token=" + token, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-user/?_format=json", "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;

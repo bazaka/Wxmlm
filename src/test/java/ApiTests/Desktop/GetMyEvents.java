@@ -25,14 +25,14 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/17/2015.
  */
 @RunWith(value = Parameterized.class)
-public class GetMyEventsToRun {
+public class GetMyEvents {
     private TestUser testUser;
     @Parameterized.Parameters
     public static Collection testData() {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetMyEventsToRun(TestUser user){this.testUser = user;}
+    public GetMyEvents(TestUser user){this.testUser = user;}
 
     @Test
     public void getEvents() throws Exception {
@@ -40,7 +40,7 @@ public class GetMyEventsToRun {
         long startTime;
         long elapsedTime;
 
-        String token = new GetTokenToRun(testUser).getToken();
+        String token = new GetToken(testUser).getToken();
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-events/?_format=json&token=" + token, "GET");
         InputStream inStrm = httpCon.getInputStream();

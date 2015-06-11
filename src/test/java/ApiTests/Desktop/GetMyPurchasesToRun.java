@@ -34,13 +34,13 @@ public class GetMyPurchasesToRun {
     }
 
     @Test
-    public void testGetToken() throws Exception {
+    public void testGetMyPurchases() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
-        String token = new GetTokenToRun(testUser).getToken();
+        //String token = new GetTokenToRun(testUser).getToken();
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-purchases/?_format=json", "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -61,6 +61,7 @@ public class GetMyPurchasesToRun {
         for (int i=0; i<purchases.length(); i++){
             JSONObject purchase = purchases.getJSONObject(i);
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(purchase.getInt("id")));
+            System.out.println(purchase.getInt("id"));
             assertTrue("Incorrect buyer_user_id", ValidationChecker.checkIdValue(purchase.getInt("buyer_user_id")));
             assertTrue("Incorrect product_id", ValidationChecker.checkProductId(purchase.getInt("product_id")));
             assertTrue("Incorrect price", ValidationChecker.checkMoneyFormat(purchase.get("price").toString()));
@@ -74,8 +75,8 @@ public class GetMyPurchasesToRun {
 
     public Purchase getMyPackageToActivate() throws Exception {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
-        String token = new GetTokenToRun(testUser).getToken();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-purchases/?_format=json&token=" + token, "GET");
+        //String token = new GetTokenToRun(testUser).getToken();
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/get-purchases/?_format=json", "GET");
         InputStream inStrm = httpCon.getInputStream();
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStreamReader isReader = new InputStreamReader(inStrm);

@@ -38,18 +38,19 @@ public class ActivateAndPingPurchaseToRun {
         String siteUrl = UsedByAll.Config.getConfig().getProtocol() + UsedByAll.Config.getConfig().getScheme(); // Урл проверяемого сайта
         Purchase purchaseToActivate = new GetMyPurchasesToRun(testUser).getMyPackageToActivate();
         assertNotNull("There is no Purchase to activate", purchaseToActivate);
-        String token = new GetTokenToRun(testUser).getToken();
-        String modifiedJson = "{\"token\": \"" + token + "\", \"purchase_id\":" + purchaseToActivate.getId() + "}";
+        //String token = new GetTokenToRun(testUser).getToken();
+        String modifiedJson = "{\"purchase_id\":" + purchaseToActivate.getId() + "}";
         System.out.println(modifiedJson);
 
         long startTime;
         long elapsedTime;
         startTime = System.currentTimeMillis();
-        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/activation/", "PUT", "application/json", "application/json", true);
+        HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, testUser, "users/api/desktop/activation/", "PUT", "application/json", "application/json", true);
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
         System.out.println(httpCon.getResponseCode());
+        System.out.println(httpCon.getResponseMessage());
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStream inStrm = httpCon.getInputStream();
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -72,11 +73,12 @@ public class ActivateAndPingPurchaseToRun {
         assertTrue("Incorrect packagesecurekey", ValidationChecker.checkPackageSecureKey(packageSecureKey));
         assertEquals("Incorrect count of JSON Objects", object.length(),1);
 
+        System.out.println("Product has been activated");
         //Ping
         System.out.println();
         for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
-            httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/ping/?_format=json&token=" + token + "&packagesecurekey=" + packageSecureKey, "GET");
+            httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "GET");
             System.out.println(httpCon.getResponseCode());
             System.out.println(httpCon.getResponseMessage());
             System.out.println(httpCon.getContent());
