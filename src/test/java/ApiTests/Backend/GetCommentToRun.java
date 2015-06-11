@@ -60,13 +60,20 @@ public class GetCommentToRun {
             JSONObject object = jsonArr.getJSONObject(i);
 
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
-            assertTrue("Incorrect object_type", ValidationChecker.checkIdOrNull(object.get("object_type")));
-            assertTrue("Incorrect object_id", ValidationChecker.checkIdOrNull(object.get("object_id")));
-            assertTrue("Incorrect type", ValidationChecker.checkCommentType(object.getInt("type")));
+            assertTrue("Incorrect type_id", ValidationChecker.checkCommentType(object.getInt("type_id")));
             assertTrue("Incorrect text", ValidationChecker.checkStringNotNull(object.getString("text")));
+            assertTrue("Incorrect user_id", ValidationChecker.checkIdOrNull(object.get("user_id")));
+            assertTrue("Incorrect purchase_id", ValidationChecker.checkIdOrNull(object.get("purchase_id")));
+            assertTrue("Incorrect operation_id", ValidationChecker.checkIdOrNull(object.get("operation_id")));
+            assertTrue("Incorrect account_id", ValidationChecker.checkIdOrNull(object.get("account_id")));
+            assertTrue("Incorrect recharge_request_id", ValidationChecker.checkIdOrNull(object.get("recharge_request_id")));
+            assertTrue("Incorrect withdraw_request_id", ValidationChecker.checkIdOrNull(object.get("withdraw_request_id")));
+            assertTrue("Incorrect verification_request_id", ValidationChecker.checkIdOrNull(object.get("verification_request_id")));
+            assertTrue("Incorrect front_event_type_id", ValidationChecker.checkIdOrNull(object.get("front_event_type_id")));
+            assertTrue("Incorrect back_event_type_id", ValidationChecker.checkIdOrNull(object.get("back_event_type_id")));
             assertTrue("Incorrect created_date", ValidationChecker.checkDateTimeString(object.getString("created_date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
-            assertEquals("Incorrect count of JSON parameters", object.length(), 7);
+            assertEquals("Incorrect count of JSON parameters", object.length(), 14);
 
 
         }
@@ -89,7 +96,7 @@ public class GetCommentToRun {
             JSONArray jsonArr = new JSONArray(result);
             assertFalse("There is an empty Array", jsonArr.length()==0);
             JSONObject object = jsonArr.getJSONObject(0);
-            return new Comment(object.getInt("id"), object.getInt("object_type"), object.getInt("object_id"), object.getInt("type"), object.getString("text"), object.getString("created_date"), object.getString("updated_date"));
+            return new Comment(object.getInt("id"), object.getInt("type_id"), object.getString("text"), object.get("user_id"), object.get("purchase_id"), object.get("operation_id"), object.get("account_id"), object.get("recharge_request_id"), object.get("withdraw_request_id"), object.get("verification_request_id"), object.get("front_event_type_id"), object.get("back_event_type_id"), object.getString("created_date"), object.getString("updated_date"));
 
         }
         catch(Exception e){
@@ -115,7 +122,7 @@ public class GetCommentToRun {
             for(int i=0; i<jsonArr.length(); i++){
                 JSONObject object = jsonArr.getJSONObject(i);
                 if (object.getInt(parameterName) == parameterValue) {
-                    return new Comment(object.getInt("id"), object.getInt("object_type"), object.getInt("object_id"), object.getInt("type"), object.getString("text"), object.getString("created_date"), object.getString("updated_date"));
+                    return new Comment(object.getInt("id"), object.getInt("type_id"), object.getString("text"), object.get("user_id"), object.get("purchase_id"), object.get("operation_id"), object.get("account_id"), object.get("recharge_request_id"), object.get("withdraw_request_id"), object.get("verification_request_id"), object.get("front_event_type_id"), object.get("back_event_type_id"), object.getString("created_date"), object.getString("updated_date"));
                 }
             }
 

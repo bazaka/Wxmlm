@@ -72,7 +72,7 @@ public class GetApprovesToRun {
             for (int j = 0; j < documents.length(); j++) {
                 assertTrue("Incorrect documents",ValidationChecker.checkIdValue(documents.getInt(j)));
             }
-            assertEquals("Incorrect count of Json parameters", object.length(), 8);
+            assertEquals("Incorrect count of Json parameters", 8, object.length());
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }

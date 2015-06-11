@@ -38,10 +38,10 @@ public class PutCommentUpdateToRun {
         long startTime;
         long elapsedTime;
         Comment originalOne = new GetCommentToRun(testUser).getAnyComment(siteUrl);
-        Comment modifiedOne = new Comment(originalOne.getId(), originalOne.getObjectType(), originalOne.getObjectId(), originalOne.getType(), RandomString.generateString(6), originalOne.getCreatedDate(), originalOne.getUpdatedDate() );
+        Comment modifiedOne = new Comment(originalOne.getId(), originalOne.getTypeId(), RandomString.generateString(6), originalOne.getUserId(), originalOne.getPurchaseId(), originalOne.getOperationId(), originalOne.getAccountId(), originalOne.getRechargeRequestId(), originalOne.getWithdrawRequestId(), originalOne.getVerificationRequestId(), originalOne.getFrontEventTypeId(), originalOne.getBackEventTypeId(), originalOne.getCreatedDate(), originalOne.getUpdatedDate());
 
-        String originalJson = "[{\"id\":"+originalOne.getId() +", \"object_type\":"+ originalOne.getObjectType() +", \"object_id\":" + originalOne.getObjectId() +", \"type\": "+originalOne.getType()+", \"text\": \""+originalOne.getText()+"\"}]";
-        String modifiedJson = "[{\"id\":"+modifiedOne.getId() +", \"object_type\":"+ modifiedOne.getObjectType() +", \"object_id\":" + modifiedOne.getObjectId() +", \"type\": "+modifiedOne.getType()+", \"text\": \""+modifiedOne.getText()+"\"}]";
+        String originalJson = "[{\"id\":"+originalOne.getId() + ", \"type_id\": " + originalOne.getTypeId() + ", \"text\": \"" + originalOne.getText() + "\", \"user_id\": " + originalOne.getUserId() + ", \"purchase_id\": " + originalOne.getPurchaseId() + ", \"operation_id\": " + originalOne.getOperationId() + ", \"account_id\": " + originalOne.getAccountId() + ", \"recharge_request_id\": " + originalOne.getRechargeRequestId() + ", \"withdraw_request_id\": " + originalOne.getWithdrawRequestId() + ", \"verification_request_id\": " + originalOne.getVerificationRequestId() + ", \"back_event_type_id\": " + originalOne.getBackEventTypeId() + "}]";
+        String modifiedJson = "[{\"id\":"+modifiedOne.getId() + ", \"type_id\": " + modifiedOne.getTypeId() + ", \"text\": \"" + modifiedOne.getText() + "\", \"user_id\": " + modifiedOne.getUserId() + ", \"purchase_id\": " + modifiedOne.getPurchaseId() + ", \"operation_id\": " + modifiedOne.getOperationId() + ", \"account_id\": " + modifiedOne.getAccountId() + ", \"recharge_request_id\": " + modifiedOne.getRechargeRequestId() + ", \"withdraw_request_id\": " + modifiedOne.getWithdrawRequestId() + ", \"verification_request_id\": " + modifiedOne.getVerificationRequestId() + ", \"back_event_type_id\": " + modifiedOne.getBackEventTypeId() + "}]";
 
         // Содзаем URL
         startTime = System.currentTimeMillis();

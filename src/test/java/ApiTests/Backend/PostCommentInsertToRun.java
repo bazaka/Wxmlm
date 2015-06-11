@@ -38,9 +38,9 @@ public class PostCommentInsertToRun {
         long startTime;
         long elapsedTime;
         Comment originalOne = new GetCommentToRun(testUser).getAnyComment(siteUrl);
-        Comment newOne = new Comment(originalOne.getId(), originalOne.getObjectType(), originalOne.getObjectId(), originalOne.getType(), RandomString.generateString(6), originalOne.getCreatedDate(), originalOne.getUpdatedDate() );
+        Comment newOne = new Comment(originalOne.getId(), originalOne.getTypeId(), RandomString.generateString(6), originalOne.getUserId(), originalOne.getPurchaseId(), originalOne.getOperationId(), originalOne.getAccountId(), originalOne.getRechargeRequestId(), originalOne.getWithdrawRequestId(), originalOne.getVerificationRequestId(), originalOne.getFrontEventTypeId(), originalOne.getBackEventTypeId(), originalOne.getCreatedDate(), originalOne.getUpdatedDate());
 
-        String newJson = "{\"object_type\":"+ newOne.getObjectType() +", \"object_id\":" + newOne.getObjectId() +", \"type\": "+newOne.getType()+", \"text\": \""+newOne.getText()+"\"}";
+        String newJson = "{\"type_id\": " + newOne.getTypeId() + ", \"text\": \"" + newOne.getText() + "\", \"user_id\": " + newOne.getUserId() + ", \"purchase_id\": " + newOne.getPurchaseId() + ", \"operation_id\": " + newOne.getOperationId() + ", \"account_id\": " + newOne.getAccountId() + ", \"recharge_request_id\": " + newOne.getRechargeRequestId() + ", \"withdraw_request_id\": " + newOne.getWithdrawRequestId() + ", \"verification_request_id\": " + newOne.getVerificationRequestId() + ", \"back_event_type_id\": " + newOne.getBackEventTypeId() + "}";
         System.out.println(newJson);
 
         // Содзаем URL
