@@ -50,8 +50,6 @@ public class ActivateAndPingPurchaseToRun {
         out.write(modifiedJson);
         out.close();
         String cookies = httpCon.getHeaderField("Set-Cookie");
-        System.out.println(httpCon.getResponseCode());
-        System.out.println(httpCon.getResponseMessage());
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         InputStream inStrm = httpCon.getInputStream();
         elapsedTime = System.currentTimeMillis() - startTime;
@@ -82,7 +80,6 @@ public class ActivateAndPingPurchaseToRun {
             httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "GET", cookies);
             System.out.println(httpCon.getResponseCode());
             System.out.println(httpCon.getResponseMessage());
-            System.out.println(httpCon.getContent());
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
             inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;
