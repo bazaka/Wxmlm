@@ -72,7 +72,7 @@ public class Comment {
     public void setCreatedDate(String a){this.createdDate=a;}
     public void setUpdatedDate(String a){this.updatedDate=a;}
 
-    public boolean equalsExceptDates(Comment a, boolean toCheckCreatedDate){
+    public boolean equalsExceptDates(Comment a, boolean toCheckCreatedDate, boolean toCheckFrontEventTypeId){
         if(this==a)
             return true;
         if(a==null){
@@ -123,7 +123,7 @@ public class Comment {
             System.out.println("16");
             return false;
         }
-        if(!getFrontEventTypeId().equals(a.getFrontEventTypeId())){
+        if(toCheckFrontEventTypeId && !getFrontEventTypeId().equals(a.getFrontEventTypeId())){
             System.out.println("17");
             return false;
         }

@@ -63,7 +63,7 @@ public class ValidationChecker {
     public static boolean checkDoubleValue(double dbl){return  true;}
 
     // Special
-    public static boolean checkAccountNumberValue(String accountNumber){return (accountNumber.length() >= 12);}
+    public static boolean checkAccountNumberValue(String accountNumber){return (accountNumber.length() >= 7);}
     public static boolean checkAccountTypeValue(int accountType){return (accountType == 10 || accountType == 20 || accountType == 30);}
     public static boolean checkBonusTypeValue(int bonusType){return bonusType >= 1 && bonusType <= 7;}
     public static boolean checkMoneyFormat(String amount){return Integer.valueOf(amount) == Integer.parseInt(amount) || (Integer.valueOf(amount.split(".")[0]) > 0 && Integer.valueOf(amount.split(".")[1]) > 0 && amount.split(".")[1].length() <= 2);}
@@ -86,19 +86,7 @@ public class ValidationChecker {
         return m.matches();
     }
     public static boolean checkSwift(Object swift){
-        int count = 0;
-        if(!swift.equals(null)){
-
-            int sfwt = Integer.valueOf(swift.toString());
-            //swift.
-            while(sfwt>1){
-                sfwt=sfwt/10;
-                count++;
-            }
-        }
-        return(swift.equals(null) || (count>=5 && count<=11));
-       /* String str = Integer.toString(swift);
-        return(str.length()==8);*/
+       return(swift.toString().length()>=8);
     }
     public static boolean checkEventName(Object event){
         return(event.toString().equals("purchase") || event.toString().equals("user"));
