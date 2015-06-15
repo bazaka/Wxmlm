@@ -16,6 +16,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -59,8 +60,8 @@ public class PostWithdrawInsertToRun {
         assertFalse("NewJson is null", newJson == null);
         out.write(newJson);
         out.close();
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         InputStream inStrm = httpCon.getInputStream();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);

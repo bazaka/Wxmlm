@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.util.Calendar;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -49,8 +50,8 @@ public class PostPurchasesInsertToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         InputStream inStrm = httpCon.getInputStream();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
