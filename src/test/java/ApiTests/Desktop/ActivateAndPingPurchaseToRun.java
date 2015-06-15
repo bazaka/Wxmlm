@@ -75,17 +75,12 @@ public class ActivateAndPingPurchaseToRun {
         System.out.println("Product has been activated");
         //Ping
         System.out.println();
-        String method;
         for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
-            method = "GET";
-            if ((i%2)==0){
-                method = "POST";
-            }
-            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, method, cookies);
-            System.out.println("Method: " + method);
+            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "POST", cookies);
             System.out.println(httpCon.getResponseCode());
             System.out.println(httpCon.getResponseMessage());
+            System.out.println(httpCon.getURL());
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
             inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;
