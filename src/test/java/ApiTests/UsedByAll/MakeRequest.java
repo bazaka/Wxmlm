@@ -57,6 +57,18 @@ public class MakeRequest{
         return httpCon;
     }
 
+    // Для GET-ов без авторизации и диапазона, с куками
+    public static HttpURLConnection getConnection(String siteUrl, String urlPart, String requestMethod, String cookie) throws IOException {
+        // Создаем диапазон и ссылку
+        String urlString = siteUrl + urlPart;
+        // Содзаем HttpUrlConnection
+        URL url = new URL(urlString);
+        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
+        httpCon.setRequestProperty("Cookie", cookie);
+        httpCon.setRequestMethod(requestMethod);
+        return httpCon;
+    }
+
     // Для GET-ов без авторизации с диапазоном
     public static HttpURLConnection getConnection(String siteUrl, String urlPart, int valueInDays, String requestMethod) throws IOException {
         // Создаем диапазон и ссылку

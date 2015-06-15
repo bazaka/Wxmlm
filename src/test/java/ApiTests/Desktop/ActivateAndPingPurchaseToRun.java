@@ -49,6 +49,7 @@ public class ActivateAndPingPurchaseToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
+        String cookies = httpCon.getHeaderField("Set-Cookie");
         System.out.println(httpCon.getResponseCode());
         System.out.println(httpCon.getResponseMessage());
         assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
@@ -78,7 +79,7 @@ public class ActivateAndPingPurchaseToRun {
         System.out.println();
         for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
-            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "GET");
+            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "GET", cookies);
             System.out.println(httpCon.getResponseCode());
             System.out.println(httpCon.getResponseMessage());
             System.out.println(httpCon.getContent());
@@ -96,7 +97,7 @@ public class ActivateAndPingPurchaseToRun {
             object = new JSONObject(result);
             System.out.println(result);
             assertTrue("Incorrect lifetime", ValidationChecker.checkPositiveInt(object.getInt("lifetime")));
-            assertEquals("Incorrect count of JSON Objects", object.length(),1);
+            assertEquals("Incorrect count of JSON Objects", object.length(), 2);
             Thread.sleep(3000);
         }
     }
