@@ -1,5 +1,8 @@
 package ApiTests.ObjectClasses;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 // * Created for W-xmlm by Fill on 03.03.2015.
 public class CareerHistory {
     private int historyId;
@@ -70,8 +73,11 @@ public class CareerHistory {
             System.out.println("9");
             return false;
         }
+        Arrays.sort(getMembers());
+        Arrays.sort(a.getMembers());
         for (int i = 0; i < getMembers().length; i++) {
             if (getMembers(i) != a.getMembers(i)) {
+                System.out.println(getMembers(i) + "!=" + a.getMembers());
                 System.out.println("6");
                 return false;
             }

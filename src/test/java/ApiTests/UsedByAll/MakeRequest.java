@@ -87,6 +87,7 @@ public class MakeRequest{
     //Для GET-ов без параметро даты и лимита
     public static HttpURLConnection getConnection(String siteUrl, TestUser user, String urlPart, String requestMethod) throws IOException {
         String urlString = siteUrl + urlPart;
+        System.out.println(urlString);
         //Создаем URL connection
         String authString = user.getEmail() + ":" + user.getPassword1();
         byte[] authEncBytes = Base64.encodeBase64(authString.getBytes());

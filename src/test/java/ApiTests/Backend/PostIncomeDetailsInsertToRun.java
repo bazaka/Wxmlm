@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.io.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 03.03.2015.
@@ -50,6 +51,7 @@ public class PostIncomeDetailsInsertToRun {
         }
         purchaseIdsString = purchaseIdsString + "]";
         String newJson = "{\"time_online\": " + newOne.getTimeOnline() + ", \"time_online_paid\": " + newOne.getTimeOnlinePaid() + ", \"operation_id\": " + newOne.getOperationId() + ", \"purchase_ids\": " + purchaseIdsString + ", \"user_id\": " + newOne.getUserId() + "}";
+        System.out.println(newJson);
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
@@ -57,8 +59,8 @@ public class PostIncomeDetailsInsertToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         InputStream inStrm = httpCon.getInputStream();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);

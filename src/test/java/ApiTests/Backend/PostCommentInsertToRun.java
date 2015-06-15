@@ -68,7 +68,7 @@ public class PostCommentInsertToRun {
 
         // Проверяем GET-запросом, что данные обновились
         Comment changedOne = new GetCommentToRun(testUser).getCommentByParameter("id", newOne.getId(), siteUrl);
-        assertTrue("Check modified data saved correctly", newOne.equalsExceptDates(changedOne, false));
+        assertTrue("Check modified data saved correctly", newOne.equalsExceptDates(changedOne, false, false));
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
 
     }
