@@ -78,7 +78,7 @@ public class ActivateAndPingPurchaseToRun {
         String method;
         for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
-             method = "GET";
+            method = "GET";
             if ((i%2)==0){
                 method = "POST";
             }
