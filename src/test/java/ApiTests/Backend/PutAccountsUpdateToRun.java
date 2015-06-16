@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
@@ -48,7 +49,7 @@ public class PutAccountsUpdateToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(modifiedJson);
         out.close();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         elapsedTime = System.currentTimeMillis() - startTime;
         // Проверяем GET-запросом, что данные обновились
         Account changedAccount = new GetAccountsToRun(testUser).getAccountByParameter("account_id", originalAccount.getAccountId(), testUser, siteUrl);

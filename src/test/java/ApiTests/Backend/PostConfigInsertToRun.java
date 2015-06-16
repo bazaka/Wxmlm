@@ -18,6 +18,7 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.Collection;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(value = Parameterized.class)
@@ -41,6 +42,7 @@ public class PostConfigInsertToRun {
         AConfig originalOne = new GetConfigToRun(testUser).getAnyConfig(testUser, siteUrl);
         AConfig newOne = new AConfig(originalOne.getName() + "New", originalOne.getValue() + "New");
         String newJson = "{\"name\":\"" + newOne.getName() + "\", \"value\": \"" + newOne.getValue() + "\"}";
+        System.out.println(newJson);
 
         // Содзаем URL
         startTime = System.currentTimeMillis();
@@ -48,8 +50,8 @@ public class PostConfigInsertToRun {
         OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
         out.write(newJson);
         out.close();
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         InputStream inStrm = httpCon.getInputStream();
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
         BufferedReader br = new BufferedReader(isReader);
