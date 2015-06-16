@@ -50,7 +50,8 @@ public class ActivateAndPingPurchaseToRun {
         out.write(modifiedJson);
         out.close();
         String cookies = httpCon.getHeaderField("Set-Cookie");
-        assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
+        System.out.println(cookies);
+        assertEquals("Check response code is 200", 200, httpCon.getResponseCode());
         InputStream inStrm = httpCon.getInputStream();
         elapsedTime = System.currentTimeMillis() - startTime;
         InputStreamReader isReader = new InputStreamReader(inStrm);
@@ -75,12 +76,28 @@ public class ActivateAndPingPurchaseToRun {
         System.out.println("Product has been activated");
         //Ping
         System.out.println();
+        String method;
         for (int i = 0; i < 5; i++) {
             startTime = System.currentTimeMillis();
-            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, "POST", cookies);
+            method = "GET";
+            if ((i%2)==0){
+                method = "POST";
+            }
+            httpCon = MakeRequest.getConnection(siteUrl,  "users/api/desktop/ping/?_format=json&packagesecurekey=" + packageSecureKey, method, cookies);
+            System.out.println("Method: " + method);
             System.out.println(httpCon.getResponseCode());
             System.out.println(httpCon.getResponseMessage());
-            System.out.println(httpCon.getURL());
+            if (httpCon.getResponseCode() != 200) {
+                inStrm = httpCon.getErrorStream();
+                isReader = new InputStreamReader(inStrm);
+                br = new BufferedReader(isReader);
+                result = "";
+                while((line=br.readLine()) !=null){
+                    result+=line;
+                }
+                System.out.println(result);
+                br.close();
+            }
             assertTrue("Check response code is 200", httpCon.getResponseCode() == 200);
             inStrm = httpCon.getInputStream();
             elapsedTime = System.currentTimeMillis() - startTime;

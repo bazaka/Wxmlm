@@ -55,7 +55,7 @@ public class GetDocumentsByIdToRun {
             BufferedReader br;
             String result;
             assertTrue("Check response code is 200", (httpCon.getResponseCode() == 200) || (httpCon.getResponseCode() == 404));
-            if (httpCon.getResponseCode() == 404) {
+            if (httpCon.getResponseCode() != 200) {
                 inStrm = httpCon.getErrorStream();
                 isReader = new InputStreamReader(inStrm);
                 br = new BufferedReader(isReader);
