@@ -50,6 +50,7 @@ public class GetToken {
         }
         br.close();
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
+        System.out.println(result);
 
         //Парсим JSON
         JSONObject object = new JSONObject(result);

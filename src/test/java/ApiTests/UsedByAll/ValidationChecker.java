@@ -68,7 +68,7 @@ public class ValidationChecker {
     public static boolean checkBonusTypeValue(int bonusType){return bonusType >= 1 && bonusType <= 7;}
     public static boolean checkMoneyFormat(String amount){return Integer.valueOf(amount) == Integer.parseInt(amount) || (Integer.valueOf(amount.split(".")[0]) > 0 && Integer.valueOf(amount.split(".")[1]) > 0 && amount.split(".")[1].length() <= 2);}
     public static boolean checkEmail (String email) {return (EmailValidator.getInstance().isValid(email));}
-    public static boolean checkURLOnDomain(String url, String domain){return RegionMatch.IsStringRegionMatch(url, domain);}
+    public static boolean checkURLOnDomain(String url, String domain){return RegionMatch.isStringRegionMatch(url, domain);}
     public static boolean checkPositiveInt(int count){return count >= 0;}
     public static boolean checkFileName(String fileName){return fileName.split("\\.")[0].length()>=1 && fileName.split("\\.")[1].length()>=3 && fileName.split("\\.")[1].length()<=4;}
     public static boolean checkApproveStatus(int status){return (status >= 0 && status <= 2);}

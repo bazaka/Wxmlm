@@ -1,10 +1,7 @@
 package FunctionalTests.Testing;
 
 import FunctionalTests.Pages.RecoveryPage;
-import UsedByAll.Config;
-import UsedByAll.CsvUsersReader;
-import UsedByAll.GmailMessager;
-import UsedByAll.TestUser;
+import UsedByAll.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -69,18 +66,19 @@ public class RecoveryTest extends BaseTest/*extends BaseTest */{
 
 
         int count = 1; // лічильник, якщо дорівнює 100, виходимо з циклу
+        assertTrue("Emails has been sent", SendMail.sendMailAction());
         do {
             try {
                 //gmailMessager.initializePOP3(testUser);
                 newMessageTime = gmailMessager.getLastMessageTime(emailPassword, emailAddress);
-                System.out.println("New last message time: " +newMessageTime);
+                System.out.println("New last message time: " + newMessageTime);
             } catch (MessagingException e) {
                 e.printStackTrace();
             }
             count++;
-            if (count == 5) break;
+            if (count == 50) break;
         }while(currentMessageTime.equals(newMessageTime));  // обновляємо до моменту, коли прийде лист, або до оверфлова лічильника
-        String activationLink = gmailMessager.openAndReturnLink(emailPassword, emailAddress, "Reset Password", confirmLink);
+        String activationLink = gmailMessager.openAndReturnLink(emailPassword, emailAddress, "Password reset confirmation", confirmLink);
         assertEquals("Not same titles", recoveryPage.enterNewPassword(newPassword1, newPassword2, activationLink), "KairosNet");
         System.out.println("RecoveryTest успешно пройден");
     }

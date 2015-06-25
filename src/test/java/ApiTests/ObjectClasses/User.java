@@ -21,7 +21,6 @@ public class User {
     private Object phoneNumber2;
     private Object phoneNumber3;
     private Object passportNumber;
-    private Object passportSeries;
     private Object passportIssuedBy;
     private Object passportIssueDate;
     private Object adressMain;
@@ -45,7 +44,7 @@ public class User {
 
 
     public User(int userId, Object surname, String name,Object patronymic, String username, String password, String salt, int countryId,Object languageId,String birthDate, String emailMain, Object email2, Object email3,
-                String phoneNumberMain, Object phoneNumber2, Object phoneNumber3, Object passportNumber, Object passportSeries, Object passportIssuedBy, Object passportIssueDate, Object adressMain, Object adress2, Object adress3,
+                String phoneNumberMain, Object phoneNumber2, Object phoneNumber3, Object passportNumber, Object passportIssuedBy, Object passportIssueDate, Object adressMain, Object adress2, Object adress3,
                 int genderId, int userStatusId, Object createdDate, Object createdBy ,Object changedBy,Object changedDate,Object parentId,Object leaderId,boolean network,int career, boolean isApproved, String[] inviteCode, boolean debtor, double turnover, Object turnoverDate)
     {
 
@@ -66,7 +65,6 @@ public class User {
         this.setPhoneNumber2(phoneNumber2);
         this.setPhoneNumber3(phoneNumber3);
         this.setPassportNumber(passportNumber);
-        this.setPassportSeries(passportSeries);
         this.setPassportIssuedBy(passportIssuedBy);
         this.setPassportIssueDate(passportIssueDate);
         this.setAdressMain(adressMain);
@@ -106,7 +104,6 @@ public class User {
     public Object getPhoneNumber2(){return phoneNumber2;}
     public Object getPhoneNumber3(){return phoneNumber3;}
     public Object getPassportNumber(){return passportNumber;}
-    public Object getPassportSeries(){return passportSeries;}
     public Object getPassportIssuedBy(){return passportIssuedBy;}
     public Object getPassportIssueDate(){return passportIssueDate;}
     public Object getAdressMain(){return adressMain;}
@@ -148,7 +145,6 @@ public class User {
     public void setPhoneNumber2(Object a){this.phoneNumber2 = a;}
     public void setPhoneNumber3(Object a){this.phoneNumber3 = a;}
     public void setPassportNumber(Object a){this.passportNumber = a;}
-    public void setPassportSeries(Object a){this.passportSeries = a;}
     public void setPassportIssuedBy(Object a){this.passportIssuedBy = a;}
     public void setPassportIssueDate(Object a){this.passportIssueDate = a;}
     public void setAdressMain(Object a){this.adressMain = a;}
@@ -257,11 +253,6 @@ public class User {
 
         if(!getPassportNumber().equals(a.getPassportNumber())){
             System.out.println("19");
-            return false;
-        }
-
-        if(!getPassportSeries().equals(a.getPassportSeries())){
-            System.out.println("20");
             return false;
         }
 

@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.nio.BufferOverflowException;
 import java.util.Collection;
 
 import static junit.framework.TestCase.assertFalse;
@@ -77,7 +76,7 @@ public class GetDocumentsByIdToRun {
                     result+=line;
                 }
                 br.close();
-                assertFalse("Response contains html in its body", RegionMatch.IsStringRegionMatch(result, "<br />"));
+                assertFalse("Response contains html in its body", RegionMatch.isStringRegionMatch(result, "<br />"));
                 JSONObject object = new JSONObject(result);
                 if(object.has("[]")) {
                     assertTrue("Object have empty array", object.has("[]"));

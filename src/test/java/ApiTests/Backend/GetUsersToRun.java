@@ -84,7 +84,6 @@ public class GetUsersToRun {
             assertTrue("Incorrect phoneNumber2 ",ValidationChecker.checkStringOrNull(object.get("phone_number2").toString()));
             assertTrue("Incorrect phoneNumber3",ValidationChecker.checkStringOrNull(object.get("phone_number3").toString()));
             assertTrue("Incorrect passportNumber",ValidationChecker.checkStringOrNull(object.get("passport_number").toString())); // зробити норм валідацію
-            assertTrue("Incorrect passportSeries",ValidationChecker.checkStringOrNull(object.get("passport_series").toString()));
             assertTrue("Incorrect passportIssuedBy",ValidationChecker.checkStringOrNull(object.get("passport_issued_by").toString()));
             assertTrue("Incorrect passportIssueDate", ValidationChecker.checkStringOrNull(object.get("passport_issue_date")) || ValidationChecker.checkDateTimeString(object.getString("passport_issue_date")));
             assertTrue("Incorrect adressMain ",ValidationChecker.checkStringOrNull(object.get("adress_main").toString()));
@@ -107,7 +106,7 @@ public class GetUsersToRun {
             assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
             assertTrue("Incorrect turnover", ValidationChecker.checkDoubleValue(object.getDouble("turnover")));
             assertTrue("Incorrect turnover_date", ValidationChecker.checkDateTimeOrNull(object.get("turnover_date")));
-            assertEquals("Incorrect count of Json Objects", object.length(), 38);
+            assertEquals("Incorrect count of Json Objects", object.length(), 37);
         }
         System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
     }
@@ -160,7 +159,7 @@ public class GetUsersToRun {
             for (int j=0; j<inviteCodesArray.length(); j++){
                 inviteCodes[j]=inviteCodesArray.getString(j);
             }
-            return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_series"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"), object.getDouble("turnover"), object.get("turnover_date"));
+            return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"), object.getDouble("turnover"), object.get("turnover_date"));
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -193,7 +192,7 @@ public class GetUsersToRun {
                     }
 
                     // System.out.println(new Purchases(object.getInt("id"), object.getInt("buyer_user_id"), object.getInt("product_id"), object.getString("date"),object.get("price").toString(),object.getDouble("payment_amount"), object.getInt("status"), terms));
-                    return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_series"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"), object.getDouble("turnover"), object.get("turnover_date"));
+                    return new User(object.getInt("user_id"), object.get("surname"), object.getString("name"),object.get("patronymic"), object.getString("username"), object.getString("password"), object.getString("salt"), object.getInt("country_id"), object.get("language_id"), object.getString("birth_date"), object.getString("email_main"),object.get("email2"),object.get("email3"), object.getString("phone_number_main"),object.get("phone_number2"),object.get("phone_number3"),object.get("passport_number"), object.get("passport_issued_by"),object.get("passport_issue_date"), object.get("adress_main"),object.get("adress2"), object.get("adress3"), object.getInt("gender_id"), object.getInt("user_status_id"), object.get("created_date"), object.get("created_by"),  object.get("changed_by"),object.get("changed_date"),object.get("parent_id"),object.get("leader_id"),object.getBoolean("network"), object.getInt("career"),object.getBoolean("is_approved"), inviteCodes, object.getBoolean("debtor"), object.getDouble("turnover"), object.get("turnover_date"));
                 }
             }
 
