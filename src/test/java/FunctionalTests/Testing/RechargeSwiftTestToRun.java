@@ -62,7 +62,7 @@ public class RechargeSwiftTestToRun extends BaseTest {
         profilePage.closeProfilePage(); // закрыть профиль
         TestCase.assertTrue("Incorrect image", rechargePage.getSwiftImageLink().contains("swift"));
 
-        String sum = RandomValue.RandomValue(); // сгенерировать сумму
+        String sum = RandomValue.randomValue(); // сгенерировать сумму
         rechargePage.enterSwiftAmount(sum);
         rechargePage.createInvoice(); // создать инвойс
 

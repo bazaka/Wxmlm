@@ -46,7 +46,7 @@ public class TransferTest extends BaseTest {
         moneyPage.goToTransfer();
         RandomValue randomValue = new RandomValue();
 
-        String value = randomValue.RandomValue(); // generate random number
+        String value = randomValue.randomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonusesItem to current
         transferPage.clickOnFromBonusesToCurrentRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -56,7 +56,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Current", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = randomValue.RandomValue(); // generate random number
+        value = randomValue.randomValue(); // generate random number
         transferPage.clickBonusesAccordion(); // start sending from bonusesItem to salary
         transferPage.clickOnFromBonusesToSalaryRadioButton();
         transferPage.enterAmountFromBonuses(value);
@@ -66,7 +66,7 @@ public class TransferTest extends BaseTest {
         checkOperationHistoryData("Withdraw", "Bonuses", value); // check operation history
 
         moneyPage.goToTransfer();
-        value = randomValue.RandomValue(); // generate random number
+        value = randomValue.randomValue(); // generate random number
         transferPage.clickSalaryAccordion(); // start sending from salary to current
         transferPage.clickOnFromSalaryToCurrantRadioButton();
         transferPage.enterAmountFromSalary(value);

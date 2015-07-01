@@ -41,4 +41,8 @@ public class AuthorizedUserPage {
     public void waitForSuccessMessage2(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(successMessage2));
     }
+    public void goNetwork(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(net));
+        driver.findElement(net).click();
+    }
 }

@@ -1,6 +1,7 @@
 package FunctionalTests.Pages;
 
 import UsedByAll.Config;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -24,5 +25,9 @@ class BasePage {  //abstract class
     }
     public boolean isOpened(String url){
         return driver.getCurrentUrl().equals(url);
+    }
+
+    public String getText(By locator){
+        return(driver.findElement(locator).getText());
     }
 }

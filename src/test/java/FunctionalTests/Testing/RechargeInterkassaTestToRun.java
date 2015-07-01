@@ -1,7 +1,5 @@
 package FunctionalTests.Testing;
 
-import ApiTests.Backend.GetConfigToRun;
-import ApiTests.ObjectClasses.AConfig;
 import FunctionalTests.Pages.*;
 import UsedByAll.Config;
 import UsedByAll.CsvUsersReader;
@@ -58,7 +56,7 @@ public class RechargeInterkassaTestToRun extends BaseTest {
 
         assertTrue("Incorrect image", rechargePage.getInterkassaImageLink().contains("interkassa")); //проверка линка картинки
         // сгенерировать сумму
-        String sum = RandomValue.RandomValue();
+        String sum = RandomValue.randomValue();
         rechargePage.enterAmount(sum);
 
        /* //расчитать сумму с комиссией, вытянув процент из конфига
