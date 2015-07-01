@@ -5,8 +5,8 @@
   "login": "t4webuser05@gmail.com",
   "password": "123"
   },
-  "defaultUser": {
-    "login": "t.4webuser01@gmail.com",
-    "password": "111111"
-  }
+"defaultUser": {
+  "login": "t.4webuser01@gmail.com",
+  "password": "111111"
+}
 }

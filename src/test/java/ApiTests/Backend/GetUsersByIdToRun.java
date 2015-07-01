@@ -112,7 +112,7 @@ public class GetUsersByIdToRun {
                 assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
                 assertTrue("Incorrect turnover", ValidationChecker.checkDoubleValue(object.getDouble("turnover")));
                 assertTrue("Incorrect turnover_date", ValidationChecker.checkDateTimeOrNull(object.get("turnover_date")));
-                assertEquals("Incorrect count of Json Objects", object.length(), 37);
+                assertEquals("Incorrect count of Json Objects", 37, object.length());
             }
             System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
             }
