@@ -85,7 +85,7 @@ public class CsvUsersReader {
         int arrLength = 0;
         List<Integer> userIndex = new ArrayList<Integer>();
         for (int i = 0; i < testUser.length; i++) {
-            if(RegionMatch.IsStringRegionMatch(testUser[i].getUseInTest(), testName)){
+            if(RegionMatch.isStringRegionMatch(testUser[i].getUseInTest(), testName)){
                 arrLength++;
                 userIndex.add(i);
             }

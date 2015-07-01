@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class RecoveryPage extends BasePage {
 
-    public static final By forgotPassword = By.xpath("//body/div/div/div[2]/a[1]");
+    public static final By forgotPassword = By.xpath("//a[text()= ' Forgot password']");
     public static final By email = By.name("username");
     public static final By resetPassword = By.xpath("//button[text()= 'Reset password']");
  //  public static final By resetPassword = By.linkText("Reset password");

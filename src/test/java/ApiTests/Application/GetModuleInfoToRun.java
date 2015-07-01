@@ -69,7 +69,7 @@ public class GetModuleInfoToRun {
                 result += line;
             }
             br.close();
-            assertFalse("Response contains html in its body", RegionMatch.IsStringRegionMatch(result, "<br />"));
+            assertFalse("Response contains html in its body", RegionMatch.isStringRegionMatch(result, "<br />"));
             //Парсим JSON
             JSONObject object = new JSONObject(result);
             if (object.has("errors")) {

@@ -30,7 +30,6 @@ public class ProfilePage extends BasePage {
     private static final By documentsTab = By.xpath("//div[@class='tabbable']//a[text()='Documents']"); //вкладка Documents
     private static final By citizen = By.id("xmlm_bundle_userbundle_document_user_citizen");
     private static final By citizenCurrent = By.xpath("//select[@id='xmlm_bundle_userbundle_document_user_citizen']/option[@selected='selected']");
-    private static final By passportSeries = By.id("xmlm_bundle_userbundle_document_series");
     private static final By passportNumber = By.id("xmlm_bundle_userbundle_document_number");
     private static final By issued = By.id("xmlm_bundle_userbundle_document_issued");
     private static final By issuedDate = By.id("xmlm_bundle_userbundle_document_issuedDate");
@@ -176,7 +175,6 @@ public class ProfilePage extends BasePage {
     public String getAddress() {return driver.findElement(address).getText();}
 
     public String getCitizen() {return driver.findElement(citizenCurrent).getText();}
-    public String getPassportSeries() {return driver.findElement(passportSeries).getAttribute("value");}
     public String getPassportNumber() {return driver.findElement(passportNumber).getAttribute("value");}
     public String getIssued() {return driver.findElement(issued).getAttribute("value");}
     public String getIssuedDate() {return driver.findElement(issuedDate).getAttribute("value");}
@@ -238,17 +236,13 @@ public class ProfilePage extends BasePage {
 
 
     }
-    public void editDocumentsTab(String profileCitizen, String profilePassportSeries, String profilePassportNum, String profileIssuedDate, String profileIssued ){
+    public void editDocumentsTab(String profileCitizen, String profilePassportNum, String profileIssuedDate, String profileIssued ){
         //WebDriverWait wait = new WebDriverWait(driver, 15);
         driver.findElement(documentsTab).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(passportSeries));
+        wait.until(ExpectedConditions.presenceOfElementLocated(passportNumber));
 
         Select dropdownCitizen = new Select(driver.findElement(citizen));
         dropdownCitizen.selectByVisibleText(profileCitizen);
-
-        driver.findElement(passportSeries).clear();
-        driver.findElement(passportSeries).click();
-        driver.findElement(passportSeries).sendKeys(profilePassportSeries);
 
         driver.findElement(passportNumber).clear();
         driver.findElement(passportNumber).click();
@@ -271,7 +265,7 @@ public class ProfilePage extends BasePage {
         wait.until(ExpectedConditions.presenceOfElementLocated(profilePage));
         goProfilePage();
         driver.findElement(documentsTab).click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(passportSeries));
+        wait.until(ExpectedConditions.presenceOfElementLocated(passportNumber));
     }
     public void editBankTab(String profileBName, String profileBAddress, String profileBankName, String profileBankAddress,String profileIban, String profileSwift, String profileEpid  ){
        // WebDriverWait wait = new WebDriverWait(driver, 120);

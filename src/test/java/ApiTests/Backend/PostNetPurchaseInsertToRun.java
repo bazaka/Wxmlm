@@ -70,6 +70,7 @@ public class PostNetPurchaseInsertToRun {
         br.close();
 
         // Берем из респонса id новой записи
+        System.out.println(result);
         JSONObject response = new JSONObject(result);
         JSONArray reports = response.getJSONArray("reports");
         JSONObject report = reports.getJSONObject(0);

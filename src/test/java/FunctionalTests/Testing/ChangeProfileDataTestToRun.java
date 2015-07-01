@@ -57,10 +57,9 @@ public class ChangeProfileDataTestToRun extends BaseTest {
         assertEquals("Phone number not changed",profilePage.getPhone() ,profileData[0].getPhoneNumber());
         assertEquals("Address not changed",profilePage.getAddress() , profileData[0].getAddress());
 
-        profilePage.editDocumentsTab(profileData[0].getCitizen(), profileData[0].getPassportSeries(), profileData[0].getPassportNum(), profileData[0].getIssuedDate(), profileData[0].getIssued());
+        profilePage.editDocumentsTab(profileData[0].getCitizen(), profileData[0].getPassportNum(), profileData[0].getIssuedDate(), profileData[0].getIssued());
 
         assertEquals("Citizen not changed", profilePage.getCitizen(), profileData[0].getCitizen());
-        assertEquals("Passport series not changed", profilePage.getPassportSeries(), profileData[0].getPassportSeries());
         assertEquals("Passport number not changed", profilePage.getPassportNumber(), profileData[0].getPassportNum());
         assertEquals("Issued not changed", profilePage.getIssued(), profileData[0].getIssued());
         assertEquals("Issued date not changed", profilePage.getIssuedDate(), profileData[0].getIssuedDate());

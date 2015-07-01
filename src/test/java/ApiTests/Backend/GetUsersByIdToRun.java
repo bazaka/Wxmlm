@@ -63,7 +63,7 @@ public class GetUsersByIdToRun {
                 result+=line;
             }
             br.close();
-            assertFalse("Response contains html in its body", RegionMatch.IsStringRegionMatch(result, "<br />"));
+            assertFalse("Response contains html in its body", RegionMatch.isStringRegionMatch(result, "<br />"));
             JSONObject object = new JSONObject(result);
             if(object.has("[]")) {
                 assertTrue("Object have empty array", object.has("[]"));
@@ -90,7 +90,6 @@ public class GetUsersByIdToRun {
                 assertTrue("Incorrect phoneNumber2 ",ValidationChecker.checkStringOrNull(object.get("phone_number2").toString()));
                 assertTrue("Incorrect phoneNumber3",ValidationChecker.checkStringOrNull(object.get("phone_number3").toString()));
                 assertTrue("Incorrect passportNumber",ValidationChecker.checkStringOrNull(object.get("passport_number").toString())); // зробити норм валідацію
-                assertTrue("Incorrect passportSeries",ValidationChecker.checkStringOrNull(object.get("passport_series").toString()));
                 assertTrue("Incorrect passportIssuedBy",ValidationChecker.checkStringOrNull(object.get("passport_issued_by").toString()));
                 assertTrue("Incorrect passportIssueDate", ValidationChecker.checkStringOrNull(object.get("passport_issue_date")) || ValidationChecker.checkDateTimeString(object.getString("passport_issue_date")));
                 assertTrue("Incorrect adressMain ",ValidationChecker.checkStringOrNull(object.get("adress_main").toString()));
@@ -113,7 +112,7 @@ public class GetUsersByIdToRun {
                 assertTrue("Incorrect debtor",ValidationChecker.checkBooleanValue(object.getBoolean("debtor")));
                 assertTrue("Incorrect turnover", ValidationChecker.checkDoubleValue(object.getDouble("turnover")));
                 assertTrue("Incorrect turnover_date", ValidationChecker.checkDateTimeOrNull(object.get("turnover_date")));
-                assertEquals("Incorrect count of Json Objects", object.length(), 38);
+                assertEquals("Incorrect count of Json Objects", object.length(), 37);
             }
             System.out.println("Total elapsed http request/response time in milliseconds: " + elapsedTime);
             }

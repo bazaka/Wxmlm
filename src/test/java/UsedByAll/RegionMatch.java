@@ -1,7 +1,7 @@
 package UsedByAll;
 
 public class RegionMatch {
-    public static boolean IsStringRegionMatch(String searchMe, String findMe) {
+    public static boolean isStringRegionMatch(String searchMe, String findMe) {
         int searchMeLength = searchMe.length();
         int findMeLength = findMe.length();
         boolean foundIt = false;
