@@ -1,5 +1,6 @@
-package ApiTests.Desktop;
+package Trash;
 
+import ApiTests.Desktop.GetTokenToRun;
 import ApiTests.UsedByAll.MakeRequest;
 import ApiTests.UsedByAll.ValidationChecker;
 import UsedByAll.CsvUsersReader;
@@ -42,7 +43,7 @@ public class GetNewToken {
         long startTime;
         long elapsedTime;
 
-        String token = new GetToken(testUser).getToken();
+        String token = new GetTokenToRun(testUser).getToken();
         startTime = System.currentTimeMillis();
         HttpURLConnection httpCon = MakeRequest.getConnection(siteUrl, "users/api/desktop/get-new-token/?_format=json&token="+token, "GET");
         InputStream inStrm = httpCon.getInputStream();

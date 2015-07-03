@@ -61,7 +61,7 @@ public class GetPurchasesToRun {
             JSONObject object = jsonArr.getJSONObject(i);
             assertTrue("Incorrect id", ValidationChecker.checkIdValue(object.getInt("id")));
             assertTrue("Incorrect buyer_user_id", ValidationChecker.checkIdValue(object.getInt("buyer_user_id")));
-            assertTrue("Incorrect product_id", ValidationChecker.checkProductId(object.getInt("product_id")));
+            assertTrue("Incorrect product_id " + object.getInt("product_id"), ValidationChecker.checkProductId(object.getInt("product_id")));
             assertTrue("Incorrect date", ValidationChecker.checkDateTimeString(object.getString("date")));
             assertTrue("Incorrect updated_date", ValidationChecker.checkDateTimeString(object.getString("updated_date")));
             assertTrue("Incorrect price", ValidationChecker.checkMoneyFormat(object.get("price").toString()));

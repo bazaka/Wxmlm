@@ -1,5 +1,5 @@
 {
-"scheme": "test.xmlm.t4web.com.ua/",
+"scheme": "xm-1026.xmlm.t4web.com.ua/",
 "isHttpsConnection": false,
 "admin": {
   "login": "t4webuser05@gmail.com",
@@ -8,5 +8,5 @@
 "defaultUser": {
   "login": "t.4webuser01@gmail.com",
   "password": "111111"
-}
+  }
 }

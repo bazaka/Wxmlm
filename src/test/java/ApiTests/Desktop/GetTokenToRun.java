@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 // * Created for W-xmlm by Fill on 16.03.2015.
 @RunWith(value = Parameterized.class)
-public class GetToken {
+public class GetTokenToRun {
     private TestUser testUser;
 
     @Parameterized.Parameters
@@ -27,7 +27,7 @@ public class GetToken {
         return CsvUsersReader.getDataForTest("_DesktopAPITest(");
     }
 
-    public GetToken(TestUser user){
+    public GetTokenToRun(TestUser user){
         this.testUser = user;
     }
 
@@ -53,11 +53,8 @@ public class GetToken {
         System.out.println(result);
 
         //Парсим JSON
-        JSONObject object = new JSONObject(result);
         //Проверяем структуру
-        assertTrue("Incorrect token", ValidationChecker.checkToken(object.getString("token")));
-        assertEquals("Incorrect count of Json parameters", object.length(), 1);
-        System.out.println(object.getString("token"));
+        assertEquals("Wrong response", "{\"token\":\"outdated.client\"}", result);
     }
 
     public String getToken() throws Exception {
