@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/26/2014.
  */
 @RunWith(value=Parameterized.class)
-public class ChangeProfileDataTest extends BaseTest {
+public class ChangeProfileDataTestToRun extends BaseTest {
 
     private String email;
     private String password;
@@ -29,7 +29,7 @@ public class ChangeProfileDataTest extends BaseTest {
     @Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_ChangeProfileDataTest(");}
 
-    public ChangeProfileDataTest(TestUser testUser){
+    public ChangeProfileDataTestToRun(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
 

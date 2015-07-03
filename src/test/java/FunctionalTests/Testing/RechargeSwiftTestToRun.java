@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/24/2015.
  */
 @RunWith(value = Parameterized.class)
-public class RechargeSwiftTest extends BaseTest {
+public class RechargeSwiftTestToRun extends BaseTest {
     String email;
     String password;
     TestUser testUser;
@@ -32,7 +32,7 @@ public class RechargeSwiftTest extends BaseTest {
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RechargeSwiftTest(");}
 
-    public RechargeSwiftTest(TestUser testUser){
+    public RechargeSwiftTestToRun(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
         this.testUser=testUser;
