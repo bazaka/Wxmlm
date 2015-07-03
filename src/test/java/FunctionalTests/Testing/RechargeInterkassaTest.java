@@ -21,7 +21,7 @@ import static junit.framework.TestCase.assertTrue;
  * Created by User on 3/31/2015.
  */
 @RunWith(value = Parameterized.class)
-public class RechargeInterkassaTestToRun extends BaseTest {
+public class RechargeInterkassaTest extends BaseTest {
     String email;
     String password;
     TestUser testUser;
@@ -29,7 +29,7 @@ public class RechargeInterkassaTestToRun extends BaseTest {
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RechargeInterkassaTest(");}
 
-    public RechargeInterkassaTestToRun(TestUser testUser){
+    public RechargeInterkassaTest(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
         this.testUser=testUser;

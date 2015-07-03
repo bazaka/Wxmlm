@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 3/31/2015.
  */
 @RunWith(value = Parameterized.class)
-public class TrialActivatesTestToRun extends BaseTest {
+public class TrialActivatesTest extends BaseTest {
     String email;
     String password;
     int trialAmount = 4; //количество триалов
@@ -26,7 +26,7 @@ public class TrialActivatesTestToRun extends BaseTest {
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_TrialActivatesTest(");}
 
-    public TrialActivatesTestToRun(TestUser testUser){
+    public TrialActivatesTest(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
     }
