@@ -77,8 +77,8 @@ public class ProfilePage extends BasePage {
     public static final By cardNumber = By.id("xmlm_bundle_userbundle_card_number");
     public static final By cardHolder = By.id("xmlm_bundle_userbundle_card_cardholder");
     public static final By expDate = By.id("xmlm_bundle_userbundle_card_expiration");
-   // public static final By mainCard = By.id("xmlm_bundle_userbundle_card_main");
-    public static final By mainCard = By.xpath("//div[@class='form-outer']/select");
+    //public static final By mainCard = By.id("xmlm_bundle_userbundle_card_main");
+    public static final By mainCard = By.xpath("//div[contains(@class, 'form-outer')]/div/select");
     public static final By saveCardButton = By.xpath("//form[@id='addNewCardForm']//button[text()='Save card']");
 
     public static final By tableCardTitle = By.xpath("//table[@id='my-credit-cards']/tbody/tr[1]/td[1]/a");

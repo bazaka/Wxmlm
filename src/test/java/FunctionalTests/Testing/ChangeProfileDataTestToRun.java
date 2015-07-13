@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/26/2014.
  */
 @RunWith(value=Parameterized.class)
-public class ChangeProfileDataTest extends BaseTest {
+public class ChangeProfileDataTestToRun extends BaseTest {
 
     private String email;
     private String password;
@@ -29,7 +29,7 @@ public class ChangeProfileDataTest extends BaseTest {
     @Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_ChangeProfileDataTest(");}
 
-    public ChangeProfileDataTest(TestUser testUser){
+    public ChangeProfileDataTestToRun(TestUser testUser){
         this.email=testUser.getEmail();
         this.password=testUser.getPassword1();
 
@@ -74,7 +74,6 @@ public class ChangeProfileDataTest extends BaseTest {
         assertEquals("Iban not changed", profilePage.getIban() , profileData[0].getIban());
         assertEquals("Swift code not changed", profilePage.getSwift() , profileData[0].getSwift());
         assertEquals("Epid code not changed", profilePage.getEpid() ,  profileData[0].getEpid());
-
         profilePage.editBankCardTab(profileData[0].getUserTitle(), profileData[0].getCardNumber(), profileData[0].getCardHolder(), profileData[0].getCardDate());
 
         assertEquals("Card Title not changed", profilePage.getLastCardTitle(), profileData[0].getUserTitle());
