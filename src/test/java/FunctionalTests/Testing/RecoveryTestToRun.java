@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  * Created by User on 12/8/2014.
  */
 @RunWith(value=Parameterized.class )
-public class RecoveryTest extends BaseTest/*extends BaseTest */{
+public class RecoveryTestToRun extends BaseTest/*extends BaseTest */{
 
     private String emailPassword;
     private String emailAddress;
@@ -27,7 +27,7 @@ public class RecoveryTest extends BaseTest/*extends BaseTest */{
     @Parameterized.Parameters
     public static Collection testData(){return CsvUsersReader.getDataForTest("_RecoveryTest(");}
 
-    public RecoveryTest(TestUser testUser) {
+    public RecoveryTestToRun(TestUser testUser) {
         this.emailAddress=testUser.getEmail();
         this.emailPassword=testUser.getEPassword();
         this.newPassword1=testUser.getNewPassword1();

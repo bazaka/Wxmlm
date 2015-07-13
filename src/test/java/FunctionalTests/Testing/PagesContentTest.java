@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 
 // * Created for W-xmlm by Fill on 26.03.2015.
 @RunWith(value = Parameterized.class)
-public class PagesContentTestToRun extends BaseTest {
+public class PagesContentTest extends BaseTest {
     String email;
     String password;
 
@@ -33,7 +33,7 @@ public class PagesContentTestToRun extends BaseTest {
         return CsvUsersReader.getDataForTest("_PagesContentTest(");
     }
 
-    public PagesContentTestToRun(TestUser testUser){
+    public PagesContentTest(TestUser testUser){
         this.email = testUser.getEmail();
         this.password = testUser.getPassword1();
     }
